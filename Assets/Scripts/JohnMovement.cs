@@ -53,7 +53,7 @@ public class OmniDirectionalMovement : MonoBehaviour
         float distanceMoved = Vector2.Distance(currentPosition, lastPosition);
         if (distanceMoved >= stepThreshold)
         {
-            steps++;
+            steps++; // walk sound here
             lastPosition = currentPosition;
             randomNum = randomNum - 4;
             if(randomNum <= 0)
