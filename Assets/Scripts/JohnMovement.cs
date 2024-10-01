@@ -19,12 +19,14 @@ public class OmniDirectionalMovement : MonoBehaviour
     public AudioClip shipWalk;
 
     public LayerMask unwalkableLayer;
-
+    public GameObject fadetoBlackImage;
+    public GameObject battleSystem;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         lastPosition = rb.position;
         UpdateStepSpawn();
+        battleSystem.gameObject.gameObject.SetActive(false);
     }
 
     void Update()
@@ -39,7 +41,7 @@ public class OmniDirectionalMovement : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 newPosition = rb.position + movement * moveSpeed * Time.fixedDeltaTime;
-        if (!IsTileUnwalkable(newPosition))
+        if (!IsTileUnwalkable(newPosition) && fadetoBlackImage.active == false && battleSystem.active == false)
         {
             rb.MovePosition(newPosition);
             CountSteps(newPosition);
@@ -65,7 +67,8 @@ public class OmniDirectionalMovement : MonoBehaviour
             randomNum = randomNum - 4;
             if(randomNum <= 0)
             {
-                Debug.Log("Fight!");
+                battleSystem.gameObject.SetActive(true);
+                //Debug.Log("Fight!");
                 UpdateStepSpawn();
             }
         }
