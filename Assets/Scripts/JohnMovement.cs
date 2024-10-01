@@ -15,6 +15,9 @@ public class OmniDirectionalMovement : MonoBehaviour
     public int steps = 0;
     public int randomNum;
 
+    public AudioSource sfx;
+    public AudioClip shipWalk;
+
     public LayerMask unwalkableLayer;
 
     void Start()
@@ -53,7 +56,11 @@ public class OmniDirectionalMovement : MonoBehaviour
         float distanceMoved = Vector2.Distance(currentPosition, lastPosition);
         if (distanceMoved >= stepThreshold)
         {
-            steps++; // walk sound here
+            steps++;
+            if (steps%2 == 0)
+            {
+                sfx.PlayOneShot(shipWalk);
+            }
             lastPosition = currentPosition;
             randomNum = randomNum - 4;
             if(randomNum <= 0)

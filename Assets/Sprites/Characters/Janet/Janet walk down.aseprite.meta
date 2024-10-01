@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3b7c2b3611e65944abd7446340807783
+guid: 89297086b6564c84a8e368140b8bf207
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -119,18 +119,38 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: John Deadassbound
+  - name: Janet walk down_Frame_0
     originalName: 
-    pivot: {x: 0.5, y: -0.3846154}
+    pivot: {x: 0.65217394, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 4
+      width: 23
+      height: 32
+    spriteID: 3c07bcfd30fb8cb4ba2dfe742f708845
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 36, y: 4}
+  - name: Janet walk down_Frame_1
+    originalName: 
+    pivot: {x: 0.6666667, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 48
-      height: 26
-    spriteID: f23ecae4d342ed3499e198496ee89c62
+      width: 24
+      height: 32
+    spriteID: d6b4937be0cf1dc4199af9d766473205
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -139,26 +159,90 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
+  - name: Janet walk down_Frame_2
+    originalName: 
+    pivot: {x: 0.6666667, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 44
+      width: 24
+      height: 32
+    spriteID: 088c68ae9c98e3240a6ff64fe73639d8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 44}
+  - name: Janet walk down_Frame_3
+    originalName: 
+    pivot: {x: 0.6666667, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 84
+      width: 24
+      height: 32
+    spriteID: 176adfa58bc070b4fac8efd687e692b2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 84}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -121532064
-    name: John Deadassbound
+    guid: -1906673957
+    name: Janet walk down
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: John Deadassbound
+    - name: Janet walk down_Frame_0
       frameIndex: 0
       cellRect:
+        x: 1
+        y: 0
+        width: 23
+        height: 32
+      spriteId: 3c07bcfd30fb8cb4ba2dfe742f708845
+    - name: Janet walk down_Frame_1
+      frameIndex: 1
+      cellRect:
         x: 0
-        y: 10
-        width: 48
-        height: 26
-      spriteId: f23ecae4d342ed3499e198496ee89c62
+        y: 0
+        width: 24
+        height: 32
+      spriteId: d6b4937be0cf1dc4199af9d766473205
+    - name: Janet walk down_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 0
+        y: 0
+        width: 24
+        height: 32
+      spriteId: 088c68ae9c98e3240a6ff64fe73639d8
+    - name: Janet walk down_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 0
+        y: 0
+        width: 24
+        height: 32
+      spriteId: 176adfa58bc070b4fac8efd687e692b2
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 48, y: 48}
+  canvasSize: {x: 32, y: 32}
