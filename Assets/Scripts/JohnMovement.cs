@@ -67,8 +67,8 @@ public class OmniDirectionalMovement : MonoBehaviour
             randomNum = randomNum - 4;
             if(randomNum <= 0)
             {
-                //battleSystem.gameObject.SetActive(true);
-                //Debug.Log("Fight!");
+                battleSystem.gameObject.SetActive(true);
+                Debug.Log("Fight!");
                 UpdateStepSpawn();
             }
         }
