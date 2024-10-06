@@ -21,6 +21,7 @@ public class OmniDirectionalMovement : MonoBehaviour
     public LayerMask unwalkableLayer;
     public GameObject fadetoBlackImage;
     public GameObject battleSystem;
+    public GameObject dialogueSystem;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,6 +32,7 @@ public class OmniDirectionalMovement : MonoBehaviour
 
     void Update()
     {
+
         //wasd input
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
@@ -41,7 +43,7 @@ public class OmniDirectionalMovement : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 newPosition = rb.position + movement * moveSpeed * Time.fixedDeltaTime;
-        if (!IsTileUnwalkable(newPosition) && fadetoBlackImage.active == false && battleSystem.active == false)
+        if (!IsTileUnwalkable(newPosition) && fadetoBlackImage.activeSelf == false && battleSystem.activeSelf == false && dialogueSystem.activeSelf == false)
         {
             rb.MovePosition(newPosition);
             CountSteps(newPosition);
