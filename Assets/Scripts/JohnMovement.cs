@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using System;
+using Unity.VisualScripting.ReorderableList;
 
 public class OmniDirectionalMovement : MonoBehaviour
 {
@@ -22,12 +23,17 @@ public class OmniDirectionalMovement : MonoBehaviour
     public GameObject fadetoBlackImage;
     public GameObject battleSystem;
     public GameObject dialogueSystem;
+
+    public Animator anim;
+    private bool moving;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         lastPosition = rb.position;
         UpdateStepSpawn();
         battleSystem.gameObject.gameObject.SetActive(false);
+        anim = GetComponent<Animator>();
+
     }
 
     void Update()
@@ -38,6 +44,7 @@ public class OmniDirectionalMovement : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical");
 
         movement = movement.normalized;
+        Animate();
     }
 
     void FixedUpdate()
@@ -78,5 +85,22 @@ public class OmniDirectionalMovement : MonoBehaviour
     void UpdateStepSpawn()
     {
         randomNum = UnityEngine.Random.Range(64, 256);
+    }
+    private void Animate()
+    {
+        if(movement.magnitude > .1f || movement.magnitude < -.1f)
+        {
+            moving = true;
+        }
+        else
+        {
+            moving = false;
+        }
+        if (moving)
+        {
+            anim.SetFloat("X", movement.x);
+            anim.SetFloat("Y", movement.y);
+        }
+        anim.SetBool("Moving", moving);
     }
 }
