@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4d319d1697facab4e9a68006d99e1a11
+guid: 490557ada0334944d915b46d30de8e3e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BoxesNew_0
+      name: tablenew-export_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d37d145786b73544fb674321584030aa
-      internalID: 678493343
+      spriteID: eff4aedf2ff9b0a47ac843843f2a7aff
+      internalID: -312775628
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoxesNew_1
+      name: tablenew-export_1
       rect:
         serializedVersion: 2
         x: 16
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64be736c3ab78ed4eafe330c8993cb64
-      internalID: 1230149667
+      spriteID: b1930cbd4bbfd8c42b8912117dac973d
+      internalID: 435358958
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoxesNew_2
+      name: tablenew-export_2
       rect:
         serializedVersion: 2
         x: 32
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83d704ec38549f44bbc69b1297338b9f
-      internalID: -672786899
+      spriteID: dbe42738a5997164cbc5849f5f92cf87
+      internalID: -424022038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoxesNew_3
+      name: tablenew-export_3
       rect:
         serializedVersion: 2
         x: 0
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbf6eff786fa3f047a85c833e06fd1dd
-      internalID: 1246924818
+      spriteID: ea2f9ed5d674f0a41ae1ff1a17d83cb4
+      internalID: -3360329
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoxesNew_4
+      name: tablenew-export_4
       rect:
         serializedVersion: 2
         x: 16
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0441bbabde3a72e43b884581749bef21
-      internalID: -1773088011
+      spriteID: e91de38bc8d5dae469956fe3d961f1ab
+      internalID: 2129457945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoxesNew_5
+      name: tablenew-export_5
       rect:
         serializedVersion: 2
         x: 32
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4aa4bfc0d49d2eb4398cb0233840b44d
-      internalID: -1903900451
+      spriteID: c6dd8cf1d4088f348be133ea8774624e
+      internalID: 1081891705
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoxesNew_6
+      name: tablenew-export_6
       rect:
         serializedVersion: 2
         x: 0
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c19df7eba12e00469bcb0c803ccf7a1
-      internalID: -810397472
+      spriteID: 477990764e324624d8fbd85d05d47bb9
+      internalID: 1347470841
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoxesNew_7
+      name: tablenew-export_7
       rect:
         serializedVersion: 2
         x: 16
@@ -271,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91ee044f986db7b439902e8ab1ffe4ec
-      internalID: -27541608
+      spriteID: 165dff2c9b63cc9458cc914753d150f9
+      internalID: -1285528328
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoxesNew_8
+      name: tablenew-export_8
       rect:
         serializedVersion: 2
         x: 32
@@ -292,8 +292,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ccc52131dcd2f84599e0aa042efc4b2
-      internalID: -229173237
+      spriteID: 9dd15ef48fd692247b7ebc7ae6aed488
+      internalID: 1438097144
       vertices: []
       indices: 
       edges: []
@@ -309,15 +309,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BoxesNew_0: 678493343
-      BoxesNew_1: 1230149667
-      BoxesNew_2: -672786899
-      BoxesNew_3: 1246924818
-      BoxesNew_4: -1773088011
-      BoxesNew_5: -1903900451
-      BoxesNew_6: -810397472
-      BoxesNew_7: -27541608
-      BoxesNew_8: -229173237
+      tablenew-export_0: -312775628
+      tablenew-export_1: 435358958
+      tablenew-export_2: -424022038
+      tablenew-export_3: -3360329
+      tablenew-export_4: 2129457945
+      tablenew-export_5: 1081891705
+      tablenew-export_6: 1347470841
+      tablenew-export_7: -1285528328
+      tablenew-export_8: 1438097144
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
