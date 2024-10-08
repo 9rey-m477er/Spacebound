@@ -10,9 +10,11 @@ public class DialogueController : MonoBehaviour
     //[SerializeField] private float typeSpeed = 10;
 
     private Queue<string> paragraphs = new Queue<string>();
+    private Queue<string> names = new Queue<string>();
 
     private bool conversationEnded;
     //private bool isTyping;
+    private string n;
     private string p;
 
     //private Coroutine typeDialogueCoroutine;
@@ -42,7 +44,9 @@ public class DialogueController : MonoBehaviour
         //}
 
 
+        n = names.Dequeue();
         p = paragraphs.Dequeue();
+        npcNameText.text = n;
         npcDialogueText.text = p;
 
         if (paragraphs.Count == 0)
@@ -57,12 +61,13 @@ public class DialogueController : MonoBehaviour
         {
             gameObject.SetActive(true);
         }
-
-        npcNameText.text = dialogueText.name;
-
         for (int i = 0; i < dialogueText.paragraphs.Length; i++)
         {
             paragraphs.Enqueue(dialogueText.paragraphs[i]);
+        }
+        for (int i = 0; i < dialogueText.speakerNames.Length; i++)
+        {
+            names.Enqueue(dialogueText.speakerNames[i]);
         }
     }
 

@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
   m_Name: TestConversation
   m_EditorClassIdentifier: 
-  speakerName: Bob
+  speakerNames:
+  - Bob
+  - John
   paragraphs:
   - This is a dialogue box! Isn't that so cool?
   - I mean, maybe not as cool as a fully-functional dialogue system, but it's something!
