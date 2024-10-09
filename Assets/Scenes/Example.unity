@@ -28287,6 +28287,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 122
       objectReference: {fileID: 0}
+    - target: {fileID: 3402706858911051436, guid: 6b70b359c84822a4b95e75f0fc4e81bd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402706858911051436, guid: 6b70b359c84822a4b95e75f0fc4e81bd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402706858911051436, guid: 6b70b359c84822a4b95e75f0fc4e81bd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1991372617}
+    - target: {fileID: 3402706858911051436, guid: 6b70b359c84822a4b95e75f0fc4e81bd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402706858911051436, guid: 6b70b359c84822a4b95e75f0fc4e81bd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: fleeButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402706858911051436, guid: 6b70b359c84822a4b95e75f0fc4e81bd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BattleUIScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402706858911051436, guid: 6b70b359c84822a4b95e75f0fc4e81bd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3613153861993684399, guid: 6b70b359c84822a4b95e75f0fc4e81bd, type: 3}
       propertyPath: m_Camera
       value: 
@@ -28311,6 +28339,10 @@ PrefabInstance:
       propertyPath: enemy4
       value: 
       objectReference: {fileID: 442341638}
+    - target: {fileID: 5173205174677880014, guid: 6b70b359c84822a4b95e75f0fc4e81bd, type: 3}
+      propertyPath: fadeImage
+      value: 
+      objectReference: {fileID: 1755800707}
     - target: {fileID: 5173205174677880014, guid: 6b70b359c84822a4b95e75f0fc4e81bd, type: 3}
       propertyPath: enemy1Arrow
       value: 
@@ -28359,6 +28391,10 @@ PrefabInstance:
       propertyPath: party4Arrow
       value: 
       objectReference: {fileID: 1795835486}
+    - target: {fileID: 5173205174677880014, guid: 6b70b359c84822a4b95e75f0fc4e81bd, type: 3}
+      propertyPath: battleSystem
+      value: 
+      objectReference: {fileID: 2140384491}
     - target: {fileID: 6434914940658921002, guid: 6b70b359c84822a4b95e75f0fc4e81bd, type: 3}
       propertyPath: m_SizeDelta.x
       value: 180
@@ -28450,6 +28486,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6886517227526790953, guid: 6b70b359c84822a4b95e75f0fc4e81bd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1755800706}
     - targetCorrespondingSourceObject: {fileID: 256430296019335459, guid: 6b70b359c84822a4b95e75f0fc4e81bd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1155056282}
@@ -32777,6 +32816,81 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1755800705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1755800706}
+  - component: {fileID: 1755800708}
+  - component: {fileID: 1755800707}
+  m_Layer: 5
+  m_Name: FadeImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1755800706
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755800705}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1991372616}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000015259, y: 0.00078583}
+  m_SizeDelta: {x: 800, y: 376.54}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1755800707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755800705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1755800708
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755800705}
+  m_CullTransparentMesh: 1
 --- !u!1 &1762085944 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7891022619765786706, guid: 6b70b359c84822a4b95e75f0fc4e81bd, type: 3}

@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleUIScript : MonoBehaviour
 {
+    public GameObject battleSystem;
     public GameObject atkMenu;
     public GameObject defMenu;
     public GameObject invMenu;
@@ -28,18 +30,22 @@ public class BattleUIScript : MonoBehaviour
     public bool isSelectingEnemy = false;
     public int currentEnemy = 1;
     public int attackPower;
-
+    public bool isBattleOver = false;
 
     public GameObject enemyHPBar1;
     public GameObject enemyHPBar2;
     public GameObject enemyHPBar3;
     public GameObject enemyHPBar4;
 
+    public Image fadeImage;
+    public float fadeDuration = 0.3f;
+
     public OmniDirectionalMovement John;
     private SoundManager soundManager;
-    void Start()
+    void OnEnable()
     {
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+        StartCoroutine(fadeIntoBattle());
         playerTurn = 1; // initialize battle with party member 1 attacking first
         party1Arrow.gameObject.SetActive(true);
         party2Arrow.gameObject.SetActive(false);
@@ -58,6 +64,20 @@ public class BattleUIScript : MonoBehaviour
         {
             HandleEnemySelection();
         }
+        if(isBattleOver == true)
+        {
+            StartCoroutine(exitBattle());
+        }
+    }
+    
+    public IEnumerator fadeIntoBattle()
+    {
+        Debug.Log("fade in");
+        fadeImage.gameObject.SetActive(true);
+        yield return StartCoroutine(Fade(1));
+        yield return StartCoroutine(Fade(0));
+        fadeImage.gameObject.SetActive(false);
+        Debug.Log("fade out");
     }
 
     public void incrementTurn()
@@ -123,6 +143,7 @@ public class BattleUIScript : MonoBehaviour
         {
             isSelectingEnemy = false; 
             ExecuteAttack();
+            checkForEndOfBattle();
         }
     }
 
@@ -182,6 +203,47 @@ public class BattleUIScript : MonoBehaviour
 
     }
 
+    public void checkForEndOfBattle()
+    {
+        BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>(); 
+        BattleEnemyScript e2 = enemy2.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e3 = enemy3.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e4 = enemy4.GetComponent<BattleEnemyScript>();
+
+        if(e1.health <= 0 && e2.health <= 0 && e3.health <= 0 && e4.health <= 0)
+        {
+            isBattleOver = true;
+        }
+    }
+
+    public void fleeButtonClick()
+    {
+        resetMenu();
+        StartCoroutine(exitBattle());
+    }
+
+    public IEnumerator exitBattle()
+    {
+        isBattleOver = false;
+        fadeImage.gameObject.SetActive(true);
+        yield return StartCoroutine(Fade(1));
+
+
+        BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e2 = enemy2.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e3 = enemy3.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e4 = enemy4.GetComponent<BattleEnemyScript>();
+
+        e1.health = e1.startingHealth;
+        e2.health = e2.startingHealth;
+        e3.health = e3.startingHealth;
+        e4.health = e4.startingHealth;
+        updateEnemyHealth();
+        fadeImage.gameObject.SetActive(false);
+
+        battleSystem.gameObject.SetActive(false); //last
+    }
+
     private void UpdateEnemyArrows()
     {
         enemy1Arrow.gameObject.SetActive(currentEnemy == 1);
@@ -197,7 +259,7 @@ public class BattleUIScript : MonoBehaviour
         runMenu.SetActive(false);
     }
     public void openMenu(int menu)
-    { //need a way to reset menu after an action is taken
+    {
         switch (menu)
         {
             case 0:
@@ -262,4 +324,22 @@ public class BattleUIScript : MonoBehaviour
                 break;
         }
     }
+
+    private IEnumerator Fade(float targetAlpha)
+    {
+        float startAlpha = fadeImage.color.a;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / fadeDuration);
+            fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, newAlpha);
+            yield return null;
+        }
+
+        // Ensure the final alpha value is set
+        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, targetAlpha);
+    }
+
 }
