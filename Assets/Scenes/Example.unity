@@ -31368,6 +31368,7 @@ MonoBehaviour:
   fadetoBlackImage: {fileID: 493506689}
   battleSystem: {fileID: 2140384491}
   dialogueSystem: {fileID: 1467291188}
+  anim: {fileID: 0}
 --- !u!50 &1791970382
 Rigidbody2D:
   serializedVersion: 4
