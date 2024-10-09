@@ -24,6 +24,8 @@ public class DialogueController : MonoBehaviour
 
     public void displayNextParagraph(DialogueText dialogueText)
     {
+        Debug.Log("Paragraphs Count = " + paragraphs.Count);
+
         if (paragraphs.Count == 0)
         {
             if (!conversationEnded)
@@ -37,6 +39,8 @@ public class DialogueController : MonoBehaviour
             }
         }
 
+        Debug.Log("Paragraphs Count = " + paragraphs.Count);
+
         //if (!isTyping)
         //{
         //    p = paragraphs.Dequeue();
@@ -48,6 +52,8 @@ public class DialogueController : MonoBehaviour
         p = paragraphs.Dequeue();
         npcNameText.text = n;
         npcDialogueText.text = p;
+
+        Debug.Log("Paragraphs Count = " + paragraphs.Count);
 
         if (paragraphs.Count == 0)
         {

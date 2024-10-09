@@ -17,7 +17,8 @@ public abstract class NPC : MonoBehaviour, IInteractible
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+
+        if (Input.GetKeyDown(KeyCode.E) && IsWithinInteractDistance())
         {
             Interact();
         }

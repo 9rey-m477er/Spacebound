@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TalkableNPC : NPC, ITalkable
+public class StevphenDemo : NPC, ITalkable
 {
     [SerializeField] private DialogueText dialogueText;
     [SerializeField] private DialogueController dialogueController;
@@ -18,3 +18,4 @@ public class TalkableNPC : NPC, ITalkable
         dialogueController.displayNextParagraph(dialogueText);
     }
 }
+

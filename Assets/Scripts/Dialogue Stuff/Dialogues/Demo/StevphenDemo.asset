@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
-  m_Name: BobDemo1
+  m_Name: StevphenDemo
   m_EditorClassIdentifier: 
   speakerNames:
-  - Bob
+  - Stevphen
   - John
-  - Bob
+  - Stevphen
   paragraphs:
-  - We're in space.
-  - I can tell, Bob.
-  - Just figured you should know.
+  - You didn't bring Bob with you, did you?
+  - No. He's still in the main room. Still mad about his comment?
+  - He shouldn't've said it. I'm supposed to be the smart one.

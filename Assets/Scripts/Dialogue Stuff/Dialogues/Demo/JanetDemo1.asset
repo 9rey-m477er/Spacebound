@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
-  m_Name: BobDemo1
+  m_Name: JanetDemo1
   m_EditorClassIdentifier: 
   speakerNames:
-  - Bob
   - John
-  - Bob
+  - Janet
+  - Janet
+  - Janet
   paragraphs:
-  - We're in space.
-  - I can tell, Bob.
-  - Just figured you should know.
+  - Where'd Stevphen go?
+  - I think he got tired of Bob's observations. Check the cockpit.
+  - It's past the big hallway off to the west, about as far from Bob as he could
+    get.
+  - Watch out for the holograms if you're going that way.
