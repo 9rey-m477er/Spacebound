@@ -40,10 +40,11 @@ public class BattleUIScript : MonoBehaviour
     public Image fadeImage;
     public float fadeDuration = 0.3f;
 
-    public OmniDirectionalMovement John;
+    private OmniDirectionalMovement johnMovement;
     private SoundManager soundManager;
     void OnEnable()
     {
+        johnMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<OmniDirectionalMovement>();
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
         StartCoroutine(fadeIntoBattle());
         playerTurn = 1; // initialize battle with party member 1 attacking first
@@ -240,7 +241,7 @@ public class BattleUIScript : MonoBehaviour
         e4.health = e4.startingHealth;
         updateEnemyHealth();
         fadeImage.gameObject.SetActive(false);
-
+        johnMovement.inBattle = false;
         battleSystem.gameObject.SetActive(false); //last
     }
 
