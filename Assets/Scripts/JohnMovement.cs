@@ -25,6 +25,7 @@ public class OmniDirectionalMovement : MonoBehaviour
     public GameObject dialogueSystem;
 
     public Animator anim;
+    public bool inBattle;
     private bool moving;
     void Start()
     {
@@ -76,6 +77,7 @@ public class OmniDirectionalMovement : MonoBehaviour
             randomNum = randomNum - 4;
             if(randomNum <= 0)
             {
+                inBattle = true;
                 battleSystem.gameObject.SetActive(true);
                 Debug.Log("Fight!");
                 UpdateStepSpawn();

@@ -34,8 +34,12 @@ public class BattleUIScript : MonoBehaviour
     public GameObject enemyHPBar2;
     public GameObject enemyHPBar3;
     public GameObject enemyHPBar4;
+
+    public OmniDirectionalMovement John;
+    private SoundManager soundManager;
     void Start()
     {
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
         playerTurn = 1; // initialize battle with party member 1 attacking first
         party1Arrow.gameObject.SetActive(true);
         party2Arrow.gameObject.SetActive(false);
@@ -76,6 +80,8 @@ public class BattleUIScript : MonoBehaviour
     }
     public void attackSlot1()
     {
+        resetMenu();
+        soundManager.PlaySoundClip(5);
         isSelectingEnemy = true;
         attackPower = 25;
         currentEnemy = 1;
@@ -86,24 +92,28 @@ public class BattleUIScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
+            soundManager.PlaySoundClip(3);
             if (currentEnemy == 1) currentEnemy = 2;
             else if (currentEnemy == 3) currentEnemy = 4;
             UpdateEnemyArrows();
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
+            soundManager.PlaySoundClip(3);
             if (currentEnemy == 2) currentEnemy = 1;
             else if (currentEnemy == 4) currentEnemy = 3;
             UpdateEnemyArrows();
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
+            soundManager.PlaySoundClip(3);
             if (currentEnemy == 3) currentEnemy = 1;
             else if (currentEnemy == 4) currentEnemy = 2;
             UpdateEnemyArrows();
         }
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
+            soundManager.PlaySoundClip(3);
             if (currentEnemy == 1) currentEnemy = 3;
             else if (currentEnemy == 2) currentEnemy = 4;
             UpdateEnemyArrows();
@@ -139,6 +149,7 @@ public class BattleUIScript : MonoBehaviour
         if (selectedEnemyScript != null)
         {
             selectedEnemyScript.health -= attackPower;
+            soundManager.PlaySoundClip(6);
             Debug.Log("Attacked enemy " + currentEnemy + ", remaining health: " + selectedEnemyScript.health);
         }
         updateEnemyHealth();
@@ -178,16 +189,21 @@ public class BattleUIScript : MonoBehaviour
         enemy3Arrow.gameObject.SetActive(currentEnemy == 3);
         enemy4Arrow.gameObject.SetActive(currentEnemy == 4);
     }
-
-
-
-public void openMenu(int menu)
+    public void resetMenu()
+    {
+        atkMenu.SetActive(false);
+        defMenu.SetActive(false);
+        invMenu.SetActive(false);
+        runMenu.SetActive(false);
+    }
+    public void openMenu(int menu)
     { //need a way to reset menu after an action is taken
-        switch(menu)
+        switch (menu)
         {
             case 0:
                 if (!atkMenu.activeSelf)
                 {
+                    soundManager.PlaySoundClip(0);
                     atkMenu.SetActive(true);
                     defMenu.SetActive(false);
                     invMenu.SetActive(false);
@@ -195,12 +211,14 @@ public void openMenu(int menu)
                 }
                 else
                 {
+                    soundManager.PlaySoundClip(4);
                     atkMenu.SetActive(false);
                 }
                 break;
             case 1:
                 if (!defMenu.activeSelf)
                 {
+                    soundManager.PlaySoundClip(0);
                     atkMenu.SetActive(false);
                     defMenu.SetActive(true);
                     invMenu.SetActive(false);
@@ -208,12 +226,14 @@ public void openMenu(int menu)
                 }
                 else
                 {
+                    soundManager.PlaySoundClip(4);
                     defMenu.SetActive(false);
                 }
                 break;
             case 2:
                 if (!invMenu.activeSelf)
                 {
+                    soundManager.PlaySoundClip(0);
                     atkMenu.SetActive(false);
                     defMenu.SetActive(false);
                     invMenu.SetActive(true);
@@ -221,12 +241,14 @@ public void openMenu(int menu)
                 }
                 else
                 {
+                    soundManager.PlaySoundClip(4);
                     invMenu.SetActive(false);
                 }
                 break;
             case 3:
                 if (!runMenu.activeSelf)
                 {
+                    soundManager.PlaySoundClip(0);
                     atkMenu.SetActive(false);
                     defMenu.SetActive(false);
                     invMenu.SetActive(false);
@@ -234,6 +256,7 @@ public void openMenu(int menu)
                 }
                 else
                 {
+                    soundManager.PlaySoundClip(4);
                     runMenu.SetActive(false);
                 }
                 break;

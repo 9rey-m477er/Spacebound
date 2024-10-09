@@ -9,6 +9,8 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI npcDialogueText;
     //[SerializeField] private float typeSpeed = 10;
 
+    private SoundManager soundManager;
+
     private Queue<string> paragraphs = new Queue<string>();
     private Queue<string> names = new Queue<string>();
 
@@ -21,6 +23,11 @@ public class DialogueController : MonoBehaviour
 
     //private const string htmlAlpha = "<color=#00000000>";
     //private const float maxTypeTime = 0.1f;
+
+    public void Awake()
+    {
+        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+    }
 
     public void displayNextParagraph(DialogueText dialogueText)
     {
@@ -50,6 +57,7 @@ public class DialogueController : MonoBehaviour
 
         n = names.Dequeue();
         p = paragraphs.Dequeue();
+        soundManager.PlaySoundClip(3);
         npcNameText.text = n;
         npcDialogueText.text = p;
 
@@ -83,6 +91,7 @@ public class DialogueController : MonoBehaviour
         conversationEnded = false;
         if (gameObject.activeSelf)
         {
+            soundManager.PlaySoundClip(4);
             gameObject.SetActive(false);
         }
     }
