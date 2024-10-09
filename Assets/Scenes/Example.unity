@@ -28364,11 +28364,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 644700752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62d3eeb3bed70c441a72109219af14ca, type: 3}
+  m_Script: {fileID: 11500000, guid: f3168a274f32d4c45a8f79ab8d21cbee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactSprite: {fileID: 530553363}
-  dialogueText: {fileID: 0}
+  dialogueText: {fileID: 11400000, guid: 3ba96794ede15d7408c2ed4de32063fa, type: 2}
   dialogueController: {fileID: 1467291189}
 --- !u!1 &665569618
 GameObject:
@@ -28818,11 +28818,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1038268967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62d3eeb3bed70c441a72109219af14ca, type: 3}
+  m_Script: {fileID: 11500000, guid: d9546e9e2a598ce479ec021cea42294e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactSprite: {fileID: 1726180896}
-  dialogueText: {fileID: 0}
+  dialogueText: {fileID: 11400000, guid: 18362eec7d291c94cba09388d51cabec, type: 2}
   dialogueController: {fileID: 1467291189}
 --- !u!1 &1069319781
 GameObject:
@@ -33355,11 +33355,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2027914767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62d3eeb3bed70c441a72109219af14ca, type: 3}
+  m_Script: {fileID: 11500000, guid: c3f1456b87cb18f4d89d54612887d96a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactSprite: {fileID: 1003346093}
-  dialogueText: {fileID: 0}
+  dialogueText: {fileID: 11400000, guid: c14c9d7f60bcda1419df041ef0711773, type: 2}
   dialogueController: {fileID: 1467291189}
 --- !u!1 &2085291936
 GameObject:
