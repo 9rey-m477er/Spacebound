@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2765a4791d68a2f44b44a8096772b0f8
+guid: d55c07694303a014181bc353aa02eb2c
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -119,118 +119,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: bushman spawn_Frame_0
+  - name: rarebug_Frame_0
     originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 36
-      y: 31
-      width: 12
-      height: 15
-    spriteID: ac36ab7ee70eb954b880a4f63a18ab80
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 36, y: 31}
-  - name: bushman spawn_Frame_1
-    originalName: 
-    pivot: {x: 0.49999997, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 36
-      y: 4
-      width: 16
-      height: 19
-    spriteID: e339772fb38b7f947952c22fe428f778
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 36, y: 4}
-  - name: bushman spawn_Frame_2
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 101
-      width: 18
-      height: 21
-    spriteID: 16191347c235cea44a44e287fc08450b
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 101}
-  - name: bushman spawn_Frame_3
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 70
-      width: 22
-      height: 23
-    spriteID: 6ea442d996ffb894c87232cd63b53b2e
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 70}
-  - name: bushman spawn_Frame_4
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 37
-      width: 22
-      height: 25
-    spriteID: db50d7b6de49c8b46b9d1319340b8989
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 37}
-  - name: bushman spawn_Frame_5
-    originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.56, y: -0.15789473}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 24
-      height: 25
-    spriteID: 18bb7746576ec664d97ea21431e5fdda
+      width: 25
+      height: 38
+    spriteID: e402cebb20d92034d882955a4ba23f38
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -239,63 +139,163 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
+  - name: rarebug_Frame_1
+    originalName: 
+    pivot: {x: 0.56, y: -0.16216215}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 50
+      width: 25
+      height: 37
+    spriteID: 0d0446727daa20445805f349802e9b33
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 50}
+  - name: rarebug_Frame_2
+    originalName: 
+    pivot: {x: 0.56, y: -0.16666667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 37
+      y: 49
+      width: 25
+      height: 36
+    spriteID: 72fad0fe603f6bc48a9601517d59cf48
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 37, y: 49}
+  - name: rarebug_Frame_3
+    originalName: 
+    pivot: {x: 0.56, y: -0.17142858}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 70
+      y: 48
+      width: 25
+      height: 35
+    spriteID: 3504040a2ca6b194480fc686bd86a9df
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 70, y: 48}
+  - name: rarebug_Frame_4
+    originalName: 
+    pivot: {x: 0.56, y: -0.16666667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 70
+      y: 4
+      width: 25
+      height: 36
+    spriteID: e793b49e98c1661418660e2c611cd2ee
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 70, y: 4}
+  - name: rarebug_Frame_5
+    originalName: 
+    pivot: {x: 0.56, y: -0.16216215}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 37
+      y: 4
+      width: 25
+      height: 37
+    spriteID: 2cd58be38d733c1419fce8b6262a7ad4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 37, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1681341165
-    name: bushman spawn
+    guid: 349448756
+    name: rarebug
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: bushman spawn_Frame_0
+    - name: rarebug_Frame_0
       frameIndex: 0
       cellRect:
-        x: 18
-        y: 0
-        width: 12
-        height: 15
-      spriteId: ac36ab7ee70eb954b880a4f63a18ab80
-    - name: bushman spawn_Frame_1
+        x: 10
+        y: 6
+        width: 25
+        height: 38
+      spriteId: e402cebb20d92034d882955a4ba23f38
+    - name: rarebug_Frame_1
       frameIndex: 1
       cellRect:
-        x: 16
-        y: 0
-        width: 16
-        height: 19
-      spriteId: e339772fb38b7f947952c22fe428f778
-    - name: bushman spawn_Frame_2
+        x: 10
+        y: 6
+        width: 25
+        height: 37
+      spriteId: 0d0446727daa20445805f349802e9b33
+    - name: rarebug_Frame_2
       frameIndex: 2
       cellRect:
-        x: 15
-        y: 0
-        width: 18
-        height: 21
-      spriteId: 16191347c235cea44a44e287fc08450b
-    - name: bushman spawn_Frame_3
+        x: 10
+        y: 6
+        width: 25
+        height: 36
+      spriteId: 72fad0fe603f6bc48a9601517d59cf48
+    - name: rarebug_Frame_3
       frameIndex: 3
       cellRect:
-        x: 13
-        y: 0
-        width: 22
-        height: 23
-      spriteId: 6ea442d996ffb894c87232cd63b53b2e
-    - name: bushman spawn_Frame_4
+        x: 10
+        y: 6
+        width: 25
+        height: 35
+      spriteId: 3504040a2ca6b194480fc686bd86a9df
+    - name: rarebug_Frame_4
       frameIndex: 4
       cellRect:
-        x: 13
-        y: 0
-        width: 22
-        height: 25
-      spriteId: db50d7b6de49c8b46b9d1319340b8989
-    - name: bushman spawn_Frame_5
+        x: 10
+        y: 6
+        width: 25
+        height: 36
+      spriteId: e793b49e98c1661418660e2c611cd2ee
+    - name: rarebug_Frame_5
       frameIndex: 5
       cellRect:
-        x: 12
-        y: 0
-        width: 24
-        height: 25
-      spriteId: 18bb7746576ec664d97ea21431e5fdda
+        x: 10
+        y: 6
+        width: 25
+        height: 37
+      spriteId: 2cd58be38d733c1419fce8b6262a7ad4
     linkedCells: []
     parentIndex: -1
   platformSettings: []
