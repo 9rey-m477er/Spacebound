@@ -44,6 +44,11 @@ public class BattleUIScript : MonoBehaviour
     private SoundManager soundManager;
     void OnEnable()
     {
+        enemy1.gameObject.SetActive(true);
+        enemy2.gameObject.SetActive(true);
+        enemy3.gameObject.SetActive(true);
+        enemy4.gameObject.SetActive(true);
+
         johnMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<OmniDirectionalMovement>();
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
         StartCoroutine(fadeIntoBattle());
@@ -105,38 +110,117 @@ public class BattleUIScript : MonoBehaviour
         soundManager.PlaySoundClip(5);
         isSelectingEnemy = true;
         attackPower = 25;
-        currentEnemy = 1;
+        
+        if(enemy1.active == true)
+        {
+            currentEnemy = 1;
+        }
+        else if (enemy2.active == true)
+        {
+            currentEnemy = 2;
+        }
+        else if (enemy3.active == true)
+        {
+            currentEnemy = 3;
+        }
+        else if (enemy4.active == true)
+        {
+            currentEnemy = 4;
+        }
         UpdateEnemyArrows();
     }
 
+    public void attackSlot2()
+    {
+        resetMenu();
+        soundManager.PlaySoundClip(5);
+        isSelectingEnemy = true;
+        attackPower = 15;
+
+        if (enemy1.active == true)
+        {
+            currentEnemy = 1;
+        }
+        else if (enemy2.active == true)
+        {
+            currentEnemy = 2;
+        }
+        else if (enemy3.active == true)
+        {
+            currentEnemy = 3;
+        }
+        else if (enemy4.active == true)
+        {
+            currentEnemy = 4;
+        }
+        UpdateEnemyArrows();
+    }
+
+    public void attackSlot3()
+    {
+        resetMenu();
+        soundManager.PlaySoundClip(5);
+        isSelectingEnemy = true;
+        attackPower = 10;
+
+        if (enemy1.active == true)
+        {
+            currentEnemy = 1;
+        }
+        else if (enemy2.active == true)
+        {
+            currentEnemy = 2;
+        }
+        else if (enemy3.active == true)
+        {
+            currentEnemy = 3;
+        }
+        else if (enemy4.active == true)
+        {
+            currentEnemy = 4;
+        }
+        UpdateEnemyArrows();
+    }
     private void HandleEnemySelection()
     {
+        BattleEnemyScript enemy1HealthCheck = enemy1.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript enemy2HealthCheck = enemy2.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript enemy3HealthCheck = enemy3.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript enemy4HealthCheck = enemy4.GetComponent<BattleEnemyScript>();
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
             soundManager.PlaySoundClip(3);
-            if (currentEnemy == 1) currentEnemy = 2;
-            else if (currentEnemy == 3) currentEnemy = 4;
+            if (currentEnemy == 1 && enemy2HealthCheck.health > 0) currentEnemy = 2;
+            else if (currentEnemy == 1 && enemy2HealthCheck.health <= 0) currentEnemy = 4;
+            else if (currentEnemy == 3 && enemy4HealthCheck.health > 0) currentEnemy = 4;
+            else if (currentEnemy == 3 && enemy4HealthCheck.health <= 0) currentEnemy = 2;
             UpdateEnemyArrows();
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
             soundManager.PlaySoundClip(3);
-            if (currentEnemy == 2) currentEnemy = 1;
-            else if (currentEnemy == 4) currentEnemy = 3;
+            if (currentEnemy == 2 && enemy1HealthCheck.health > 0) currentEnemy = 1;
+            else if (currentEnemy == 2 && enemy1HealthCheck.health <= 0) currentEnemy = 3;
+            else if (currentEnemy == 4 && enemy3HealthCheck.health > 0) currentEnemy = 3;
+            else if (currentEnemy == 4 && enemy3HealthCheck.health <= 0) currentEnemy = 1;
             UpdateEnemyArrows();
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
             soundManager.PlaySoundClip(3);
-            if (currentEnemy == 3) currentEnemy = 1;
-            else if (currentEnemy == 4) currentEnemy = 2;
+            if (currentEnemy == 3 && enemy1HealthCheck.health > 0) currentEnemy = 1;
+            else if (currentEnemy == 3 && enemy1HealthCheck.health <= 0) currentEnemy = 2;
+            else if (currentEnemy == 4 && enemy2HealthCheck.health > 0) currentEnemy = 2;
+            else if (currentEnemy == 4 && enemy2HealthCheck.health <= 0) currentEnemy = 1;
             UpdateEnemyArrows();
         }
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
             soundManager.PlaySoundClip(3);
-            if (currentEnemy == 1) currentEnemy = 3;
-            else if (currentEnemy == 2) currentEnemy = 4;
+            if (currentEnemy == 1 && enemy3HealthCheck.health > 0) currentEnemy = 3;
+            else if (currentEnemy == 1 && enemy3HealthCheck.health <= 0) currentEnemy = 4;
+            else if (currentEnemy == 2 && enemy4HealthCheck.health > 0) currentEnemy = 4;
+            else if (currentEnemy == 2 && enemy4HealthCheck.health <= 0) currentEnemy = 3;
             UpdateEnemyArrows();
         }
 
@@ -188,18 +272,34 @@ public class BattleUIScript : MonoBehaviour
 
         currentEnemy = enemy1.GetComponent<BattleEnemyScript>();
         RectTransform enemyHP1 = enemyHPBar1.GetComponent<RectTransform>();
+        if(currentEnemy.health <= 0)
+        {
+            enemy1.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+        }
         enemyHP1.sizeDelta = new Vector2((currentEnemy.health / currentEnemy.startingHealth) * 180, enemyHP1.sizeDelta.y);
 
         currentEnemy = enemy2.GetComponent<BattleEnemyScript>();
         RectTransform enemyHP2 = enemyHPBar2.GetComponent<RectTransform>();
+        if (currentEnemy.health <= 0)
+        {
+            enemy2.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+        }
         enemyHP2.sizeDelta = new Vector2((currentEnemy.health / currentEnemy.startingHealth) * 180, enemyHP2.sizeDelta.y);
-
+        
         currentEnemy = enemy3.GetComponent<BattleEnemyScript>();
         RectTransform enemyHP3 = enemyHPBar3.GetComponent<RectTransform>();
+        if (currentEnemy.health <= 0)
+        {
+            enemy3.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+        }
         enemyHP3.sizeDelta = new Vector2((currentEnemy.health / currentEnemy.startingHealth) * 180, enemyHP3.sizeDelta.y);
 
         currentEnemy = enemy4.GetComponent<BattleEnemyScript>();
         RectTransform enemyHP4 = enemyHPBar4.GetComponent<RectTransform>();
+        if (currentEnemy.health <= 0)
+        {
+            enemy4.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+        }
         enemyHP4.sizeDelta = new Vector2((currentEnemy.health / currentEnemy.startingHealth) * 180, enemyHP4.sizeDelta.y);
 
     }
