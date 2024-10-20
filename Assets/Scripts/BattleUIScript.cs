@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class BattleUIScript : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class BattleUIScript : MonoBehaviour
 
     public bool isSelectingEnemy = false;
     public int currentEnemy = 1;
+    public int currentEnemy2 = 0;
+    public char currentAttack = 'n';
     public int attackPower;
     public bool isBattleOver = false;
 
@@ -40,10 +43,14 @@ public class BattleUIScript : MonoBehaviour
     public Image fadeImage;
     public float fadeDuration = 0.3f;
 
+    public TextMeshProUGUI turnCounter;
+    public int turnCounterIndex = 1;
+
     private OmniDirectionalMovement johnMovement;
     private SoundManager soundManager;
     void OnEnable()
     {
+        turnCounter.text = "Turn 1";
         enemy1.gameObject.SetActive(true);
         enemy2.gameObject.SetActive(true);
         enemy3.gameObject.SetActive(true);
@@ -88,12 +95,13 @@ public class BattleUIScript : MonoBehaviour
 
     public void incrementTurn()
     {
+        turnCounterIndex++;
         playerTurn++;
         if (playerTurn == 5)
         {
             playerTurn = 1;
         }
-
+        updateTurns();
         UpdatePartyArrow();
     }
 
@@ -104,9 +112,10 @@ public class BattleUIScript : MonoBehaviour
         party3Arrow.gameObject.SetActive(playerTurn == 3);
         party4Arrow.gameObject.SetActive(playerTurn == 4);
     }
-    public void attackSlot1()
-    {
+    public void attackSlot1() //bash    XO
+    {                         //        OO
         resetMenu();
+        currentAttack = 'b';
         soundManager.PlaySoundClip(5);
         isSelectingEnemy = true;
         attackPower = 25;
@@ -130,9 +139,10 @@ public class BattleUIScript : MonoBehaviour
         UpdateEnemyArrows();
     }
 
-    public void attackSlot2()
-    {
+    public void attackSlot2() //slash   //   XO
+    {                                   //   XO
         resetMenu();
+        currentAttack = 's';
         soundManager.PlaySoundClip(5);
         isSelectingEnemy = true;
         attackPower = 15;
@@ -156,12 +166,13 @@ public class BattleUIScript : MonoBehaviour
         UpdateEnemyArrows();
     }
 
-    public void attackSlot3()
-    {
+    public void attackSlot3() //poke    // XX
+    {                                   // OO
         resetMenu();
+        currentAttack = 'p';
         soundManager.PlaySoundClip(5);
         isSelectingEnemy = true;
-        attackPower = 10;
+        attackPower = 15;
 
         if (enemy1.active == true)
         {
@@ -232,29 +243,68 @@ public class BattleUIScript : MonoBehaviour
         }
     }
 
-    private void ExecuteAttack()
+    public void ExecuteAttack()
     {
         BattleEnemyScript selectedEnemyScript = null;
-
+        BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e2 = enemy2.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e3 = enemy3.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e4 = enemy4.GetComponent<BattleEnemyScript>();
+        int selectedEnemy = 0;
         switch (currentEnemy)
         {
             case 1:
                 selectedEnemyScript = enemy1.GetComponent<BattleEnemyScript>();
+                selectedEnemy = 1;
                 break;
             case 2:
                 selectedEnemyScript = enemy2.GetComponent<BattleEnemyScript>();
+                selectedEnemy = 2;
                 break;
             case 3:
                 selectedEnemyScript = enemy3.GetComponent<BattleEnemyScript>();
+                selectedEnemy = 3;
                 break;
             case 4:
                 selectedEnemyScript = enemy4.GetComponent<BattleEnemyScript>();
+                selectedEnemy = 4;
                 break;
         }
 
         if (selectedEnemyScript != null)
         {
-            selectedEnemyScript.health -= attackPower;
+            if(currentAttack == 'b') //bash
+            {
+                selectedEnemyScript.health -= attackPower;
+                
+            }
+            else if(currentAttack == 's') //slash
+            {
+                if(selectedEnemy == 1 || selectedEnemy == 2)
+                {
+                    e1.health -= attackPower;
+                    e2.health -= attackPower;
+                }
+                else if (selectedEnemy == 3 || selectedEnemy == 4)
+                {
+                    e3.health -= attackPower;
+                    e4.health -= attackPower;
+                }
+            }
+            else if(currentAttack == 'p') //poke
+            {
+                if (selectedEnemy == 1 || selectedEnemy == 3)
+                {
+                    e1.health -= attackPower;
+                    e3.health -= attackPower;
+                }
+                else if (selectedEnemy == 2 || selectedEnemy == 4)
+                {
+                    e2.health -= attackPower;
+                    e4.health -= attackPower;
+                }
+            }
+            currentAttack = 'n';
             soundManager.PlaySoundClip(6);
             Debug.Log("Attacked enemy " + currentEnemy + ", remaining health: " + selectedEnemyScript.health);
         }
@@ -443,4 +493,9 @@ public class BattleUIScript : MonoBehaviour
         fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, targetAlpha);
     }
 
+
+    public void updateTurns()
+    {
+        turnCounter.text = "Turn " + turnCounterIndex;
+    }
 }
