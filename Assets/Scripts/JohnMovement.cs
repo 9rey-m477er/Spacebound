@@ -17,7 +17,8 @@ public class OmniDirectionalMovement : MonoBehaviour
     public int randomNum;
 
     public AudioSource sfx;
-    public AudioClip shipWalk;
+    public AudioClip shipWalk, forestWalk;
+    private AudioClip walkSound;
 
     public LayerMask unwalkableLayer;
     public GameObject fadetoBlackImage;
@@ -34,7 +35,7 @@ public class OmniDirectionalMovement : MonoBehaviour
         UpdateStepSpawn();
         battleSystem.gameObject.gameObject.SetActive(false);
         anim = GetComponent<Animator>();
-
+        walkSound = forestWalk; //When we have a change in scenery, we can rework changing the step sound. ~Dylan
     }
 
     void Update()
@@ -71,7 +72,7 @@ public class OmniDirectionalMovement : MonoBehaviour
             steps++;
             if (steps%2 == 0)
             {
-                sfx.PlayOneShot(shipWalk);
+                sfx.PlayOneShot(walkSound);
             }
             lastPosition = currentPosition;
             randomNum = randomNum - 4;
