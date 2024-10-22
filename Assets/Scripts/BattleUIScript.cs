@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using JetBrains.Annotations;
 
 public class BattleUIScript : MonoBehaviour
 {
@@ -27,6 +28,12 @@ public class BattleUIScript : MonoBehaviour
     public GameObject enemy3;
     public GameObject enemy4;
     public BattleEnemyScript battleEnemyScript;
+    public BattlePlayerScript battlePlayerScript;
+
+    public GameObject player1;
+    public GameObject player2;
+    public GameObject player3;
+    public GameObject player4;
 
     public bool isSelectingEnemy = false;
     public int currentEnemy = 1;
@@ -40,6 +47,11 @@ public class BattleUIScript : MonoBehaviour
     public GameObject enemyHPBar3;
     public GameObject enemyHPBar4;
 
+    public GameObject playerHPBar1;
+    public GameObject playerHPBar2;
+    public GameObject playerHPBar3;
+    public GameObject playerHPBar4;
+
     public Image fadeImage;
     public float fadeDuration = 0.3f;
 
@@ -48,8 +60,11 @@ public class BattleUIScript : MonoBehaviour
 
     private OmniDirectionalMovement johnMovement;
     private SoundManager soundManager;
+
+    public Button menuBlocking;
     void OnEnable()
     {
+        menuBlocking.gameObject.SetActive(false);
         turnCounter.text = "Turn 1";
         enemy1.gameObject.SetActive(true);
         enemy2.gameObject.SetActive(true);
@@ -97,13 +112,60 @@ public class BattleUIScript : MonoBehaviour
     {
         turnCounterIndex++;
         playerTurn++;
-        if (playerTurn == 5)
+        if (playerTurn == 5) // END OF PLAYER TURNS
         {
+            menuBlocking.gameObject.SetActive(true);
+            StartCoroutine(EnemyAttackSequence()); // TURN THIS OFF TO DISABLE ENEMY ATTACKS
             playerTurn = 1;
         }
         updateTurns();
         UpdatePartyArrow();
     }
+
+    public void enemyAttack(int randomNumber)
+    {
+        int attackPower = 10;
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player3.GetComponent<BattlePlayerScript>();
+
+        if(randomNumber == 1)
+        {
+            p1.health = p1.health - attackPower;
+            Debug.Log("attack 1");
+        }
+        else if(randomNumber == 2)
+        {
+            p2.health = p2.health - attackPower;
+            Debug.Log("attack 2");
+        }
+        else if (randomNumber == 3)
+        {
+            p3.health = p3.health - attackPower;
+            Debug.Log("attack 3");
+        }
+        else if (randomNumber == 4)
+        {
+            p4.health = p4.health - attackPower;
+            Debug.Log("attack 4");
+        }
+        updatePlayerHealth();
+    }
+
+    private IEnumerator EnemyAttackSequence()
+    {
+        for (int i = 1; i <= 4; i++)
+        {
+            yield return new WaitForSeconds(1.5f);
+            int randomNumber = Random.Range(1, 5); // randomly choose who to attack
+            enemyAttack(randomNumber);
+            turnCounterIndex++;
+            updateTurns();
+        }
+        menuBlocking.gameObject.SetActive(false);
+    }
+
 
     private void UpdatePartyArrow()
     {
@@ -354,6 +416,43 @@ public class BattleUIScript : MonoBehaviour
 
     }
 
+    public void updatePlayerHealth()
+    {
+        BattlePlayerScript currentPlayer = null;
+
+        currentPlayer = player1.GetComponent<BattlePlayerScript>();
+        RectTransform playerHP1 = playerHPBar1.GetComponent<RectTransform>();
+        if (currentPlayer.health <= 0)
+        {
+            player1.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+        }
+        playerHP1.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP1.sizeDelta.y);
+
+        currentPlayer = player2.GetComponent<BattlePlayerScript>();
+        RectTransform playerHP2 = playerHPBar2.GetComponent<RectTransform>();
+        if (currentPlayer.health <= 0)
+        {
+            player2.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+        }
+        playerHP2.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP2.sizeDelta.y);
+
+        currentPlayer = player3.GetComponent<BattlePlayerScript>();
+        RectTransform playerHP3 = playerHPBar3.GetComponent<RectTransform>();
+        if (currentPlayer.health <= 0)
+        {
+            player3.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+        }
+        playerHP3.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP3.sizeDelta.y);
+
+        currentPlayer = player4.GetComponent<BattlePlayerScript>();
+        RectTransform playerHP4 = playerHPBar4.GetComponent<RectTransform>();
+        if (currentPlayer.health <= 0)
+        {
+            player4.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+        }
+        playerHP4.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP4.sizeDelta.y);
+
+    }
     public void checkForEndOfBattle()
     {
         BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>(); 
@@ -379,16 +478,27 @@ public class BattleUIScript : MonoBehaviour
         fadeImage.gameObject.SetActive(true);
         yield return StartCoroutine(Fade(1));
 
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player3.GetComponent<BattlePlayerScript>();
 
         BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
         BattleEnemyScript e2 = enemy2.GetComponent<BattleEnemyScript>();
         BattleEnemyScript e3 = enemy3.GetComponent<BattleEnemyScript>();
         BattleEnemyScript e4 = enemy4.GetComponent<BattleEnemyScript>();
 
+        p1.health = p1.startingHealth;
+        p2.health = p2.startingHealth;
+        p3.health = p3.startingHealth;
+        p4.health = p4.startingHealth;
+
         e1.health = e1.startingHealth;
         e2.health = e2.startingHealth;
         e3.health = e3.startingHealth;
         e4.health = e4.startingHealth;
+
+        updatePlayerHealth();
         updateEnemyHealth();
         fadeImage.gameObject.SetActive(false);
         johnMovement.inBattle = false;
