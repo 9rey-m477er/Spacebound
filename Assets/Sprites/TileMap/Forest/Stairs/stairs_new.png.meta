@@ -113,7 +113,7 @@ TextureImporter:
       name: stairs_new_0
       rect:
         serializedVersion: 2
-        x: 16
+        x: 0
         y: 32
         width: 16
         height: 16
@@ -134,8 +134,8 @@ TextureImporter:
       name: stairs_new_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
+        x: 16
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -155,7 +155,7 @@ TextureImporter:
       name: stairs_new_2
       rect:
         serializedVersion: 2
-        x: 16
+        x: 0
         y: 16
         width: 16
         height: 16
@@ -176,7 +176,7 @@ TextureImporter:
       name: stairs_new_3
       rect:
         serializedVersion: 2
-        x: 32
+        x: 16
         y: 16
         width: 16
         height: 16
@@ -189,6 +189,27 @@ TextureImporter:
       bones: []
       spriteID: b6a6ac5972ad85f45b8d679e8dd0ad98
       internalID: -1476906079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stairs_new_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfc55fecaff057a41ad2edb7fd6c4537
+      internalID: 851688396
       vertices: []
       indices: 
       edges: []
@@ -208,6 +229,7 @@ TextureImporter:
       stairs_new_1: -552090289
       stairs_new_2: 887018196
       stairs_new_3: -1476906079
+      stairs_new_4: 851688396
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
