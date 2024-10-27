@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public AudioSource AS, LevelMusic, BattleMusic;
+    public AudioSource AS, Music;
     public AudioClip MenuOpen, MenuConfirm, MenuCancel, MenuChange, MenuClose, MenuClick, 
         MetalImpact2;
-    public AudioClip BMIntro;
+
+    public float maxVol;
 
     public void PlaySoundClip(int clip)
     {
@@ -35,5 +36,25 @@ public class SoundManager : MonoBehaviour
                 AS.PlayOneShot(MetalImpact2);
                 break;
         }
+    }
+
+    public void PlaySpecificClip(AudioClip ac)
+    {
+        AS.PlayOneShot(ac);
+    }
+
+    public void ChangeMusic(AudioClip ac)
+    {
+        Music.Stop();
+        Music.clip = ac;
+        Music.PlayDelayed(0.5f);
+    }
+
+    public void BattleTransition(AudioClip intro, AudioClip loop)
+    {
+        Music.Stop();
+        Music.PlayOneShot(intro);
+        Music.clip = loop;
+        Music.PlayDelayed(intro.length - 0.25f);
     }
 }

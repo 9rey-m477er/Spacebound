@@ -475,6 +475,7 @@ public class BattleUIScript : MonoBehaviour
     public IEnumerator exitBattle()
     {
         isBattleOver = false;
+        johnMovement.EndBattle();
         fadeImage.gameObject.SetActive(true);
         yield return StartCoroutine(Fade(1));
 

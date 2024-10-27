@@ -15,9 +15,13 @@ public class OmniDirectionalMovement : MonoBehaviour
     public float stepThreshold = 2f;
     public int steps = 0;
     public int randomNum;
+    public int level;
 
     public AudioSource sfx;
     public AudioClip shipWalk, forestWalk;
+    public SoundManager soundManager;
+    public AudioClip shipBM, shipBMIntro, shipLM, forestBM, forestBMIntro, forestLM;
+    private AudioClip battleMusic, battleMusicIntro, levelMusic;
     private AudioClip walkSound;
 
     public LayerMask unwalkableLayer;
@@ -36,6 +40,9 @@ public class OmniDirectionalMovement : MonoBehaviour
         battleSystem.gameObject.gameObject.SetActive(false);
         anim = GetComponent<Animator>();
         walkSound = forestWalk; //When we have a change in scenery, we can rework changing the step sound. ~Dylan
+        battleMusic = forestBM;
+        battleMusicIntro = forestBMIntro;
+        levelMusic = forestLM;
     }
 
     void Update()
@@ -78,6 +85,7 @@ public class OmniDirectionalMovement : MonoBehaviour
             randomNum = randomNum - 4;
             if(randomNum <= 0)
             {
+                soundManager.BattleTransition(battleMusicIntro, battleMusic);
                 inBattle = true;
                 battleSystem.gameObject.SetActive(true);
                 Debug.Log("Fight!");
@@ -105,5 +113,27 @@ public class OmniDirectionalMovement : MonoBehaviour
             anim.SetFloat("Y", movement.y);
         }
         anim.SetBool("Moving", moving);
+    }
+
+    public void EndBattle()
+    {
+        soundManager.ChangeMusic(levelMusic);
+    }
+
+    private void MusicChange(int lvl)
+    {
+        switch(lvl)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+        }
     }
 }
