@@ -110,12 +110,12 @@ public class BattleUIScript : MonoBehaviour
     
     public IEnumerator fadeIntoBattle()
     {
-        Debug.Log("fade in");
+        //Debug.Log("fade in");
         fadeImage.gameObject.SetActive(true);
         yield return StartCoroutine(Fade(1));
         yield return StartCoroutine(Fade(0));
         fadeImage.gameObject.SetActive(false);
-        Debug.Log("fade out");
+        //Debug.Log("fade out");
     }
 
     public void incrementTurn()
