@@ -18,6 +18,11 @@ public class BattleUIScript : MonoBehaviour
     public GameObject party3Arrow;
     public GameObject party4Arrow;
 
+    public GameObject party1Reticle;
+    public GameObject party2Reticle;
+    public GameObject party3Reticle;
+    public GameObject party4Reticle;
+
     public GameObject enemy1Arrow;
     public GameObject enemy2Arrow;
     public GameObject enemy3Arrow;
@@ -84,6 +89,11 @@ public class BattleUIScript : MonoBehaviour
         enemy2Arrow.gameObject.SetActive(false);
         enemy3Arrow.gameObject.SetActive(false);
         enemy4Arrow.gameObject.SetActive(false);
+
+        party1Reticle.SetActive(false);
+        party2Reticle.SetActive(false);
+        party3Reticle.SetActive(false);
+        party4Reticle.SetActive(false);
     }
     void Update()
     {
@@ -128,7 +138,7 @@ public class BattleUIScript : MonoBehaviour
         BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
-        BattlePlayerScript p4 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
 
         if(randomNumber == 1)
         {
@@ -155,14 +165,141 @@ public class BattleUIScript : MonoBehaviour
 
     private IEnumerator EnemyAttackSequence()
     {
+        if(enemy1.gameObject.active == true)
+        {
+            yield return new WaitForSeconds(0.75f);
+            int randomNumber = Random.Range(1, 5); // randomly choose who to attack
+            if(randomNumber == 1)
+            {
+                party1Reticle.SetActive(true);
+            }
+            else if(randomNumber == 2)
+            {
+                party2Reticle.SetActive(true);
+            }
+            else if (randomNumber == 3)
+            {
+                party3Reticle.SetActive(true);
+            }
+            else if (randomNumber == 4)
+            {
+                party4Reticle.SetActive(true);
+            }
+            yield return new WaitForSeconds(0.75f);
+            soundManager.PlaySoundClip(6);
+            enemyAttack(randomNumber);
+            turnCounterIndex++;
+            updateTurns();
+            party1Reticle.SetActive(false);
+            party2Reticle.SetActive(false);
+            party3Reticle.SetActive(false);
+            party4Reticle.SetActive(false);
+        }
+        if (enemy2.gameObject.active == true)
+        {
+            yield return new WaitForSeconds(0.75f);
+            int randomNumber = Random.Range(1, 5); // randomly choose who to attack
+            //reticle
+            if (randomNumber == 1)
+            {
+                party1Reticle.SetActive(true);
+            }
+            else if (randomNumber == 2)
+            {
+                party2Reticle.SetActive(true);
+            }
+            else if (randomNumber == 3)
+            {
+                party3Reticle.SetActive(true);
+            }
+            else if (randomNumber == 4)
+            {
+                party4Reticle.SetActive(true);
+            }
+            yield return new WaitForSeconds(0.75f);
+            soundManager.PlaySoundClip(6);
+            enemyAttack(randomNumber);
+            turnCounterIndex++;
+            updateTurns();
+            party1Reticle.SetActive(false);
+            party2Reticle.SetActive(false);
+            party3Reticle.SetActive(false);
+            party4Reticle.SetActive(false);
+        }
+        if (enemy3.gameObject.active == true)
+        {
+            yield return new WaitForSeconds(0.75f);
+            int randomNumber = Random.Range(1, 5); // randomly choose who to attack
+            //reticle
+            if (randomNumber == 1)
+            {
+                party1Reticle.SetActive(true);
+            }
+            else if (randomNumber == 2)
+            {
+                party2Reticle.SetActive(true);
+            }
+            else if (randomNumber == 3)
+            {
+                party3Reticle.SetActive(true);
+            }
+            else if (randomNumber == 4)
+            {
+                party4Reticle.SetActive(true);
+            }
+            yield return new WaitForSeconds(0.75f);
+            soundManager.PlaySoundClip(6);
+            enemyAttack(randomNumber);
+            turnCounterIndex++;
+            updateTurns();
+            party1Reticle.SetActive(false);
+            party2Reticle.SetActive(false);
+            party3Reticle.SetActive(false);
+            party4Reticle.SetActive(false);
+        }
+        if (enemy4.gameObject.active == true)
+        {
+            yield return new WaitForSeconds(0.75f);
+            int randomNumber = Random.Range(1, 5); // randomly choose who to attack
+                                                   //reticle
+            if (randomNumber == 1)
+            {
+                party1Reticle.SetActive(true);
+            }
+            else if (randomNumber == 2)
+            {
+                party2Reticle.SetActive(true);
+            }
+            else if (randomNumber == 3)
+            {
+                party3Reticle.SetActive(true);
+            }
+            else if (randomNumber == 4)
+            {
+                party4Reticle.SetActive(true);
+            }
+            yield return new WaitForSeconds(0.75f);
+            soundManager.PlaySoundClip(6);
+            enemyAttack(randomNumber);
+            turnCounterIndex++;
+            updateTurns();
+            party1Reticle.SetActive(false);
+            party2Reticle.SetActive(false);
+            party3Reticle.SetActive(false);
+            party4Reticle.SetActive(false);
+        }
+
+        /*
         for (int i = 1; i <= 4; i++)
         {
             yield return new WaitForSeconds(1.5f);
             int randomNumber = Random.Range(1, 5); // randomly choose who to attack
+            //reticle
             enemyAttack(randomNumber);
             turnCounterIndex++;
             updateTurns();
         }
+        */
         menuBlocking.gameObject.SetActive(false);
     }
 
