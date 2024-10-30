@@ -115,18 +115,19 @@ public class BattleUIScript : MonoBehaviour
         yield return StartCoroutine(Fade(1));
         yield return StartCoroutine(Fade(0));
         fadeImage.gameObject.SetActive(false);
+        turnCounterIndex = 1;
         //Debug.Log("fade out");
     }
 
     public void incrementTurn()
     {
-        turnCounterIndex++;
         playerTurn++;
         if (playerTurn == 5) // END OF PLAYER TURNS
         {
             menuBlocking.gameObject.SetActive(true);
             StartCoroutine(EnemyAttackSequence()); // TURN THIS OFF TO DISABLE ENEMY ATTACKS
             playerTurn = 1;
+            turnCounterIndex++;
         }
         updateTurns();
         UpdatePartyArrow();
@@ -188,7 +189,7 @@ public class BattleUIScript : MonoBehaviour
             yield return new WaitForSeconds(0.75f);
             soundManager.PlaySoundClip(6);
             enemyAttack(randomNumber);
-            turnCounterIndex++;
+            //turnCounterIndex++;
             updateTurns();
             party1Reticle.SetActive(false);
             party2Reticle.SetActive(false);
@@ -219,7 +220,7 @@ public class BattleUIScript : MonoBehaviour
             yield return new WaitForSeconds(0.75f);
             soundManager.PlaySoundClip(6);
             enemyAttack(randomNumber);
-            turnCounterIndex++;
+            //turnCounterIndex++;
             updateTurns();
             party1Reticle.SetActive(false);
             party2Reticle.SetActive(false);
@@ -250,7 +251,7 @@ public class BattleUIScript : MonoBehaviour
             yield return new WaitForSeconds(0.75f);
             soundManager.PlaySoundClip(6);
             enemyAttack(randomNumber);
-            turnCounterIndex++;
+            //turnCounterIndex++;
             updateTurns();
             party1Reticle.SetActive(false);
             party2Reticle.SetActive(false);
