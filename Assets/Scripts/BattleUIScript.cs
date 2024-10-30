@@ -619,7 +619,7 @@ public class BattleUIScript : MonoBehaviour
         BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
-        BattlePlayerScript p4 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
 
         BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
         BattleEnemyScript e2 = enemy2.GetComponent<BattleEnemyScript>();
