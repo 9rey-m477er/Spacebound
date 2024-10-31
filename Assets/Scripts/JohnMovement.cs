@@ -115,6 +115,11 @@ public class OmniDirectionalMovement : MonoBehaviour
         anim.SetBool("Moving", moving);
     }
 
+    public void StartScriptedBattle()
+    {
+
+    }
+
     public void EndBattle()
     {
         soundManager.ChangeMusic(levelMusic);
