@@ -5,7 +5,7 @@ using UnityEngine;
 using System;
 //using Unity.VisualScripting.ReorderableList;
 
-public class OmniDirectionalMovement : MonoBehaviour
+public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
 {
     public float moveSpeed = 4f;
     private Rigidbody2D rb;
@@ -26,8 +26,9 @@ public class OmniDirectionalMovement : MonoBehaviour
 
     public LayerMask unwalkableLayer;
     public GameObject fadetoBlackImage;
-    public GameObject battleSystem;
+    public GameObject battleSystem, bossSystem;
     public GameObject dialogueSystem;
+    private BossBattleUIScript bossScript;
 
     public Animator anim;
     public bool inBattle;
@@ -115,9 +116,12 @@ public class OmniDirectionalMovement : MonoBehaviour
         anim.SetBool("Moving", moving);
     }
 
-    public void StartScriptedBattle()
+    public void StartScriptedBattle(GameObject enemyPrefab)
     {
-
+        soundManager.BattleTransition(battleMusicIntro, battleMusic);
+        bossScript = bossSystem.GetComponent<BossBattleUIScript>();
+        bossSystem.SetActive(true);
+        inBattle = true;
     }
 
     public void EndBattle()
@@ -140,5 +144,17 @@ public class OmniDirectionalMovement : MonoBehaviour
             case 4:
                 break;
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.steps = data.steps;
+        this.transform.position = data.playerPosition;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.steps = this.steps;
+        data.playerPosition = this.transform.position;
     }
 }

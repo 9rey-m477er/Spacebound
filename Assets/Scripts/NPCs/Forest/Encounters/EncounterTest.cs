@@ -27,6 +27,6 @@ public class EncounterTest : NPC, ITalkable, IBattleable
 
     public void Battle(GameObject enemyPrefab)
     {
-        john.StartScriptedBattle();
+        john.StartScriptedBattle(enemyPrefab);
     }
 }
