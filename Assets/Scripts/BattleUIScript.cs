@@ -435,7 +435,7 @@ public class BattleUIScript : MonoBehaviour
             UpdateEnemyArrows();
         }
 
-        if (Input.GetKeyDown(KeyCode.E))//confirm
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))//confirm
         {
             isSelectingEnemy = false; 
             ExecuteAttack();
