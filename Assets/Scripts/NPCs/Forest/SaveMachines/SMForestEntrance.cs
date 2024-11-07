@@ -7,17 +7,17 @@ public class SMForestEntrance : NPC, ITalkable, ISaveable
 
     [SerializeField] private DialogueText dialogueText;
     [SerializeField] private DialogueController dialogueController;
-    public SaveLoadSystem saveManager;
+    public DataPersistenceManager dataPersistenceManager;
     public int machineID;
     public override void Interact()
     {
         Talk(dialogueText);
-        SaveGame(machineID);
+        SaveGame();
     }
 
-    public void SaveGame(int saveMachine)
+    public void SaveGame()
     {
-        throw new System.NotImplementedException();
+        dataPersistenceManager.SaveGame();
     }
 
     public void Talk(DialogueText dialogueText)

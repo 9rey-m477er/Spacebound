@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ISaveable
 {
-    public void SaveGame(int saveMachine);
+    public void SaveGame();
 }
