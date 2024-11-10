@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
+  m_Name: BobFound
+  m_EditorClassIdentifier: 
+  speakerNames:
+  - T.H.E
+  - John
+  - T.H.E
+  - Bob
+  - John
+  - Bob
+  - John
+  - Bob
+  - John
+  - Bob
+  - Bob
+  - John
+  - Bob
+  - T.H.E
+  - Bob
+  - John
+  - T.H.E
+  - John
+  - Bob
+  - John
+  - Bob
+  - Bob
+  - John
+  paragraphs:
+  - "Isn\u2019t that one of your friends?"
+  - "Yeah, that\u2019s Bob!"
+  - Information updated.
+  - Where am I? Where are the others?!
+  - Hey, Bob.
+  - Did I die?!! Is this hell?!!
+  - "Bob, it\u2019s me, John."
+  - "John\u2019s in hell too?!!"
+  - BOB!!
+  - John?!
+  - I was so scared!
+  - I can tell. Are you alright otherwise?
+  - Yep.
+  - "Glad to see you\u2019re alright, Bob."
+  - Wha- T.H.E? Where-
+  - From the smartwatch, see?
+  - John, now that we have found Bob, it is time to acquire the rocket piece.
+  - Right.
+  - Rocket piece?
+  - When the rocket crashed, some pieces got scattered around the planet.
+  - 'Whoo! Adventure time!!
+
+'
+  - "Let\u2019s go explore!"
+  - You were just - forget it.

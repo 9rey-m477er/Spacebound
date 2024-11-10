@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
+  m_Name: MidDialogue1
+  m_EditorClassIdentifier: 
+  speakerNames:
+  - John
+  - Bob
+  - T.H.E
+  - John
+  - Bob
+  - John
+  - John
+  - Bob
+  - John
+  paragraphs:
+  - "Who\u2019d ever thought we end up like this?"
+  - Right. Some vacation. I thought this was suppose to be easy.
+  - "\u2026"
+  - Planet Sanctuary has a beautiful beach. I wanted to work on my tan.
+  - Why?
+  - I wanted to show those losers who had the best-looking body.
+  - "Can\u2019t get any more perfect than me."
+  - I wanted to see you win.
+  - Maybe some other time.

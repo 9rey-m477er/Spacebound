@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
+  m_Name: ThozosFound
+  m_EditorClassIdentifier: 
+  speakerNames:
+  - Bob
+  - John
+  - Bob
+  - John
+  - Bob
+  - John
+  - John
+  - ???
+  - John
+  - Bob
+  - Bob
+  - ???
+  - ???
+  - John
+  - ???
+  - John
+  - ???
+  - ???
+  - ???
+  - John, Bob
+  - Thozos
+  - John
+  - T.H.E
+  - Thozos
+  - John
+  - Thozos
+  - John
+  - Thozos
+  - Thozos
+  paragraphs:
+  - Is that an alien?
+  - Appears so.
+  - "I told Stevphen they\u2019re real."
+  - Although this one looks different. Maybe it knows where the rocket piece is?
+  - You speak alien?
+  - They speak English.
+  - "Excuse me, have you seen a rocket piece around? Our ship crashed, and we\u2019re
+    trying to fix it."
+  - "\u235C\u2291 \u2307\u235C \u27DF\u23C1 \u2359\u23C3\u2307 \u22AC\u235C\u238D
+    \u260C\u238D\u22AC\u2307!\n(Oh, so it was you guys!)"
+  - "I\u2019m sorry?"
+  - Let me try.
+  - "\u22AC\u235C\u238D\u2340 \u22D4\u235C\u22D4'\u2307 \u23C3 \u2291\u235C\u27D2\n(Your
+    mom's a -)"
+  - "\u22AC\u235C\u238D \u233F\u27DF\u27D2\u260A\u27D2 \u235C\u238E \u2307\u2291\u27DF\u23C1.
+    \u22CF\u27D2\u2390\u27D2\u2340 \u23C1\u23C3\u2330\u260D \u23C3\u23DA\u235C\u238D\u23C1
+    \u22D4\u22AC \u22D4\u235C\u23C1\u2291\u27D2\u2340 \u23C3\u260C\u23C3\u27DF\u22CF!\n(You
+    piece of $#!%! Never talk about my mother again!)"
+  - "For the record, I can speak human. Anyway, what the \u2291\u27D2\u2330\u2330
+    were you guys thinking?"
+  - What did we do?!
+  - Your rocket demolished my office! Now, what am I supposed to do?!
+  - "We didn\u2019t mean to. Our rocket malfunctioned and. Look, we just want to
+    leave here and go home.\n"
+  - Ugh!
+  - "Okay. I\u2019ll help you."
+  - But I want you guys gone and never come back here when this is over. Are we clear?
+  - Yeah.
+  - "Name\u2019s Thozos."
+  - "I\u2019m John, and this is Bob."
+  - Information updated.
+  - "The \u2291\u27D2\u2330\u2330?!"
+  - "Sorry, that\u2019s T.H.E, our ship\u2019s AI."
+  - "Whatever. So you said you\u2019re looking for rocket pieces?"
+  - "Not just that, we\u2019re looking for our friends too."
+  - "\u23C1\u2291\u27D2\u2340\u27D2'\u2307 \u22D4\u235C\u2340\u27D2 \u235C\u238E
+    \u22AC\u235C\u238D?! \u238D\u260C\u2291!!\n(There\u2019s more of you?! Ugh!!)"
+  - Come. The sooner we finish, the sooner I have peace.

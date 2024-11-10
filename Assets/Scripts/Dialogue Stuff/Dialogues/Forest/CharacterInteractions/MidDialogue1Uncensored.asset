@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
+  m_Name: MidDialogue1Uncensored
+  m_EditorClassIdentifier: 
+  speakerNames:
+  - John
+  - Bob
+  - T.H.E
+  - John
+  - Bob
+  - John
+  - Bob
+  - John
+  - John
+  - Bob
+  paragraphs:
+  - "Who\u2019d ever thought we end up like this?"
+  - Right. Some vacation. I thought this was suppose to be easy.
+  - "\u2026"
+  - Planet Sanctuary has a beautiful beach. I wanted to work on my tan.
+  - Did you bring the jockstrap?
+  - Yep, I wanted to show those people who has the best ass.
+  - 'Can I sp-
+
+'
+  - "Don\u2019t you finish that, Bob!"
+  - Gotta earned it.
+  - Heh. Maybe I will.
