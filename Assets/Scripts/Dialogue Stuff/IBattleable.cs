@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IBattleable
 {
-    public void Battle(GameObject enemyPrefab);
+    public void Battle(EnemyStatSheet enemy);
 }

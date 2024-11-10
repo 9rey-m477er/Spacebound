@@ -116,14 +116,6 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         anim.SetBool("Moving", moving);
     }
 
-    public void StartScriptedBattle(GameObject enemyPrefab)
-    {
-        soundManager.BattleTransition(battleMusicIntro, battleMusic);
-        bossScript = bossSystem.GetComponent<BossBattleUIScript>();
-        bossSystem.SetActive(true);
-        inBattle = true;
-    }
-
     public void EndBattle()
     {
         soundManager.ChangeMusic(levelMusic);

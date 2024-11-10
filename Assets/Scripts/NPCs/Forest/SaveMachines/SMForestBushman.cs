@@ -8,7 +8,6 @@ public class SMForestBushman : NPC, ITalkable, ISaveable
     [SerializeField] private DialogueText dialogueText;
     [SerializeField] private DialogueController dialogueController;
     public DataPersistenceManager dataPersistenceManager;
-    public int machineID;
     public override void Interact()
     {
         Talk(dialogueText);

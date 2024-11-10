@@ -11,10 +11,10 @@ public class DialogueController : MonoBehaviour
 
     private SoundManager soundManager;
 
-    private Queue<string> paragraphs = new Queue<string>();
+    public Queue<string> paragraphs = new Queue<string>();
     private Queue<string> names = new Queue<string>();
 
-    private bool conversationEnded;
+    public bool conversationEnded;
     //private bool isTyping;
     private string n;
     private string p;
@@ -31,7 +31,6 @@ public class DialogueController : MonoBehaviour
 
     public void displayNextParagraph(DialogueText dialogueText)
     {
-        Debug.Log("Paragraphs Count = " + paragraphs.Count);
 
         if (paragraphs.Count == 0)
         {
@@ -46,8 +45,6 @@ public class DialogueController : MonoBehaviour
             }
         }
 
-        Debug.Log("Paragraphs Count = " + paragraphs.Count);
-
         //if (!isTyping)
         //{
         //    p = paragraphs.Dequeue();
@@ -60,8 +57,6 @@ public class DialogueController : MonoBehaviour
         soundManager.PlaySoundClip(3);
         npcNameText.text = n;
         npcDialogueText.text = p;
-
-        Debug.Log("Paragraphs Count = " + paragraphs.Count);
 
         if (paragraphs.Count == 0)
         {
@@ -85,9 +80,10 @@ public class DialogueController : MonoBehaviour
         }
     }
 
-    private void EndConversation()
+    public void EndConversation()
     {
         paragraphs.Clear();
+        names.Clear();
         conversationEnded = false;
         if (gameObject.activeSelf)
         {

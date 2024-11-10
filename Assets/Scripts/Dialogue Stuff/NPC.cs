@@ -9,7 +9,7 @@ public abstract class NPC : MonoBehaviour, IInteractible
     private Transform playerTransform;
     private OmniDirectionalMovement johnMovement;
 
-    private const float interactDistance = 2.5f;
+    private const float interactDistance = 2f;
 
     private void Start()
     {

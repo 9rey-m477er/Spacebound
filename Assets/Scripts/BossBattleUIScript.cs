@@ -26,6 +26,7 @@ public class BossBattleUIScript : MonoBehaviour
     public GameObject enemy1Arrow;
 
     public GameObject enemy1;
+    public Image enemyImage;
     public BattleEnemyScript battleEnemyScript;
     public BattlePlayerScript battlePlayerScript;
 
@@ -91,6 +92,42 @@ public class BossBattleUIScript : MonoBehaviour
         {
             StartCoroutine(exitBattle());
         }
+    }
+
+    public void StartScriptedBattle(EnemyStatSheet enemy, AudioClip encounterIntro, AudioClip encounterMusic)
+    {
+        soundManager.BattleTransition(encounterIntro, encounterMusic);
+        SetEnemyStats(enemy);
+        johnMovement.inBattle = true;
+    }
+
+    public void SetEnemyStats(EnemyStatSheet sheet)
+    {
+        Debug.Log("Passing Information to Enemy");
+        enemyImage.sprite = sheet.sprite;
+        Debug.Log("Sprite Passed");
+
+        // Resize the GameObject based on the sprite dimensions
+        RectTransform rectTransform = enemy1.GetComponent<RectTransform>();
+        if (rectTransform != null && sheet.sprite != null)
+        {
+            rectTransform.sizeDelta = new Vector2(sheet.sprite.rect.width, sheet.sprite.rect.height);
+            //Debug.Log($"Resized {enemy.name} to: {randomSprite.rect.width}x{randomSprite.rect.height}");
+        }
+        else
+        {
+            //Debug.LogWarning($"RectTransform or Sprite missing for {enemy.name}");
+        }
+
+        //Set the rest of the values
+        battleEnemyScript.health = sheet.health;
+        Debug.Log("Enemy Health = " + battleEnemyScript.health);
+        battleEnemyScript.startingHealth = sheet.health;
+        Debug.Log("Enemy Starting Health = " + battleEnemyScript.startingHealth);
+        battleEnemyScript.attackStrength = sheet.attackStrength;
+        Debug.Log("Enemy Attack Strength = " + battleEnemyScript.attackStrength);
+        battleEnemyScript.baseExpValue = sheet.baseExpValue;
+        Debug.Log("Enemy Base EXP Value = " + battleEnemyScript.baseExpValue);
     }
     
     public IEnumerator fadeIntoBattle()

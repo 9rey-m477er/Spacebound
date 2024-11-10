@@ -6,12 +6,14 @@ public class EncounterTest : NPC, ITalkable, IBattleable
 {
     [SerializeField] private DialogueText dialogueText;
     [SerializeField] private DialogueController dialogueController;
-    [SerializeField] private GameObject enemy;
-    private OmniDirectionalMovement john;
+    [SerializeField] private EnemyStatSheet enemy;
+    [SerializeField] private AudioClip encounterIntro, encounterMusic;
+    [SerializeField] private GameObject bossSystem;
+    private BossBattleUIScript bossScript;
 
     public void Start()
     {
-        john = GameObject.FindGameObjectWithTag("Player").GetComponent<OmniDirectionalMovement>();
+        bossScript = GameObject.FindGameObjectWithTag("BossSystem").GetComponent<BossBattleUIScript>();
     }
 
     public override void Interact()
@@ -25,8 +27,9 @@ public class EncounterTest : NPC, ITalkable, IBattleable
         dialogueController.displayNextParagraph(dialogueText);
     }
 
-    public void Battle(GameObject enemyPrefab)
+    public void Battle(EnemyStatSheet enemy)
     {
-        john.StartScriptedBattle(enemyPrefab);
+        bossSystem.SetActive(true);
+        bossScript.StartScriptedBattle(enemy, encounterIntro, encounterMusic);
     }
 }
