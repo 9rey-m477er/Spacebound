@@ -67,6 +67,8 @@ public class BattleUIScript : MonoBehaviour
     private SoundManager soundManager;
 
     public Button menuBlocking;
+
+    public List<Sprite> forestSpritePool = new List<Sprite>();
     void OnEnable()
     {
         menuBlocking.gameObject.SetActive(false);
@@ -94,7 +96,38 @@ public class BattleUIScript : MonoBehaviour
         party2Reticle.SetActive(false);
         party3Reticle.SetActive(false);
         party4Reticle.SetActive(false);
+
+
+        //randomly assign forest enemies
+        //need an if statement here for when different biomes are put in
+        rollEnemyForest(enemy1, forestSpritePool);
+        rollEnemyForest(enemy2, forestSpritePool);
+        rollEnemyForest(enemy3, forestSpritePool);
+        rollEnemyForest(enemy4, forestSpritePool);
     }
+
+    void rollEnemyForest(GameObject enemy, List<Sprite> spritePool)
+    {
+        // Get a random sprite from the pool
+        Sprite randomSprite = spritePool[Random.Range(0, spritePool.Count)];
+
+        // Get the Image component from the enemy GameObject
+        Image targetImage = enemy.GetComponent<Image>();
+        targetImage.sprite = randomSprite;
+
+        // Resize the GameObject based on the sprite dimensions
+        RectTransform rectTransform = enemy.GetComponent<RectTransform>();
+        if (rectTransform != null && randomSprite != null)
+        {
+            rectTransform.sizeDelta = new Vector2(randomSprite.rect.width, randomSprite.rect.height);
+            //Debug.Log($"Resized {enemy.name} to: {randomSprite.rect.width}x{randomSprite.rect.height}");
+        }
+        else
+        {
+            //Debug.LogWarning($"RectTransform or Sprite missing for {enemy.name}");
+        }
+    }
+
     void Update()
     {
         // Only check input if the player is currently selecting an enemy
