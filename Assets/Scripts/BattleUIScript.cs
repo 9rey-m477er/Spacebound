@@ -69,6 +69,7 @@ public class BattleUIScript : MonoBehaviour
     public Button menuBlocking;
 
     public List<Sprite> forestSpritePool = new List<Sprite>();
+    public List<EnemyStatSheet> forestEnemyPool = new List<EnemyStatSheet>();
     void OnEnable()
     {
         menuBlocking.gameObject.SetActive(false);
@@ -100,32 +101,39 @@ public class BattleUIScript : MonoBehaviour
 
         //randomly assign forest enemies
         //need an if statement here for when different biomes are put in
-        rollEnemyForest(enemy1, forestSpritePool);
-        rollEnemyForest(enemy2, forestSpritePool);
-        rollEnemyForest(enemy3, forestSpritePool);
-        rollEnemyForest(enemy4, forestSpritePool);
+        rollEnemyForest(enemy1, forestEnemyPool);
+        rollEnemyForest(enemy2, forestEnemyPool);
+        rollEnemyForest(enemy3, forestEnemyPool);
+        rollEnemyForest(enemy4, forestEnemyPool);
     }
 
-    void rollEnemyForest(GameObject enemy, List<Sprite> spritePool)
+    void rollEnemyForest(GameObject enemy, List<EnemyStatSheet> sheetPool)
     {
         // Get a random sprite from the pool
-        Sprite randomSprite = spritePool[Random.Range(0, spritePool.Count)];
+        EnemyStatSheet sheet = sheetPool[Random.Range(0, sheetPool.Count)];
 
         // Get the Image component from the enemy GameObject
         Image targetImage = enemy.GetComponent<Image>();
-        targetImage.sprite = randomSprite;
+        BattleEnemyScript targetScript = enemy.GetComponent<BattleEnemyScript>();
+        targetImage.sprite = sheet.sprite;
 
         // Resize the GameObject based on the sprite dimensions
         RectTransform rectTransform = enemy.GetComponent<RectTransform>();
-        if (rectTransform != null && randomSprite != null)
+        if (rectTransform != null && sheet.sprite != null)
         {
-            rectTransform.sizeDelta = new Vector2(randomSprite.rect.width, randomSprite.rect.height);
+            rectTransform.sizeDelta = new Vector2(sheet.sprite.rect.width, sheet.sprite.rect.height);
             //Debug.Log($"Resized {enemy.name} to: {randomSprite.rect.width}x{randomSprite.rect.height}");
         }
         else
         {
             //Debug.LogWarning($"RectTransform or Sprite missing for {enemy.name}");
         }
+
+        //Set the rest of the values
+        targetScript.health = sheet.health;
+        targetScript.startingHealth = sheet.health;
+        targetScript.attackStrength = sheet.attackStrength;
+        targetScript.baseExpValue = sheet.baseExpValue;
     }
 
     void Update()

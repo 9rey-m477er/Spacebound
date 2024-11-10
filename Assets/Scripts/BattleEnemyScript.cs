@@ -10,6 +10,9 @@ public class BattleEnemyScript : MonoBehaviour
     //move type resistances? the math for that would probably go here id imagine
     public float health = 0;
     public float startingHealth = 0;
+    public float attackStrength = 0;
+    public float baseExpValue = 0;
+    public string enemyName = " ";
 
 
     void Start()
