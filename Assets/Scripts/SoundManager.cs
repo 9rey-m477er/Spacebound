@@ -55,6 +55,6 @@ public class SoundManager : MonoBehaviour
         Music.Stop();
         Music.PlayOneShot(intro);
         Music.clip = loop;
-        Music.PlayDelayed(intro.length - 0.25f);
+        Music.PlayDelayed(intro.length);
     }
 }

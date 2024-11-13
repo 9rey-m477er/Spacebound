@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: 'Bushman '
   sprite: {fileID: 5283636339583025027, guid: f6fc287bca9cb8e4489ca4a0c972006d, type: 3}
-  health: 75
+  health: 175
   attackStrength: 7
   baseExpValue: 0
