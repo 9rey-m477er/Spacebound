@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
-public class Bushman : NPC, ITalkable, IBattleable
+public class Bushman : NPC, ITalkable, IBattleable, IDataPersistence
 {
+
+    [SerializeField] private string id;
 
     [SerializeField] private DialogueText dialogueText;
     [SerializeField] private DialogueController dialogueController;
@@ -12,6 +15,7 @@ public class Bushman : NPC, ITalkable, IBattleable
     [SerializeField] private GameObject bossSystem;
     [SerializeField] private BossBattleUIScript bossScript;
     private bool battleStarted = false;
+    private bool defeated = false;
 
     public override void Interact()
     {
@@ -34,5 +38,24 @@ public class Bushman : NPC, ITalkable, IBattleable
         bossSystem.SetActive(true);
         bossScript.StartScriptedBattle(enemy);
         this.gameObject.SetActive(false);
+    }
+
+    public void LoadData(GameData data)
+    {
+        data.bossesDefeated.TryGetValue(id, out defeated);
+        if (defeated)
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        Debug.Log("Saving Bushman");
+        if (data.bossesDefeated.ContainsKey(id))
+        {
+            data.bossesDefeated.Remove(id);
+        }
+        data.bossesDefeated.Add(id, defeated);
     }
 }

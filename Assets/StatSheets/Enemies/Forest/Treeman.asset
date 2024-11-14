@@ -17,5 +17,5 @@ MonoBehaviour:
   encounterIntro: {fileID: 8300000, guid: a8a989fe01d8bbe47bcc81bbaee24f84, type: 3}
   encounterMusic: {fileID: 8300000, guid: e2267472c51f2ae45b78e9a26c5439ca, type: 3}
   health: 200
-  attackStrength: 10
+  attackStrength: 50
   baseExpValue: 0
