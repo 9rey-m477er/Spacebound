@@ -309,52 +309,60 @@ public class BattleUIScript : MonoBehaviour
                 {
                     innerMenuArrow = 2;
                     updateInnerArrow();
+                    //Debug.Log("1 > 2");
                 }
-                /*
+
                 else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {                    
                     if (runMenu.activeInHierarchy == true)
                     {
+                        //Debug.Log("run is active going from 2 to 1");
                         innerMenuArrow = 2;
                         updateInnerArrow();
                     }
                     else
                     {
+                        //Debug.Log("1 > 3");
                         innerMenuArrow = 3;
                         updateInnerArrow();
                     }
-                }*/
+                }
             }
-            if (innerMenuArrow == 2)
+            else if (innerMenuArrow == 2)
             {
                 if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
                 {
                     if(runMenu.activeInHierarchy == true)
                     {
+                        //Debug.Log("run is active going from 2 to 1");
                         innerMenuArrow = 1;
                         updateInnerArrow();
                     }
                     else
                     {
+                        //Debug.Log("2 > 3");
                         innerMenuArrow = 3;
                         updateInnerArrow();
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
+                    //Debug.Log("2 > 1");
                     innerMenuArrow = 1;
                     updateInnerArrow();
                 }
             }
-            if (innerMenuArrow == 3)
+            else if (innerMenuArrow == 3)
             {
                 if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
                 {
+                    //Debug.Log("3 > 1");
                     innerMenuArrow = 1;
                     updateInnerArrow();
                 }
                 else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
+                    //Debug.Log("3 > 2");
                     innerMenuArrow = 2;
                     updateInnerArrow();
                 }
