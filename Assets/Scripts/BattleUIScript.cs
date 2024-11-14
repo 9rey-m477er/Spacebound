@@ -90,6 +90,8 @@ public class BattleUIScript : MonoBehaviour
     public GameObject runArrow1;
     public GameObject runArrow2;
 
+    public bool canSelect = false;
+    public bool canSelect2 = false;
 
     public List<Sprite> forestSpritePool = new List<Sprite>();
     public List<EnemyStatSheet> forestEnemyPool = new List<EnemyStatSheet>();
@@ -278,26 +280,32 @@ public class BattleUIScript : MonoBehaviour
                     updateMenuArrows();
                 }
             }
-            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return) && canSelect2 == false)
             {
+                canSelect2 = true;
                 if (currentMenuArrow == 1)
                 {
                     openMenu(0);
+                    StartCoroutine(SelectionWaitCoroutine(0.2f));
                 }
                 else if (currentMenuArrow == 2)
                 {
                     openMenu(1);
+                    StartCoroutine(SelectionWaitCoroutine(0.2f));
                 }
                 else if (currentMenuArrow == 3)
                 {
                     openMenu(2);
+                    StartCoroutine(SelectionWaitCoroutine(0.2f));
                 }
                 else if (currentMenuArrow == 4)
                 {
                     openMenu(3);
+                    StartCoroutine(SelectionWaitCoroutine(0.2f));
                 }
                 innerMenuArrow = 1;
                 updateInnerArrow();
+                canSelect = false;
             }
         }
         
@@ -305,14 +313,14 @@ public class BattleUIScript : MonoBehaviour
         {
             if(innerMenuArrow == 1)
             {
-                if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+                if(Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
                 {
                     innerMenuArrow = 2;
                     updateInnerArrow();
                     //Debug.Log("1 > 2");
                 }
 
-                else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+                else if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
                 {                    
                     if (runMenu.activeInHierarchy == true)
                     {
@@ -330,7 +338,7 @@ public class BattleUIScript : MonoBehaviour
             }
             else if (innerMenuArrow == 2)
             {
-                if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+                if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
                 {
                     if(runMenu.activeInHierarchy == true)
                     {
@@ -345,7 +353,7 @@ public class BattleUIScript : MonoBehaviour
                         updateInnerArrow();
                     }
                 }
-                else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+                else if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
                 {
                     //Debug.Log("2 > 1");
                     innerMenuArrow = 1;
@@ -354,18 +362,45 @@ public class BattleUIScript : MonoBehaviour
             }
             else if (innerMenuArrow == 3)
             {
-                if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+                if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
                 {
                     //Debug.Log("3 > 1");
                     innerMenuArrow = 1;
                     updateInnerArrow();
                 }
-                else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+                else if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
                 {
                     //Debug.Log("3 > 2");
                     innerMenuArrow = 2;
                     updateInnerArrow();
                 }
+            }
+
+
+            ////////////
+            ///
+            if(atkArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            {
+                attackSlot1();
+                StartCoroutine(postSelectionWaitCoroutine(3f));
+            }
+            if (atkArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            {
+                attackSlot2();
+                StartCoroutine(postSelectionWaitCoroutine(0.2f));
+            }
+            if (atkArrow3.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            {
+                attackSlot3();
+                StartCoroutine(postSelectionWaitCoroutine(0.2f));
+            }
+            if(runArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            {
+                fleeButtonClick();
+            }
+            if (runArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            {
+                resetMenu();
             }
         }
 
@@ -375,6 +410,19 @@ public class BattleUIScript : MonoBehaviour
             updateInnerArrow();
             resetMenu();
         }
+    }
+
+    public IEnumerator SelectionWaitCoroutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        //Debug.Log("waiting");
+        canSelect = true;
+    }
+    public IEnumerator postSelectionWaitCoroutine(float duration) //broken idk
+    {
+        yield return new WaitForSeconds(duration);
+        Debug.Log("waiting");
+        canSelect2 = false;
     }
 
     public void updateInnerArrow()
