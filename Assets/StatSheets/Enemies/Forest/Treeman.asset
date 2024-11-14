@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Treeman
   sprite: {fileID: -4857770718393422953, guid: 2bd22d900f7a0e24d9d3762145cc3fab, type: 3}
+  encounterIntro: {fileID: 8300000, guid: a8a989fe01d8bbe47bcc81bbaee24f84, type: 3}
+  encounterMusic: {fileID: 8300000, guid: e2267472c51f2ae45b78e9a26c5439ca, type: 3}
   health: 200
   attackStrength: 10
   baseExpValue: 0

@@ -94,9 +94,9 @@ public class BossBattleUIScript : MonoBehaviour
         }
     }
 
-    public void StartScriptedBattle(EnemyStatSheet enemy, AudioClip encounterIntro, AudioClip encounterMusic)
+    public void StartScriptedBattle(EnemyStatSheet enemy)
     {
-        soundManager.BattleTransition(encounterIntro, encounterMusic);
+        soundManager.BattleTransition(enemy.encounterIntro, enemy.encounterMusic) ;
         SetEnemyStats(enemy);
         johnMovement.inBattle = true;
     }

@@ -14,7 +14,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     private Vector2 lastPosition;
     public float stepThreshold = 2f;
     public int steps = 0;
-    public int randomNum;
+    public int randomNum, specRoll;
     public int level;
 
     public AudioSource sfx;
@@ -28,7 +28,9 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public GameObject fadetoBlackImage;
     public GameObject battleSystem, bossSystem;
     public GameObject dialogueSystem;
-    private BossBattleUIScript bossScript;
+    public EnemyStatSheet forestSE;
+    public BossBattleUIScript bossScript;
+    private EnemyStatSheet specEncounter;
 
     public Animator anim;
     public bool inBattle;
@@ -44,6 +46,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         battleMusic = forestBM;
         battleMusicIntro = forestBMIntro;
         levelMusic = forestLM;
+        specEncounter = forestSE;
     }
 
     void Update()
@@ -84,7 +87,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
             }
             lastPosition = currentPosition;
             randomNum = randomNum - 4;
-            if(randomNum <= 0)
+            if(randomNum <= 0 && specRoll != 69)
             {
                 soundManager.BattleTransition(battleMusicIntro, battleMusic);
                 inBattle = true;
@@ -92,11 +95,19 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 Debug.Log("Fight!");
                 UpdateStepSpawn();
             }
+            else if (randomNum <= 0 && specRoll == 69)
+            {
+                inBattle = true;
+                bossSystem.SetActive(true);
+                bossScript.StartScriptedBattle(specEncounter);
+                UpdateStepSpawn();
+            }
         }
     }
     void UpdateStepSpawn()
     {
         randomNum = UnityEngine.Random.Range(64, 256);
+        specRoll = UnityEngine.Random.Range(0, 100);
     }
     private void Animate()
     {
