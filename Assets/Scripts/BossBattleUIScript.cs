@@ -157,7 +157,7 @@ public class BossBattleUIScript : MonoBehaviour
 
     public void enemyAttack(int randomNumber)
     {
-        int attackPower = 30;
+        float attackPower = battleEnemyScript.attackStrength;
         BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
