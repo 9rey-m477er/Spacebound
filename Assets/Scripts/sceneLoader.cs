@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class sceneLoader : MonoBehaviour
 {
-public void LoadGame()
+    public void LoadGame()
     {
         SceneManager.LoadScene("Example");
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
