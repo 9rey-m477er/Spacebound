@@ -32,7 +32,7 @@ public class Bushman : NPC, ITalkable, IBattleable
     {
         battleStarted = true;
         bossSystem.SetActive(true);
-        bossScript.StartScriptedBattle(enemy, encounterIntro, encounterMusic);
+        bossScript.StartScriptedBattle(enemy);
         this.gameObject.SetActive(false);
     }
 }

@@ -30,6 +30,6 @@ public class EncounterTest : NPC, ITalkable, IBattleable
     public void Battle(EnemyStatSheet enemy)
     {
         bossSystem.SetActive(true);
-        bossScript.StartScriptedBattle(enemy, encounterIntro, encounterMusic);
+        bossScript.StartScriptedBattle(enemy);
     }
 }
