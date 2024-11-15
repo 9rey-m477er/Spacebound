@@ -17,6 +17,7 @@ public class SMForestEntrance : NPC, ITalkable, ISaveable
 
     public void SaveGame()
     {
+        Debug.Log("Saving Game");
         dataPersistenceManager.SaveGame();
     }
 

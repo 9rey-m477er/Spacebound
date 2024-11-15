@@ -54,8 +54,10 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void SaveGame()
     {
+        Debug.Log("DPM Recieved Save Call");
         foreach (IDataPersistence dpo in dataPersistenceObjects)
         {
+            Debug.Log("Saving object: " + dpo);
             dpo.SaveData(ref gameData);
         }
 

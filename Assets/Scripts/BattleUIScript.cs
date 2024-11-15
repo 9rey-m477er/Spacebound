@@ -56,6 +56,10 @@ public class BattleUIScript : MonoBehaviour
     public GameObject enemyHPBar2;
     public GameObject enemyHPBar3;
     public GameObject enemyHPBar4;
+    public TextMeshProUGUI enemyName1;
+    public TextMeshProUGUI enemyName2;
+    public TextMeshProUGUI enemyName3;
+    public TextMeshProUGUI enemyName4;
 
     public GameObject playerHPBar1;
     public GameObject playerHPBar2;
@@ -144,13 +148,26 @@ public class BattleUIScript : MonoBehaviour
         runArrow1.gameObject.SetActive(false);
         runArrow2.gameObject.SetActive(false);
 
-
         //randomly assign forest enemies
         //need an if statement here for when different biomes are put in
         rollEnemyForest(enemy1, forestEnemyPool);
         rollEnemyForest(enemy2, forestEnemyPool);
         rollEnemyForest(enemy3, forestEnemyPool);
         rollEnemyForest(enemy4, forestEnemyPool);
+        updateEnemyNames();
+    }
+
+    void updateEnemyNames()
+    {
+        BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e2 = enemy2.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e3 = enemy3.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e4 = enemy4.GetComponent<BattleEnemyScript>();
+
+        enemyName1.text = e1.enemyName;
+        enemyName2.text = e2.enemyName;
+        enemyName3.text = e3.enemyName;
+        enemyName4.text = e4.enemyName;
     }
 
     void rollEnemyForest(GameObject enemy, List<EnemyStatSheet> sheetPool)
@@ -180,6 +197,7 @@ public class BattleUIScript : MonoBehaviour
         targetScript.startingHealth = sheet.health;
         targetScript.attackStrength = sheet.attackStrength;
         targetScript.baseExpValue = sheet.baseExpValue;
+        targetScript.enemyName = sheet.enemyName;
     }
 
     void Update()
@@ -287,6 +305,7 @@ public class BattleUIScript : MonoBehaviour
                 {
                     openMenu(0);
                     StartCoroutine(SelectionWaitCoroutine(0.2f));
+                    currentMenuArrow = 0;
                 }
                 else if (currentMenuArrow == 2)
                 {
@@ -382,7 +401,7 @@ public class BattleUIScript : MonoBehaviour
             if(atkArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
             {
                 attackSlot1();
-                StartCoroutine(postSelectionWaitCoroutine(3f));
+                StartCoroutine(postSelectionWaitCoroutine(0.2f));
             }
             if (atkArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
             {
@@ -422,7 +441,9 @@ public class BattleUIScript : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         Debug.Log("waiting");
-        canSelect2 = false;
+        //canSelect2 = false;
+        currentMenuArrow = 1;
+        resetMenu();
     }
 
     public void updateInnerArrow()
@@ -518,7 +539,59 @@ public class BattleUIScript : MonoBehaviour
 
     public void incrementTurn()
     {
-        playerTurn++;
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+        if (playerTurn == 1)
+        {
+            if (p2.health > 0)
+            {
+                playerTurn = 2;
+            }
+            else if (p3.health > 0)
+            {
+                playerTurn = 3;
+            }
+            else if (p4.health > 0)
+            {
+                playerTurn = 4;
+            }
+            else
+            {
+                playerTurn = 5;
+            }
+        }
+        else if (playerTurn == 2)
+        {
+            if (p3.health > 0)
+            {
+                playerTurn = 3;
+            }
+            else if (p4.health > 0)
+            {
+                playerTurn = 4;
+            }
+            else
+            {
+                playerTurn = 5;
+            }
+        }
+        else if (playerTurn == 3)
+        {
+            if (p4.health > 0)
+            {
+                playerTurn = 4;
+            }
+            else
+            {
+                playerTurn = 5;
+            }
+        }
+        else if (playerTurn == 4)
+        {
+            playerTurn = 5;
+        }
         if (playerTurn == 5) // END OF PLAYER TURNS
         {
             menuBlocking.gameObject.SetActive(true);
@@ -837,6 +910,7 @@ public class BattleUIScript : MonoBehaviour
         {
             isSelectingEnemy = false; 
             ExecuteAttack();
+            resetMenu();
             checkForEndOfBattle();
         }
     }
@@ -873,8 +947,7 @@ public class BattleUIScript : MonoBehaviour
         {
             if(currentAttack == 'b') //bash
             {
-                selectedEnemyScript.health -= attackPower;
-                
+                selectedEnemyScript.health -= attackPower;     
             }
             else if(currentAttack == 's') //slash
             {
@@ -912,6 +985,7 @@ public class BattleUIScript : MonoBehaviour
         enemy3Arrow.gameObject.SetActive(false);
         enemy4Arrow.gameObject.SetActive(false);
         incrementTurn();
+        resetMenu();
     }
 
     public void updateEnemyHealth()

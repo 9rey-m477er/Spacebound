@@ -16,7 +16,9 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
         foreach (KeyValuePair<TKey, TValue> kvp in this)
         {
             keys.Add(kvp.Key);
+            Debug.Log("Added Key: " + kvp.Key);
             values.Add(kvp.Value);
+            Debug.Log("Added Value: " + kvp.Value);
         }
     }
 
@@ -32,6 +34,7 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
         for (int i = 0; i < keys.Count; i++)
         {
             this.Add(keys[i], values[i]);
+            Debug.Log(this);
         }
     }
 }
