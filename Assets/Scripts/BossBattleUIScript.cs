@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 
 public class BossBattleUIScript : MonoBehaviour
 {
@@ -58,9 +59,37 @@ public class BossBattleUIScript : MonoBehaviour
     private OmniDirectionalMovement johnMovement;
     private SoundManager soundManager;
 
+
+    public int currentMenuArrow = 1;
+    public int innerMenuArrow = 1;
+
+    public GameObject atkArrow1;
+    public GameObject atkArrow2;
+    public GameObject atkArrow3;
+
+    public GameObject defArrow1;
+    public GameObject defArrow2;
+    public GameObject defArrow3;
+
+    public GameObject invArrow1;
+    public GameObject invArrow2;
+    public GameObject invArrow3;
+
+    public GameObject runArrow1;
+    public GameObject runArrow2;
+
+    public GameObject attackArrow;
+    public GameObject defendArrow;
+    public GameObject invenArrow;
+    public GameObject runArrow;
+    public bool isinMenu = false;
+
+    public bool canSelect = false;
+    public bool canSelect2 = false;
     public Button menuBlocking;
     void OnEnable()
     {
+        isinMenu = true;
         menuBlocking.gameObject.SetActive(false);
         turnCounter.text = "Turn 1";
         enemy1.gameObject.SetActive(true);
@@ -80,6 +109,26 @@ public class BossBattleUIScript : MonoBehaviour
         party2Reticle.SetActive(false);
         party3Reticle.SetActive(false);
         party4Reticle.SetActive(false);
+
+        attackArrow.gameObject.SetActive(true);
+        defendArrow.gameObject.SetActive(false);
+        invenArrow.gameObject.SetActive(false);
+        runArrow.gameObject.SetActive(false);
+
+        atkArrow1.gameObject.SetActive(false);
+        atkArrow2.gameObject.SetActive(false);
+        atkArrow3.gameObject.SetActive(false);
+
+        defArrow1.gameObject.SetActive(false);
+        defArrow2.gameObject.SetActive(false);
+        defArrow3.gameObject.SetActive(false);
+
+        invArrow1.gameObject.SetActive(false);
+        invArrow2.gameObject.SetActive(false);
+        invArrow3.gameObject.SetActive(false);
+
+        runArrow1.gameObject.SetActive(false);
+        runArrow2.gameObject.SetActive(false);
     }
     void Update()
     {
@@ -88,10 +137,325 @@ public class BossBattleUIScript : MonoBehaviour
         {
             HandleEnemySelection();
         }
-        if(isBattleOver == true)
+        else if (isinMenu && isSelectingEnemy == false && menuBlocking.gameObject.active == false)
+        {
+            menuArrowNav();
+        }
+        if (isBattleOver == true)
         {
             StartCoroutine(exitBattle());
         }
+        //updateTurnText();
+    }
+
+    public void menuArrowNav()
+    {
+        if (atkMenu.active == false && defMenu.active == false && invMenu.active == false && runMenu.active == false && isSelectingEnemy == false)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+            {
+                if (currentMenuArrow == 1)
+                {
+                    currentMenuArrow = 4;
+                    updateMenuArrows();
+                }
+                else if (currentMenuArrow == 2)
+                {
+                    currentMenuArrow = 1;
+                    updateMenuArrows();
+                }
+                else if (currentMenuArrow == 3)
+                {
+                    currentMenuArrow = 2;
+                    updateMenuArrows();
+                }
+                else if (currentMenuArrow == 4)
+                {
+                    currentMenuArrow = 3;
+                    updateMenuArrows();
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+            {
+                if (currentMenuArrow == 1)
+                {
+                    currentMenuArrow = 2;
+                    updateMenuArrows();
+                }
+                else if (currentMenuArrow == 2)
+                {
+                    currentMenuArrow = 3;
+                    updateMenuArrows();
+                }
+                else if (currentMenuArrow == 3)
+                {
+                    currentMenuArrow = 4;
+                    updateMenuArrows();
+                }
+                else if (currentMenuArrow == 4)
+                {
+                    currentMenuArrow = 1;
+                    updateMenuArrows();
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return) && canSelect2 == false && isSelectingEnemy == false)
+            {
+                canSelect2 = true;
+                if (currentMenuArrow == 1)
+                {
+                    openMenu(0);
+                    StartCoroutine(SelectionWaitCoroutine(0.2f));
+                    currentMenuArrow = 0;
+                }
+                else if (currentMenuArrow == 2)
+                {
+                    openMenu(1);
+                    StartCoroutine(SelectionWaitCoroutine(0.2f));
+                }
+                else if (currentMenuArrow == 3)
+                {
+                    openMenu(2);
+                    StartCoroutine(SelectionWaitCoroutine(0.2f));
+                }
+                else if (currentMenuArrow == 4)
+                {
+                    openMenu(3);
+                    StartCoroutine(SelectionWaitCoroutine(0.2f));
+                }
+                innerMenuArrow = 1;
+                updateInnerArrow();
+                canSelect = false;
+            }
+        }
+
+        if (atkMenu.active == true || defMenu.active == true || invMenu.active == true || runMenu.active == true && isSelectingEnemy == false)
+        {
+            if (innerMenuArrow == 1)
+            {
+                if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
+                {
+                    innerMenuArrow = 2;
+                    updateInnerArrow();
+                    //Debug.Log("1 > 2");
+                }
+
+                else if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
+                {
+                    if (runMenu.activeInHierarchy == true)
+                    {
+                        //Debug.Log("run is active going from 2 to 1");
+                        innerMenuArrow = 2;
+                        updateInnerArrow();
+                    }
+                    else
+                    {
+                        //Debug.Log("1 > 3");
+                        innerMenuArrow = 3;
+                        updateInnerArrow();
+                    }
+                }
+            }
+            else if (innerMenuArrow == 2)
+            {
+                if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
+                {
+                    if (runMenu.activeInHierarchy == true)
+                    {
+                        //Debug.Log("run is active going from 2 to 1");
+                        innerMenuArrow = 1;
+                        updateInnerArrow();
+                    }
+                    else
+                    {
+                        //Debug.Log("2 > 3");
+                        innerMenuArrow = 3;
+                        updateInnerArrow();
+                    }
+                }
+                else if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
+                {
+                    //Debug.Log("2 > 1");
+                    innerMenuArrow = 1;
+                    updateInnerArrow();
+                }
+            }
+            else if (innerMenuArrow == 3)
+            {
+                if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
+                {
+                    //Debug.Log("3 > 1");
+                    innerMenuArrow = 1;
+                    updateInnerArrow();
+                }
+                else if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
+                {
+                    //Debug.Log("3 > 2");
+                    innerMenuArrow = 2;
+                    updateInnerArrow();
+                }
+            }
+
+
+            ////////////
+            ///
+            if (atkArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            {
+                attackSlot1();
+                StartCoroutine(postSelectionWaitCoroutine(0.2f));
+            }
+            if (atkArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            {
+                attackSlot2();
+                StartCoroutine(postSelectionWaitCoroutine(0.2f));
+            }
+            if (atkArrow3.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            {
+                attackSlot3();
+                StartCoroutine(postSelectionWaitCoroutine(0.2f));
+            }
+            if (runArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            {
+                fleeButtonClick();
+            }
+            if (runArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            {
+                resetMenu();
+            }
+        }
+
+        if ((atkMenu.active == true || defMenu.active == true || invMenu.active == true || runMenu.active == true) && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace)))
+        {
+            innerMenuArrow = 1;
+            updateInnerArrow();
+            resetMenu();
+        }
+    }
+
+    public void updateInnerArrow()
+    {
+        if (atkMenu.active == true)
+        {
+            if (innerMenuArrow == 1)
+            {
+                atkArrow1.gameObject.SetActive(true);
+                atkArrow2.gameObject.SetActive(false);
+                atkArrow3.gameObject.SetActive(false);
+            }
+            else if (innerMenuArrow == 2)
+            {
+                atkArrow1.gameObject.SetActive(false);
+                atkArrow2.gameObject.SetActive(true);
+                atkArrow3.gameObject.SetActive(false);
+            }
+            else if (innerMenuArrow == 3)
+            {
+                atkArrow1.gameObject.SetActive(false);
+                atkArrow2.gameObject.SetActive(false);
+                atkArrow3.gameObject.SetActive(true);
+            }
+        }
+        else if (defMenu.active == true)
+        {
+            if (innerMenuArrow == 1)
+            {
+                defArrow1.gameObject.SetActive(true);
+                defArrow2.gameObject.SetActive(false);
+                defArrow3.gameObject.SetActive(false);
+            }
+            else if (innerMenuArrow == 2)
+            {
+                defArrow1.gameObject.SetActive(false);
+                defArrow2.gameObject.SetActive(true);
+                defArrow3.gameObject.SetActive(false);
+            }
+            else if (innerMenuArrow == 3)
+            {
+                defArrow1.gameObject.SetActive(false);
+                defArrow2.gameObject.SetActive(false);
+                defArrow3.gameObject.SetActive(true);
+            }
+        }
+        else if (invMenu.active == true)
+        {
+            if (innerMenuArrow == 1)
+            {
+                invArrow1.gameObject.SetActive(true);
+                invArrow2.gameObject.SetActive(false);
+                invArrow3.gameObject.SetActive(false);
+            }
+            else if (innerMenuArrow == 2)
+            {
+                invArrow1.gameObject.SetActive(false);
+                invArrow2.gameObject.SetActive(true);
+                invArrow3.gameObject.SetActive(false);
+            }
+            else if (innerMenuArrow == 3)
+            {
+                invArrow1.gameObject.SetActive(false);
+                invArrow2.gameObject.SetActive(false);
+                invArrow3.gameObject.SetActive(true);
+            }
+        }
+        else if (runMenu.active == true)
+        {
+            if (innerMenuArrow == 1)
+            {
+                runArrow1.gameObject.SetActive(true);
+                runArrow2.gameObject.SetActive(false);
+            }
+            else if (innerMenuArrow == 2)
+            {
+                runArrow1.gameObject.SetActive(false);
+                runArrow2.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    public void updateMenuArrows()
+    {
+        if (currentMenuArrow == 1)
+        {
+            attackArrow.gameObject.SetActive(true);
+            defendArrow.gameObject.SetActive(false);
+            invenArrow.gameObject.SetActive(false);
+            runArrow.gameObject.SetActive(false);
+        }
+        else if (currentMenuArrow == 2)
+        {
+            attackArrow.gameObject.SetActive(false);
+            defendArrow.gameObject.SetActive(true);
+            invenArrow.gameObject.SetActive(false);
+            runArrow.gameObject.SetActive(false);
+        }
+        else if (currentMenuArrow == 3)
+        {
+            attackArrow.gameObject.SetActive(false);
+            defendArrow.gameObject.SetActive(false);
+            invenArrow.gameObject.SetActive(true);
+            runArrow.gameObject.SetActive(false);
+        }
+        else if (currentMenuArrow == 4)
+        {
+            attackArrow.gameObject.SetActive(false);
+            defendArrow.gameObject.SetActive(false);
+            invenArrow.gameObject.SetActive(false);
+            runArrow.gameObject.SetActive(true);
+        }
+    }
+
+    public IEnumerator SelectionWaitCoroutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        //Debug.Log("waiting");
+        canSelect = true;
+    }
+    public IEnumerator postSelectionWaitCoroutine(float duration) //broken idk
+    {
+        yield return new WaitForSeconds(duration);
+        Debug.Log("waiting");
+        //canSelect2 = false;
+        currentMenuArrow = 1;
+        resetMenu();
     }
 
     public void StartScriptedBattle(EnemyStatSheet enemy)
@@ -128,8 +492,9 @@ public class BossBattleUIScript : MonoBehaviour
         Debug.Log("Enemy Attack Strength = " + battleEnemyScript.attackStrength);
         battleEnemyScript.baseExpValue = sheet.baseExpValue;
         Debug.Log("Enemy Base EXP Value = " + battleEnemyScript.baseExpValue);
+        battleEnemyScript.enemyName = sheet.enemyName;
     }
-    
+
     public IEnumerator fadeIntoBattle()
     {
         //Debug.Log("fade in");
@@ -230,6 +595,7 @@ public class BossBattleUIScript : MonoBehaviour
         }
         */
         menuBlocking.gameObject.SetActive(false);
+        isinMenu = true;
     }
 
 

@@ -99,6 +99,8 @@ public class BattleUIScript : MonoBehaviour
 
     public List<Sprite> forestSpritePool = new List<Sprite>();
     public List<EnemyStatSheet> forestEnemyPool = new List<EnemyStatSheet>();
+
+    public TextMeshProUGUI turnName;
     void OnEnable()
     {
         isinMenu = true;
@@ -207,13 +209,28 @@ public class BattleUIScript : MonoBehaviour
         {
             HandleEnemySelection();
         }
-        else if (isinMenu && isSelectingEnemy == false)
+        else if (isinMenu && isSelectingEnemy == false && menuBlocking.gameObject.active == false)
         {
             menuArrowNav();
         }
         if (isBattleOver == true)
         {
             StartCoroutine(exitBattle());
+        }
+        updateTurnText();
+    }
+
+    void updateTurnText()
+    {
+        if(menuBlocking.gameObject.active == true)
+        {
+            turnName.text = "Enemy Turn!";
+            turnName.color = Color.red;
+        }
+        else
+        {
+            turnName.text = "Party Turn!";
+            turnName.color = Color.cyan;
         }
     }
 
