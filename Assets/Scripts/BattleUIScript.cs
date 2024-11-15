@@ -207,13 +207,13 @@ public class BattleUIScript : MonoBehaviour
         {
             HandleEnemySelection();
         }
-        if(isBattleOver == true)
-        {
-            StartCoroutine(exitBattle());
-        }
-        if (isinMenu)
+        else if (isinMenu && isSelectingEnemy == false)
         {
             menuArrowNav();
+        }
+        if (isBattleOver == true)
+        {
+            StartCoroutine(exitBattle());
         }
     }
 
@@ -298,7 +298,7 @@ public class BattleUIScript : MonoBehaviour
                     updateMenuArrows();
                 }
             }
-            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return) && canSelect2 == false)
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return) && canSelect2 == false && isSelectingEnemy == false)
             {
                 canSelect2 = true;
                 if (currentMenuArrow == 1)
