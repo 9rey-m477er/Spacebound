@@ -11,6 +11,7 @@ public class Treeman : NPC, ITalkable, IBattleable
     [SerializeField] private AudioClip encounterIntro, encounterMusic;
     [SerializeField] private GameObject bossSystem;
     [SerializeField] private BossBattleUIScript bossScript;
+    [SerializeField] private EncounterSaver encounterSaver;
     private bool battleStarted = false;
 
     public override void Interact()
@@ -33,6 +34,7 @@ public class Treeman : NPC, ITalkable, IBattleable
         battleStarted = true;
         bossSystem.SetActive(true);
         bossScript.StartScriptedBattle(enemy);
+        encounterSaver.defeated = true;
         this.gameObject.SetActive(false);
     }
 }
