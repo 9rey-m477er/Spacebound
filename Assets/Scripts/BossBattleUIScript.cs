@@ -30,6 +30,7 @@ public class BossBattleUIScript : MonoBehaviour
     public Image enemyImage;
     public BattleEnemyScript battleEnemyScript;
     public BattlePlayerScript battlePlayerScript;
+    public TextMeshProUGUI enemyname;
 
     public GameObject player1;
     public GameObject player2;
@@ -493,6 +494,7 @@ public class BossBattleUIScript : MonoBehaviour
         battleEnemyScript.baseExpValue = sheet.baseExpValue;
         Debug.Log("Enemy Base EXP Value = " + battleEnemyScript.baseExpValue);
         battleEnemyScript.enemyName = sheet.enemyName;
+        enemyname.text = battleEnemyScript.enemyName;
     }
 
     public IEnumerator fadeIntoBattle()
