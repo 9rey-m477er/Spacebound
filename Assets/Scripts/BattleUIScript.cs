@@ -900,19 +900,47 @@ public class BattleUIScript : MonoBehaviour
         BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
         if (playerTurn == 1)
         {
-            p1.health += 10;
+            if (p1.health < p1.startingHealth)
+            {
+                p1.health += 10;
+                if(p1.health > p1.startingHealth)
+                {
+                    p1.health = p1.startingHealth;
+                }
+            }
         }
         else if(playerTurn == 2)
         {
-            p2.health += 10;
+            if (p2.health < p2.startingHealth)
+            {
+                p2.health += 10;
+                if (p2.health > p2.startingHealth)
+                {
+                    p2.health = p2.startingHealth;
+                }
+            }
         }
         else if (playerTurn == 3)
         {
-            p3.health += 10;
+            if (p3.health < p3.startingHealth)
+            {
+                p3.health += 10;
+                if (p3.health > p3.startingHealth)
+                {
+                    p3.health = p3.startingHealth;
+                }
+            }
         }
         else if (playerTurn == 4)
         {
-            p4.health += 10;
+            if (p4.health < p4.startingHealth)
+            {
+                p4.health += 10;
+                if (p4.health > p4.startingHealth)
+                {
+                    p4.health = p4.startingHealth;
+                }
+            }
         }
         incrementTurn();
         updatePlayerHealth();
