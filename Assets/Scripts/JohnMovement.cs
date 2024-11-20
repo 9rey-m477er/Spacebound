@@ -58,6 +58,14 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
 
         movement = movement.normalized;
         Animate();
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            moveSpeed = 6f;
+        }
+        else
+        {
+            moveSpeed = 4f;
+        }
     }
 
     void FixedUpdate()
