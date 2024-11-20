@@ -316,7 +316,7 @@ public class BossBattleUIScript : MonoBehaviour
             }
             if (runArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
             {
-                fleeButtonClick();
+                //fleeButtonClick();
             }
             if (runArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
             {
