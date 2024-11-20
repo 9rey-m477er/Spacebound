@@ -430,7 +430,17 @@ public class BattleUIScript : MonoBehaviour
                 attackSlot3();
                 StartCoroutine(postSelectionWaitCoroutine(0.2f));
             }
-            if(runArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            if (invArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            {
+                invSlot1();
+                Debug.Log("islot1");
+            }
+            if (invArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            {
+                invSlot2();
+                Debug.Log("islot2");
+            }
+            if (runArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
             {
                 fleeButtonClick();
             }
@@ -880,12 +890,67 @@ public class BattleUIScript : MonoBehaviour
         }
         UpdateEnemyArrows();
     }
+
+    public void invSlot1()
+    {
+        resetMenu();
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+        if (playerTurn == 1)
+        {
+            p1.health += 10;
+        }
+        else if(playerTurn == 2)
+        {
+            p2.health += 10;
+        }
+        else if (playerTurn == 3)
+        {
+            p3.health += 10;
+        }
+        else if (playerTurn == 4)
+        {
+            p4.health += 10;
+        }
+        incrementTurn();
+        updatePlayerHealth();
+    }
+
+    public void invSlot2()
+    {
+        resetMenu();
+        currentAttack = 'r';
+        soundManager.PlaySoundClip(5);
+        isSelectingEnemy = true;
+        attackPower = 10;
+
+        if (enemy1.active == true)
+        {
+            currentEnemy = 1;
+        }
+        else if (enemy2.active == true)
+        {
+            currentEnemy = 2;
+        }
+        else if (enemy3.active == true)
+        {
+            currentEnemy = 3;
+        }
+        else if (enemy4.active == true)
+        {
+            currentEnemy = 4;
+        }
+        UpdateEnemyArrows();
+    }
     private void HandleEnemySelection()
     {
         BattleEnemyScript enemy1HealthCheck = enemy1.GetComponent<BattleEnemyScript>();
         BattleEnemyScript enemy2HealthCheck = enemy2.GetComponent<BattleEnemyScript>();
         BattleEnemyScript enemy3HealthCheck = enemy3.GetComponent<BattleEnemyScript>();
         BattleEnemyScript enemy4HealthCheck = enemy4.GetComponent<BattleEnemyScript>();
+        UpdateEnemyArrows();
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
             soundManager.PlaySoundClip(3);
@@ -991,6 +1056,10 @@ public class BattleUIScript : MonoBehaviour
                     e2.health -= attackPower;
                     e4.health -= attackPower;
                 }
+            }
+            else if(currentAttack == 'r') //rock
+            {
+                selectedEnemyScript.health -= attackPower;
             }
             currentAttack = 'n';
             soundManager.PlaySoundClip(6);
@@ -1135,10 +1204,57 @@ public class BattleUIScript : MonoBehaviour
 
     private void UpdateEnemyArrows()
     {
-        enemy1Arrow.gameObject.SetActive(currentEnemy == 1);
-        enemy2Arrow.gameObject.SetActive(currentEnemy == 2);
-        enemy3Arrow.gameObject.SetActive(currentEnemy == 3);
-        enemy4Arrow.gameObject.SetActive(currentEnemy == 4);
+        BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e2 = enemy2.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e3 = enemy3.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e4 = enemy4.GetComponent<BattleEnemyScript>();
+        if (currentAttack == 'b' || currentAttack == 'r')
+        {
+            enemy1Arrow.gameObject.SetActive(currentEnemy == 1);
+            enemy2Arrow.gameObject.SetActive(currentEnemy == 2);
+            enemy3Arrow.gameObject.SetActive(currentEnemy == 3);
+            enemy4Arrow.gameObject.SetActive(currentEnemy == 4);
+        }
+        else if(currentAttack == 's')
+        {
+            if (e1.health > 0)
+            {
+                enemy1Arrow.gameObject.SetActive(currentEnemy == 1 || currentEnemy == 2);
+            }
+            if (e2.health > 0)
+            {
+                enemy2Arrow.gameObject.SetActive(currentEnemy == 1 || currentEnemy == 2);
+            }
+            //
+            if (e3.health > 0)
+            {
+                enemy3Arrow.gameObject.SetActive(currentEnemy == 3 || currentEnemy == 4);
+            }
+            if (e4.health > 0)
+            {
+                enemy4Arrow.gameObject.SetActive(currentEnemy == 3 || currentEnemy == 4);
+            }
+        }
+        else if (currentAttack == 'p')
+        {
+            if (e1.health > 0)
+            {
+                enemy1Arrow.gameObject.SetActive(currentEnemy == 1 || currentEnemy == 3);
+            }
+            if (e3.health > 0)
+            {
+                enemy3Arrow.gameObject.SetActive(currentEnemy == 1 || currentEnemy == 3);
+            }
+            //
+            if (e2.health > 0)
+            {
+                enemy2Arrow.gameObject.SetActive(currentEnemy == 2 || currentEnemy == 4);
+            }
+            if (e4.health > 0)
+            {
+                enemy4Arrow.gameObject.SetActive(currentEnemy == 2 || currentEnemy == 4);
+            }
+        }
     }
     public void resetMenu()
     {
