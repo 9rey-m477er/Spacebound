@@ -12,27 +12,25 @@ public class EncounterSaver : MonoBehaviour, IDataPersistence
         id = System.Guid.NewGuid().ToString();
     }
 
-    [SerializeField] private GameObject enemy;
+    [SerializeField] private GameObject encounter;
 
-    public bool defeated = false;
+    public bool cleared = false;
 
     public void LoadData(GameData data)
     {
-        data.bossesDefeated.TryGetValue(id, out defeated);
-        if (defeated)
+        data.staticsCleared.TryGetValue(id, out cleared);
+        if (cleared)
         {
-            enemy.SetActive(false);
+            encounter.SetActive(false);
         }
     }
 
     public void SaveData(ref GameData data)
     {
-        Debug.Log("Saving Encounter: " + enemy.name);
-        if (data.bossesDefeated.ContainsKey(id))
+        if (data.staticsCleared.ContainsKey(id))
         {
-            data.bossesDefeated.Remove(id);
+            data.staticsCleared.Remove(id);
         }
-        data.bossesDefeated.Add(id, defeated);
-        Debug.Log("Saved: " + id + ", " + defeated);
+        data.staticsCleared.Add(id, cleared);
     }
 }

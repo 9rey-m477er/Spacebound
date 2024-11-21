@@ -36,6 +36,8 @@ MonoBehaviour:
   - Bob
   - Bob
   - John
+  - 
+  - 
   paragraphs:
   - "Isn\u2019t that one of your friends?"
   - "Yeah, that\u2019s Bob!"
@@ -62,3 +64,5 @@ MonoBehaviour:
 '
   - "Let\u2019s go explore!"
   - You were just - forget it.
+  - Bob joined the party!
+  - Bob joined the party!

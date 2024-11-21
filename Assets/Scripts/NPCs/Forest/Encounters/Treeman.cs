@@ -34,7 +34,7 @@ public class Treeman : NPC, ITalkable, IBattleable
         battleStarted = true;
         bossSystem.SetActive(true);
         bossScript.StartScriptedBattle(enemy);
-        encounterSaver.defeated = true;
+        encounterSaver.cleared = true;
         this.gameObject.SetActive(false);
     }
 }

@@ -32,6 +32,8 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public BossBattleUIScript bossScript;
     private EnemyStatSheet specEncounter;
 
+    private bool bobActive, stephvenActive, janetActive, thozosActive;
+
     public Animator anim;
     public bool inBattle;
     private bool moving;
@@ -153,6 +155,27 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
             case 3:
                 break;
             case 4:
+                break;
+        }
+    }
+
+    public void setTeammateActive(int flag)
+    {
+        switch(flag)
+        {
+            case 0:
+                bobActive = true;
+                break;
+            case 1:
+                stephvenActive = true;
+                break;
+            case 2:
+                janetActive = true;
+                break;
+            case 3:
+                thozosActive = true;
+                break;
+            default:
                 break;
         }
     }
