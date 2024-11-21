@@ -21,7 +21,7 @@ public class BobJoin : NPC, ITalkable, ITeamable
 
     public void joinTeam(int flag)
     {
-        john.setTeammateActive(1);
+        john.setTeammateActive(flag);
         encounterSaver.cleared = true;
         this.gameObject.SetActive(false);
     }
