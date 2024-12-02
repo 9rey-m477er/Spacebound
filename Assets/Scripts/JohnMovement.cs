@@ -167,13 +167,13 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 bobActive = true;
                 break;
             case 1:
-                stephvenActive = true;
+                thozosActive = true;
                 break;
             case 2:
                 janetActive = true;
                 break;
             case 3:
-                thozosActive = true;
+                stephvenActive = true;
                 break;
             default:
                 break;
