@@ -114,6 +114,10 @@ public class BattleUIScript : MonoBehaviour
     public TextMeshProUGUI turnName;
     void OnEnable()
     {
+        currentMenuArrow = 1;
+        updateMenuArrows();
+        innerMenuArrow = 1;
+        updateInnerArrow();
         isinMenu = true;
         menuBlocking.gameObject.SetActive(false);
         turnCounter.text = "Turn 1";
@@ -196,6 +200,10 @@ public class BattleUIScript : MonoBehaviour
         if (johnMovement.bobActive == true)
         {
             p2.gameObject.SetActive(true);
+            p2.health = p2.startingHealth;
+            playerHPBar2.gameObject.SetActive(true);
+            playerHPBar2Border.gameObject.SetActive(true);
+            playerHPBar2inside.gameObject.SetActive(true);
         }
         else
         {
@@ -209,6 +217,10 @@ public class BattleUIScript : MonoBehaviour
         if (johnMovement.stephvenActive == true)
         {
             p3.gameObject.SetActive(true);
+            p3.health = p3.startingHealth;
+            playerHPBar3.gameObject.SetActive(true);
+            playerHPBar3Border.gameObject.SetActive(true);
+            playerHPBar3inside.gameObject.SetActive(true);
         }
         else
         {
@@ -222,6 +234,10 @@ public class BattleUIScript : MonoBehaviour
         if (johnMovement.janetActive == true)
         {
             p4.gameObject.SetActive(true);
+            p4.health = p4.startingHealth;
+            playerHPBar4.gameObject.SetActive(true);
+            playerHPBar4Border.gameObject.SetActive(true);
+            playerHPBar4inside.gameObject.SetActive(true);
         }
         else
         {
@@ -705,257 +721,109 @@ public class BattleUIScript : MonoBehaviour
         UpdatePartyArrow();
     }
 
-    public void enemyAttack(int randomNumber)
+    public void enemyAttack()
     {
         int attackPower = 10;
+        List<BattlePlayerScript> validTargets = new List<BattlePlayerScript>();
+
+        // Add valid targets (players with health > 0)
         BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
-        if(randomNumber == 1)
-        {
-            if(p1.health < 1)
-            {
-                while (randomNumber == 1)
-                {
-                    randomNumber = Random.Range(2, 5);
-                }
-            }
-        }
-        if (randomNumber == 2)
-        {
-            if (p2.health < 1)
-            {
-                while(randomNumber == 2)
-                {
-                    randomNumber = Random.Range(1, 5);
-                }
-            }
-        }
-        if (randomNumber == 3)
-        {
-            if (p3.health < 1)
-            {
-                while (randomNumber == 3)
-                {
-                    randomNumber = Random.Range(1, 5);
-                }
-            }
-        }
-        if (randomNumber == 4)
-        {
-            if (p4.health < 1)
-            {
-                while (randomNumber == 4)
-                {
-                    randomNumber = Random.Range(1, 5);
-                }
-            }
-        }
 
+        if (p1.health > 0) validTargets.Add(p1);
+        if (p2.health > 0) validTargets.Add(p2);
+        if (p3.health > 0) validTargets.Add(p3);
+        if (p4.health > 0) validTargets.Add(p4);
 
+        // If no valid targets exist, exit the attack method
+        if (validTargets.Count == 0) return;
 
-        if (randomNumber == 1)
-        {
-            if(p1.health < 1)
-            {
-                EnemyAttackSequence();
-            }
-            p1.health = p1.health - attackPower;
-            Debug.Log("attack 1");
-        }
-        if(randomNumber == 2)
-        {
-            if (p2.health < 1)
-            {
-                EnemyAttackSequence();
-            }
-            p2.health = p2.health - attackPower;
-            Debug.Log("attack 2");
-        }
-        if (randomNumber == 3)
-        {
-            if (p3.health < 1)
-            {
-                EnemyAttackSequence();
-            }
-            p3.health = p3.health - attackPower;
-            Debug.Log("attack 3");
-        }
-        if (randomNumber == 4)
-        {
-            if (p4.health < 1)
-            {
-                EnemyAttackSequence();
-            }
-            p4.health = p4.health - attackPower;
-            Debug.Log("attack 4");
-        }
+        // Randomly select a target
+        BattlePlayerScript target = validTargets[Random.Range(0, validTargets.Count)];
+
+        // Apply damage to the target
+        target.health -= attackPower;
+        Debug.Log($"Enemy attacked {target.name} for {attackPower} damage.");
+
+        // Update player health UI
         updatePlayerHealth();
     }
 
+
     private IEnumerator EnemyAttackSequence()
     {
-        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
-        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
-        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
-        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+        // List of all players
+        List<BattlePlayerScript> players = new List<BattlePlayerScript>
+    {
+        player1.GetComponent<BattlePlayerScript>(),
+        player2.GetComponent<BattlePlayerScript>(),
+        player3.GetComponent<BattlePlayerScript>(),
+        player4.GetComponent<BattlePlayerScript>()
+    };
 
-        if (enemy1.gameObject.active == true)
-        {
-            yield return new WaitForSeconds(0.75f);
-            int randomNumber = Random.Range(1, 5); // randomly choose who to attack
+        // List of all enemies and their corresponding arrows
+        List<(GameObject enemy, GameObject arrow)> activeEnemies = new List<(GameObject, GameObject)>
+    {
+        (enemy1.gameObject, enemy1Arrow),
+        (enemy2.gameObject, enemy2Arrow),
+        (enemy3.gameObject, enemy3Arrow),
+        (enemy4.gameObject, enemy4Arrow)
+    };
 
-            if(randomNumber == 1 && p1.health > 0)
-            {
-                party1Reticle.SetActive(true);
-            }
-            else if(randomNumber == 2 && p2.health > 0)
-            {
-                party2Reticle.SetActive(true);
-            }
-            else if (randomNumber == 3 && p3.health > 0)
-            {
-                party3Reticle.SetActive(true);
-            }
-            else if (randomNumber == 4 && p4.health > 0)
-            {
-                party4Reticle.SetActive(true);
-            }
-            else
-            {
-                EnemyAttackSequence();
-            }
-            yield return new WaitForSeconds(0.75f);
-            soundManager.PlaySoundClip(6);
-            enemyAttack(randomNumber);
-            //turnCounterIndex++;
-            updateTurns();
-            party1Reticle.SetActive(false);
-            party2Reticle.SetActive(false);
-            party3Reticle.SetActive(false);
-            party4Reticle.SetActive(false);
-        }
-        if (enemy2.gameObject.active == true)
+        // Iterate through each active enemy
+        foreach (var (enemy, arrow) in activeEnemies)
         {
+            if (!enemy.activeSelf) continue; // Skip if the enemy is not active
+
+            // Find valid targets (players with health > 0)
+            List<BattlePlayerScript> validTargets = players.FindAll(player => player.health > 0);
+
+            // If no valid targets exist, stop attacking
+            if (validTargets.Count == 0) yield break;
+
+            // Randomly select a target
+            BattlePlayerScript target = validTargets[Random.Range(0, validTargets.Count)];
+
+            // Show the arrow for the current attacking enemy
+            arrow.SetActive(true);
+
+            // Show the reticle for the selected target
+            if (target == players[0]) party1Reticle.SetActive(true);
+            else if (target == players[1]) party2Reticle.SetActive(true);
+            else if (target == players[2]) party3Reticle.SetActive(true);
+            else if (target == players[3]) party4Reticle.SetActive(true);
+
             yield return new WaitForSeconds(0.75f);
-            int randomNumber = Random.Range(1, 5); // randomly choose who to attack
-            //reticle
-            if (randomNumber == 1)
-            {
-                party1Reticle.SetActive(true);
-            }
-            else if (randomNumber == 2)
-            {
-                party2Reticle.SetActive(true);
-            }
-            else if (randomNumber == 3)
-            {
-                party3Reticle.SetActive(true);
-            }
-            else if (randomNumber == 4)
-            {
-                party4Reticle.SetActive(true);
-            }
-            else
-            {
-                EnemyAttackSequence();
-            }
-            yield return new WaitForSeconds(0.75f);
+
+            // Play attack sound and deal damage
             soundManager.PlaySoundClip(6);
-            enemyAttack(randomNumber);
-            //turnCounterIndex++;
+            target.health -= 10; // Example attack power
+            Debug.Log($"{enemy.name} attacked {target.name} for 10 damage.");
+
+            // Update turn and UI
             updateTurns();
+            updatePlayerHealth();
+
+            // Hide the reticles and arrow after the attack
             party1Reticle.SetActive(false);
             party2Reticle.SetActive(false);
             party3Reticle.SetActive(false);
             party4Reticle.SetActive(false);
-        }
-        if (enemy3.gameObject.active == true)
-        {
-            yield return new WaitForSeconds(0.75f);
-            int randomNumber = Random.Range(1, 5); // randomly choose who to attack
-            //reticle
-            if (randomNumber == 1)
-            {
-                party1Reticle.SetActive(true);
-            }
-            else if (randomNumber == 2)
-            {
-                party2Reticle.SetActive(true);
-            }
-            else if (randomNumber == 3)
-            {
-                party3Reticle.SetActive(true);
-            }
-            else if (randomNumber == 4)
-            {
-                party4Reticle.SetActive(true);
-            }
-            else
-            {
-                EnemyAttackSequence();
-            }
-            yield return new WaitForSeconds(0.75f);
-            soundManager.PlaySoundClip(6);
-            enemyAttack(randomNumber);
-            //turnCounterIndex++;
-            updateTurns();
-            party1Reticle.SetActive(false);
-            party2Reticle.SetActive(false);
-            party3Reticle.SetActive(false);
-            party4Reticle.SetActive(false);
-        }
-        if (enemy4.gameObject.active == true)
-        {
-            yield return new WaitForSeconds(0.75f);
-            int randomNumber = Random.Range(1, 5); // randomly choose who to attack
-                                                   //reticle
-            if (randomNumber == 1)
-            {
-                party1Reticle.SetActive(true);
-            }
-            else if (randomNumber == 2)
-            {
-                party2Reticle.SetActive(true);
-            }
-            else if (randomNumber == 3)
-            {
-                party3Reticle.SetActive(true);
-            }
-            else if (randomNumber == 4)
-            {
-                party4Reticle.SetActive(true);
-            }
-            else
-            {
-                EnemyAttackSequence();
-            }
-            yield return new WaitForSeconds(0.75f);
-            soundManager.PlaySoundClip(6);
-            enemyAttack(randomNumber);
-            turnCounterIndex++;
-            updateTurns();
-            party1Reticle.SetActive(false);
-            party2Reticle.SetActive(false);
-            party3Reticle.SetActive(false);
-            party4Reticle.SetActive(false);
+            arrow.SetActive(false);
+
+            // Wait a bit before the next enemy attack
+            yield return new WaitForSeconds(0.5f);
         }
 
-        /*
-        for (int i = 1; i <= 4; i++)
-        {
-            yield return new WaitForSeconds(1.5f);
-            int randomNumber = Random.Range(1, 5); // randomly choose who to attack
-            //reticle
-            enemyAttack(randomNumber);
-            turnCounterIndex++;
-            updateTurns();
-        }
-        */
+        // End of enemy attack sequence
+        turnCounterIndex++;
         menuBlocking.gameObject.SetActive(false);
         isinMenu = true;
     }
+
+
 
 
     private void UpdatePartyArrow()
