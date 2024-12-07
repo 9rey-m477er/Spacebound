@@ -121,14 +121,14 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: John Spacebound color palette
     originalName: 
-    pivot: {x: 0.42857146, y: 0}
+    pivot: {x: 0.4375, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 7
+      width: 8
       height: 1
     spriteID: da8e4fd1a6ea4c746ab246b4f381d021
     spriteBone: []
@@ -153,7 +153,7 @@ ScriptedImporter:
       cellRect:
         x: 0
         y: 0
-        width: 8
+        width: 9
         height: 1
       spriteId: da8e4fd1a6ea4c746ab246b4f381d021
     linkedCells: []
@@ -161,4 +161,4 @@ ScriptedImporter:
   platformSettings: []
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 8, y: 1}
+  canvasSize: {x: 9, y: 1}

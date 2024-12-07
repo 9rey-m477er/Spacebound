@@ -121,16 +121,16 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Stevphen color palette
     originalName: 
-    pivot: {x: 0.42857146, y: 0}
+    pivot: {x: 0.4375, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 7
+      width: 8
       height: 1
-    spriteID: aebc377974966bc4ca946f46d1a5be89
+    spriteID: 2721687cf6148af49aebdb72fdb8bb37
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -153,12 +153,12 @@ ScriptedImporter:
       cellRect:
         x: 0
         y: 0
-        width: 8
+        width: 9
         height: 1
-      spriteId: aebc377974966bc4ca946f46d1a5be89
+      spriteId: 2721687cf6148af49aebdb72fdb8bb37
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 8, y: 1}
+  canvasSize: {x: 9, y: 1}

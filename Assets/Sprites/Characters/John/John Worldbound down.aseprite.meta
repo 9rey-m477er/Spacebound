@@ -121,7 +121,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: John Worldbound down_Frame_0
     originalName: 
-    pivot: {x: 0.5, y: 0.48387095}
+    pivot: {x: 0.5, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -129,7 +129,7 @@ ScriptedImporter:
       x: 4
       y: 84
       width: 17
-      height: 31
+      height: 32
     spriteID: 6140a255ef1b9234d8febcfd82bfc3cd
     spriteBone: []
     spriteOutline: []
@@ -161,7 +161,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: John Worldbound down_Frame_2
     originalName: 
-    pivot: {x: 0.5588235, y: 0.48387095}
+    pivot: {x: 0.5588235, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -169,7 +169,7 @@ ScriptedImporter:
       x: 30
       y: 4
       width: 17
-      height: 31
+      height: 32
     spriteID: 7036bba9c8c47374a822db2fe7f10478
     spriteBone: []
     spriteOutline: []
@@ -212,9 +212,9 @@ ScriptedImporter:
       frameIndex: 0
       cellRect:
         x: 1
-        y: 1
+        y: 0
         width: 17
-        height: 31
+        height: 32
       spriteId: 6140a255ef1b9234d8febcfd82bfc3cd
     - name: John Worldbound down_Frame_1
       frameIndex: 1
@@ -228,9 +228,9 @@ ScriptedImporter:
       frameIndex: 2
       cellRect:
         x: 0
-        y: 1
+        y: 0
         width: 17
-        height: 31
+        height: 32
       spriteId: 7036bba9c8c47374a822db2fe7f10478
     - name: John Worldbound down_Frame_3
       frameIndex: 3
