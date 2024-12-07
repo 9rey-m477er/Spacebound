@@ -32,7 +32,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public BossBattleUIScript bossScript;
     private EnemyStatSheet specEncounter;
 
-    private bool bobActive, stephvenActive, janetActive, thozosActive;
+    public bool bobActive, stephvenActive, janetActive, thozosActive;
 
     public Animator anim;
     public bool inBattle;

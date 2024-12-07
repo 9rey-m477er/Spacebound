@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 
 public class BattleUIScript : MonoBehaviour
 {
@@ -66,6 +67,16 @@ public class BattleUIScript : MonoBehaviour
     public GameObject playerHPBar3;
     public GameObject playerHPBar4;
 
+    public GameObject playerHPBar1Border;
+    public GameObject playerHPBar2Border;
+    public GameObject playerHPBar3Border;
+    public GameObject playerHPBar4Border;
+
+    public GameObject playerHPBar1inside;
+    public GameObject playerHPBar2inside;
+    public GameObject playerHPBar3inside;
+    public GameObject playerHPBar4inside;
+
     public Image fadeImage;
     public float fadeDuration = 0.3f;
 
@@ -110,6 +121,21 @@ public class BattleUIScript : MonoBehaviour
         enemy2.gameObject.SetActive(true);
         enemy3.gameObject.SetActive(true);
         enemy4.gameObject.SetActive(true);
+
+        playerHPBar1.gameObject.SetActive(true);
+        playerHPBar2.gameObject.SetActive(true);
+        playerHPBar3.gameObject.SetActive(true);
+        playerHPBar4.gameObject.SetActive(true);
+
+        playerHPBar1Border.gameObject.SetActive(true);
+        playerHPBar2Border.gameObject.SetActive(true);
+        playerHPBar3Border.gameObject.SetActive(true);
+        playerHPBar4Border.gameObject.SetActive(true);
+
+        playerHPBar1inside.gameObject.SetActive(true);
+        playerHPBar2inside.gameObject.SetActive(true);
+        playerHPBar3inside.gameObject.SetActive(true);
+        playerHPBar4inside.gameObject.SetActive(true);
 
         johnMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<OmniDirectionalMovement>();
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
@@ -157,6 +183,55 @@ public class BattleUIScript : MonoBehaviour
         rollEnemyForest(enemy3, forestEnemyPool);
         rollEnemyForest(enemy4, forestEnemyPool);
         updateEnemyNames();
+        playerTeamSpawn();
+    }
+
+    public void playerTeamSpawn()
+    {
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+
+        if (johnMovement.bobActive == true)
+        {
+            p2.gameObject.SetActive(true);
+        }
+        else
+        {
+            p2.gameObject.SetActive(false);
+            p2.health = 0;
+            playerHPBar2.gameObject.SetActive(false);
+            playerHPBar2Border.gameObject.SetActive(false);
+            playerHPBar2inside.gameObject.SetActive(false);
+        }
+        //
+        if (johnMovement.stephvenActive == true)
+        {
+            p3.gameObject.SetActive(true);
+        }
+        else
+        {
+            p3.gameObject.SetActive(false);
+            p3.health = 0;
+            playerHPBar3.gameObject.SetActive(false);
+            playerHPBar3Border.gameObject.SetActive(false);
+            playerHPBar3inside.gameObject.SetActive(false);
+        }
+        //
+        if (johnMovement.janetActive == true)
+        {
+            p4.gameObject.SetActive(true);
+        }
+        else
+        {
+            p4.gameObject.SetActive(false);
+            p4.health = 0;
+            playerHPBar4.gameObject.SetActive(false);
+            playerHPBar4Border.gameObject.SetActive(false);
+            playerHPBar4inside.gameObject.SetActive(false);
+        }
+        updatePlayerHealth();
     }
 
     void updateEnemyNames()
@@ -572,15 +647,15 @@ public class BattleUIScript : MonoBehaviour
         BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
         if (playerTurn == 1)
         {
-            if (p2.health > 0)
+            if (p2.health > 0 && p2.isActiveAndEnabled == true)
             {
                 playerTurn = 2;
             }
-            else if (p3.health > 0)
+            else if (p3.health > 0 && p3.isActiveAndEnabled == true)
             {
                 playerTurn = 3;
             }
-            else if (p4.health > 0)
+            else if (p4.health > 0 && p4.isActiveAndEnabled == true)
             {
                 playerTurn = 4;
             }
@@ -591,11 +666,11 @@ public class BattleUIScript : MonoBehaviour
         }
         else if (playerTurn == 2)
         {
-            if (p3.health > 0)
+            if (p3.health > 0 && p3.isActiveAndEnabled == true)
             {
                 playerTurn = 3;
             }
-            else if (p4.health > 0)
+            else if (p4.health > 0 && p4.isActiveAndEnabled == true)
             {
                 playerTurn = 4;
             }
@@ -606,7 +681,7 @@ public class BattleUIScript : MonoBehaviour
         }
         else if (playerTurn == 3)
         {
-            if (p4.health > 0)
+            if (p4.health > 0 && p4.isActiveAndEnabled == true)
             {
                 playerTurn = 4;
             }
@@ -637,24 +712,82 @@ public class BattleUIScript : MonoBehaviour
         BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
-
         if(randomNumber == 1)
         {
+            if(p1.health < 1)
+            {
+                while (randomNumber == 1)
+                {
+                    randomNumber = Random.Range(2, 5);
+                }
+            }
+        }
+        if (randomNumber == 2)
+        {
+            if (p2.health < 1)
+            {
+                while(randomNumber == 2)
+                {
+                    randomNumber = Random.Range(1, 5);
+                }
+            }
+        }
+        if (randomNumber == 3)
+        {
+            if (p3.health < 1)
+            {
+                while (randomNumber == 3)
+                {
+                    randomNumber = Random.Range(1, 5);
+                }
+            }
+        }
+        if (randomNumber == 4)
+        {
+            if (p4.health < 1)
+            {
+                while (randomNumber == 4)
+                {
+                    randomNumber = Random.Range(1, 5);
+                }
+            }
+        }
+
+
+
+        if (randomNumber == 1)
+        {
+            if(p1.health < 1)
+            {
+                EnemyAttackSequence();
+            }
             p1.health = p1.health - attackPower;
             Debug.Log("attack 1");
         }
-        else if(randomNumber == 2)
+        if(randomNumber == 2)
         {
+            if (p2.health < 1)
+            {
+                EnemyAttackSequence();
+            }
             p2.health = p2.health - attackPower;
             Debug.Log("attack 2");
         }
-        else if (randomNumber == 3)
+        if (randomNumber == 3)
         {
+            if (p3.health < 1)
+            {
+                EnemyAttackSequence();
+            }
             p3.health = p3.health - attackPower;
             Debug.Log("attack 3");
         }
-        else if (randomNumber == 4)
+        if (randomNumber == 4)
         {
+            if (p4.health < 1)
+            {
+                EnemyAttackSequence();
+            }
             p4.health = p4.health - attackPower;
             Debug.Log("attack 4");
         }
@@ -663,25 +796,35 @@ public class BattleUIScript : MonoBehaviour
 
     private IEnumerator EnemyAttackSequence()
     {
-        if(enemy1.gameObject.active == true)
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+
+        if (enemy1.gameObject.active == true)
         {
             yield return new WaitForSeconds(0.75f);
             int randomNumber = Random.Range(1, 5); // randomly choose who to attack
-            if(randomNumber == 1)
+
+            if(randomNumber == 1 && p1.health > 0)
             {
                 party1Reticle.SetActive(true);
             }
-            else if(randomNumber == 2)
+            else if(randomNumber == 2 && p2.health > 0)
             {
                 party2Reticle.SetActive(true);
             }
-            else if (randomNumber == 3)
+            else if (randomNumber == 3 && p3.health > 0)
             {
                 party3Reticle.SetActive(true);
             }
-            else if (randomNumber == 4)
+            else if (randomNumber == 4 && p4.health > 0)
             {
                 party4Reticle.SetActive(true);
+            }
+            else
+            {
+                EnemyAttackSequence();
             }
             yield return new WaitForSeconds(0.75f);
             soundManager.PlaySoundClip(6);
@@ -714,6 +857,10 @@ public class BattleUIScript : MonoBehaviour
             {
                 party4Reticle.SetActive(true);
             }
+            else
+            {
+                EnemyAttackSequence();
+            }
             yield return new WaitForSeconds(0.75f);
             soundManager.PlaySoundClip(6);
             enemyAttack(randomNumber);
@@ -745,6 +892,10 @@ public class BattleUIScript : MonoBehaviour
             {
                 party4Reticle.SetActive(true);
             }
+            else
+            {
+                EnemyAttackSequence();
+            }
             yield return new WaitForSeconds(0.75f);
             soundManager.PlaySoundClip(6);
             enemyAttack(randomNumber);
@@ -775,6 +926,10 @@ public class BattleUIScript : MonoBehaviour
             else if (randomNumber == 4)
             {
                 party4Reticle.SetActive(true);
+            }
+            else
+            {
+                EnemyAttackSequence();
             }
             yield return new WaitForSeconds(0.75f);
             soundManager.PlaySoundClip(6);
