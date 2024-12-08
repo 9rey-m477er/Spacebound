@@ -16,6 +16,6 @@ MonoBehaviour:
   sprite: {fileID: -957784798167101480, guid: d55c07694303a014181bc353aa02eb2c, type: 3}
   encounterIntro: {fileID: 8300000, guid: 2b220facce6b7b748a416a10f348e8a7, type: 3}
   encounterMusic: {fileID: 8300000, guid: b8bf09e6d3ccba7428a9ecb9938fa2ef, type: 3}
-  health: 250
+  health: 225
   attackStrength: 7
   baseExpValue: 0

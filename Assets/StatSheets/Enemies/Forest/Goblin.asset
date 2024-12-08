@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a0765da29f3f8d46b6f73163a2524df, type: 3}
+  m_Name: Goblin
+  m_EditorClassIdentifier: 
+  enemyName: Goblin
+  sprite: {fileID: 21300000, guid: 8ab7812a78b13654f93fe6b5670ae1be, type: 3}
+  encounterIntro: {fileID: 8300000, guid: 743230996d5e4b241adecbe0d7601d41, type: 3}
+  encounterMusic: {fileID: 8300000, guid: 94b980c752eb9a245b1b903323877726, type: 3}
+  health: 250
+  attackStrength: 7
+  baseExpValue: 0

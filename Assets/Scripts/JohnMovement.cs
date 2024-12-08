@@ -18,7 +18,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public int level;
 
     public AudioSource sfx;
-    public AudioClip shipWalk, forestWalk;
+    public AudioClip shipWalk, forestWalk, caveWalk;
     public SoundManager soundManager;
     public AudioClip shipBM, shipBMIntro, shipLM, forestBM, forestBMIntro, forestLM;
     private AudioClip battleMusic, battleMusicIntro, levelMusic;
@@ -28,7 +28,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public GameObject fadetoBlackImage;
     public GameObject battleSystem, bossSystem;
     public GameObject dialogueSystem;
-    public EnemyStatSheet forestSE;
+    public EnemyStatSheet forestSE, caveSE;
     public BossBattleUIScript bossScript;
     private EnemyStatSheet specEncounter;
 
@@ -142,19 +142,35 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         soundManager.ChangeMusic(levelMusic);
     }
 
-    private void MusicChange(int lvl)
+    public void BiomeChange(int lvl)
     {
         switch(lvl)
         {
-            case 0:
+            case 0: //Ship
+                walkSound = shipWalk;
+                levelMusic = shipLM;
+                battleMusic = shipBM;
+                battleMusicIntro = shipBMIntro;
+                level = 0;
                 break;
-            case 1:
+            case 1: //Forest
+                walkSound = forestWalk;
+                levelMusic = forestLM;
+                battleMusic = forestBM;
+                battleMusicIntro = forestBMIntro;
+                specEncounter = forestSE;
+                level = 1;
                 break;
-            case 2:
+            case 2: //Cave
+                walkSound = caveWalk;
+                specEncounter = caveSE;
+                level = 2;
                 break;
-            case 3:
+            case 3: //Glacier
                 break;
-            case 4:
+            case 4: //Volcano
+                break;
+            case 5: //ForestNight
                 break;
         }
     }
