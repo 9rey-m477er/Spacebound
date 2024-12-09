@@ -804,6 +804,13 @@ public class BossBattleUIScript : MonoBehaviour
             ExecuteAttack();
             checkForEndOfBattle();
         }
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
+        {
+            Debug.Log("back out");
+            enemy1Arrow.gameObject.SetActive(false);
+            resetMenu();
+            isSelectingEnemy = false;
+        }
     }
 
     public void ExecuteAttack()

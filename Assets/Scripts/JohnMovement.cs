@@ -73,7 +73,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     void FixedUpdate()
     {
         Vector2 newPosition = rb.position + movement * moveSpeed * Time.fixedDeltaTime;
-        if (!IsTileUnwalkable(newPosition) && fadetoBlackImage.activeSelf == false && battleSystem.activeSelf == false && dialogueSystem.activeSelf == false)
+        if (!IsTileUnwalkable(newPosition) && fadetoBlackImage.activeSelf == false && battleSystem.activeSelf == false && dialogueSystem.activeSelf == false && bossSystem.activeSelf == false)
         {
             rb.MovePosition(newPosition);
             CountSteps(newPosition);
