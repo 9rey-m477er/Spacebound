@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 053481aa810cff64fa33141ad89bba50
+guid: 2d68b898274ffb74ab00c51cb595f320
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -95,7 +95,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 638692824098488307
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -119,18 +119,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Thozos Battle
+  - name: Thozos default sprite
     originalName: 
-    pivot: {x: 0.43589747, y: 0}
+    pivot: {x: 0.5, y: -0.11428572}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 39
-      height: 45
-    spriteID: 48c52684c8205c94cad198edc921a3b8
+      width: 24
+      height: 35
+    spriteID: 0095928ec8c8ad54ebc1b86af39bcbe9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -142,23 +142,59 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1699341483
-    name: Thozos Battle
+    guid: -586322125
+    name: Thozos default sprite
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Thozos Battle
+    - name: Thozos default sprite
       frameIndex: 0
       cellRect:
-        x: 7
-        y: 0
-        width: 39
-        height: 45
-      spriteId: 48c52684c8205c94cad198edc921a3b8
+        x: 12
+        y: 4
+        width: 24
+        height: 35
+      spriteId: 0095928ec8c8ad54ebc1b86af39bcbe9
     linkedCells: []
     parentIndex: -1
-  platformSettings: []
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Server
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 48, y: 48}
