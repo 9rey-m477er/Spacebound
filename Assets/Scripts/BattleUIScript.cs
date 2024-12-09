@@ -1186,12 +1186,15 @@ public class BattleUIScript : MonoBehaviour
 
         currentPlayer = player1.GetComponent<BattlePlayerScript>();
         RectTransform playerHP1 = playerHPBar1.GetComponent<RectTransform>();
+        Image p1 = player1.GetComponent<Image>();
+        string name1 = p1.sprite.name;
         if (currentPlayer.health <= 0)
         {
-            Image p1 = player1.GetComponent<Image>();
-            string name = p1.sprite.name;
-            p1.sprite = Resources.Load<Sprite>("Dead " + name);
-            //player1.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+            p1.sprite = Resources.Load<Sprite>("Dead " + name1);
+        }
+        else
+        {
+            p1.sprite = Resources.Load<Sprite>("John Spacebound");
         }
         playerHP1.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP1.sizeDelta.y);
 
@@ -1199,12 +1202,15 @@ public class BattleUIScript : MonoBehaviour
         {
             currentPlayer = player2.GetComponent<BattlePlayerScript>();
             RectTransform playerHP2 = playerHPBar2.GetComponent<RectTransform>();
+            Image p2 = player2.GetComponent<Image>();
+            string name2 = p2.sprite.name;
             if (currentPlayer.health <= 0)
             {
-                Image p2 = player2.GetComponent<Image>();
-                string name = p2.sprite.name;
-                p2.sprite = Resources.Load<Sprite>("Dead " + name);
-                //player2.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+                p2.sprite = Resources.Load<Sprite>("Dead " + name2);
+            }
+            else
+            {
+                p2.sprite = Resources.Load<Sprite>("Bob");
             }
             playerHP2.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP2.sizeDelta.y);
         }
@@ -1213,12 +1219,15 @@ public class BattleUIScript : MonoBehaviour
         {
             currentPlayer = player3.GetComponent<BattlePlayerScript>();
             RectTransform playerHP3 = playerHPBar3.GetComponent<RectTransform>();
+            Image p3 = player3.GetComponent<Image>();
+            string name = p3.sprite.name;
             if (currentPlayer.health <= 0)
             {
-                Image p3 = player3.GetComponent<Image>();
-                string name = p3.sprite.name;
                 p3.sprite = Resources.Load<Sprite>("Dead " + name);
-                //player3.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+            }
+            else
+            {
+                p3.sprite = Resources.Load<Sprite>("Thozos");
             }
             playerHP3.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP3.sizeDelta.y);
         }
@@ -1227,12 +1236,15 @@ public class BattleUIScript : MonoBehaviour
         {
             currentPlayer = player4.GetComponent<BattlePlayerScript>();
             RectTransform playerHP4 = playerHPBar4.GetComponent<RectTransform>();
+            Image p4 = player4.GetComponent<Image>();
+            string name = p4.sprite.name;
             if (currentPlayer.health <= 0)
             {
-                Image p4 = player4.GetComponent<Image>();
-                string name = p4.sprite.name;
                 p4.sprite = Resources.Load<Sprite>("Dead " + name);
-                player4.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+            }
+            else
+            {
+                p4.sprite = Resources.Load<Sprite>("Janet");
             }
             playerHP4.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP4.sizeDelta.y);
         }
