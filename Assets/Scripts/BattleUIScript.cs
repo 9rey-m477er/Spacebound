@@ -551,6 +551,7 @@ public class BattleUIScript : MonoBehaviour
             innerMenuArrow = 1;
             updateInnerArrow();
             resetMenu();
+
         }
     }
 
@@ -1062,6 +1063,16 @@ public class BattleUIScript : MonoBehaviour
             ExecuteAttack();
             resetMenu();
             //checkForEndOfBattle();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
+        {
+            Debug.Log("back out");
+            enemy1Arrow.gameObject.SetActive(false);
+            enemy2Arrow.gameObject.SetActive(false);
+            enemy3Arrow.gameObject.SetActive(false);
+            enemy4Arrow.gameObject.SetActive(false);
+            resetMenu();
+            isSelectingEnemy = false;
         }
     }
 
