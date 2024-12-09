@@ -191,6 +191,7 @@ public class BattleUIScript : MonoBehaviour
         rollEnemyForest(enemy4, forestEnemyPool);
         updateEnemyNames();
         playerTeamSpawn();
+        isBattleOver = false;
     }
 
     public void playerTeamSpawn()
@@ -1060,7 +1061,7 @@ public class BattleUIScript : MonoBehaviour
             isSelectingEnemy = false; 
             ExecuteAttack();
             resetMenu();
-            checkForEndOfBattle();
+            //checkForEndOfBattle();
         }
     }
 
@@ -1251,10 +1252,12 @@ public class BattleUIScript : MonoBehaviour
 
         if (p1.health <= 0 && p2.health <= 0 && p3.health <= 0 && p4.health <= 0)
         {
-            StartCoroutine(Fade(1));
-            StartCoroutine(Fade(0));
-            dataPersistenceManager.LoadGame();
+            //StartCoroutine(Fade(1));
+            //StartCoroutine(Fade(0));
             isBattleOver = true;
+            exitBattle();
+            dataPersistenceManager.LoadGame();
+            Debug.Log("all players dead");
         }
 
 
@@ -1272,6 +1275,7 @@ public class BattleUIScript : MonoBehaviour
 
     public IEnumerator exitBattle()
     {
+        Debug.Log("exiting battle");
         isBattleOver = false;
         johnMovement.EndBattle();
         fadeImage.gameObject.SetActive(true);
