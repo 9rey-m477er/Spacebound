@@ -218,7 +218,7 @@ public class BattleUIScript : MonoBehaviour
             playerHPBar2inside.gameObject.SetActive(false);
         }
         //
-        if (johnMovement.stephvenActive == true)
+        if (johnMovement.thozosActive == true)
         {
             p3.gameObject.SetActive(true);
             p3.health = p3.startingHealth;
