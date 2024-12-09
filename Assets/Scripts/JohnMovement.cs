@@ -27,7 +27,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
 
     public LayerMask unwalkableLayer;
     public GameObject fadetoBlackImage;
-    public GameObject battleSystem, bossSystem;
+    public GameObject battleSystem, bossSystem, pauseMenu;
     public GameObject dialogueSystem;
     public EnemyStatSheet forestSE, caveSE;
     public BossBattleUIScript bossScript;
@@ -74,7 +74,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     void FixedUpdate()
     {
         Vector2 newPosition = rb.position + movement * moveSpeed * Time.fixedDeltaTime;
-        if (!IsTileUnwalkable(newPosition) && fadetoBlackImage.activeSelf == false && battleSystem.activeSelf == false && dialogueSystem.activeSelf == false && bossSystem.activeSelf == false)
+        if (!IsTileUnwalkable(newPosition) && fadetoBlackImage.activeSelf == false && battleSystem.activeSelf == false && dialogueSystem.activeSelf == false && bossSystem.activeSelf == false && pauseMenu.activeSelf == false)
         {
             rb.MovePosition(newPosition);
             CountSteps(newPosition);
