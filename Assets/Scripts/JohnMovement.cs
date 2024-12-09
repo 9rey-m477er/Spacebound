@@ -30,7 +30,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public GameObject dialogueSystem;
     public EnemyStatSheet forestSE, caveSE;
     public BossBattleUIScript bossScript;
-    private EnemyStatSheet specEncounter;
+    public EnemyStatSheet specEncounter;
 
     public bool bobActive, stephvenActive, janetActive, thozosActive;
 
