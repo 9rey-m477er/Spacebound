@@ -30,6 +30,7 @@ public class BossBattleUIScript : MonoBehaviour
     public Image enemyImage;
     public BattleEnemyScript battleEnemyScript;
     public BattlePlayerScript battlePlayerScript;
+    public DataPersistenceManager dataPersistenceManager;
     public TextMeshProUGUI enemyname;
 
     public GameObject player1;
@@ -928,9 +929,24 @@ public class BossBattleUIScript : MonoBehaviour
     }
     public void checkForEndOfBattle()
     {
-        BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>(); 
+        BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
 
-        if(e1.health <= 0)
+
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+
+        if (p1.health <= 0 && p2.health <= 0 && p3.health <= 0 && p4.health <= 0)
+        {
+            //StartCoroutine(Fade(1));
+            //StartCoroutine(Fade(0));
+            isBattleOver = true;
+            exitBattle();
+            dataPersistenceManager.LoadGame();
+            Debug.Log("all players dead");
+        }
+        if (e1.health <= 0)
         {
             isBattleOver = true;
         }
