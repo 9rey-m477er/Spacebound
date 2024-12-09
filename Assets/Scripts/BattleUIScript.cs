@@ -40,6 +40,7 @@ public class BattleUIScript : MonoBehaviour
     public GameObject enemy4;
     public BattleEnemyScript battleEnemyScript;
     public BattlePlayerScript battlePlayerScript;
+    public DataPersistenceManager dataPersistenceManager;
 
     public GameObject player1;
     public GameObject player2;
@@ -115,6 +116,7 @@ public class BattleUIScript : MonoBehaviour
     public TextMeshProUGUI turnName;
     void OnEnable()
     {
+        resetMenu();
         currentMenuArrow = 1;
         updateMenuArrows();
         innerMenuArrow = 1;
@@ -309,6 +311,7 @@ public class BattleUIScript : MonoBehaviour
         {
             StartCoroutine(exitBattle());
         }
+        checkForEndOfBattle();
         updateTurnText();
     }
 
@@ -721,9 +724,14 @@ public class BattleUIScript : MonoBehaviour
         updateTurns();
         UpdatePartyArrow();
     }
-
+    /*
     public void enemyAttack()
     {
+        BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e2 = enemy2.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e3 = enemy3.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e4 = enemy4.GetComponent<BattleEnemyScript>();
+
         int attackPower = 10;
         List<BattlePlayerScript> validTargets = new List<BattlePlayerScript>();
 
@@ -750,11 +758,17 @@ public class BattleUIScript : MonoBehaviour
 
         // Update player health UI
         updatePlayerHealth();
+        checkForEndOfBattle();
     }
-
+    */
 
     private IEnumerator EnemyAttackSequence()
     {
+        BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e2 = enemy2.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e3 = enemy3.GetComponent<BattleEnemyScript>();
+        BattleEnemyScript e4 = enemy4.GetComponent<BattleEnemyScript>();
+
         // List of all players
         List<BattlePlayerScript> players = new List<BattlePlayerScript>
     {
@@ -764,19 +778,19 @@ public class BattleUIScript : MonoBehaviour
         player4.GetComponent<BattlePlayerScript>()
     };
 
-        // List of all enemies and their corresponding arrows
-        List<(GameObject enemy, GameObject arrow)> activeEnemies = new List<(GameObject, GameObject)>
+        // List of all enemies with their corresponding scripts and arrows
+        List<(BattleEnemyScript enemyScript, GameObject arrow)> activeEnemies = new List<(BattleEnemyScript, GameObject)>
     {
-        (enemy1.gameObject, enemy1Arrow),
-        (enemy2.gameObject, enemy2Arrow),
-        (enemy3.gameObject, enemy3Arrow),
-        (enemy4.gameObject, enemy4Arrow)
+        (e1, enemy1Arrow),
+        (e2, enemy2Arrow),
+        (e3, enemy3Arrow),
+        (e4, enemy4Arrow)
     };
 
         // Iterate through each active enemy
-        foreach (var (enemy, arrow) in activeEnemies)
+        foreach (var (enemyScript, arrow) in activeEnemies)
         {
-            if (!enemy.activeSelf) continue; // Skip if the enemy is not active
+            if (!enemyScript.gameObject.activeSelf) continue; // Skip if the enemy is not active
 
             // Find valid targets (players with health > 0)
             List<BattlePlayerScript> validTargets = players.FindAll(player => player.health > 0);
@@ -798,10 +812,10 @@ public class BattleUIScript : MonoBehaviour
 
             yield return new WaitForSeconds(0.75f);
 
-            // Play attack sound and deal damage
+            // Play attack sound and deal damage using the enemy's attackStrength
             soundManager.PlaySoundClip(6);
-            target.health -= 10; // Example attack power
-            Debug.Log($"{enemy.name} attacked {target.name} for 10 damage.");
+            target.health -= enemyScript.attackStrength;
+            Debug.Log($"{enemyScript.name} attacked {target.name} for {enemyScript.attackStrength} damage.");
 
             // Update turn and UI
             updateTurns();
@@ -823,6 +837,7 @@ public class BattleUIScript : MonoBehaviour
         menuBlocking.gameObject.SetActive(false);
         isinMenu = true;
     }
+
 
 
 
@@ -1224,12 +1239,26 @@ public class BattleUIScript : MonoBehaviour
     }
     public void checkForEndOfBattle()
     {
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+
         BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>(); 
         BattleEnemyScript e2 = enemy2.GetComponent<BattleEnemyScript>();
         BattleEnemyScript e3 = enemy3.GetComponent<BattleEnemyScript>();
         BattleEnemyScript e4 = enemy4.GetComponent<BattleEnemyScript>();
 
-        if(e1.health <= 0 && e2.health <= 0 && e3.health <= 0 && e4.health <= 0)
+        if (p1.health <= 0 && p2.health <= 0 && p3.health <= 0 && p4.health <= 0)
+        {
+            StartCoroutine(Fade(1));
+            StartCoroutine(Fade(0));
+            dataPersistenceManager.LoadGame();
+            isBattleOver = true;
+        }
+
+
+        if (e1.health <= 0 && e2.health <= 0 && e3.health <= 0 && e4.health <= 0)
         {
             isBattleOver = true;
         }

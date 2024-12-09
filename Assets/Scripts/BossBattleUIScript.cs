@@ -51,6 +51,16 @@ public class BossBattleUIScript : MonoBehaviour
     public GameObject playerHPBar3;
     public GameObject playerHPBar4;
 
+    public GameObject playerHPBar1Border;
+    public GameObject playerHPBar2Border;
+    public GameObject playerHPBar3Border;
+    public GameObject playerHPBar4Border;
+
+    public GameObject playerHPBar1inside;
+    public GameObject playerHPBar2inside;
+    public GameObject playerHPBar3inside;
+    public GameObject playerHPBar4inside;
+
     public Image fadeImage;
     public float fadeDuration = 0.3f;
 
@@ -90,10 +100,30 @@ public class BossBattleUIScript : MonoBehaviour
     public Button menuBlocking;
     void OnEnable()
     {
+        resetMenu();
+        currentMenuArrow = 1;
+        updateMenuArrows();
+        innerMenuArrow = 1;
+        updateInnerArrow();
         isinMenu = true;
         menuBlocking.gameObject.SetActive(false);
         turnCounter.text = "Turn 1";
         enemy1.gameObject.SetActive(true);
+
+        playerHPBar1.gameObject.SetActive(true);
+        playerHPBar2.gameObject.SetActive(true);
+        playerHPBar3.gameObject.SetActive(true);
+        playerHPBar4.gameObject.SetActive(true);
+
+        playerHPBar1Border.gameObject.SetActive(true);
+        playerHPBar2Border.gameObject.SetActive(true);
+        playerHPBar3Border.gameObject.SetActive(true);
+        playerHPBar4Border.gameObject.SetActive(true);
+
+        playerHPBar1inside.gameObject.SetActive(true);
+        playerHPBar2inside.gameObject.SetActive(true);
+        playerHPBar3inside.gameObject.SetActive(true);
+        playerHPBar4inside.gameObject.SetActive(true);
 
         johnMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<OmniDirectionalMovement>();
         soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
@@ -510,7 +540,59 @@ public class BossBattleUIScript : MonoBehaviour
 
     public void incrementTurn()
     {
-        playerTurn++;
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+        if (playerTurn == 1)
+        {
+            if (p2.health > 0 && p2.isActiveAndEnabled == true)
+            {
+                playerTurn = 2;
+            }
+            else if (p3.health > 0 && p3.isActiveAndEnabled == true)
+            {
+                playerTurn = 3;
+            }
+            else if (p4.health > 0 && p4.isActiveAndEnabled == true)
+            {
+                playerTurn = 4;
+            }
+            else
+            {
+                playerTurn = 5;
+            }
+        }
+        else if (playerTurn == 2)
+        {
+            if (p3.health > 0 && p3.isActiveAndEnabled == true)
+            {
+                playerTurn = 3;
+            }
+            else if (p4.health > 0 && p4.isActiveAndEnabled == true)
+            {
+                playerTurn = 4;
+            }
+            else
+            {
+                playerTurn = 5;
+            }
+        }
+        else if (playerTurn == 3)
+        {
+            if (p4.health > 0 && p4.isActiveAndEnabled == true)
+            {
+                playerTurn = 4;
+            }
+            else
+            {
+                playerTurn = 5;
+            }
+        }
+        else if (playerTurn == 4)
+        {
+            playerTurn = 5;
+        }
         if (playerTurn == 5) // END OF PLAYER TURNS
         {
             menuBlocking.gameObject.SetActive(true);
@@ -525,31 +607,30 @@ public class BossBattleUIScript : MonoBehaviour
     public void enemyAttack(int randomNumber)
     {
         float attackPower = battleEnemyScript.attackStrength;
+        List<BattlePlayerScript> validTargets = new List<BattlePlayerScript>();
+
+        // Add valid targets (players with health > 0)
         BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
 
-        if(randomNumber == 1)
-        {
-            p1.health = p1.health - attackPower;
-            Debug.Log("attack 1");
-        }
-        else if(randomNumber == 2)
-        {
-            p2.health = p2.health - attackPower;
-            Debug.Log("attack 2");
-        }
-        else if (randomNumber == 3)
-        {
-            p3.health = p3.health - attackPower;
-            Debug.Log("attack 3");
-        }
-        else if (randomNumber == 4)
-        {
-            p4.health = p4.health - attackPower;
-            Debug.Log("attack 4");
-        }
+        if (p1.health > 0) validTargets.Add(p1);
+        if (p2.health > 0) validTargets.Add(p2);
+        if (p3.health > 0) validTargets.Add(p3);
+        if (p4.health > 0) validTargets.Add(p4);
+
+        // If no valid targets exist, exit the attack method
+        if (validTargets.Count == 0) return;
+
+        // Randomly select a target
+        BattlePlayerScript target = validTargets[Random.Range(0, validTargets.Count)];
+
+        // Apply damage to the target
+        target.health -= attackPower;
+        Debug.Log($"Enemy attacked {target.name} for {attackPower} damage.");
+
+        // Update player health UI
         updatePlayerHealth();
     }
 
