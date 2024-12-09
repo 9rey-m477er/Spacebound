@@ -716,34 +716,55 @@ public class BossBattleUIScript : MonoBehaviour
         RectTransform playerHP1 = playerHPBar1.GetComponent<RectTransform>();
         if (currentPlayer.health <= 0)
         {
-            player1.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+            Image p1 = player1.GetComponent<Image>();
+            string name = p1.sprite.name;
+            p1.sprite = Resources.Load<Sprite>("Dead " + name);
+            //player1.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
         }
         playerHP1.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP1.sizeDelta.y);
 
-        currentPlayer = player2.GetComponent<BattlePlayerScript>();
-        RectTransform playerHP2 = playerHPBar2.GetComponent<RectTransform>();
-        if (currentPlayer.health <= 0)
-        {
-            player2.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
-        }
-        playerHP2.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP2.sizeDelta.y);
 
-        currentPlayer = player3.GetComponent<BattlePlayerScript>();
-        RectTransform playerHP3 = playerHPBar3.GetComponent<RectTransform>();
-        if (currentPlayer.health <= 0)
+        if (player2.active)
         {
-            player3.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+            currentPlayer = player2.GetComponent<BattlePlayerScript>();
+            RectTransform playerHP2 = playerHPBar2.GetComponent<RectTransform>();
+            if (currentPlayer.health <= 0)
+            {
+                Image p2 = player2.GetComponent<Image>();
+                string name = p2.sprite.name;
+                p2.sprite = Resources.Load<Sprite>("Dead " + name);
+                //player2.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+            }
+            playerHP2.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP2.sizeDelta.y);
         }
-        playerHP3.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP3.sizeDelta.y);
 
-        currentPlayer = player4.GetComponent<BattlePlayerScript>();
-        RectTransform playerHP4 = playerHPBar4.GetComponent<RectTransform>();
-        if (currentPlayer.health <= 0)
+        if (player3.active)
         {
-            player4.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+            currentPlayer = player3.GetComponent<BattlePlayerScript>();
+            RectTransform playerHP3 = playerHPBar3.GetComponent<RectTransform>();
+            if (currentPlayer.health <= 0)
+            {
+                Image p3 = player3.GetComponent<Image>();
+                string name = p3.sprite.name;
+                p3.sprite = Resources.Load<Sprite>("Dead " + name);
+                //player3.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+            }
+            playerHP3.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP3.sizeDelta.y);
         }
-        playerHP4.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP4.sizeDelta.y);
 
+        if (player4.active)
+        {
+            currentPlayer = player4.GetComponent<BattlePlayerScript>();
+            RectTransform playerHP4 = playerHPBar4.GetComponent<RectTransform>();
+            if (currentPlayer.health <= 0)
+            {
+                Image p4 = player4.GetComponent<Image>();
+                string name = p4.sprite.name;
+                p4.sprite = Resources.Load<Sprite>("Dead " + name);
+                player4.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+            }
+            playerHP4.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP4.sizeDelta.y);
+        }
     }
     public void checkForEndOfBattle()
     {
