@@ -160,6 +160,7 @@ public class BossBattleUIScript : MonoBehaviour
 
         runArrow1.gameObject.SetActive(false);
         runArrow2.gameObject.SetActive(false);
+        playerTeamSpawn();
     }
     void Update()
     {
@@ -177,6 +178,65 @@ public class BossBattleUIScript : MonoBehaviour
             StartCoroutine(exitBattle());
         }
         //updateTurnText();
+    }
+    public void playerTeamSpawn()
+    {
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+
+        if (johnMovement.bobActive == true)
+        {
+            p2.gameObject.SetActive(true);
+            p2.health = p2.startingHealth;
+            playerHPBar2.gameObject.SetActive(true);
+            playerHPBar2Border.gameObject.SetActive(true);
+            playerHPBar2inside.gameObject.SetActive(true);
+        }
+        else
+        {
+            p2.gameObject.SetActive(false);
+            p2.health = 0;
+            playerHPBar2.gameObject.SetActive(false);
+            playerHPBar2Border.gameObject.SetActive(false);
+            playerHPBar2inside.gameObject.SetActive(false);
+        }
+        //
+        if (johnMovement.stephvenActive == true)
+        {
+            p3.gameObject.SetActive(true);
+            p3.health = p3.startingHealth;
+            playerHPBar3.gameObject.SetActive(true);
+            playerHPBar3Border.gameObject.SetActive(true);
+            playerHPBar3inside.gameObject.SetActive(true);
+        }
+        else
+        {
+            p3.gameObject.SetActive(false);
+            p3.health = 0;
+            playerHPBar3.gameObject.SetActive(false);
+            playerHPBar3Border.gameObject.SetActive(false);
+            playerHPBar3inside.gameObject.SetActive(false);
+        }
+        //
+        if (johnMovement.janetActive == true)
+        {
+            p4.gameObject.SetActive(true);
+            p4.health = p4.startingHealth;
+            playerHPBar4.gameObject.SetActive(true);
+            playerHPBar4Border.gameObject.SetActive(true);
+            playerHPBar4inside.gameObject.SetActive(true);
+        }
+        else
+        {
+            p4.gameObject.SetActive(false);
+            p4.health = 0;
+            playerHPBar4.gameObject.SetActive(false);
+            playerHPBar4Border.gameObject.SetActive(false);
+            playerHPBar4inside.gameObject.SetActive(false);
+        }
+        updatePlayerHealth();
     }
 
     public void menuArrowNav()
