@@ -16,6 +16,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public int steps = 0;
     public int randomNum, specRoll;
     public int level;
+    public int membersMissing = 4;
 
     public AudioSource sfx;
     public AudioClip shipWalk, forestWalk, caveWalk;
@@ -181,15 +182,19 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         {
             case 0:
                 bobActive = true;
+                membersMissing -= 1;
                 break;
             case 1:
                 thozosActive = true;
+                membersMissing -= 1;
                 break;
             case 2:
                 janetActive = true;
+                membersMissing -= 1;
                 break;
             case 3:
                 stephvenActive = true;
+                membersMissing -= 1;
                 break;
             default:
                 break;
@@ -199,12 +204,22 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         this.steps = data.steps;
+        this.membersMissing = data.membersMissing;
         this.transform.position = data.playerPosition;
+        this.bobActive = data.bobFlag;
+        this.thozosActive = data.thozosFlag;
+        this.stephvenActive = data.stephvenFlag;
+        this.janetActive = data.janetFlag;
     }
 
     public void SaveData(ref GameData data)
     {
         data.steps = this.steps;
+        data.membersMissing = this.membersMissing;
         data.playerPosition = this.transform.position;
+        data.bobFlag = this.bobActive;
+        data.thozosFlag = this.thozosActive;
+        data.stephvenFlag = this.stephvenActive;
+        data.janetFlag = this.janetActive;
     }
 }

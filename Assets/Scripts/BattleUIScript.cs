@@ -292,7 +292,7 @@ public class BattleUIScript : MonoBehaviour
         //Set the rest of the values
         targetScript.health = sheet.health;
         targetScript.startingHealth = sheet.health;
-        targetScript.attackStrength = sheet.attackStrength;
+        targetScript.attackStrength = sheet.attackStrength - johnMovement.membersMissing;
         targetScript.baseExpValue = sheet.baseExpValue;
         targetScript.enemyName = sheet.enemyName;
     }

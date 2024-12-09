@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    public int steps;
+    public int steps, membersMissing;
     public bool bobFlag, thozosFlag, janetFlag, stephvenFlag;
     public Vector3 playerPosition;
     public SerializableDictionary<string, bool> staticsCleared;
@@ -14,6 +14,7 @@ public class GameData
     {
         //General Information: Simple
         steps = 0;
+        membersMissing = 4;
         bobFlag = false;
         thozosFlag = false;
         janetFlag = false;
