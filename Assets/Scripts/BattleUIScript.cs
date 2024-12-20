@@ -295,6 +295,7 @@ public class BattleUIScript : MonoBehaviour
         targetScript.attackStrength = sheet.attackStrength - johnMovement.membersMissing;
         targetScript.baseExpValue = sheet.baseExpValue;
         targetScript.enemyName = sheet.enemyName;
+        targetScript.enemyAttacks = sheet.enemyAttacks;
     }
 
     void Update()
@@ -800,24 +801,94 @@ public class BattleUIScript : MonoBehaviour
             // If no valid targets exist, stop attacking
             if (validTargets.Count == 0) yield break;
 
-            // Randomly select a target
-            BattlePlayerScript target = validTargets[Random.Range(0, validTargets.Count)];
+            //If there aren't any attacks in the enemy's attack list
+            if (enemyScript.enemyAttacks == null || enemyScript.enemyAttacks.Count == 0)
+            {
+                // Randomly select a target
+                BattlePlayerScript target = validTargets[Random.Range(0, validTargets.Count)];
 
-            // Show the arrow for the current attacking enemy
-            arrow.SetActive(true);
+                // Show the arrow for the current attacking enemy
+                arrow.SetActive(true);
 
-            // Show the reticle for the selected target
-            if (target == players[0]) party1Reticle.SetActive(true);
-            else if (target == players[1]) party2Reticle.SetActive(true);
-            else if (target == players[2]) party3Reticle.SetActive(true);
-            else if (target == players[3]) party4Reticle.SetActive(true);
+                // Show the reticle for the selected target
+                if (target == players[0]) party1Reticle.SetActive(true);
+                else if (target == players[1]) party2Reticle.SetActive(true);
+                else if (target == players[2]) party3Reticle.SetActive(true);
+                else if (target == players[3]) party4Reticle.SetActive(true);
 
-            yield return new WaitForSeconds(0.75f);
+                yield return new WaitForSeconds(0.75f);
 
-            // Play attack sound and deal damage using the enemy's attackStrength
-            soundManager.PlaySoundClip(6);
-            target.health -= enemyScript.attackStrength;
-            Debug.Log($"{enemyScript.name} attacked {target.name} for {enemyScript.attackStrength} damage.");
+                // Play attack sound and deal damage using the enemy's attackStrength
+                soundManager.PlaySoundClip(6);
+                target.health -= enemyScript.attackStrength;
+                Debug.Log($"{enemyScript.name} attacked {target.name} for {enemyScript.attackStrength} damage.");
+            }
+            else
+            {
+                //Otherwise, use a listed attack
+                EnemyAttack chosenAttack = enemyScript.enemyAttacks[Random.Range(0, enemyScript.enemyAttacks.Count)];
+                BattlePlayerScript target = null;
+
+                foreach (int t in chosenAttack.targets)
+                {
+                    switch (t)
+                    {
+                        case 0:
+                            target = validTargets[Random.Range(0, validTargets.Count)];
+                            break;
+                        case 1:
+                            target = players[0];
+                            break;
+                        case 2:
+                            target = players[1];
+                            break;
+                        case 3:
+                            target = players[2];
+                            break;
+                        case 4:
+                            target = players[3];
+                            break;
+                        case -1:
+                            target = null;
+                            break;
+                        default:
+                            target = validTargets[Random.Range(0, validTargets.Count)];
+                            break;
+                    }
+
+                    if (target != null)
+                    {
+                        if (target.health > 0)
+                        {
+                            // Show the reticle for the selected target
+                            if (target == players[0]) party1Reticle.SetActive(true);
+                            else if (target == players[1]) party2Reticle.SetActive(true);
+                            else if (target == players[2]) party3Reticle.SetActive(true);
+                            else if (target == players[3]) party4Reticle.SetActive(true);
+
+                            yield return new WaitForSeconds(0.75f);
+
+                            // Play attack sound and deal damage using the enemy's attackStrength and the attack's attackStrength
+                            soundManager.PlaySoundClip(6);
+                            target.health -= enemyScript.attackStrength + chosenAttack.attackStrength;
+                            Debug.Log($"{enemyScript.name} attacked {target.name} for {enemyScript.attackStrength + chosenAttack.attackStrength} damage using {chosenAttack.attackName}.");
+                        }
+                    }
+                    else
+                    {
+                        //Need you to put a reticule thing here for the enemies to attack themselves (for recoil and shit).
+                        enemyScript.health -= enemyScript.attackStrength + chosenAttack.attackStrength;
+                    }
+
+                    updatePlayerHealth();
+                    party1Reticle.SetActive(false);
+                    party2Reticle.SetActive(false);
+                    party3Reticle.SetActive(false);
+                    party4Reticle.SetActive(false);
+
+                    yield return new WaitForSeconds(0.25f);
+                }
+            }
 
             // Update turn and UI
             updateTurns();
@@ -839,9 +910,6 @@ public class BattleUIScript : MonoBehaviour
         menuBlocking.gameObject.SetActive(false);
         isinMenu = true;
     }
-
-
-
 
 
     private void UpdatePartyArrow()

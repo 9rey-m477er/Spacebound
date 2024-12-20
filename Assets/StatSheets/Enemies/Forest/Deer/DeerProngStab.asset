@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a0765da29f3f8d46b6f73163a2524df, type: 3}
-  m_Name: Roach
+  m_Script: {fileID: 11500000, guid: cc9567689f673314299186c92df3243c, type: 3}
+  m_Name: DeerProngStab
   m_EditorClassIdentifier: 
-  enemyName: 'Roach '
-  sprite: {fileID: 724264291447259930, guid: c385d8b83d9611345ab5659f09905577, type: 3}
-  health: 45
-  attackStrength: 5
-  baseExpValue: 0
+  attackName: Prong Stab
+  attackStrength: 1
+  targets: 0000000000000000
