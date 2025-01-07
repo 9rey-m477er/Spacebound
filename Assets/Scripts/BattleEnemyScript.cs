@@ -13,6 +13,7 @@ public class BattleEnemyScript : MonoBehaviour
     public float attackStrength = 0;
     public float baseExpValue = 0;
     public string enemyName = " ";
+    public List<EnemyAttack> enemyAttacks = new List<EnemyAttack>();
 
 
     void Start()

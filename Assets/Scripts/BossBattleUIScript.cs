@@ -577,14 +577,11 @@ public class BossBattleUIScript : MonoBehaviour
 
         //Set the rest of the values
         battleEnemyScript.health = sheet.health;
-        Debug.Log("Enemy Health = " + battleEnemyScript.health);
         battleEnemyScript.startingHealth = sheet.health;
-        Debug.Log("Enemy Starting Health = " + battleEnemyScript.startingHealth);
         battleEnemyScript.attackStrength = sheet.attackStrength;
-        Debug.Log("Enemy Attack Strength = " + battleEnemyScript.attackStrength);
         battleEnemyScript.baseExpValue = sheet.baseExpValue;
-        Debug.Log("Enemy Base EXP Value = " + battleEnemyScript.baseExpValue);
         battleEnemyScript.enemyName = sheet.enemyName;
+        battleEnemyScript.enemyAttacks = sheet.enemyAttacks;
         enemyname.text = battleEnemyScript.enemyName;
     }
 

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a0765da29f3f8d46b6f73163a2524df, type: 3}
+  m_Name: Roach
+  m_EditorClassIdentifier: 
+  enemyName: 'Roach '
+  sprite: {fileID: 724264291447259930, guid: c385d8b83d9611345ab5659f09905577, type: 3}
+  encounterIntro: {fileID: 0}
+  encounterMusic: {fileID: 0}
+  health: 45
+  attackStrength: 5
+  baseExpValue: 0
+  enemyAttacks:
+  - {fileID: 11400000, guid: 0eaf4f7bf53dcae41b812509a040167f, type: 2}
+  - {fileID: 11400000, guid: a4de931273d2fe54cb1d36008af92270, type: 2}

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a0765da29f3f8d46b6f73163a2524df, type: 3}
+  m_Name: Crickhopper
+  m_EditorClassIdentifier: 
+  enemyName: Crickhopper
+  sprite: {fileID: 5380833482610996554, guid: 02ce17f3693313841beebdfde3c4cfaa, type: 3}
+  encounterIntro: {fileID: 0}
+  encounterMusic: {fileID: 0}
+  health: 50
+  attackStrength: 5
+  baseExpValue: 0
+  enemyAttacks:
+  - {fileID: 11400000, guid: cb03cf2d1fb2f614da5b8c1d0ef14876, type: 2}
+  - {fileID: 11400000, guid: 216d6f4c1ee638a43900197086e5530c, type: 2}
