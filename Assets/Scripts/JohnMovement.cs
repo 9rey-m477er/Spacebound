@@ -29,9 +29,9 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public GameObject fadetoBlackImage;
     public GameObject battleSystem, bossSystem, pauseMenu;
     public GameObject dialogueSystem;
-    public EnemyStatSheet forestSE, caveSE;
+    public BossStatSheet forestSE, caveSE;
     public BossBattleUIScript bossScript;
-    public EnemyStatSheet specEncounter;
+    public BossStatSheet specEncounter;
 
     public bool bobActive, stephvenActive, janetActive, thozosActive;
 

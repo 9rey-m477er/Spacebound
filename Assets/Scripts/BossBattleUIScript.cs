@@ -550,14 +550,14 @@ public class BossBattleUIScript : MonoBehaviour
         resetMenu();
     }
 
-    public void StartScriptedBattle(EnemyStatSheet enemy)
+    public void StartScriptedBattle(BossStatSheet enemy)
     {
         soundManager.BattleTransition(enemy.encounterIntro, enemy.encounterMusic) ;
         SetEnemyStats(enemy);
         johnMovement.inBattle = true;
     }
 
-    public void SetEnemyStats(EnemyStatSheet sheet)
+    public void SetEnemyStats(BossStatSheet sheet)
     {
         Debug.Log("Passing Information to Enemy");
         enemyImage.sprite = sheet.sprite;
@@ -582,6 +582,7 @@ public class BossBattleUIScript : MonoBehaviour
         battleEnemyScript.baseExpValue = sheet.baseExpValue;
         battleEnemyScript.enemyName = sheet.enemyName;
         battleEnemyScript.enemyAttacks = sheet.enemyAttacks;
+        battleEnemyScript.canFlee = sheet.canFlee;
         enemyname.text = battleEnemyScript.enemyName;
     }
 
@@ -951,8 +952,11 @@ public class BossBattleUIScript : MonoBehaviour
 
     public void fleeButtonClick()
     {
-        resetMenu();
-        StartCoroutine(exitBattle());
+        if (battleEnemyScript.canFlee)
+        {
+            resetMenu();
+            StartCoroutine(exitBattle());
+        }
     }
 
     public IEnumerator exitBattle()

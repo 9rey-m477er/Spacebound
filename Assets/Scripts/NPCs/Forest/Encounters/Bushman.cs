@@ -7,7 +7,7 @@ public class Bushman : NPC, ITalkable, IBattleable
 {
     [SerializeField] private DialogueText dialogueText;
     [SerializeField] private DialogueController dialogueController;
-    [SerializeField] private EnemyStatSheet enemy;
+    [SerializeField] private BossStatSheet enemy;
     [SerializeField] private AudioClip encounterIntro, encounterMusic;
     [SerializeField] private GameObject bossSystem;
     [SerializeField] private BossBattleUIScript bossScript;
@@ -29,7 +29,7 @@ public class Bushman : NPC, ITalkable, IBattleable
         dialogueController.displayNextParagraph(dialogueText);
     }
 
-    public void Battle(EnemyStatSheet enemy)
+    public void Battle(BossStatSheet enemy)
     {
         battleStarted = true;
         bossSystem.SetActive(true);
