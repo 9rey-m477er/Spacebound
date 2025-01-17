@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Enemies/New EnemyStatSheet")]
+[CreateAssetMenu(menuName = "Spacebound/Enemies/New EnemyStatSheet")]
 
 public class EnemyStatSheet : ScriptableObject
 {
