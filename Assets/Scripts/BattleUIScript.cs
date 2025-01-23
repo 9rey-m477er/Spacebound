@@ -91,6 +91,7 @@ public class BattleUIScript : MonoBehaviour
     public Button menuBlocking;
     public int currentMenuArrow = 1;
     public int innerMenuArrow = 1;
+    int menuArrowTemp = 0;
 
     public GameObject atkArrow1;
     public GameObject atkArrow2;
@@ -388,6 +389,7 @@ public class BattleUIScript : MonoBehaviour
                     currentMenuArrow = 3;
                     updateMenuArrows();
                 }
+                menuArrowTemp = currentMenuArrow;
             }
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
             {
@@ -411,6 +413,7 @@ public class BattleUIScript : MonoBehaviour
                     currentMenuArrow = 1;
                     updateMenuArrows();
                 }
+                menuArrowTemp = currentMenuArrow;
             }
             if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return) && canSelect2 == false && isSelectingEnemy == false)
             {
@@ -419,7 +422,7 @@ public class BattleUIScript : MonoBehaviour
                 {
                     openMenu(0);
                     StartCoroutine(SelectionWaitCoroutine(0.2f));
-                    currentMenuArrow = 0;
+                    //currentMenuArrow = 0;
                 }
                 else if (currentMenuArrow == 2)
                 {
@@ -549,10 +552,10 @@ public class BattleUIScript : MonoBehaviour
 
         if ((atkMenu.active == true || defMenu.active == true || invMenu.active == true || runMenu.active == true) && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace)))
         {
+            menuArrowTemp = currentMenuArrow;
             innerMenuArrow = 1;
             updateInnerArrow();
             resetMenu();
-
         }
     }
 
@@ -568,6 +571,7 @@ public class BattleUIScript : MonoBehaviour
         Debug.Log("waiting");
         //canSelect2 = false;
         currentMenuArrow = 1;
+        menuArrowTemp = currentMenuArrow;
         resetMenu();
     }
 
@@ -821,7 +825,7 @@ public class BattleUIScript : MonoBehaviour
                 // Play attack sound and deal damage using the enemy's attackStrength
                 soundManager.PlaySoundClip(6);
                 target.health -= enemyScript.attackStrength;
-                Debug.Log($"{enemyScript.name} attacked {target.name} for {enemyScript.attackStrength} damage.");
+                Debug.Log($"{enemyScript.name} attacked {target.name} for {enemyScript.attackStrength} damage."); //BATTLE NARRATION
             }
             else
             {
@@ -871,7 +875,7 @@ public class BattleUIScript : MonoBehaviour
                             // Play attack sound and deal damage using the enemy's attackStrength and the attack's attackStrength
                             soundManager.PlaySoundClip(6);
                             target.health -= enemyScript.attackStrength + chosenAttack.attackStrength;
-                            Debug.Log($"{enemyScript.name} attacked {target.name} for {enemyScript.attackStrength + chosenAttack.attackStrength} damage using {chosenAttack.attackName}.");
+                            Debug.Log($"{enemyScript.name} attacked {target.name} for {enemyScript.attackStrength + chosenAttack.attackStrength} damage using {chosenAttack.attackName}."); //BATTLE NARRATION
                         }
                     }
                     else
@@ -909,6 +913,8 @@ public class BattleUIScript : MonoBehaviour
         turnCounterIndex++;
         menuBlocking.gameObject.SetActive(false);
         isinMenu = true;
+        resetMenu();
+
     }
 
 
@@ -921,6 +927,8 @@ public class BattleUIScript : MonoBehaviour
     }
     public void attackSlot1() //bash    XO
     {                         //        OO
+        currentMenuArrow = 1;
+        menuArrowTemp = currentMenuArrow;
         resetMenu();
         currentAttack = 'b';
         soundManager.PlaySoundClip(5);
@@ -948,6 +956,8 @@ public class BattleUIScript : MonoBehaviour
 
     public void attackSlot2() //slash   //   XO
     {                                   //   XO
+        currentMenuArrow = 1;
+        menuArrowTemp = currentMenuArrow;
         resetMenu();
         currentAttack = 's';
         soundManager.PlaySoundClip(5);
@@ -975,6 +985,8 @@ public class BattleUIScript : MonoBehaviour
 
     public void attackSlot3() //poke    // XX
     {                                   // OO
+        currentMenuArrow = 1;
+        menuArrowTemp = currentMenuArrow;
         resetMenu();
         currentAttack = 'p';
         soundManager.PlaySoundClip(5);
@@ -1002,6 +1014,8 @@ public class BattleUIScript : MonoBehaviour
 
     public void invSlot1()
     {
+        //currentMenuArrow = 1;
+        menuArrowTemp = currentMenuArrow;
         resetMenu();
         BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
@@ -1057,6 +1071,8 @@ public class BattleUIScript : MonoBehaviour
 
     public void invSlot2()
     {
+        //currentMenuArrow = 1;
+        menuArrowTemp = currentMenuArrow;
         resetMenu();
         currentAttack = 'r';
         soundManager.PlaySoundClip(5);
@@ -1134,6 +1150,7 @@ public class BattleUIScript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
         {
+            menuArrowTemp = currentMenuArrow;
             Debug.Log("back out");
             enemy1Arrow.gameObject.SetActive(false);
             enemy2Arrow.gameObject.SetActive(false);
@@ -1210,7 +1227,7 @@ public class BattleUIScript : MonoBehaviour
             }
             currentAttack = 'n';
             soundManager.PlaySoundClip(6);
-            Debug.Log("Attacked enemy " + currentEnemy + ", remaining health: " + selectedEnemyScript.health);
+            Debug.Log("Attacked enemy " + currentEnemy + ", remaining health: " + selectedEnemyScript.health); //BATTLE NARRATION
         }
         updateEnemyHealth();
         enemy1Arrow.gameObject.SetActive(false);
@@ -1459,6 +1476,11 @@ public class BattleUIScript : MonoBehaviour
         defMenu.SetActive(false);
         invMenu.SetActive(false);
         runMenu.SetActive(false);
+        canSelect2 = false;
+        currentMenuArrow = menuArrowTemp; //THIS FIXES THE ISSUE WITH MENU LOCKING UP ON PRESSING ESCAPE
+        updateMenuArrows();
+        innerMenuArrow = 1;
+        updateInnerArrow();
     }
     public void openMenu(int menu)
     {
