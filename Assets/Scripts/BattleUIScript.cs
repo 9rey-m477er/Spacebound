@@ -8,6 +8,9 @@ using Unity.VisualScripting;
 
 public class BattleUIScript : MonoBehaviour
 {
+    public AudioListener battleEars;
+    public AudioListener overworldEars;
+
     public GameObject battleSystem;
     public GameObject atkMenu;
     public GameObject defMenu;
@@ -123,6 +126,8 @@ public class BattleUIScript : MonoBehaviour
         innerMenuArrow = 1;
         updateInnerArrow();
         isinMenu = true;
+        battleEars.enabled = true;
+        overworldEars.enabled = false;
         menuBlocking.gameObject.SetActive(false);
         turnCounter.text = "Turn 1";
         enemy1.gameObject.SetActive(true);
@@ -825,16 +830,27 @@ public class BattleUIScript : MonoBehaviour
                 // Play attack sound and deal damage using the enemy's attackStrength
                 soundManager.PlaySoundClip(6);
                 target.health -= enemyScript.attackStrength;
-                Debug.Log($"{enemyScript.name} attacked {target.name} for {enemyScript.attackStrength} damage."); //BATTLE NARRATION
+                //Debug.Log($"({enemyScript.name} attacked {target.name} for {enemyScript.attackStrength} damage.)"); //BATTLE NARRATION
+                Debug.Log($"({target.name} was attacked by {enemyScript.enemyName}! ({enemyScript.attackStrength} damage))");
             }
             else
             {
                 //Otherwise, use a listed attack
                 EnemyAttack chosenAttack = enemyScript.enemyAttacks[Random.Range(0, enemyScript.enemyAttacks.Count)];
+
                 BattlePlayerScript target = null;
 
                 foreach (int t in chosenAttack.targets)
                 {
+                    string attackReadout = "";
+                    if (chosenAttack.attackReadout.Count == 0)
+                    {
+                        attackReadout = "was attacked by";
+                    }
+                    else
+                    {
+                        attackReadout = chosenAttack.attackReadout[Random.Range(0, chosenAttack.attackReadout.Count)];
+                    }
                     switch (t)
                     {
                         case 0:
@@ -875,7 +891,8 @@ public class BattleUIScript : MonoBehaviour
                             // Play attack sound and deal damage using the enemy's attackStrength and the attack's attackStrength
                             soundManager.PlaySoundClip(6);
                             target.health -= enemyScript.attackStrength + chosenAttack.attackStrength;
-                            Debug.Log($"{enemyScript.name} attacked {target.name} for {enemyScript.attackStrength + chosenAttack.attackStrength} damage using {chosenAttack.attackName}."); //BATTLE NARRATION
+                            //Debug.Log($"{enemyScript.name} attacked {target.name} for {enemyScript.attackStrength + chosenAttack.attackStrength} damage using {chosenAttack.attackName}."); //BATTLE NARRATION
+                            Debug.Log($"({target.name} {attackReadout} {enemyScript.enemyName} ({enemyScript.attackStrength} damage)!)");
                         }
                     }
                     else
@@ -1385,6 +1402,8 @@ public class BattleUIScript : MonoBehaviour
     {
         Debug.Log("exiting battle");
         isBattleOver = false;
+        battleEars.enabled = false;
+        overworldEars.enabled = true;
         johnMovement.EndBattle();
         fadeImage.gameObject.SetActive(true);
         yield return StartCoroutine(Fade(1));

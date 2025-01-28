@@ -15,3 +15,7 @@ MonoBehaviour:
   attackName: Prong Stab
   attackStrength: 1
   targets: 0000000000000000
+  attackReadout:
+  - was gouged by
+  - was gored by
+  - was stabbed by

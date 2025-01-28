@@ -15,3 +15,6 @@ MonoBehaviour:
   attackName: Bite
   attackStrength: 0
   targets: 00000000
+  attackReadout:
+  - was bitten by
+  - was chomped by

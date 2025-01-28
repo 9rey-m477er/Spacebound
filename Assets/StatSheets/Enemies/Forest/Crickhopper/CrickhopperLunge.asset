@@ -15,3 +15,6 @@ MonoBehaviour:
   attackName: Lunge
   attackStrength: 1
   targets: 00000000
+  attackReadout:
+  - was struck by
+  - was jumped by
