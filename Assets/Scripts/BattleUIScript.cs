@@ -117,6 +117,13 @@ public class BattleUIScript : MonoBehaviour
     public List<Sprite> forestSpritePool = new List<Sprite>();
     public List<EnemyStatSheet> forestEnemyPool = new List<EnemyStatSheet>();
 
+    private List<string> battleLog = new List<string>();
+    private string battleLogEntry = string.Empty;
+    public TextMeshProUGUI battleLogLine1;
+    public TextMeshProUGUI battleLogLine2;
+    public TextMeshProUGUI battleLogLine3;
+    public TextMeshProUGUI battleLogLine4;
+
     public TextMeshProUGUI turnName;
     void OnEnable()
     {
@@ -188,6 +195,11 @@ public class BattleUIScript : MonoBehaviour
 
         runArrow1.gameObject.SetActive(false);
         runArrow2.gameObject.SetActive(false);
+
+        battleLogLine1.text = "";
+        battleLogLine2.text = "";
+        battleLogLine3.text = "";
+        battleLogLine4.text = "";
 
         //randomly assign forest enemies
         //need an if statement here for when different biomes are put in
@@ -830,8 +842,10 @@ public class BattleUIScript : MonoBehaviour
                 // Play attack sound and deal damage using the enemy's attackStrength
                 soundManager.PlaySoundClip(6);
                 target.health -= enemyScript.attackStrength;
-                //Debug.Log($"({enemyScript.name} attacked {target.name} for {enemyScript.attackStrength} damage.)"); //BATTLE NARRATION
-                Debug.Log($"({target.name} was attacked by {enemyScript.enemyName}! ({enemyScript.attackStrength} damage))");
+
+                //Write the Attack to the Battle Log
+                Debug.Log($"({target.name} was attacked by {enemyScript.enemyName}({enemyScript.attackStrength} damage)!)");
+                battleLogEntry = $"({target.name} was attacked by {enemyScript.enemyName}({enemyScript.attackStrength} damage)!)";
             }
             else
             {
@@ -891,8 +905,11 @@ public class BattleUIScript : MonoBehaviour
                             // Play attack sound and deal damage using the enemy's attackStrength and the attack's attackStrength
                             soundManager.PlaySoundClip(6);
                             target.health -= enemyScript.attackStrength + chosenAttack.attackStrength;
-                            //Debug.Log($"{enemyScript.name} attacked {target.name} for {enemyScript.attackStrength + chosenAttack.attackStrength} damage using {chosenAttack.attackName}."); //BATTLE NARRATION
+
+                            //Write the Attack to the Battle Log
                             Debug.Log($"({target.name} {attackReadout} {enemyScript.enemyName} ({enemyScript.attackStrength} damage)!)");
+                            battleLogEntry = $"({target.name} {attackReadout} {enemyScript.enemyName}({enemyScript.attackStrength} damage)!)";
+                            updateBattleLog(battleLogEntry);
                         }
                     }
                     else
@@ -932,6 +949,45 @@ public class BattleUIScript : MonoBehaviour
         isinMenu = true;
         resetMenu();
 
+    }
+
+    private void updateBattleLog(string logUpdate)
+    {
+
+        //If the battle log already has 4 entries
+        if (battleLog.Count == 4)
+        {
+            //Remove the least recent entry of the battle log
+            battleLog.RemoveAt(3);
+        }
+
+        //Insert the new entry (logUpdate) into the front of the battle log
+        battleLog.Insert(0, logUpdate);
+
+        Debug.Log(battleLog.ToString());
+
+        //Write as many lines as needed based on the length of the battle log (1-4, bottom-top)
+        switch (battleLog.Count)
+        {
+            case 1:
+                battleLogLine1.text = battleLog[0];
+                break;
+            case 2:
+                battleLogLine1.text = battleLog[0];
+                battleLogLine2.text = battleLog[1];
+                break;
+            case 3:
+                battleLogLine1.text = battleLog[0];
+                battleLogLine2.text = battleLog[1];
+                battleLogLine3.text = battleLog[2];
+                break;
+            case 4:
+                battleLogLine1.text = battleLog[0];
+                battleLogLine2.text = battleLog[1];
+                battleLogLine3.text = battleLog[2];
+                battleLogLine4.text = battleLog[3];
+                break;
+        }
     }
 
 

@@ -9,7 +9,7 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI npcDialogueText;
     //[SerializeField] private float typeSpeed = 10;
 
-    private SoundManager soundManager;
+    public SoundManager soundManager;
 
     public Queue<string> paragraphs = new Queue<string>();
     private Queue<string> names = new Queue<string>();
@@ -26,7 +26,7 @@ public class DialogueController : MonoBehaviour
 
     public void Awake()
     {
-        soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+
     }
 
     public void displayNextParagraph(DialogueText dialogueText)
