@@ -8,6 +8,7 @@ public class EnemyStatSheet : ScriptableObject
 {
     public string enemyName = " ";
     public Sprite sprite = null;
+    public Sprite attackSprite = null;
     public AudioClip encounterIntro = null;
     public AudioClip encounterMusic = null;
     public float health = 0;

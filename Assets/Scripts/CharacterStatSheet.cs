@@ -7,6 +7,8 @@ using UnityEngine;
 public class CharacterStatSheet : ScriptableObject
 {
     public string characterName = string.Empty;
+    public Sprite characterSprite = null;
+    public Sprite attackSprite = null;
     public int characterLevel = 1;
     public int characterHP = 30;
     public float bashMultiplier = 1.0f;
