@@ -1,0 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "Spacebound/Characters/New CharacterSpriteSheet")]
+
+public class CharacterStatSheet : ScriptableObject
+{
+    public string characterName = string.Empty;
+    public int characterLevel = 1;
+    public int characterHP = 30;
+    public float bashMultiplier = 1.0f;
+    public float slashMultiplier = 1.0f;
+    public float pokeMultiplier = 1.0f;
+    //so slot for weapon
+    //so slot for armour
+}

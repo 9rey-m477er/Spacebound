@@ -123,6 +123,7 @@ public class BattleUIScript : MonoBehaviour
     public TextMeshProUGUI battleLogLine2;
     public TextMeshProUGUI battleLogLine3;
     public TextMeshProUGUI battleLogLine4;
+    public GameObject battleLogObj;
 
     public TextMeshProUGUI turnName;
     void OnEnable()
@@ -200,6 +201,7 @@ public class BattleUIScript : MonoBehaviour
         battleLogLine2.text = "";
         battleLogLine3.text = "";
         battleLogLine4.text = "";
+        //battleLogObj.SetActive(true);
 
         //randomly assign forest enemies
         //need an if statement here for when different biomes are put in
