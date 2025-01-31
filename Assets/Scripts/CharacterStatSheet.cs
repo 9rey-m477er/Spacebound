@@ -10,7 +10,7 @@ public class CharacterStatSheet : ScriptableObject
     public Sprite characterSprite = null;
     public Sprite attackSprite = null;
     public int characterLevel = 1;
-    public int characterHP = 30;
+    public float characterHP = 30;
     public float bashMultiplier = 1.0f;
     public float slashMultiplier = 1.0f;
     public float pokeMultiplier = 1.0f;
