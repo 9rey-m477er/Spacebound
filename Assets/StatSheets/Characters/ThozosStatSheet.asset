@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901e28b8dfd38024d9a33d38e34c9fd9, type: 3}
   m_Name: ThozosStatSheet
   m_EditorClassIdentifier: 
-  characterName: 
+  characterName: Thozos
   characterSprite: {fileID: 0}
   attackSprite: {fileID: 0}
+  downedSprite: {fileID: 0}
   characterLevel: 1
   characterHP: 30
+  currentHP: 30
   bashMultiplier: 1
   slashMultiplier: 1
   pokeMultiplier: 1

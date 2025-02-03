@@ -125,6 +125,8 @@ public class BattleUIScript : MonoBehaviour
     public TextMeshProUGUI battleLogLine4;
     public GameObject battleLogObj;
 
+    public CharacterStatSheet john, bob, thozos, janet, stephven;
+
     public TextMeshProUGUI turnName;
     void OnEnable()
     {
@@ -221,10 +223,22 @@ public class BattleUIScript : MonoBehaviour
         BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
 
+        p1.health = john.currentHP;
+        p1.startingHealth = john.characterHP;
+        p1.bashMultiplier = john.bashMultiplier;
+        p1.slashMultiplier = john.slashMultiplier;
+        p1.pokeMultiplier = john.pokeMultiplier;
+        p1.characterName = john.characterName;
+
         if (johnMovement.bobActive == true)
         {
             p2.gameObject.SetActive(true);
-            p2.health = p2.startingHealth;
+            p2.startingHealth = bob.characterHP;
+            p2.health = bob.currentHP;
+            p2.bashMultiplier = bob.bashMultiplier;
+            p2.slashMultiplier = bob.slashMultiplier;
+            p2.pokeMultiplier = bob.pokeMultiplier;
+            p2.characterName = bob.characterName;
             playerHPBar2.gameObject.SetActive(true);
             playerHPBar2Border.gameObject.SetActive(true);
             playerHPBar2inside.gameObject.SetActive(true);
@@ -241,7 +255,12 @@ public class BattleUIScript : MonoBehaviour
         if (johnMovement.thozosActive == true)
         {
             p3.gameObject.SetActive(true);
-            p3.health = p3.startingHealth;
+            p3.health = thozos.currentHP;
+            p3.startingHealth = thozos.characterHP;
+            p3.bashMultiplier = thozos.bashMultiplier;
+            p3.slashMultiplier = thozos.slashMultiplier;
+            p3.pokeMultiplier = thozos.pokeMultiplier;
+            p3.characterName = thozos.characterName;
             playerHPBar3.gameObject.SetActive(true);
             playerHPBar3Border.gameObject.SetActive(true);
             playerHPBar3inside.gameObject.SetActive(true);
@@ -258,7 +277,12 @@ public class BattleUIScript : MonoBehaviour
         if (johnMovement.janetActive == true)
         {
             p4.gameObject.SetActive(true);
-            p4.health = p4.startingHealth;
+            p4.health = janet.currentHP;
+            p4.startingHealth = janet.characterHP;
+            p4.bashMultiplier = janet.bashMultiplier;
+            p4.slashMultiplier = janet.slashMultiplier;
+            p4.pokeMultiplier = janet.pokeMultiplier;
+            p4.characterName = janet.characterName;
             playerHPBar4.gameObject.SetActive(true);
             playerHPBar4Border.gameObject.SetActive(true);
             playerHPBar4inside.gameObject.SetActive(true);
@@ -846,8 +870,8 @@ public class BattleUIScript : MonoBehaviour
                 target.health -= enemyScript.attackStrength;
 
                 //Write the Attack to the Battle Log
-                Debug.Log($"({target.name} was attacked by {enemyScript.enemyName}({enemyScript.attackStrength} damage)!)");
-                battleLogEntry = $"({target.name} was attacked by {enemyScript.enemyName}({enemyScript.attackStrength} damage)!)";
+                Debug.Log($"{target.characterName} was attacked by {enemyScript.enemyName}({enemyScript.attackStrength} damage)!");
+                battleLogEntry = $"{target.characterName} was attacked by {enemyScript.enemyName}({enemyScript.attackStrength} damage)!";
             }
             else
             {
@@ -909,8 +933,8 @@ public class BattleUIScript : MonoBehaviour
                             target.health -= enemyScript.attackStrength + chosenAttack.attackStrength;
 
                             //Write the Attack to the Battle Log
-                            Debug.Log($"({target.name} {attackReadout} {enemyScript.enemyName} ({enemyScript.attackStrength} damage)!)");
-                            battleLogEntry = $"({target.name} {attackReadout} {enemyScript.enemyName}({enemyScript.attackStrength} damage)!)";
+                            Debug.Log($"{target.characterName} {attackReadout} {enemyScript.enemyName} ({enemyScript.attackStrength} damage)!");
+                            battleLogEntry = $"{target.characterName} {attackReadout} {enemyScript.enemyName}({enemyScript.attackStrength} damage)!";
                             updateBattleLog(battleLogEntry);
                         }
                     }
