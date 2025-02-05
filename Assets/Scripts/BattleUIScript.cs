@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
+using System;
+using Random = UnityEngine.Random;
 
 public class BattleUIScript : MonoBehaviour
 {
@@ -347,7 +349,7 @@ public class BattleUIScript : MonoBehaviour
         // Only check input if the player is currently selecting an enemy
         if (isSelectingEnemy)
         {
-            HandleEnemySelection();
+            StartCoroutine(HandleEnemySelection());
         }
         else if (isinMenu && isSelectingEnemy == false && menuBlocking.gameObject.active == false)
         {
@@ -814,6 +816,8 @@ public class BattleUIScript : MonoBehaviour
 
     private IEnumerator EnemyAttackSequence()
     {
+        yield return new WaitForSeconds(0.5f);
+
         BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
         BattleEnemyScript e2 = enemy2.GetComponent<BattleEnemyScript>();
         BattleEnemyScript e3 = enemy3.GetComponent<BattleEnemyScript>();
@@ -1196,7 +1200,7 @@ public class BattleUIScript : MonoBehaviour
         }
         UpdateEnemyArrows();
     }
-    private void HandleEnemySelection()
+    private IEnumerator HandleEnemySelection()
     {
         BattleEnemyScript enemy1HealthCheck = enemy1.GetComponent<BattleEnemyScript>();
         BattleEnemyScript enemy2HealthCheck = enemy2.GetComponent<BattleEnemyScript>();
@@ -1244,6 +1248,17 @@ public class BattleUIScript : MonoBehaviour
         {
             isSelectingEnemy = false; 
             ExecuteAttack();
+
+            updateEnemyHealth();
+            enemy1Arrow.gameObject.SetActive(false);
+            enemy2Arrow.gameObject.SetActive(false);
+            enemy3Arrow.gameObject.SetActive(false);
+            enemy4Arrow.gameObject.SetActive(false);
+
+            yield return new WaitForSeconds(.5f);////////////////////////////// ANIMATION IS ALLOWED TO SIMMER HERE
+
+            updatePlayerHealth(); //player sprites get reset back to base form here
+            incrementTurn();
             resetMenu();
             //checkForEndOfBattle();
         }
@@ -1260,13 +1275,22 @@ public class BattleUIScript : MonoBehaviour
         }
     }
 
+
+
     public void ExecuteAttack()
     {
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+
+
         BattleEnemyScript selectedEnemyScript = null;
         BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
         BattleEnemyScript e2 = enemy2.GetComponent<BattleEnemyScript>();
         BattleEnemyScript e3 = enemy3.GetComponent<BattleEnemyScript>();
         BattleEnemyScript e4 = enemy4.GetComponent<BattleEnemyScript>();
+        int currentAttacker = playerTurn;
         int selectedEnemy = 0;
         switch (currentEnemy)
         {
@@ -1287,7 +1311,28 @@ public class BattleUIScript : MonoBehaviour
                 selectedEnemy = 4;
                 break;
         }
-
+        ////////////////////////////////// -- ATTACK ANIMATIONS THIS CHANGES CURRENT IMAGE TO THE IMAGE ATTACHED TO IMAGE COMPONENT OF FRONTLINE/BACKLINE GAMEOBJECT
+        if(currentAttacker == 1)
+        {
+            //Image playerImage = player1.GetComponent<Image>();
+            //playerImage.sprite = p1.attackSprite;
+        }
+        else if(currentAttacker == 2)
+        {
+            Image playerImage = player2.GetComponent<Image>();
+            playerImage.sprite = p2.attackSprite;
+        }
+        else if(currentAttacker == 3)
+        {
+            //Image playerImage = player3.GetComponent<Image>();
+            //playerImage.sprite = p3.attackSprite;
+        }
+        else if (currentAttacker == 4)
+        {
+            //Image playerImage = player4.GetComponent<Image>();
+            //playerImage.sprite = p4.attackSprite;
+        }
+        ///////////////////////////////////
         if (selectedEnemyScript != null)
         {
             if(currentAttack == 'b') //bash
@@ -1328,13 +1373,6 @@ public class BattleUIScript : MonoBehaviour
             soundManager.PlaySoundClip(6);
             Debug.Log("Attacked enemy " + currentEnemy + ", remaining health: " + selectedEnemyScript.health); //BATTLE NARRATION
         }
-        updateEnemyHealth();
-        enemy1Arrow.gameObject.SetActive(false);
-        enemy2Arrow.gameObject.SetActive(false);
-        enemy3Arrow.gameObject.SetActive(false);
-        enemy4Arrow.gameObject.SetActive(false);
-        incrementTurn();
-        resetMenu();
     }
 
     public void updateEnemyHealth()

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901e28b8dfd38024d9a33d38e34c9fd9, type: 3}
   m_Name: StephvenStatSheet
   m_EditorClassIdentifier: 
-  characterName: Stephven
-  characterSprite: {fileID: 0}
-  attackSprite: {fileID: 0}
-  downedSprite: {fileID: 0}
+  characterName: Stevphen
+  characterSprite: {fileID: 21300000, guid: 23317911c5d19bb40a5012d19a8f2553, type: 3}
+  attackSprite: {fileID: 21300000, guid: 74a4c198e1ae4864197687d53bda4603, type: 3}
+  downedSprite: {fileID: 21300000, guid: fda2a9b2e6ddc8a4d96f5bb917514ff1, type: 3}
   characterLevel: 1
   characterHP: 30
   currentHP: 30

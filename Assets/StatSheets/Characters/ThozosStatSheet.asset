@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ThozosStatSheet
   m_EditorClassIdentifier: 
   characterName: Thozos
-  characterSprite: {fileID: 0}
-  attackSprite: {fileID: 0}
-  downedSprite: {fileID: 0}
+  characterSprite: {fileID: 21300000, guid: acbf54b030d457e458ef8ea55006b583, type: 3}
+  attackSprite: {fileID: 21300000, guid: 37ff2c87cd871d1488ecdef1905992cc, type: 3}
+  downedSprite: {fileID: 21300000, guid: f3d8b8dbe7c96534287002444ee24e3a, type: 3}
   characterLevel: 1
   characterHP: 30
   currentHP: 30
