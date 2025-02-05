@@ -874,8 +874,8 @@ public class BattleUIScript : MonoBehaviour
                 target.health -= enemyScript.attackStrength;
 
                 //Write the Attack to the Battle Log
-                Debug.Log($"{target.characterName} was attacked by {enemyScript.enemyName}({enemyScript.attackStrength} damage)!");
-                battleLogEntry = $"{target.characterName} was attacked by {enemyScript.enemyName}({enemyScript.attackStrength} damage)!";
+                Debug.Log($"{target.characterName} was attacked by {enemyScript.enemyName} ({enemyScript.attackStrength} damage)!");
+                battleLogEntry = $"{target.characterName} was attacked by {enemyScript.enemyName} ({enemyScript.attackStrength} damage)!";
             }
             else
             {
@@ -938,7 +938,7 @@ public class BattleUIScript : MonoBehaviour
 
                             //Write the Attack to the Battle Log
                             Debug.Log($"{target.characterName} {attackReadout} {enemyScript.enemyName} ({enemyScript.attackStrength} damage)!");
-                            battleLogEntry = $"{target.characterName} {attackReadout} {enemyScript.enemyName}({enemyScript.attackStrength} damage)!";
+                            battleLogEntry = $"{target.characterName} {attackReadout} {enemyScript.enemyName} ({enemyScript.attackStrength} damage)!";
                             updateBattleLog(battleLogEntry);
                         }
                     }
@@ -1279,6 +1279,7 @@ public class BattleUIScript : MonoBehaviour
 
     public void ExecuteAttack()
     {
+        BattlePlayerScript attacker = null;
         BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
@@ -1290,8 +1291,13 @@ public class BattleUIScript : MonoBehaviour
         BattleEnemyScript e2 = enemy2.GetComponent<BattleEnemyScript>();
         BattleEnemyScript e3 = enemy3.GetComponent<BattleEnemyScript>();
         BattleEnemyScript e4 = enemy4.GetComponent<BattleEnemyScript>();
+
         int currentAttacker = playerTurn;
         int selectedEnemy = 0;
+        string attackerName = string.Empty;
+        string attackDesc = string.Empty;
+        string enemyName = string.Empty;
+        int readoutDamage = 0;
         switch (currentEnemy)
         {
             case 1:
@@ -1316,62 +1322,83 @@ public class BattleUIScript : MonoBehaviour
         {
             //Image playerImage = player1.GetComponent<Image>();
             //playerImage.sprite = p1.attackSprite;
+            attacker = p1;
         }
         else if(currentAttacker == 2)
         {
             Image playerImage = player2.GetComponent<Image>();
             playerImage.sprite = p2.attackSprite;
+            attacker = p2;
         }
         else if(currentAttacker == 3)
         {
             //Image playerImage = player3.GetComponent<Image>();
             //playerImage.sprite = p3.attackSprite;
+            attacker = p3;
         }
         else if (currentAttacker == 4)
         {
             //Image playerImage = player4.GetComponent<Image>();
             //playerImage.sprite = p4.attackSprite;
+            attacker = p4;
         }
+        attackerName = attacker.characterName;
         ///////////////////////////////////
         if (selectedEnemyScript != null)
         {
             if(currentAttack == 'b') //bash
             {
-                selectedEnemyScript.health -= attackPower;     
+                readoutDamage = (int)(attackPower * attacker.bashMultiplier);
+                selectedEnemyScript.health -= (int)(attackPower * attacker.bashMultiplier);
+                attackDesc = "bashed";
+                enemyName = selectedEnemyScript.enemyName;
             }
             else if(currentAttack == 's') //slash
             {
-                if(selectedEnemy == 1 || selectedEnemy == 2)
+                attackDesc = "slashed";
+                readoutDamage = (int)(attackPower * attacker.slashMultiplier);
+                if (selectedEnemy == 1 || selectedEnemy == 2)
                 {
-                    e1.health -= attackPower;
-                    e2.health -= attackPower;
+                    e1.health -= (int)(attackPower * attacker.slashMultiplier);
+                    e2.health -= (int)(attackPower * attacker.slashMultiplier);
+                    enemyName = ($"{e1.enemyName} and {e2.enemyName}");
                 }
                 else if (selectedEnemy == 3 || selectedEnemy == 4)
                 {
-                    e3.health -= attackPower;
-                    e4.health -= attackPower;
+                    e3.health -= (int)(attackPower * attacker.slashMultiplier);
+                    e4.health -= (int)(attackPower * attacker.slashMultiplier);
+                    enemyName = ($"{e3.enemyName} and {e4.enemyName}");
                 }
             }
             else if(currentAttack == 'p') //poke
             {
+                attackDesc = "poked";
+                readoutDamage = (int)(attackPower * attacker.pokeMultiplier);
                 if (selectedEnemy == 1 || selectedEnemy == 3)
                 {
-                    e1.health -= attackPower;
-                    e3.health -= attackPower;
+                    e1.health -= (int)(attackPower * attacker.pokeMultiplier);
+                    e3.health -= (int)(attackPower * attacker.pokeMultiplier);
+                    enemyName = ($"{e1.enemyName} and {e3.enemyName}");
                 }
                 else if (selectedEnemy == 2 || selectedEnemy == 4)
                 {
-                    e2.health -= attackPower;
-                    e4.health -= attackPower;
+                    e2.health -= (int)(attackPower * attacker.pokeMultiplier);
+                    e4.health -= (int)(attackPower * attacker.pokeMultiplier);
+                    enemyName = ($"{e2.enemyName} and {e4.enemyName}");
                 }
             }
             else if(currentAttack == 'r') //rock
             {
+                readoutDamage = attackPower;
+                enemyName = selectedEnemyScript.enemyName;
                 selectedEnemyScript.health -= attackPower;
+                attackDesc = "threw a rock at";
             }
+            Debug.LogError(readoutDamage);
             currentAttack = 'n';
             soundManager.PlaySoundClip(6);
-            Debug.Log("Attacked enemy " + currentEnemy + ", remaining health: " + selectedEnemyScript.health); //BATTLE NARRATION
+            updateBattleLog($"{attackerName} {attackDesc} {enemyName}! ({readoutDamage} HP)");
+            //Debug.Log("Attacked enemy " + currentEnemy + ", remaining health: " + selectedEnemyScript.health); //BATTLE NARRATION
         }
     }
 
@@ -1524,6 +1551,7 @@ public class BattleUIScript : MonoBehaviour
         isBattleOver = false;
         battleEars.enabled = false;
         overworldEars.enabled = true;
+        battleLog.Clear();
         johnMovement.EndBattle();
         fadeImage.gameObject.SetActive(true);
         yield return StartCoroutine(Fade(1));

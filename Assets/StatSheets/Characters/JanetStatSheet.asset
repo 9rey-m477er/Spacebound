@@ -17,8 +17,8 @@ MonoBehaviour:
   attackSprite: {fileID: 0}
   downedSprite: {fileID: 0}
   characterLevel: 1
-  characterHP: 30
-  currentHP: 30
+  characterHP: 35
+  currentHP: 35
   bashMultiplier: 1
-  slashMultiplier: 1
-  pokeMultiplier: 1
+  slashMultiplier: 0.9
+  pokeMultiplier: 1.1
