@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterStatHandler : MonoBehaviour, IDataPersistence
@@ -87,20 +88,21 @@ public class CharacterStatHandler : MonoBehaviour, IDataPersistence
         data.sSlash = Stephven.slashMultiplier;
         data.sPoke = Stephven.pokeMultiplier;
         //Set General Information
-        data.partyExp = expToNext;
+        data.partyExp = partyEXP;
         data.expToNext = expToNext;
     }
 
     //Add EXP to partyEXP
     public void addEXP(int exp)
     {
+        Debug.Log("Adding " +  exp + " exp!");
         partyEXP += exp;
         if (partyEXP >= expToNext && partyLevel < levelMax)
         {
             partyLevelUp();
             Debug.Log("Next Level Reached");
         }
-        else
+        else if (partyLevel >= levelMax)
         {
             Debug.Log("Max Level Reached");
         }
@@ -178,7 +180,11 @@ public class CharacterStatHandler : MonoBehaviour, IDataPersistence
 
         Debug.Log("Level " + partyLevel + " reached.");
 
-        expToNext += 200; //Replace with whatever formula we use.
+        expToNext += 200;
+        if (partyEXP >= expToNext)
+        {
+            partyLevelUp();
+        }
     }
 
     //Dev Tool for debugging.

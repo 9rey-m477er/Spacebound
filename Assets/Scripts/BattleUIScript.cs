@@ -128,6 +128,10 @@ public class BattleUIScript : MonoBehaviour
     public GameObject battleLogObj;
 
     public CharacterStatSheet john, bob, thozos, janet, stephven;
+    public CharacterStatHandler characterStatHandler;
+
+    public bool fled = false;
+    public int expToGive;
 
     public TextMeshProUGUI turnName;
     void OnEnable()
@@ -339,9 +343,16 @@ public class BattleUIScript : MonoBehaviour
         targetScript.health = sheet.health;
         targetScript.startingHealth = sheet.health;
         targetScript.attackStrength = sheet.attackStrength - johnMovement.membersMissing;
-        targetScript.baseExpValue = sheet.baseExpValue;
         targetScript.enemyName = sheet.enemyName;
         targetScript.enemyAttacks = sheet.enemyAttacks;
+        expToGive += sheet.baseExpValue;
+
+        //If the player is in the forest level and have reached level 10 or higher
+        if (johnMovement.level == 0 && characterStatHandler.partyLevel >= 10)
+        {
+            //Exp gain is set to 1.
+            expToGive = 1;
+        }
     }
 
     void Update()
@@ -1542,6 +1553,7 @@ public class BattleUIScript : MonoBehaviour
     public void fleeButtonClick()
     {
         resetMenu();
+        fled = true;
         StartCoroutine(exitBattle());
     }
 
@@ -1570,6 +1582,15 @@ public class BattleUIScript : MonoBehaviour
         p2.health = p2.startingHealth;
         p3.health = p3.startingHealth;
         p4.health = p4.startingHealth;
+
+        //Checks to make sure the player didn't flee the fight
+        if (!fled)
+        {
+            //Gives EXP to player.
+            characterStatHandler.addEXP(expToGive);
+        }
+        //Reset Fled Flag
+        fled = false;
 
         e1.health = e1.startingHealth;
         e2.health = e2.startingHealth;

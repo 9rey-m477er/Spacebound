@@ -13,6 +13,6 @@ public class EnemyStatSheet : ScriptableObject
     public AudioClip encounterMusic = null;
     public float health = 0;
     public float attackStrength = 0;
-    public float baseExpValue = 0;
+    public int baseExpValue = 0;
     public List<EnemyAttack> enemyAttacks = new List<EnemyAttack>();
 }

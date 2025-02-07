@@ -11,7 +11,7 @@ public class BattleEnemyScript : MonoBehaviour
     public float health = 0;
     public float startingHealth = 0;
     public float attackStrength = 0;
-    public float baseExpValue = 0;
+    public int baseExpValue = 0;
     public string enemyName = " ";
     public bool canFlee = true;
     public List<EnemyAttack> enemyAttacks = new List<EnemyAttack>();

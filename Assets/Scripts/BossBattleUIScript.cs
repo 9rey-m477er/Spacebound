@@ -579,7 +579,7 @@ public class BossBattleUIScript : MonoBehaviour
         battleEnemyScript.health = sheet.health;
         battleEnemyScript.startingHealth = sheet.health;
         battleEnemyScript.attackStrength = sheet.attackStrength;
-        battleEnemyScript.baseExpValue = sheet.baseExpValue;
+        //battleEnemyScript.baseExpValue = sheet.baseExpValue;
         battleEnemyScript.enemyName = sheet.enemyName;
         battleEnemyScript.enemyAttacks = sheet.enemyAttacks;
         battleEnemyScript.canFlee = sheet.canFlee;

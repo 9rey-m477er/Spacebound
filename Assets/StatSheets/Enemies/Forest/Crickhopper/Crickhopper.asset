@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Crickhopper
   sprite: {fileID: 5380833482610996554, guid: 02ce17f3693313841beebdfde3c4cfaa, type: 3}
+  attackSprite: {fileID: 0}
   encounterIntro: {fileID: 0}
   encounterMusic: {fileID: 0}
   health: 50
   attackStrength: 5
-  baseExpValue: 0
+  baseExpValue: 13
   enemyAttacks:
   - {fileID: 11400000, guid: cb03cf2d1fb2f614da5b8c1d0ef14876, type: 2}
   - {fileID: 11400000, guid: 216d6f4c1ee638a43900197086e5530c, type: 2}
