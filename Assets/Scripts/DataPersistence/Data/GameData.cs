@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameData
 {
     //General Information: Simple
-    public int steps, membersMissing, partyLevel, expToNext;
+    public int steps, membersMissing, partyLevel, partyExp, expToNext;
     public bool bobFlag, thozosFlag, janetFlag, stephvenFlag;
     //General Information: Complex
     public Vector3 playerPosition;
@@ -28,6 +28,7 @@ public class GameData
         steps = 0;
         membersMissing = 4;
         partyLevel = 1;
+        partyExp = 0;
         expToNext = 100;
         bobFlag = false;
         thozosFlag = false;
