@@ -38,6 +38,9 @@ public class BattleUIScript : MonoBehaviour
     public GameObject defendArrow;
     public GameObject invenArrow;
     public GameObject runArrow;
+    public GameObject reportArrow;
+
+    public GameObject bigReport;
 
     public GameObject enemy1;
     public GameObject enemy2;
@@ -189,6 +192,7 @@ public class BattleUIScript : MonoBehaviour
         defendArrow.gameObject.SetActive(false);
         invenArrow.gameObject.SetActive(false);
         runArrow.gameObject.SetActive(false);
+        reportArrow.gameObject.SetActive(false);
 
         atkArrow1.gameObject.SetActive(false);
         atkArrow2.gameObject.SetActive(false);
@@ -204,6 +208,8 @@ public class BattleUIScript : MonoBehaviour
 
         runArrow1.gameObject.SetActive(false);
         runArrow2.gameObject.SetActive(false);
+
+        bigReport.SetActive(false);
 
         battleLogLine1.text = "";
         battleLogLine2.text = "";
@@ -396,6 +402,7 @@ public class BattleUIScript : MonoBehaviour
             defendArrow.gameObject.SetActive(false);
             invenArrow.gameObject.SetActive(false);
             runArrow.gameObject.SetActive(false);
+            reportArrow.gameObject.SetActive(false);
         }
         else if(currentMenuArrow == 2)
         {
@@ -403,6 +410,7 @@ public class BattleUIScript : MonoBehaviour
             defendArrow.gameObject.SetActive(true);
             invenArrow.gameObject.SetActive(false);
             runArrow.gameObject.SetActive(false);
+            reportArrow.gameObject.SetActive(false);
         }
         else if (currentMenuArrow == 3)
         {
@@ -410,6 +418,7 @@ public class BattleUIScript : MonoBehaviour
             defendArrow.gameObject.SetActive(false);
             invenArrow.gameObject.SetActive(true);
             runArrow.gameObject.SetActive(false);
+            reportArrow.gameObject.SetActive(false);
         }
         else if (currentMenuArrow == 4)
         {
@@ -417,12 +426,35 @@ public class BattleUIScript : MonoBehaviour
             defendArrow.gameObject.SetActive(false);
             invenArrow.gameObject.SetActive(false);
             runArrow.gameObject.SetActive(true);
+            reportArrow.gameObject.SetActive(false);
+        }
+        else if (currentMenuArrow == 5)
+        {
+            attackArrow.gameObject.SetActive(false);
+            defendArrow.gameObject.SetActive(false);
+            invenArrow.gameObject.SetActive(false);
+            runArrow.gameObject.SetActive(false);
+            reportArrow.gameObject.SetActive(true);
         }
     }
     public void menuArrowNav()
     {
-        if(atkMenu.active == false && defMenu.active == false && invMenu.active == false && runMenu.active == false && isSelectingEnemy == false)
+        if(atkMenu.active == false && defMenu.active == false && invMenu.active == false && runMenu.active == false && isSelectingEnemy == false && bigReport.active == false)
         {
+            if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                if(currentMenuArrow != 5)
+                {
+                    currentMenuArrow = 5;
+                    updateMenuArrows();
+                }
+                else if(currentMenuArrow == 5)
+                {
+                    currentMenuArrow = 1;
+                    updateMenuArrows();
+                }
+                menuArrowTemp = currentMenuArrow;
+            }
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
                 if (currentMenuArrow == 1)
@@ -495,12 +527,28 @@ public class BattleUIScript : MonoBehaviour
                     openMenu(3);
                     StartCoroutine(SelectionWaitCoroutine(0.2f));
                 }
+                else if (currentMenuArrow == 5)
+                {
+                    openMenu(4);
+                    StartCoroutine(SelectionWaitCoroutine(0.2f));
+                }
                 innerMenuArrow = 1;
                 updateInnerArrow();
                 canSelect = false;
             }
         }
         
+        if(bigReport.active == true)
+        {
+            if(Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Escape))
+            {
+                openMenu(4);
+                StartCoroutine(SelectionWaitCoroutine(0.2f));
+                canSelect = false;
+                resetMenu();
+            }
+        }
+
         if(atkMenu.active == true || defMenu.active == true || invMenu.active == true || runMenu.active == true && isSelectingEnemy == false)
         {
             if(innerMenuArrow == 1)
@@ -1734,7 +1782,31 @@ public class BattleUIScript : MonoBehaviour
                     runMenu.SetActive(false);
                 }
                 break;
+            case 4:
+                if (!bigReport.activeSelf)
+                {
+                    soundManager.PlaySoundClip(0);
+                    atkMenu.SetActive(false);
+                    defMenu.SetActive(false);
+                    invMenu.SetActive(false);
+                    runMenu.SetActive(false);
+                    bigReport.SetActive(true);
+                }
+                else
+                {
+                    soundManager.PlaySoundClip(4);
+                    bigReport.SetActive(false);
+                }
+                break;
         }
+    }
+
+    public void bigReportClose()
+    {
+        openMenu(4);
+        StartCoroutine(SelectionWaitCoroutine(0.2f));
+        canSelect = false;
+        resetMenu();
     }
 
     private IEnumerator Fade(float targetAlpha)
