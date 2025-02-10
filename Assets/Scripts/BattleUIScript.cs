@@ -1636,7 +1636,7 @@ public class BattleUIScript : MonoBehaviour
     {
         Debug.Log("exiting battle");
         isBattleOver = false;
-        battleLog.Clear();
+        battleLog = { "", "", "", "", "", "", "", "", "", "", "", ""};
         johnMovement.EndBattle();
         fadeImage.gameObject.SetActive(true);
         yield return StartCoroutine(Fade(1));
