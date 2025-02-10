@@ -122,12 +122,14 @@ public class BattleUIScript : MonoBehaviour
     public List<Sprite> forestSpritePool = new List<Sprite>();
     public List<EnemyStatSheet> forestEnemyPool = new List<EnemyStatSheet>();
 
-    private List<string> battleLog = new List<string>();
+    private List<string> battleLog = new List<string> {"", "", "", "", "", "", "", "", "", "", "", ""};
     private string battleLogEntry = string.Empty;
     public TextMeshProUGUI battleLogLine1;
     public TextMeshProUGUI battleLogLine2;
     public TextMeshProUGUI battleLogLine3;
     public TextMeshProUGUI battleLogLine4;
+    public TextMeshProUGUI bigLogLine1, bigLogLine2, bigLogLine3, bigLogLine4, bigLogLine5, bigLogLine6, 
+        bigLogLine7, bigLogLine8, bigLogLine9, bigLogLine10, bigLogLine11, bigLogLine12;
     public GameObject battleLogObj;
 
     public CharacterStatSheet john, bob, thozos, janet, stephven;
@@ -145,8 +147,6 @@ public class BattleUIScript : MonoBehaviour
         innerMenuArrow = 1;
         updateInnerArrow();
         isinMenu = true;
-        battleEars.enabled = true;
-        overworldEars.enabled = false;
         menuBlocking.gameObject.SetActive(false);
         turnCounter.text = "Turn 1";
         enemy1.gameObject.SetActive(true);
@@ -215,6 +215,18 @@ public class BattleUIScript : MonoBehaviour
         battleLogLine2.text = "";
         battleLogLine3.text = "";
         battleLogLine4.text = "";
+        bigLogLine1.text = "";
+        bigLogLine2.text = "";
+        bigLogLine3.text = "";
+        bigLogLine4.text = "";
+        bigLogLine5.text = "";
+        bigLogLine6.text = "";
+        bigLogLine7.text = "";
+        bigLogLine8.text = "";
+        bigLogLine9.text = "";
+        bigLogLine10.text = "";
+        bigLogLine11.text = "";
+        bigLogLine12.text = "";
         //battleLogObj.SetActive(true);
 
         //randomly assign forest enemies
@@ -230,6 +242,8 @@ public class BattleUIScript : MonoBehaviour
 
     public void playerTeamSpawn()
     {
+        battleEars.enabled = true;
+        overworldEars.enabled = false;
         BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
@@ -1056,27 +1070,31 @@ public class BattleUIScript : MonoBehaviour
         Debug.Log(battleLog.ToString());
 
         //Write as many lines as needed based on the length of the battle log (1-4, bottom-top)
-        switch (battleLog.Count)
-        {
-            case 1:
-                battleLogLine1.text = battleLog[0];
-                break;
-            case 2:
-                battleLogLine1.text = battleLog[0];
-                battleLogLine2.text = battleLog[1];
-                break;
-            case 3:
-                battleLogLine1.text = battleLog[0];
-                battleLogLine2.text = battleLog[1];
-                battleLogLine3.text = battleLog[2];
-                break;
-            case 4:
-                battleLogLine1.text = battleLog[0];
-                battleLogLine2.text = battleLog[1];
-                battleLogLine3.text = battleLog[2];
-                battleLogLine4.text = battleLog[3];
-                break;
-        }
+        //switch (battleLog.Count)
+        //{
+        //    case 1:
+        //        battleLogLine1.text = battleLog[0];
+        //        break;
+        //    case 2:
+        //        battleLogLine1.text = battleLog[0];
+        //        battleLogLine2.text = battleLog[1];
+        //        break;
+        //    case 3:
+        //        battleLogLine1.text = battleLog[0];
+        //        battleLogLine2.text = battleLog[1];
+        //        battleLogLine3.text = battleLog[2];
+        //        break;
+        //    case 4:
+        //        battleLogLine1.text = battleLog[0];
+        //        battleLogLine2.text = battleLog[1];
+        //        battleLogLine3.text = battleLog[2];
+        //        battleLogLine4.text = battleLog[3];
+        //        break;
+        //}
+        battleLogLine1.text = battleLog[0];
+        battleLogLine2.text = battleLog[1];
+        battleLogLine3.text = battleLog[2];
+        battleLogLine4.text = battleLog[3];
     }
 
 
