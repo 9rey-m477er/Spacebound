@@ -10,9 +10,6 @@ using Random = UnityEngine.Random;
 
 public class BattleUIScript : MonoBehaviour
 {
-    public AudioListener battleEars;
-    public AudioListener overworldEars;
-
     public GameObject battleSystem;
     public GameObject atkMenu;
     public GameObject defMenu;
@@ -242,8 +239,6 @@ public class BattleUIScript : MonoBehaviour
 
     public void playerTeamSpawn()
     {
-        battleEars.enabled = true;
-        overworldEars.enabled = false;
         BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
@@ -1058,10 +1053,10 @@ public class BattleUIScript : MonoBehaviour
     {
 
         //If the battle log already has 4 entries
-        if (battleLog.Count == 4)
+        if (battleLog.Count == 12)
         {
             //Remove the least recent entry of the battle log
-            battleLog.RemoveAt(3);
+            battleLog.RemoveAt(11);
         }
 
         //Insert the new entry (logUpdate) into the front of the battle log
@@ -1097,6 +1092,21 @@ public class BattleUIScript : MonoBehaviour
         battleLogLine4.text = battleLog[3];
     }
 
+    private void updateBigBattleLog()
+    {
+        bigLogLine1.text = battleLog[0];
+        bigLogLine2.text = battleLog[1];
+        bigLogLine3.text = battleLog[2];
+        bigLogLine4.text = battleLog[3];
+        bigLogLine5.text = battleLog[4];
+        bigLogLine6.text = battleLog[5];
+        bigLogLine7.text = battleLog[6];
+        bigLogLine8.text = battleLog[7];
+        bigLogLine9.text = battleLog[8];
+        bigLogLine10.text = battleLog[9];
+        bigLogLine11.text = battleLog[10];
+        bigLogLine12.text = battleLog[11];
+    }
 
     private void UpdatePartyArrow()
     {
@@ -1471,7 +1481,6 @@ public class BattleUIScript : MonoBehaviour
                 selectedEnemyScript.health -= attackPower;
                 attackDesc = "threw a rock at";
             }
-            Debug.LogError(readoutDamage);
             currentAttack = 'n';
             soundManager.PlaySoundClip(6);
             updateBattleLog($"{attackerName} {attackDesc} {enemyName}! ({readoutDamage} HP)");
@@ -1627,8 +1636,6 @@ public class BattleUIScript : MonoBehaviour
     {
         Debug.Log("exiting battle");
         isBattleOver = false;
-        battleEars.enabled = false;
-        overworldEars.enabled = true;
         battleLog.Clear();
         johnMovement.EndBattle();
         fadeImage.gameObject.SetActive(true);
@@ -1809,6 +1816,7 @@ public class BattleUIScript : MonoBehaviour
                     invMenu.SetActive(false);
                     runMenu.SetActive(false);
                     bigReport.SetActive(true);
+                    updateBigBattleLog();
                 }
                 else
                 {

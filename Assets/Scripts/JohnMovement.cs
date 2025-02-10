@@ -25,6 +25,9 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     private AudioClip battleMusic, battleMusicIntro, levelMusic;
     private AudioClip walkSound;
 
+    public AudioListener battleEars;
+    public AudioListener overworldEars;
+
     public LayerMask unwalkableLayer;
     public GameObject fadetoBlackImage;
     public GameObject battleSystem, bossSystem, pauseMenu;
@@ -100,6 +103,8 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
             randomNum = randomNum - 4;
             if(randomNum <= 0 && specRoll != 69)
             {
+                battleEars.enabled = true;
+                overworldEars.enabled = false;
                 soundManager.BattleTransition(battleMusicIntro, battleMusic);
                 inBattle = true;
                 battleSystem.gameObject.SetActive(true);
@@ -108,6 +113,8 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
             }
             else if (randomNum <= 0 && specRoll == 69)
             {
+                battleEars.enabled = true;
+                overworldEars.enabled = false;
                 inBattle = true;
                 bossSystem.SetActive(true);
                 bossScript.StartScriptedBattle(specEncounter);
@@ -140,6 +147,8 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
 
     public void EndBattle()
     {
+        battleEars.enabled = false;
+        overworldEars.enabled = true;
         soundManager.ChangeMusic(levelMusic);
     }
 
