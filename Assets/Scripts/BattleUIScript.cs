@@ -891,6 +891,11 @@ public class BattleUIScript : MonoBehaviour
         BattleEnemyScript e3 = enemy3.GetComponent<BattleEnemyScript>();
         BattleEnemyScript e4 = enemy4.GetComponent<BattleEnemyScript>();
 
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+
         // List of all players
         List<BattlePlayerScript> players = new List<BattlePlayerScript>
     {
@@ -930,15 +935,43 @@ public class BattleUIScript : MonoBehaviour
                 arrow.SetActive(true);
 
                 // Show the reticle for the selected target
-                if (target == players[0]) party1Reticle.SetActive(true);
-                else if (target == players[1]) party2Reticle.SetActive(true);
-                else if (target == players[2]) party3Reticle.SetActive(true);
-                else if (target == players[3]) party4Reticle.SetActive(true);
+                if (target == players[0])
+                {
+                    party1Reticle.SetActive(true);
+                    Image playerImage = player1.GetComponent<Image>();
+                    playerImage.sprite = p1.hurtSprite;
+                    RectTransform rt = playerImage.GetComponent<RectTransform>();
+                    rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
+                }
+                else if (target == players[1])
+                {
+                    party2Reticle.SetActive(true);
+                    Image playerImage = player2.GetComponent<Image>();
+                    playerImage.sprite = p2.hurtSprite;
+                    RectTransform rt = playerImage.GetComponent<RectTransform>();
+                    rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
 
-                yield return new WaitForSeconds(0.75f);
+                }
+                else if (target == players[2])
+                {
+                    party3Reticle.SetActive(true);
+                    Image playerImage = player3.GetComponent<Image>();
+                    playerImage.sprite = p3.hurtSprite;
+                    RectTransform rt = playerImage.GetComponent<RectTransform>();
+                    rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
+                }
+                else if (target == players[3])
+                {
+                    party4Reticle.SetActive(true);
+                    Image playerImage = player4.GetComponent<Image>();
+                    playerImage.sprite = p4.hurtSprite;
+                    RectTransform rt = playerImage.GetComponent<RectTransform>();
+                    rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
+                }
 
                 // Play attack sound and deal damage using the enemy's attackStrength
                 soundManager.PlaySoundClip(6);
+                yield return new WaitForSeconds(0.75f);
                 target.health -= enemyScript.attackStrength;
 
                 //Write the Attack to the Battle Log
@@ -993,10 +1026,39 @@ public class BattleUIScript : MonoBehaviour
                         if (target.health > 0)
                         {
                             // Show the reticle for the selected target
-                            if (target == players[0]) party1Reticle.SetActive(true);
-                            else if (target == players[1]) party2Reticle.SetActive(true);
-                            else if (target == players[2]) party3Reticle.SetActive(true);
-                            else if (target == players[3]) party4Reticle.SetActive(true);
+                            if (target == players[0])
+                            {
+                                party1Reticle.SetActive(true);
+                                Image playerImage = player1.GetComponent<Image>();
+                                playerImage.sprite = p1.hurtSprite;
+                                RectTransform rt = playerImage.GetComponent<RectTransform>();
+                                rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
+                            }
+                            else if (target == players[1])
+                            {
+                                party2Reticle.SetActive(true);
+                                Image playerImage = player2.GetComponent<Image>();
+                                playerImage.sprite = p2.hurtSprite;
+                                RectTransform rt = playerImage.GetComponent<RectTransform>();
+                                rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
+
+                            }
+                            else if (target == players[2])
+                            {
+                                party3Reticle.SetActive(true);
+                                Image playerImage = player3.GetComponent<Image>();
+                                playerImage.sprite = p3.hurtSprite;
+                                RectTransform rt = playerImage.GetComponent<RectTransform>();
+                                rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
+                            }
+                            else if (target == players[3])
+                            {
+                                party4Reticle.SetActive(true);
+                                Image playerImage = player4.GetComponent<Image>();
+                                playerImage.sprite = p4.hurtSprite;
+                                RectTransform rt = playerImage.GetComponent<RectTransform>();
+                                rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
+                            }
 
                             yield return new WaitForSeconds(0.75f);
 
@@ -1046,7 +1108,7 @@ public class BattleUIScript : MonoBehaviour
         menuBlocking.gameObject.SetActive(false);
         isinMenu = true;
         resetMenu();
-
+        UpdatePartyArrow();
     }
 
     private void updateBattleLog(string logUpdate)
@@ -1110,7 +1172,7 @@ public class BattleUIScript : MonoBehaviour
 
     private void UpdatePartyArrow()
     {
-        party1Arrow.gameObject.SetActive(playerTurn == 1);
+        party1Arrow.gameObject.SetActive(playerTurn == 1 && menuBlocking.isActiveAndEnabled == false);
         party2Arrow.gameObject.SetActive(playerTurn == 2);
         party3Arrow.gameObject.SetActive(playerTurn == 3);
         party4Arrow.gameObject.SetActive(playerTurn == 4);
@@ -1407,26 +1469,34 @@ public class BattleUIScript : MonoBehaviour
         ////////////////////////////////// -- ATTACK ANIMATIONS THIS CHANGES CURRENT IMAGE TO THE IMAGE ATTACHED TO IMAGE COMPONENT OF FRONTLINE/BACKLINE GAMEOBJECT
         if(currentAttacker == 1)
         {
-            //Image playerImage = player1.GetComponent<Image>();
-            //playerImage.sprite = p1.attackSprite;
+            Image playerImage = player1.GetComponent<Image>();
+            playerImage.sprite = p1.attackSprite;
+            RectTransform rt = playerImage.GetComponent<RectTransform>();
+            rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
             attacker = p1;
         }
         else if(currentAttacker == 2)
         {
             Image playerImage = player2.GetComponent<Image>();
             playerImage.sprite = p2.attackSprite;
+            RectTransform rt = playerImage.GetComponent<RectTransform>();
+            rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
             attacker = p2;
         }
         else if(currentAttacker == 3)
         {
-            //Image playerImage = player3.GetComponent<Image>();
-            //playerImage.sprite = p3.attackSprite;
+            Image playerImage = player3.GetComponent<Image>();
+            playerImage.sprite = p3.attackSprite;
+            RectTransform rt = playerImage.GetComponent<RectTransform>();
+            rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
             attacker = p3;
         }
         else if (currentAttacker == 4)
         {
-            //Image playerImage = player4.GetComponent<Image>();
-            //playerImage.sprite = p4.attackSprite;
+            Image playerImage = player4.GetComponent<Image>();
+            playerImage.sprite = p4.attackSprite;
+            RectTransform rt = playerImage.GetComponent<RectTransform>();
+            rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
             attacker = p4;
         }
         attackerName = attacker.characterName;
@@ -1530,9 +1600,19 @@ public class BattleUIScript : MonoBehaviour
     {
         BattlePlayerScript currentPlayer = null;
 
+        BattlePlayerScript player1sprite = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript player2sprite = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript player3sprite = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript player4sprite = player4.GetComponent<BattlePlayerScript>();
+
         currentPlayer = player1.GetComponent<BattlePlayerScript>();
         RectTransform playerHP1 = playerHPBar1.GetComponent<RectTransform>();
+
         Image p1 = player1.GetComponent<Image>();
+        p1.sprite = player1sprite.characterSprite;
+        RectTransform rt = player1.GetComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(p1.sprite.bounds.size.x * 16f, p1.sprite.bounds.size.y * 16f);
+
         string name1 = p1.sprite.name;
         if (currentPlayer.health <= 0)
         {
@@ -1549,6 +1629,9 @@ public class BattleUIScript : MonoBehaviour
             currentPlayer = player2.GetComponent<BattlePlayerScript>();
             RectTransform playerHP2 = playerHPBar2.GetComponent<RectTransform>();
             Image p2 = player2.GetComponent<Image>();
+            p2.sprite = player2sprite.characterSprite;
+            RectTransform rt2 = player2.GetComponent<RectTransform>();
+            rt2.sizeDelta = new Vector2(p2.sprite.bounds.size.x * 16f, p2.sprite.bounds.size.y * 16f);
             string name2 = p2.sprite.name;
             if (currentPlayer.health <= 0)
             {
@@ -1566,6 +1649,9 @@ public class BattleUIScript : MonoBehaviour
             currentPlayer = player3.GetComponent<BattlePlayerScript>();
             RectTransform playerHP3 = playerHPBar3.GetComponent<RectTransform>();
             Image p3 = player3.GetComponent<Image>();
+            p3.sprite = player3sprite.characterSprite;
+            RectTransform rt3 = player3.GetComponent<RectTransform>();
+            rt3.sizeDelta = new Vector2(p3.sprite.bounds.size.x * 1f, p3.sprite.bounds.size.y * 1f);
             string name = p3.sprite.name;
             if (currentPlayer.health <= 0)
             {
@@ -1583,6 +1669,9 @@ public class BattleUIScript : MonoBehaviour
             currentPlayer = player4.GetComponent<BattlePlayerScript>();
             RectTransform playerHP4 = playerHPBar4.GetComponent<RectTransform>();
             Image p4 = player4.GetComponent<Image>();
+            p4.sprite = player4sprite.characterSprite;
+            RectTransform rt4 = player4.GetComponent<RectTransform>();
+            rt4.sizeDelta = new Vector2(p4.sprite.bounds.size.x * 16f, p4.sprite.bounds.size.y * 16f);
             string name = p4.sprite.name;
             if (currentPlayer.health <= 0)
             {

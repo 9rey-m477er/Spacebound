@@ -12,5 +12,6 @@ public class BattlePlayerScript : MonoBehaviour
     public Sprite characterSprite = null;
     public Sprite attackSprite = null;
     public Sprite downedSprite = null;
+    public Sprite hurtSprite = null;
     public string characterName = string.Empty;
 }

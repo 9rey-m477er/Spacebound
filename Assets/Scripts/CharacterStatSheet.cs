@@ -9,7 +9,8 @@ public class CharacterStatSheet : ScriptableObject
     public string characterName = string.Empty;
     public Sprite characterSprite = null;
     public Sprite attackSprite = null;
-    public Sprite downedSprite = null;    
+    public Sprite downedSprite = null;
+    public Sprite hurtSprite = null;
     public int characterLevel = 1;
     public float characterHP = 30;
     public float currentHP = 30;
