@@ -250,6 +250,10 @@ public class BattleUIScript : MonoBehaviour
         p1.slashMultiplier = john.slashMultiplier;
         p1.pokeMultiplier = john.pokeMultiplier;
         p1.characterName = john.characterName;
+        p1.characterSprite = john.characterSprite;
+        p1.attackSprite = john.attackSprite;
+        p1.downedSprite = john.downedSprite;
+        p1.hurtSprite = john.hurtSprite;
 
         if (johnMovement.bobActive == true)
         {
@@ -260,6 +264,10 @@ public class BattleUIScript : MonoBehaviour
             p2.slashMultiplier = bob.slashMultiplier;
             p2.pokeMultiplier = bob.pokeMultiplier;
             p2.characterName = bob.characterName;
+            p2.characterSprite = bob.characterSprite;
+            p2.attackSprite = bob.attackSprite;
+            p2.downedSprite = bob.downedSprite;
+            p2.hurtSprite = bob.hurtSprite;
             playerHPBar2.gameObject.SetActive(true);
             playerHPBar2Border.gameObject.SetActive(true);
             playerHPBar2inside.gameObject.SetActive(true);
@@ -282,6 +290,10 @@ public class BattleUIScript : MonoBehaviour
             p3.slashMultiplier = thozos.slashMultiplier;
             p3.pokeMultiplier = thozos.pokeMultiplier;
             p3.characterName = thozos.characterName;
+            p3.characterSprite = thozos.characterSprite;
+            p3.attackSprite = thozos.attackSprite;
+            p3.downedSprite = thozos.downedSprite;
+            p3.hurtSprite = thozos.hurtSprite;
             playerHPBar3.gameObject.SetActive(true);
             playerHPBar3Border.gameObject.SetActive(true);
             playerHPBar3inside.gameObject.SetActive(true);
@@ -304,6 +316,10 @@ public class BattleUIScript : MonoBehaviour
             p4.slashMultiplier = janet.slashMultiplier;
             p4.pokeMultiplier = janet.pokeMultiplier;
             p4.characterName = janet.characterName;
+            p4.characterSprite = janet.characterSprite;
+            p4.attackSprite = janet.attackSprite;
+            p4.downedSprite = janet.downedSprite;
+            p4.hurtSprite = janet.hurtSprite;
             playerHPBar4.gameObject.SetActive(true);
             playerHPBar4Border.gameObject.SetActive(true);
             playerHPBar4inside.gameObject.SetActive(true);
@@ -934,12 +950,13 @@ public class BattleUIScript : MonoBehaviour
                 // Show the arrow for the current attacking enemy
                 arrow.SetActive(true);
 
-                // Show the reticle for the selected target
+                // Show the reticle for the selected target and play damage sound
                 if (target == players[0])
                 {
                     party1Reticle.SetActive(true);
                     Image playerImage = player1.GetComponent<Image>();
                     playerImage.sprite = p1.hurtSprite;
+                    soundManager.PlaySoundClip(6);
                     RectTransform rt = playerImage.GetComponent<RectTransform>();
                     rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
                 }
@@ -948,6 +965,7 @@ public class BattleUIScript : MonoBehaviour
                     party2Reticle.SetActive(true);
                     Image playerImage = player2.GetComponent<Image>();
                     playerImage.sprite = p2.hurtSprite;
+                    soundManager.PlaySoundClip(6);
                     RectTransform rt = playerImage.GetComponent<RectTransform>();
                     rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
 
@@ -957,6 +975,7 @@ public class BattleUIScript : MonoBehaviour
                     party3Reticle.SetActive(true);
                     Image playerImage = player3.GetComponent<Image>();
                     playerImage.sprite = p3.hurtSprite;
+                    soundManager.PlaySoundClip(6);
                     RectTransform rt = playerImage.GetComponent<RectTransform>();
                     rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
                 }
@@ -965,12 +984,12 @@ public class BattleUIScript : MonoBehaviour
                     party4Reticle.SetActive(true);
                     Image playerImage = player4.GetComponent<Image>();
                     playerImage.sprite = p4.hurtSprite;
+                    soundManager.PlaySoundClip(6);
                     RectTransform rt = playerImage.GetComponent<RectTransform>();
                     rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
                 }
 
                 // Play attack sound and deal damage using the enemy's attackStrength
-                soundManager.PlaySoundClip(6);
                 yield return new WaitForSeconds(0.75f);
                 target.health -= enemyScript.attackStrength;
 
@@ -1025,11 +1044,12 @@ public class BattleUIScript : MonoBehaviour
                     {
                         if (target.health > 0)
                         {
-                            // Show the reticle for the selected target
+                            // Show the reticle for the selected target and play damage sound
                             if (target == players[0])
                             {
                                 party1Reticle.SetActive(true);
                                 Image playerImage = player1.GetComponent<Image>();
+                                soundManager.PlaySoundClip(6);
                                 playerImage.sprite = p1.hurtSprite;
                                 RectTransform rt = playerImage.GetComponent<RectTransform>();
                                 rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
@@ -1038,6 +1058,7 @@ public class BattleUIScript : MonoBehaviour
                             {
                                 party2Reticle.SetActive(true);
                                 Image playerImage = player2.GetComponent<Image>();
+                                soundManager.PlaySoundClip(6);
                                 playerImage.sprite = p2.hurtSprite;
                                 RectTransform rt = playerImage.GetComponent<RectTransform>();
                                 rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
@@ -1047,6 +1068,7 @@ public class BattleUIScript : MonoBehaviour
                             {
                                 party3Reticle.SetActive(true);
                                 Image playerImage = player3.GetComponent<Image>();
+                                soundManager.PlaySoundClip(6);
                                 playerImage.sprite = p3.hurtSprite;
                                 RectTransform rt = playerImage.GetComponent<RectTransform>();
                                 rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
@@ -1055,6 +1077,7 @@ public class BattleUIScript : MonoBehaviour
                             {
                                 party4Reticle.SetActive(true);
                                 Image playerImage = player4.GetComponent<Image>();
+                                soundManager.PlaySoundClip(6);
                                 playerImage.sprite = p4.hurtSprite;
                                 RectTransform rt = playerImage.GetComponent<RectTransform>();
                                 rt.sizeDelta = new Vector2(playerImage.sprite.bounds.size.x * 1f, playerImage.sprite.bounds.size.y * 1f);
@@ -1062,8 +1085,7 @@ public class BattleUIScript : MonoBehaviour
 
                             yield return new WaitForSeconds(0.75f);
 
-                            // Play attack sound and deal damage using the enemy's attackStrength and the attack's attackStrength
-                            soundManager.PlaySoundClip(6);
+                            // Deal damage using the enemy's attackStrength and the attack's attackStrength
                             target.health -= enemyScript.attackStrength + chosenAttack.attackStrength;
 
                             //Write the Attack to the Battle Log

@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: JanetStatSheet
   m_EditorClassIdentifier: 
   characterName: Janet
-  characterSprite: {fileID: 0}
-  attackSprite: {fileID: 0}
-  downedSprite: {fileID: 0}
+  characterSprite: {fileID: 21300000, guid: 9290c9c9e6c7dc94498761a06f448691, type: 3}
+  attackSprite: {fileID: -9014898942371220051, guid: 7da844a9147fb1c4db029ea8f2c4227c, type: 3}
+  downedSprite: {fileID: 8379082059386957824, guid: c54153b07970bf54ca51c9b5901164d5, type: 3}
+  hurtSprite: {fileID: -9099321052138193462, guid: 4b07693a5788d8443b90b72106b2e24d, type: 3}
   characterLevel: 1
   characterHP: 35
   currentHP: 35

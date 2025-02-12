@@ -16,6 +16,7 @@ MonoBehaviour:
   characterSprite: {fileID: 21300000, guid: 071d974f81a30cc4885ef72b32be1bf8, type: 3}
   attackSprite: {fileID: 21300000, guid: 51833091c29517a4f96c88fd39e99492, type: 3}
   downedSprite: {fileID: 21300000, guid: 7bedf3a4d2e77ab45b8f4a9f44f6b3a7, type: 3}
+  hurtSprite: {fileID: 21300000, guid: 996887e0d640cb54580a4d46c1d8c0ac, type: 3}
   characterLevel: 1
   characterHP: 40
   currentHP: 40
