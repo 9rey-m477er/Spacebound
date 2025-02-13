@@ -994,8 +994,8 @@ public class BattleUIScript : MonoBehaviour
                 target.health -= enemyScript.attackStrength;
 
                 //Write the Attack to the Battle Log
-                Debug.Log($"{target.characterName} was attacked by {enemyScript.enemyName} ({enemyScript.attackStrength} damage)!");
-                battleLogEntry = $"{target.characterName} was attacked by {enemyScript.enemyName} ({enemyScript.attackStrength} damage)!";
+                Debug.Log($"{target.characterName} was attacked by {enemyScript.enemyName}! ({enemyScript.attackStrength} Damage)");
+                battleLogEntry = $"{target.characterName} was attacked by {enemyScript.enemyName}! ({enemyScript.attackStrength} Damage)";
             }
             else
             {
@@ -1089,8 +1089,8 @@ public class BattleUIScript : MonoBehaviour
                             target.health -= enemyScript.attackStrength + chosenAttack.attackStrength;
 
                             //Write the Attack to the Battle Log
-                            Debug.Log($"{target.characterName} {attackReadout} {enemyScript.enemyName} ({enemyScript.attackStrength} damage)!");
-                            battleLogEntry = $"{target.characterName} {attackReadout} {enemyScript.enemyName} ({enemyScript.attackStrength} damage)!";
+                            Debug.Log($"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} Damage)");
+                            battleLogEntry = $"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} Damage)";
                             updateBattleLog(battleLogEntry);
                         }
                     }
@@ -1575,7 +1575,7 @@ public class BattleUIScript : MonoBehaviour
             }
             currentAttack = 'n';
             soundManager.PlaySoundClip(6);
-            updateBattleLog($"{attackerName} {attackDesc} {enemyName}! ({readoutDamage} HP)");
+            updateBattleLog($"{attackerName} {attackDesc} {enemyName}! ({readoutDamage} Damage)");
             //Debug.Log("Attacked enemy " + currentEnemy + ", remaining health: " + selectedEnemyScript.health); //BATTLE NARRATION
         }
     }

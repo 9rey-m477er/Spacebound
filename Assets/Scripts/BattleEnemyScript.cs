@@ -12,6 +12,12 @@ public class BattleEnemyScript : MonoBehaviour
     public float startingHealth = 0;
     public float attackStrength = 0;
     public int baseExpValue = 0;
+    public float bashMultiplier = 0;
+    public float slashMultiplier = 0;
+    public float pokeMultiplier = 0;
+    public float defMultiplier = 1.0f;
+    public float accuracy = 1.0f;
+    public float evasiveness = 0f;
     public string enemyName = " ";
     public bool canFlee = true;
     public List<EnemyAttack> enemyAttacks = new List<EnemyAttack>();

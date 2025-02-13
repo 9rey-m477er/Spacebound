@@ -15,8 +15,9 @@ MonoBehaviour:
   enemyName: Crickhopper
   sprite: {fileID: 5380833482610996554, guid: 02ce17f3693313841beebdfde3c4cfaa, type: 3}
   attackSprite: {fileID: 0}
-  encounterIntro: {fileID: 0}
-  encounterMusic: {fileID: 0}
+  bashMultiplier: 1.1
+  slashMultiplier: 1
+  pokeMultiplier: 0.9
   health: 50
   attackStrength: 5
   baseExpValue: 13

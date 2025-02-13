@@ -15,8 +15,9 @@ MonoBehaviour:
   enemyName: 'Deer '
   sprite: {fileID: 21300000, guid: e9eab3a2aa9247c4fa21ee60eb370d24, type: 3}
   attackSprite: {fileID: 0}
-  encounterIntro: {fileID: 0}
-  encounterMusic: {fileID: 0}
+  bashMultiplier: 1
+  slashMultiplier: 0.9
+  pokeMultiplier: 1.1
   health: 65
   attackStrength: 6
   baseExpValue: 15

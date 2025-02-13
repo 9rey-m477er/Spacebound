@@ -15,8 +15,9 @@ MonoBehaviour:
   enemyName: 'Roach '
   sprite: {fileID: 724264291447259930, guid: c385d8b83d9611345ab5659f09905577, type: 3}
   attackSprite: {fileID: 0}
-  encounterIntro: {fileID: 0}
-  encounterMusic: {fileID: 0}
+  bashMultiplier: 0.9
+  slashMultiplier: 1.1
+  pokeMultiplier: 1
   health: 45
   attackStrength: 5
   baseExpValue: 12
