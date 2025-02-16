@@ -379,6 +379,7 @@ public class BattleUIScript : MonoBehaviour
         targetScript.bashMultiplier = sheet.bashMultiplier;
         targetScript.slashMultiplier = sheet.slashMultiplier;
         targetScript.pokeMultiplier = sheet.pokeMultiplier;
+        targetScript.baseExpValue = sheet.baseExpValue;
         expToGive += sheet.baseExpValue;
 
         //If the player is in the forest level and have reached level 10 or higher
@@ -1594,37 +1595,54 @@ public class BattleUIScript : MonoBehaviour
     {
         BattleEnemyScript currentEnemy = null;
 
-        currentEnemy = enemy1.GetComponent<BattleEnemyScript>();
-        RectTransform enemyHP1 = enemyHPBar1.GetComponent<RectTransform>();
-        if(currentEnemy.health <= 0)
-        {
-            enemy1.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
-        }
-        enemyHP1.sizeDelta = new Vector2((currentEnemy.health / currentEnemy.startingHealth) * 180, enemyHP1.sizeDelta.y);
 
-        currentEnemy = enemy2.GetComponent<BattleEnemyScript>();
-        RectTransform enemyHP2 = enemyHPBar2.GetComponent<RectTransform>();
-        if (currentEnemy.health <= 0)
+        if (enemy1.activeSelf)
         {
-            enemy2.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+            currentEnemy = enemy1.GetComponent<BattleEnemyScript>();
+            RectTransform enemyHP1 = enemyHPBar1.GetComponent<RectTransform>();
+            if (currentEnemy.health <= 0)
+            {
+                updateBattleLog($"{currentEnemy.enemyName} was defeated! ({currentEnemy.baseExpValue} XP)");
+                enemy1.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+            }
+            enemyHP1.sizeDelta = new Vector2((currentEnemy.health / currentEnemy.startingHealth) * 180, enemyHP1.sizeDelta.y);
         }
-        enemyHP2.sizeDelta = new Vector2((currentEnemy.health / currentEnemy.startingHealth) * 180, enemyHP2.sizeDelta.y);
+
+        if (enemy2.activeSelf)
+        {
+            currentEnemy = enemy2.GetComponent<BattleEnemyScript>();
+            RectTransform enemyHP2 = enemyHPBar2.GetComponent<RectTransform>();
+            if (currentEnemy.health <= 0)
+            {
+                updateBattleLog($"{currentEnemy.enemyName} was defeated! ({currentEnemy.baseExpValue} XP)");
+                enemy2.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+            }
+            enemyHP2.sizeDelta = new Vector2((currentEnemy.health / currentEnemy.startingHealth) * 180, enemyHP2.sizeDelta.y);
+        }
+
+        if (enemy3.activeSelf)
+        {
+            currentEnemy = enemy3.GetComponent<BattleEnemyScript>();
+            RectTransform enemyHP3 = enemyHPBar3.GetComponent<RectTransform>();
+            if (currentEnemy.health <= 0)
+            {
+                updateBattleLog($"{currentEnemy.enemyName} was defeated! ({currentEnemy.baseExpValue} XP)");
+                enemy3.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+            }
+            enemyHP3.sizeDelta = new Vector2((currentEnemy.health / currentEnemy.startingHealth) * 180, enemyHP3.sizeDelta.y);
+        }
         
-        currentEnemy = enemy3.GetComponent<BattleEnemyScript>();
-        RectTransform enemyHP3 = enemyHPBar3.GetComponent<RectTransform>();
-        if (currentEnemy.health <= 0)
+        if (enemy4.activeSelf)
         {
-            enemy3.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+            currentEnemy = enemy4.GetComponent<BattleEnemyScript>();
+            RectTransform enemyHP4 = enemyHPBar4.GetComponent<RectTransform>();
+            if (currentEnemy.health <= 0)
+            {
+                updateBattleLog($"{currentEnemy.enemyName} was defeated! ({currentEnemy.baseExpValue} XP)");
+                enemy4.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
+            }
+            enemyHP4.sizeDelta = new Vector2((currentEnemy.health / currentEnemy.startingHealth) * 180, enemyHP4.sizeDelta.y);
         }
-        enemyHP3.sizeDelta = new Vector2((currentEnemy.health / currentEnemy.startingHealth) * 180, enemyHP3.sizeDelta.y);
-
-        currentEnemy = enemy4.GetComponent<BattleEnemyScript>();
-        RectTransform enemyHP4 = enemyHPBar4.GetComponent<RectTransform>();
-        if (currentEnemy.health <= 0)
-        {
-            enemy4.gameObject.SetActive(false); //probably want to put a fade and sound effect here on enemy death
-        }
-        enemyHP4.sizeDelta = new Vector2((currentEnemy.health / currentEnemy.startingHealth) * 180, enemyHP4.sizeDelta.y);
 
     }
 
@@ -1649,6 +1667,7 @@ public class BattleUIScript : MonoBehaviour
         if (currentPlayer.health <= 0)
         {
             p1.sprite = Resources.Load<Sprite>("Dead " + name1);
+            updateBattleLog($"{p1.name} is unconscious!");
         }
         else
         {
@@ -1668,6 +1687,7 @@ public class BattleUIScript : MonoBehaviour
             if (currentPlayer.health <= 0)
             {
                 p2.sprite = Resources.Load<Sprite>("Dead " + name2);
+                updateBattleLog($"{p2.name} is unconscious!");
             }
             else
             {
@@ -1688,6 +1708,7 @@ public class BattleUIScript : MonoBehaviour
             if (currentPlayer.health <= 0)
             {
                 p3.sprite = Resources.Load<Sprite>("Dead " + name);
+                updateBattleLog($"{p3.name} is unconscious!");
             }
             else
             {
@@ -1708,6 +1729,7 @@ public class BattleUIScript : MonoBehaviour
             if (currentPlayer.health <= 0)
             {
                 p4.sprite = Resources.Load<Sprite>("Dead " + name);
+                updateBattleLog($"{p4.name} is unconscious!");
             }
             else
             {
