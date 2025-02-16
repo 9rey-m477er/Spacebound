@@ -376,6 +376,9 @@ public class BattleUIScript : MonoBehaviour
         targetScript.attackStrength = sheet.attackStrength - johnMovement.membersMissing;
         targetScript.enemyName = sheet.enemyName;
         targetScript.enemyAttacks = sheet.enemyAttacks;
+        targetScript.bashMultiplier = sheet.bashMultiplier;
+        targetScript.slashMultiplier = sheet.slashMultiplier;
+        targetScript.pokeMultiplier = sheet.pokeMultiplier;
         expToGive += sheet.baseExpValue;
 
         //If the player is in the forest level and have reached level 10 or higher
@@ -994,8 +997,8 @@ public class BattleUIScript : MonoBehaviour
                 target.health -= enemyScript.attackStrength;
 
                 //Write the Attack to the Battle Log
-                Debug.Log($"{target.characterName} was attacked by {enemyScript.enemyName}! ({enemyScript.attackStrength} Damage)");
-                battleLogEntry = $"{target.characterName} was attacked by {enemyScript.enemyName}! ({enemyScript.attackStrength} Damage)";
+                Debug.Log($"{target.characterName} was attacked by {enemyScript.enemyName}! ({enemyScript.attackStrength} HP)");
+                battleLogEntry = $"{target.characterName} was attacked by {enemyScript.enemyName}! ({enemyScript.attackStrength} HP)";
             }
             else
             {
@@ -1089,8 +1092,8 @@ public class BattleUIScript : MonoBehaviour
                             target.health -= enemyScript.attackStrength + chosenAttack.attackStrength;
 
                             //Write the Attack to the Battle Log
-                            Debug.Log($"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} Damage)");
-                            battleLogEntry = $"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} Damage)";
+                            Debug.Log($"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} HP)");
+                            battleLogEntry = $"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} HP)";
                             updateBattleLog(battleLogEntry);
                         }
                     }
@@ -1468,7 +1471,7 @@ public class BattleUIScript : MonoBehaviour
         string attackerName = string.Empty;
         string attackDesc = string.Empty;
         string enemyName = string.Empty;
-        int readoutDamage = 0;
+        string readoutDamage = string.Empty;
         switch (currentEnemy)
         {
             case 1:
@@ -1527,55 +1530,62 @@ public class BattleUIScript : MonoBehaviour
         {
             if(currentAttack == 'b') //bash
             {
-                readoutDamage = (int)(attackPower * attacker.bashMultiplier);
-                selectedEnemyScript.health -= (int)(attackPower * attacker.bashMultiplier);
+                readoutDamage = ((int)(attackPower * attacker.bashMultiplier * selectedEnemyScript.bashMultiplier)).ToString();
+                selectedEnemyScript.health -= (int)(attackPower * attacker.bashMultiplier * selectedEnemyScript.bashMultiplier);
                 attackDesc = "bashed";
                 enemyName = selectedEnemyScript.enemyName;
             }
             else if(currentAttack == 's') //slash
             {
                 attackDesc = "slashed";
-                readoutDamage = (int)(attackPower * attacker.slashMultiplier);
+                readoutDamage = ((int)(attackPower * attacker.slashMultiplier)).ToString();
                 if (selectedEnemy == 1 || selectedEnemy == 2)
                 {
-                    e1.health -= (int)(attackPower * attacker.slashMultiplier);
-                    e2.health -= (int)(attackPower * attacker.slashMultiplier);
+                    e1.health -= (int)(attackPower * attacker.slashMultiplier * e1.slashMultiplier);
+                    e2.health -= (int)(attackPower * attacker.slashMultiplier * e2.slashMultiplier);
+                    readoutDamage = (((int)(attackPower * attacker.slashMultiplier * e1.slashMultiplier)).ToString() + " / " + 
+                        ((int)(attackPower * attacker.slashMultiplier * e2.slashMultiplier)).ToString());
                     enemyName = ($"{e1.enemyName} and {e2.enemyName}");
                 }
                 else if (selectedEnemy == 3 || selectedEnemy == 4)
                 {
-                    e3.health -= (int)(attackPower * attacker.slashMultiplier);
-                    e4.health -= (int)(attackPower * attacker.slashMultiplier);
+                    e3.health -= (int)(attackPower * attacker.slashMultiplier * e3.slashMultiplier);
+                    e4.health -= (int)(attackPower * attacker.slashMultiplier * e4.slashMultiplier);
+                    readoutDamage = (((int)(attackPower * attacker.slashMultiplier * e3.slashMultiplier)).ToString() + " / " + 
+                        ((int)(attackPower * attacker.slashMultiplier * e4.slashMultiplier)).ToString());
                     enemyName = ($"{e3.enemyName} and {e4.enemyName}");
                 }
             }
             else if(currentAttack == 'p') //poke
             {
                 attackDesc = "poked";
-                readoutDamage = (int)(attackPower * attacker.pokeMultiplier);
                 if (selectedEnemy == 1 || selectedEnemy == 3)
                 {
                     e1.health -= (int)(attackPower * attacker.pokeMultiplier);
                     e3.health -= (int)(attackPower * attacker.pokeMultiplier);
+                    readoutDamage = (((int)(attackPower * attacker.pokeMultiplier * e1.pokeMultiplier)).ToString() + " / " + 
+                        ((int)(attackPower * attacker.pokeMultiplier * e3.pokeMultiplier)).ToString());
                     enemyName = ($"{e1.enemyName} and {e3.enemyName}");
                 }
                 else if (selectedEnemy == 2 || selectedEnemy == 4)
                 {
                     e2.health -= (int)(attackPower * attacker.pokeMultiplier);
                     e4.health -= (int)(attackPower * attacker.pokeMultiplier);
+                    readoutDamage = (((int)(attackPower * attacker.pokeMultiplier * e2.pokeMultiplier)).ToString() + " / " + 
+                        ((int)(attackPower * attacker.pokeMultiplier * e4.pokeMultiplier)).ToString());
                     enemyName = ($"{e2.enemyName} and {e4.enemyName}");
                 }
             }
             else if(currentAttack == 'r') //rock
             {
-                readoutDamage = attackPower;
+                readoutDamage = attackPower.ToString();
                 enemyName = selectedEnemyScript.enemyName;
                 selectedEnemyScript.health -= attackPower;
                 attackDesc = "threw a rock at";
             }
             currentAttack = 'n';
             soundManager.PlaySoundClip(6);
-            updateBattleLog($"{attackerName} {attackDesc} {enemyName}! ({readoutDamage} Damage)");
+            updateBattleLog($"{attackerName} {attackDesc} {enemyName}! ({readoutDamage} HP)");
             //Debug.Log("Attacked enemy " + currentEnemy + ", remaining health: " + selectedEnemyScript.health); //BATTLE NARRATION
         }
     }
