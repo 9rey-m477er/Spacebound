@@ -233,6 +233,7 @@ public class BattleUIScript : MonoBehaviour
         rollEnemyForest(enemy3, forestEnemyPool);
         rollEnemyForest(enemy4, forestEnemyPool);
         updateEnemyNames();
+        updateEnemyHealth();
         playerTeamSpawn();
         isBattleOver = false;
     }

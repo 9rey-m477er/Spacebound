@@ -10,6 +10,9 @@ public class BossStatSheet : ScriptableObject
     public Sprite sprite = null;
     public AudioClip encounterIntro = null;
     public AudioClip encounterMusic = null;
+    public float bashMultiplier = 0;
+    public float slashMultiplier = 0;
+    public float pokeMultiplier = 0;
     public float health = 0;
     public float attackStrength = 0;
     public float baseExpValue = 0;
