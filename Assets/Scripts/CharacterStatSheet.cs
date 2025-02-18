@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Spacebound/Characters/New CharacterSpriteSheet")]
+[CreateAssetMenu(menuName = "Spacebound/Characters/New CharacterStatSheet")]
 
 public class CharacterStatSheet : ScriptableObject
 {

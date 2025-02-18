@@ -23,4 +23,10 @@ MonoBehaviour:
   attackStrength: 10
   baseExpValue: 0
   canFlee: 0
-  enemyAttacks: []
+  enemyAttacks:
+  - {fileID: 11400000, guid: c7fad523603f044428b5c58937cd5da4, type: 2}
+  - {fileID: 11400000, guid: 2756b092e096c834a80ebb94efab3843, type: 2}
+  - {fileID: 11400000, guid: 9fa512f1995092f40837fe6c3c64061b, type: 2}
+  - {fileID: 11400000, guid: 88b93e35b19113848867601349c08776, type: 2}
+  - {fileID: 11400000, guid: eed7f51305fcfe248a14662210275005, type: 2}
+  - {fileID: 11400000, guid: aa0f634309e7ff041a14e618a8bb534f, type: 2}

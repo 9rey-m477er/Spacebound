@@ -16,8 +16,15 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 8ab7812a78b13654f93fe6b5670ae1be, type: 3}
   encounterIntro: {fileID: 8300000, guid: 743230996d5e4b241adecbe0d7601d41, type: 3}
   encounterMusic: {fileID: 8300000, guid: 94b980c752eb9a245b1b903323877726, type: 3}
+  bashMultiplier: 0
+  slashMultiplier: 0
+  pokeMultiplier: 0
   health: 250
   attackStrength: 7
-  baseExpValue: 0
+  baseExpValue: 75
   canFlee: 1
-  enemyAttacks: []
+  enemyAttacks:
+  - {fileID: 11400000, guid: b4bca154794be8d4d97faed705982cc2, type: 2}
+  - {fileID: 11400000, guid: d0ec3d4fe35b3f74d905f94e072e7a9a, type: 2}
+  - {fileID: 11400000, guid: 0a58a09d98af59f4092c455f42f9026c, type: 2}
+  - {fileID: 11400000, guid: 15c4d44195ffaff46b1ae521c4de1df8, type: 2}
