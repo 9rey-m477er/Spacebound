@@ -9,9 +9,11 @@ public class SpecialDoors : MonoBehaviour
     public Image fadeImage;
     public float fadeDuration = 0.3f;
     public int level;
+    private DataPersistenceManager dpm;
 
     private void Start()
     {
+        dpm = GameObject.Find("DataPersistenceManager").GetComponent<DataPersistenceManager>();
         fadeImage.gameObject.SetActive(false);
     }
 
@@ -31,6 +33,7 @@ public class SpecialDoors : MonoBehaviour
         player.transform.position = teleportTarget.position;
         yield return StartCoroutine(Fade(0));
         fadeImage.gameObject.SetActive(false);
+        //dpm.SaveGame();
     }
 
     private IEnumerator Fade(float targetAlpha)

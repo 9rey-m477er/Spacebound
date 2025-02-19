@@ -19,9 +19,11 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public int membersMissing = 4;
 
     public AudioSource sfx;
-    public AudioClip shipWalk, forestWalk, caveWalk;
+    public AudioClip shipWalk, forestWalk, caveWalk, glacierWalk;
     public SoundManager soundManager;
-    public AudioClip shipBM, shipBMIntro, shipLM, forestBM, forestBMIntro, forestLM;
+    public AudioClip shipBM, shipBMIntro, shipLM, 
+        forestBM, forestBMIntro, forestLM,
+        glacierBM, glacierBMIntro, glacierLM;
     private AudioClip battleMusic, battleMusicIntro, levelMusic;
     private AudioClip walkSound;
 
@@ -48,11 +50,44 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         UpdateStepSpawn();
         battleSystem.gameObject.gameObject.SetActive(false);
         anim = GetComponent<Animator>();
-        walkSound = forestWalk; //When we have a change in scenery, we can rework changing the step sound. ~Dylan
-        battleMusic = forestBM;
-        battleMusicIntro = forestBMIntro;
-        levelMusic = forestLM;
-        specEncounter = forestSE;
+        UpdateArea(level);
+    }
+
+    private void UpdateArea(int area)
+    {
+        switch (area)
+        {
+            case 0:
+                battleMusic = shipBM;
+                battleMusicIntro = shipBMIntro;
+                levelMusic = shipLM;
+                walkSound = shipWalk;
+                //Ship-Specific Stuff (Turning off encounters, etc.)
+                break;
+            case 1:
+                battleMusic = forestBM;
+                battleMusicIntro = forestBMIntro;
+                levelMusic = forestLM;
+                walkSound = forestWalk;
+                specEncounter = forestSE;
+                //Enemy Pool Here Maybe?
+                break;
+            case 2:
+                battleMusic = forestBM;
+                battleMusicIntro = forestBMIntro;
+                levelMusic = forestLM;
+                walkSound = caveWalk;
+                specEncounter = caveSE;
+                //Enemy Pool Here Maybe?
+                break;
+            case 3:
+                battleMusic = glacierBM;
+                battleMusicIntro = glacierBMIntro;
+                levelMusic = glacierLM;
+                walkSound = glacierWalk;
+                specEncounter = caveSE;
+                break;
+        }
     }
 
     void Update()
@@ -219,6 +254,8 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         this.thozosActive = data.thozosFlag;
         this.stephvenActive = data.stephvenFlag;
         this.janetActive = data.janetFlag;
+        this.level = data.area;
+        UpdateArea(level);
     }
 
     public void SaveData(ref GameData data)
@@ -230,5 +267,6 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         data.thozosFlag = this.thozosActive;
         data.stephvenFlag = this.stephvenActive;
         data.janetFlag = this.janetActive;
+        data.area = this.level;
     }
 }
