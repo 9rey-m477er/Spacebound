@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
+  m_Name: JanetFound
+  m_EditorClassIdentifier: 
+  speakerNames:
+  - Thozos
+  - Bob
+  - T.H.E
+  - Bob
+  - Janet
+  - John
+  - Janet
+  - T.H.E
+  - Janet
+  - Thozos
+  - Janet
+  - Bob
+  - Janet
+  - John
+  - John
+  - Janet
+  - Thozos
+  - Bob
+  - Janet
+  - John
+  - 
+  paragraphs:
+  - I believe I see someone you know.
+  - "That\u2019s Janet."
+  - Information updated.
+  - Hey, Janet!
+  - "Bob! John! I\u2019m glad to see you two are alright."
+  - "We\u2019re fine. You?"
+  - "Aside from being cold, I\u2019m good."
+  - I am delighted to have you back, Janet!
+  - Thanks, T.H.E.
+  - "Okay, you found your friend. Let\u2019s go."
+  - "Ah, uh, who\u2019s the alien?"
+  - "You\u2019re not shocked?"
+  - "I\u2019ve seen stranger things."
+  - "That\u2019s Thozos, and, uh, I probably should explain the situation we\u2019re
+    in and why he\u2019s helping us."
+  - (I explained everything to Janet)
+  - Okay, I got it.
+  - "Great, she\u2019s caught up. Can we please get a move on?!"
+  - Okay, fine. Jeez!
+  - "He really wants us out, doesn\u2019t he, John?"
+  - Yep.
+  - JANET JOINS THE PARTY!

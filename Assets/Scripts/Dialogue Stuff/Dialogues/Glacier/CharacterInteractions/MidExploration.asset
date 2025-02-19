@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
+  m_Name: MidExploration
+  m_EditorClassIdentifier: 
+  speakerNames:
+  - Janet
+  - John
+  - Janet
+  - John
+  - T.H.E
+  - Bob
+  - Thozos
+  paragraphs:
+  - This is not what I was expecting.
+  - Hm?
+  - This was supposed to be a pure escape from everything.
+  - Yeah. Stevphen said the rocket was ours and that we could go anywhere we liked.
+  - ...
+  - After we get home, should we try and look for another rocket?
+  - And possibly crash here again?! No way. Stay at home!
