@@ -40,11 +40,16 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
 
     public bool bobActive, stephvenActive, janetActive, thozosActive;
 
+    public bool devTools;
+
+    private DataPersistenceManager dpm;
+
     public Animator anim;
     public bool inBattle;
     private bool moving;
     void Start()
     {
+        dpm = GameObject.Find("DataPersistenceManager").GetComponent<DataPersistenceManager>();
         rb = GetComponent<Rigidbody2D>();
         lastPosition = rb.position;
         UpdateStepSpawn();
@@ -106,6 +111,13 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         else
         {
             moveSpeed = 4f;
+        }
+        if (devTools)
+        {
+            if (Input.GetKey(KeyCode.RightShift))
+            {
+                dpm.SaveGame();
+            }
         }
     }
 
