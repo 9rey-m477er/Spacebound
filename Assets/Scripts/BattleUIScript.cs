@@ -117,7 +117,7 @@ public class BattleUIScript : MonoBehaviour
     public bool canSelect2 = false;
 
     public List<Sprite> forestSpritePool = new List<Sprite>();
-    public List<EnemyStatSheet> forestEnemyPool = new List<EnemyStatSheet>();
+    public List<EnemyStatSheet> enemyPool = new List<EnemyStatSheet>();
 
     private List<string> battleLog = new List<string> {"", "", "", "", "", "", "", "", "", "", "", ""};
     private string battleLogEntry = string.Empty;
@@ -228,10 +228,11 @@ public class BattleUIScript : MonoBehaviour
 
         //randomly assign forest enemies
         //need an if statement here for when different biomes are put in
-        rollEnemyForest(enemy1, forestEnemyPool);
-        rollEnemyForest(enemy2, forestEnemyPool);
-        rollEnemyForest(enemy3, forestEnemyPool);
-        rollEnemyForest(enemy4, forestEnemyPool);
+        enemyPool = johnMovement.encounterPool;
+        rollEnemy(enemy1, enemyPool);
+        rollEnemy(enemy2, enemyPool);
+        rollEnemy(enemy3, enemyPool);
+        rollEnemy(enemy4, enemyPool);
         updateEnemyNames();
         updateEnemyHealth();
         playerTeamSpawn();
@@ -349,7 +350,7 @@ public class BattleUIScript : MonoBehaviour
         enemyName4.text = e4.enemyName;
     }
 
-    void rollEnemyForest(GameObject enemy, List<EnemyStatSheet> sheetPool)
+    void rollEnemy(GameObject enemy, List<EnemyStatSheet> sheetPool)
     {
         // Get a random sprite from the pool
         EnemyStatSheet sheet = sheetPool[Random.Range(0, sheetPool.Count)];
