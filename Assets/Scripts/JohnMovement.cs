@@ -172,6 +172,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
 
     public void BiomeChange(int lvl)
     {
+        AudioClip prevMusic = levelMusic;
         switch (lvl)
         {
             case 0:
@@ -221,7 +222,10 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 specEncounter = caveSE;
                 encounterPool = gCavePool;
                 break;
-
+        }
+        if (levelMusic != prevMusic)
+        {
+            soundManager.ChangeMusic(levelMusic);
         }
     }
 
