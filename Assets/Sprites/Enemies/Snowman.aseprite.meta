@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ec91a04aaa6ceb0409c84a8adc12f2ee
+guid: 607a25dcb69f3c84eb0cc50c41524610
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -119,18 +119,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Snow Mage Boss
+  - name: Snowman
     originalName: 
-    pivot: {x: 0.5, y: -0.045454547}
+    pivot: {x: 0.48837212, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 42
-      height: 44
-    spriteID: b91dcd6afb6a11e4582bfb7fd0cd420d
+      width: 43
+      height: 47
+    spriteID: 893e75581eb92cc47942e6838254c1c0
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -142,20 +142,20 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -409665818
-    name: Snow Mage Boss
+    guid: -1284266225
+    name: Snowman
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Snow Mage Boss
+    - name: Snowman
       frameIndex: 0
       cellRect:
         x: 3
-        y: 2
-        width: 42
-        height: 44
-      spriteId: b91dcd6afb6a11e4582bfb7fd0cd420d
+        y: 0
+        width: 43
+        height: 47
+      spriteId: 893e75581eb92cc47942e6838254c1c0
     linkedCells: []
     parentIndex: -1
   platformSettings:
