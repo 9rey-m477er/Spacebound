@@ -188,6 +188,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 levelMusic = forestLM;
                 walkSound = forestWalk;
                 specEncounter = forestSE;
+                encounterPool = new List<EnemyStatSheet>();
                 encounterPool = forestPool;
                 break;
             case 2:
@@ -196,6 +197,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 levelMusic = forestLM;
                 walkSound = caveWalk;
                 specEncounter = caveSE;
+                encounterPool = new List<EnemyStatSheet>();
                 encounterPool = fCavePool;
                 break;
             case 3:
@@ -204,6 +206,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 levelMusic = forestLM;
                 walkSound = caveWalk;
                 specEncounter = caveSE;
+                encounterPool = new List<EnemyStatSheet>();
                 encounterPool = fgConnPool;
                 break;
             case 4:
@@ -212,6 +215,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 levelMusic = glacierLM;
                 walkSound = glacierWalk;
                 specEncounter = caveSE;
+                encounterPool = new List<EnemyStatSheet>();
                 encounterPool = glacierPool;
                 break;
             case 5:
@@ -220,6 +224,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 levelMusic = glacierLM;
                 walkSound = glacierWalk;
                 specEncounter = caveSE;
+                encounterPool = new List<EnemyStatSheet>();
                 encounterPool = gCavePool;
                 break;
         }
