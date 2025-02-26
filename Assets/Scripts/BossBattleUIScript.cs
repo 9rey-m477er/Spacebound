@@ -766,7 +766,13 @@ public class BossBattleUIScript : MonoBehaviour
         BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
         if (playerTurn == 1)
         {
-            if (p2.health > 0 && p2.isActiveAndEnabled == true)
+            if (p1.health <= 0)
+            {
+                playerTurn = 2;
+                incrementTurn();
+                return;
+            }
+            else if (p2.health > 0 && p2.isActiveAndEnabled == true)
             {
                 playerTurn = 2;
             }
@@ -817,7 +823,26 @@ public class BossBattleUIScript : MonoBehaviour
         {
             menuBlocking.gameObject.SetActive(true);
             StartCoroutine(EnemyAttackSequence()); // TURN THIS OFF TO DISABLE ENEMY ATTACKS
-            playerTurn = 1;
+            if (p1.health > 0)
+            {
+                playerTurn = 1;
+            }
+            else if (p2.health > 0)
+            {
+                playerTurn = 2;
+            }
+            else if (p3.health > 0)
+            {
+                playerTurn = 3;
+            }
+            else if (p4.health > 0)
+            {
+                playerTurn = 4;
+            }
+            else
+            {
+                checkForEndOfBattle();
+            }
             turnCounterIndex++;
         }
         updateTurns();
@@ -993,9 +1018,12 @@ public class BossBattleUIScript : MonoBehaviour
                     {
                         if (target.health > 0)
                         {
+                            float targetDodge = 0;
+
                             // Show the reticle for the selected target and play damage sound
                             if (target == players[0])
                             {
+                                targetDodge = p1.evasiveness;
                                 party1Reticle.SetActive(true);
                                 Image playerImage = player1.GetComponent<Image>();
                                 soundManager.PlaySoundClip(6);
@@ -1005,6 +1033,7 @@ public class BossBattleUIScript : MonoBehaviour
                             }
                             else if (target == players[1])
                             {
+                                targetDodge = p2.evasiveness;
                                 party2Reticle.SetActive(true);
                                 Image playerImage = player2.GetComponent<Image>();
                                 soundManager.PlaySoundClip(6);
@@ -1015,6 +1044,7 @@ public class BossBattleUIScript : MonoBehaviour
                             }
                             else if (target == players[2])
                             {
+                                targetDodge = p3.evasiveness;
                                 party3Reticle.SetActive(true);
                                 Image playerImage = player3.GetComponent<Image>();
                                 soundManager.PlaySoundClip(6);
@@ -1024,6 +1054,7 @@ public class BossBattleUIScript : MonoBehaviour
                             }
                             else if (target == players[3])
                             {
+                                targetDodge = p4.evasiveness;
                                 party4Reticle.SetActive(true);
                                 Image playerImage = player4.GetComponent<Image>();
                                 soundManager.PlaySoundClip(6);
@@ -1033,13 +1064,21 @@ public class BossBattleUIScript : MonoBehaviour
                             }
 
                             yield return new WaitForSeconds(0.75f);
-
                             // Deal damage using the enemy's attackStrength and the attack's attackStrength
-                            target.health -= enemyScript.attackStrength + chosenAttack.attackStrength;
+                            int accuracyCheck = Random.Range(0, 100);
+                            if (enemyScript.accuracy - targetDodge < accuracyCheck) //miss
+                            {
+                                Debug.Log($"{target.characterName} dodged the {enemyScript.enemyName}'s attack! (0 HP)");
+                                battleLogEntry = $"{target.characterName} dodged the {enemyScript.enemyName}'s attack! (0 HP)";
+                            }
+                            else
+                            {
+                                target.health -= enemyScript.attackStrength + chosenAttack.attackStrength;
+                                //Write the Attack to the Battle Log
+                                Debug.Log($"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} HP)");
+                                battleLogEntry = $"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} HP)";
+                            }
 
-                            //Write the Attack to the Battle Log
-                            Debug.Log($"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} HP)");
-                            battleLogEntry = $"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} HP)";
                             updateBattleLog(battleLogEntry);
                         }
                     }
@@ -1359,38 +1398,83 @@ public class BossBattleUIScript : MonoBehaviour
         {
             if (currentAttack == 'b') //bash
             {
-                readoutDamage = ((int)(attackPower * attacker.bashMultiplier * selectedEnemyScript.bashMultiplier)).ToString();
-                selectedEnemyScript.health -= (int)(attackPower * attacker.bashMultiplier * selectedEnemyScript.bashMultiplier);
-                attackDesc = "bashed";
-                enemyName = selectedEnemyScript.enemyName;
+                int damage = (int)(attackPower * attacker.bashMultiplier * selectedEnemyScript.bashMultiplier);
+                int accuracyCheck = Random.Range(0, 100);
+                if ((attacker.accuracy - selectedEnemyScript.evasiveness) < accuracyCheck) //if miss
+                {
+                    damage = 0;
+                    readoutDamage = damage.ToString();
+                    selectedEnemyScript.health -= damage;
+                    attackDesc = "missed";
+                    enemyName = selectedEnemyScript.enemyName;
+                }
+                else
+                {
+                    readoutDamage = damage.ToString();
+                    selectedEnemyScript.health -= damage;
+                    attackDesc = "bashed";
+                    enemyName = selectedEnemyScript.enemyName;
+                }
             }
             else if (currentAttack == 's') //slash
             {
-                attackDesc = "slashed";
-                readoutDamage = ((int)(attackPower * attacker.slashMultiplier)).ToString();
-                if (selectedEnemy == 1 || selectedEnemy == 2)
+                int damage = (int)(attackPower * attacker.slashMultiplier * selectedEnemyScript.slashMultiplier);
+                int accuracyCheck = Random.Range(0, 100);
+                if ((attacker.accuracy - selectedEnemyScript.evasiveness) < accuracyCheck) //if miss
                 {
-                    e1.health -= (int)(attackPower * attacker.slashMultiplier * e1.slashMultiplier);
-                    readoutDamage = (((int)(attackPower * attacker.slashMultiplier * e1.slashMultiplier)).ToString());
-                    enemyName = ($"{e1.enemyName}");
+                    damage = 0;
+                    readoutDamage = damage.ToString();
+                    selectedEnemyScript.health -= damage;
+                    attackDesc = "missed";
+                    enemyName = selectedEnemyScript.enemyName;
+                }
+                else
+                {
+                    readoutDamage = damage.ToString();
+                    selectedEnemyScript.health -= damage;
+                    attackDesc = "slashed";
+                    enemyName = selectedEnemyScript.enemyName;
                 }
             }
             else if (currentAttack == 'p') //poke
             {
-                attackDesc = "poked";
-                if (selectedEnemy == 1 || selectedEnemy == 3)
+                int damage = (int)(attackPower * attacker.pokeMultiplier * selectedEnemyScript.pokeMultiplier);
+                int accuracyCheck = Random.Range(0, 100);
+                if ((attacker.accuracy - selectedEnemyScript.evasiveness) < accuracyCheck) //if miss
                 {
-                    e1.health -= (int)(attackPower * attacker.pokeMultiplier);
-                    readoutDamage = (((int)(attackPower * attacker.pokeMultiplier * e1.pokeMultiplier)).ToString());
-                    enemyName = ($"{e1.enemyName}");
+                    damage = 0;
+                    readoutDamage = damage.ToString();
+                    selectedEnemyScript.health -= damage;
+                    attackDesc = "missed";
+                    enemyName = selectedEnemyScript.enemyName;
+                }
+                else
+                {
+                    readoutDamage = damage.ToString();
+                    selectedEnemyScript.health -= damage;
+                    attackDesc = "poked";
+                    enemyName = selectedEnemyScript.enemyName;
                 }
             }
             else if (currentAttack == 'r') //rock
             {
-                readoutDamage = attackPower.ToString();
-                enemyName = selectedEnemyScript.enemyName;
-                selectedEnemyScript.health -= attackPower;
-                attackDesc = "threw a rock at";
+                int damage = attackPower;
+                int accuracyCheck = Random.Range(0, 100);
+                if ((attacker.accuracy - selectedEnemyScript.evasiveness) < accuracyCheck) //if miss
+                {
+                    damage = 0;
+                    readoutDamage = damage.ToString();
+                    selectedEnemyScript.health -= damage;
+                    attackDesc = "missed";
+                    enemyName = selectedEnemyScript.enemyName;
+                }
+                else
+                {
+                    readoutDamage = damage.ToString();
+                    selectedEnemyScript.health -= damage;
+                    attackDesc = "threw a rock at";
+                    enemyName = selectedEnemyScript.enemyName;
+                }
             }
             currentAttack = 'n';
             soundManager.PlaySoundClip(6);
