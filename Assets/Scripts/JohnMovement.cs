@@ -38,6 +38,14 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public BossBattleUIScript bossScript;
     public BossStatSheet specEncounter;
 
+    public List<EnemyStatSheet> encounterPool = new List<EnemyStatSheet>();
+
+    public List<EnemyStatSheet> forestPool = new List<EnemyStatSheet>();
+    public List<EnemyStatSheet> fCavePool = new List<EnemyStatSheet>();
+    public List<EnemyStatSheet> fgConnPool = new List<EnemyStatSheet>();
+    public List<EnemyStatSheet> glacierPool = new List<EnemyStatSheet>();
+    public List<EnemyStatSheet> gCavePool = new List<EnemyStatSheet>();
+
     public bool bobActive, stephvenActive, janetActive, thozosActive;
 
     public bool devTools;
@@ -55,44 +63,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         UpdateStepSpawn();
         battleSystem.gameObject.gameObject.SetActive(false);
         anim = GetComponent<Animator>();
-        UpdateArea(level);
-    }
-
-    private void UpdateArea(int area)
-    {
-        switch (area)
-        {
-            case 0:
-                battleMusic = shipBM;
-                battleMusicIntro = shipBMIntro;
-                levelMusic = shipLM;
-                walkSound = shipWalk;
-                //Ship-Specific Stuff (Turning off encounters, etc.)
-                break;
-            case 1:
-                battleMusic = forestBM;
-                battleMusicIntro = forestBMIntro;
-                levelMusic = forestLM;
-                walkSound = forestWalk;
-                specEncounter = forestSE;
-                //Enemy Pool Here Maybe?
-                break;
-            case 2:
-                battleMusic = forestBM;
-                battleMusicIntro = forestBMIntro;
-                levelMusic = forestLM;
-                walkSound = caveWalk;
-                specEncounter = caveSE;
-                //Enemy Pool Here Maybe?
-                break;
-            case 3:
-                battleMusic = glacierBM;
-                battleMusicIntro = glacierBMIntro;
-                levelMusic = glacierLM;
-                walkSound = glacierWalk;
-                specEncounter = caveSE;
-                break;
-        }
+        BiomeChange(level);
     }
 
     void Update()
@@ -201,34 +172,56 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
 
     public void BiomeChange(int lvl)
     {
-        switch(lvl)
+        switch (lvl)
         {
-            case 0: //Ship
-                walkSound = shipWalk;
-                levelMusic = shipLM;
+            case 0:
                 battleMusic = shipBM;
                 battleMusicIntro = shipBMIntro;
-                level = 0;
+                levelMusic = shipLM;
+                walkSound = shipWalk;
+                //Ship-Specific Stuff (Turning off encounters, etc.)
                 break;
-            case 1: //Forest
-                walkSound = forestWalk;
-                levelMusic = forestLM;
+            case 1:
                 battleMusic = forestBM;
                 battleMusicIntro = forestBMIntro;
+                levelMusic = forestLM;
+                walkSound = forestWalk;
                 specEncounter = forestSE;
-                level = 1;
+                encounterPool = forestPool;
                 break;
-            case 2: //Cave
+            case 2:
+                battleMusic = forestBM;
+                battleMusicIntro = forestBMIntro;
+                levelMusic = forestLM;
                 walkSound = caveWalk;
                 specEncounter = caveSE;
-                level = 2;
+                encounterPool = fCavePool;
                 break;
-            case 3: //Glacier
+            case 3:
+                battleMusic = forestBM;
+                battleMusicIntro = forestBMIntro;
+                levelMusic = forestLM;
+                walkSound = caveWalk;
+                specEncounter = caveSE;
+                encounterPool = fgConnPool;
                 break;
-            case 4: //Volcano
+            case 4:
+                battleMusic = glacierBM;
+                battleMusicIntro = glacierBMIntro;
+                levelMusic = glacierLM;
+                walkSound = glacierWalk;
+                specEncounter = caveSE;
+                encounterPool = glacierPool;
                 break;
-            case 5: //ForestNight
+            case 5:
+                battleMusic = glacierBM;
+                battleMusicIntro = glacierBMIntro;
+                levelMusic = glacierLM;
+                walkSound = glacierWalk;
+                specEncounter = caveSE;
+                encounterPool = gCavePool;
                 break;
+
         }
     }
 
@@ -267,7 +260,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         this.stephvenActive = data.stephvenFlag;
         this.janetActive = data.janetFlag;
         this.level = data.area;
-        UpdateArea(level);
+        BiomeChange(level);
     }
 
     public void SaveData(ref GameData data)
