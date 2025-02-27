@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
+using TMPro;
 //using Unity.VisualScripting.ReorderableList;
 
 public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
@@ -45,6 +47,10 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public List<EnemyStatSheet> fgConnPool = new List<EnemyStatSheet>();
     public List<EnemyStatSheet> glacierPool = new List<EnemyStatSheet>();
     public List<EnemyStatSheet> gCavePool = new List<EnemyStatSheet>();
+
+    public Color shipBG, shipTxt, forestBG, forestTxt, fcaveBG, fcaveTxt, fgconnBG, fgconnTxt, glacierBG, glacierTxt, gCaveBG, gCaveTxt;
+    public Image battleBacakground;
+    public TextMeshProUGUI battleHintText;
 
     public bool bobActive, stephvenActive, janetActive, thozosActive;
 
@@ -173,6 +179,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public void BiomeChange(int lvl)
     {
         AudioClip prevMusic = levelMusic;
+        level = lvl;
         switch (lvl)
         {
             case 0:
