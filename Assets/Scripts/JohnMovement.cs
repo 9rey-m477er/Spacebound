@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
+using TMPro;
 //using Unity.VisualScripting.ReorderableList;
 
 public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
@@ -45,6 +47,10 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public List<EnemyStatSheet> fgConnPool = new List<EnemyStatSheet>();
     public List<EnemyStatSheet> glacierPool = new List<EnemyStatSheet>();
     public List<EnemyStatSheet> gCavePool = new List<EnemyStatSheet>();
+
+    public Color shipBG, shipTxt, forestBG, forestTxt, fcaveBG, fcaveTxt, fgconnBG, fgconnTxt, glacierBG, glacierTxt, gCaveBG, gCaveTxt;
+    public Image battleBacakground;
+    public TextMeshProUGUI battleHintText;
 
     public bool bobActive, stephvenActive, janetActive, thozosActive;
 
@@ -173,6 +179,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public void BiomeChange(int lvl)
     {
         AudioClip prevMusic = levelMusic;
+        level = lvl;
         switch (lvl)
         {
             case 0:
@@ -188,6 +195,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 levelMusic = forestLM;
                 walkSound = forestWalk;
                 specEncounter = forestSE;
+                encounterPool = new List<EnemyStatSheet>();
                 encounterPool = forestPool;
                 break;
             case 2:
@@ -196,6 +204,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 levelMusic = forestLM;
                 walkSound = caveWalk;
                 specEncounter = caveSE;
+                encounterPool = new List<EnemyStatSheet>();
                 encounterPool = fCavePool;
                 break;
             case 3:
@@ -204,6 +213,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 levelMusic = forestLM;
                 walkSound = caveWalk;
                 specEncounter = caveSE;
+                encounterPool = new List<EnemyStatSheet>();
                 encounterPool = fgConnPool;
                 break;
             case 4:
@@ -212,6 +222,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 levelMusic = glacierLM;
                 walkSound = glacierWalk;
                 specEncounter = caveSE;
+                encounterPool = new List<EnemyStatSheet>();
                 encounterPool = glacierPool;
                 break;
             case 5:
@@ -220,6 +231,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 levelMusic = glacierLM;
                 walkSound = glacierWalk;
                 specEncounter = caveSE;
+                encounterPool = new List<EnemyStatSheet>();
                 encounterPool = gCavePool;
                 break;
         }

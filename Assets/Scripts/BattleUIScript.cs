@@ -226,8 +226,7 @@ public class BattleUIScript : MonoBehaviour
         bigLogLine12.text = "";
         //battleLogObj.SetActive(true);
 
-        //randomly assign forest enemies
-        //need an if statement here for when different biomes are put in
+        //Randomly Assign Enemies
         enemyPool = johnMovement.encounterPool;
         rollEnemy(enemy1, enemyPool);
         rollEnemy(enemy2, enemyPool);

@@ -26,7 +26,7 @@ public class GameData
     {
         //General Information: Simple
         steps = 0;
-        area = 0;
+        area = 1;
         membersMissing = 4;
         partyLevel = 1;
         partyExp = 0;
