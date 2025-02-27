@@ -11,6 +11,7 @@ public class DataPersistenceManager : MonoBehaviour
     private GameData gameData;
     private List<IDataPersistence> dataPersistenceObjects;
     private FileDataHandler dataHandler;
+    public CharacterStatHandler characterStatHandler;
     public static DataPersistenceManager instance { get; private set; }
 
     private void Awake()
@@ -56,6 +57,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void SaveGame()
     {
         Debug.Log("DPM Recieved Save Call");
+        characterStatHandler.healCharacters();
         foreach (IDataPersistence dpo in dataPersistenceObjects)
         {
             Debug.Log("Saving object: " + dpo);

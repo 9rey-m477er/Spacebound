@@ -108,6 +108,15 @@ public class CharacterStatHandler : MonoBehaviour, IDataPersistence
         }
     }
 
+    public void healCharacters()
+    {
+        John.currentHP = John.characterHP;
+        Bob.currentHP = Bob.characterHP;
+        Thozos.currentHP = Thozos.characterHP;
+        Janet.currentHP = Janet.characterHP;
+        Stephven.currentHP = Stephven.characterHP;
+    }
+
     //Level Up Party (+0.1 for = (4), +0.13 for + (5), +0.07 for - (3))
     public void partyLevelUp()
     {
@@ -124,26 +133,31 @@ public class CharacterStatHandler : MonoBehaviour, IDataPersistence
         {
             //LevelUpJohn
             John.characterHP += 5;
+            John.currentHP = John.characterHP;
             John.bashMultiplier += 0.1f;
             John.slashMultiplier += 0.1f;
             John.pokeMultiplier += 0.1f;
             //LevelUpBob
             Bob.characterHP += 5;
+            Bob.currentHP = Bob.characterHP;
             Bob.bashMultiplier += 0.13f;
             Bob.slashMultiplier += 0.1f;
             Bob.pokeMultiplier += 0.07f;
             //LevelUpThozos
             Thozos.characterHP += 5;
+            Thozos.currentHP = Thozos.characterHP;
             Thozos.bashMultiplier += 0.07f;
             Thozos.slashMultiplier += 0.07f;
             Thozos.pokeMultiplier += 0.07f;
             //LevelUpJanet
             Janet.characterHP += 5;
+            Janet.currentHP = Janet.characterHP;
             Janet.bashMultiplier += 0.1f;
             Janet.slashMultiplier += 0.07f;
             Janet.pokeMultiplier += 0.13f;
             //LevelUpStephven
             Stephven.characterHP += 5;
+            Stephven.currentHP = Stephven.characterHP;
             Stephven.bashMultiplier += 0.07f;
             Stephven.slashMultiplier += 0.13f;
             Stephven.pokeMultiplier += 0.1f;
