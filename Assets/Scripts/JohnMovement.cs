@@ -24,7 +24,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public AudioClip shipWalk, forestWalk, caveWalk, glacierWalk;
     public SoundManager soundManager;
     public AudioClip shipBM, shipBMIntro, shipLM, 
-        forestBM, forestBMIntro, forestLM,
+        forestBM, forestBMIntro, forestLM, forestCaveLM,
         glacierBM, glacierBMIntro, glacierLM;
     private AudioClip battleMusic, battleMusicIntro, levelMusic;
     private AudioClip walkSound;
@@ -182,14 +182,14 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         level = lvl;
         switch (lvl)
         {
-            case 0:
+            case 0: //Ship
                 battleMusic = shipBM;
                 battleMusicIntro = shipBMIntro;
                 levelMusic = shipLM;
                 walkSound = shipWalk;
                 //Ship-Specific Stuff (Turning off encounters, etc.)
                 break;
-            case 1:
+            case 1: //Forest
                 battleMusic = forestBM;
                 battleMusicIntro = forestBMIntro;
                 levelMusic = forestLM;
@@ -198,7 +198,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 encounterPool = new List<EnemyStatSheet>();
                 encounterPool = forestPool;
                 break;
-            case 2:
+            case 2: //Forest Cave
                 battleMusic = forestBM;
                 battleMusicIntro = forestBMIntro;
                 levelMusic = forestLM;
@@ -207,16 +207,16 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 encounterPool = new List<EnemyStatSheet>();
                 encounterPool = fCavePool;
                 break;
-            case 3:
+            case 3: //Forest Connector Cave
                 battleMusic = forestBM;
                 battleMusicIntro = forestBMIntro;
-                levelMusic = forestLM;
+                levelMusic = forestCaveLM;
                 walkSound = caveWalk;
                 specEncounter = caveSE;
                 encounterPool = new List<EnemyStatSheet>();
                 encounterPool = fgConnPool;
                 break;
-            case 4:
+            case 4: //Glacier
                 battleMusic = glacierBM;
                 battleMusicIntro = glacierBMIntro;
                 levelMusic = glacierLM;
@@ -225,7 +225,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 encounterPool = new List<EnemyStatSheet>();
                 encounterPool = glacierPool;
                 break;
-            case 5:
+            case 5: //Glacier Cave
                 battleMusic = glacierBM;
                 battleMusicIntro = glacierBMIntro;
                 levelMusic = glacierLM;
