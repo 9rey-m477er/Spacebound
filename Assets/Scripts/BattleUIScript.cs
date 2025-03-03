@@ -7,6 +7,7 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using System;
 using Random = UnityEngine.Random;
+using System.Runtime.CompilerServices;
 
 public class BattleUIScript : MonoBehaviour
 {
@@ -129,6 +130,19 @@ public class BattleUIScript : MonoBehaviour
         bigLogLine7, bigLogLine8, bigLogLine9, bigLogLine10, bigLogLine11, bigLogLine12;
     public GameObject battleLogObj;
 
+    private List<EnemyStatSheet> enemies = new List<EnemyStatSheet>();
+    public TextMeshProUGUI line1Name, line1EXP;
+    public TextMeshProUGUI line2Name, line2EXP;
+    public TextMeshProUGUI line3Name, line3EXP;
+    public TextMeshProUGUI line4Name, line4EXP;
+    public TextMeshProUGUI line5Total, expToNextTXT;
+    public TextMeshProUGUI currentLVL, nextLVL;
+    public Image expBarInner;
+    public GameObject postReportObj;
+    private bool postReportOpen;
+
+    public GameObject overworldMenu;
+
     public CharacterStatSheet john, bob, thozos, janet, stephven;
     public CharacterStatHandler characterStatHandler;
 
@@ -140,6 +154,7 @@ public class BattleUIScript : MonoBehaviour
     {
         resetMenu();
         currentMenuArrow = 1;
+        expToGive = 0;
         updateMenuArrows();
         innerMenuArrow = 1;
         updateInnerArrow();
@@ -207,6 +222,8 @@ public class BattleUIScript : MonoBehaviour
         runArrow2.gameObject.SetActive(false);
 
         bigReport.SetActive(false);
+        postReportOpen = false;
+        postReportObj.SetActive(false);
 
         battleLogLine1.text = "";
         battleLogLine2.text = "";
@@ -228,6 +245,7 @@ public class BattleUIScript : MonoBehaviour
 
         //Randomly Assign Enemies
         enemyPool = johnMovement.encounterPool;
+        enemies.Clear();
         rollEnemy(enemy1, enemyPool);
         rollEnemy(enemy2, enemyPool);
         rollEnemy(enemy3, enemyPool);
@@ -382,6 +400,8 @@ public class BattleUIScript : MonoBehaviour
         targetScript.pokeMultiplier = sheet.pokeMultiplier;
         targetScript.baseExpValue = sheet.baseExpValue;
         expToGive += sheet.baseExpValue;
+        Debug.Log("EXP To Give: " + expToGive);
+        enemies.Add(sheet);
 
         //If the player is in the forest level and have reached level 10 or higher
         if (johnMovement.level == 0 && characterStatHandler.partyLevel >= 10)
@@ -394,17 +414,21 @@ public class BattleUIScript : MonoBehaviour
     void Update()
     {
         // Only check input if the player is currently selecting an enemy
-        if (isSelectingEnemy)
+        if (isBattleOver == false)
         {
-            StartCoroutine(HandleEnemySelection());
+            if (isSelectingEnemy)
+            {
+                StartCoroutine(HandleEnemySelection());
+            }
+            else if (isinMenu && isSelectingEnemy == false && menuBlocking.gameObject.active == false)
+            {
+                menuArrowNav();
+            }
         }
-        else if (isinMenu && isSelectingEnemy == false && menuBlocking.gameObject.active == false)
+        else if (postReportOpen == false)
         {
-            menuArrowNav();
-        }
-        if (isBattleOver == true)
-        {
-            StartCoroutine(exitBattle());
+            postReportOpen = true;
+            postBattleReport();
         }
         checkForEndOfBattle();
         updateTurnText();
@@ -1490,7 +1514,59 @@ public class BattleUIScript : MonoBehaviour
         }
     }
 
+    private void postBattleReport()
+    {
+        int currentLevel = characterStatHandler.partyLevel;
+        postReportObj.SetActive(true);
+        if (enemies[0] != null || enemies.Count > 0)
+        {
+            line1Name.text = enemies[0].enemyName;
+            line1EXP.text = enemies[0].baseExpValue.ToString();
+        }
+        if (enemies[1] != null || enemies.Count > 1)
+        {
+            line2Name.text = enemies[1].enemyName;
+            line2EXP.text = enemies[1].baseExpValue.ToString();
+        }
+        if (enemies[2] != null || enemies.Count > 2)
+        {
+            line3Name.text = enemies[2].enemyName;
+            line3EXP.text = enemies[2].baseExpValue.ToString();
+        }
+        if (enemies[3] != null || enemies.Count > 3)
+        {
+            line4Name.text = enemies[3].enemyName;
+            line4EXP.text = enemies[3].baseExpValue.ToString();
+        }
+        line5Total.text = (expToGive.ToString());
+        currentLVL.text = characterStatHandler.partyLevel.ToString();
+        if (characterStatHandler.partyLevel < characterStatHandler.levelMax)
+        {
+            nextLVL.text = (characterStatHandler.partyLevel + 1).ToString();
+            characterStatHandler.addEXP(expToGive);
+            if (currentLevel == characterStatHandler.partyLevel)
+            {
+                expToNextTXT.text = ((characterStatHandler.expToNext - characterStatHandler.partyEXP).ToString() + " TO NEXT LEVEL!");
+                expBarInner.fillAmount = characterStatHandler.partyEXP / characterStatHandler.expToNext;
+            }
+            else
+            {
+                expToNextTXT.text = ("LEVEL " + characterStatHandler.partyLevel.ToString() + " REACHED!");
+                expBarInner.fillAmount = 1;
+                //level up screen
+            }
+        }
+        else
+        {
+            nextLVL.text = "Max Level";
+        }
+    }
 
+    public void postReportClose()
+    {
+        postReportObj.SetActive(false);
+        StartCoroutine(exitBattle());
+    }
 
     public void ExecuteAttack()
     {
@@ -1953,7 +2029,6 @@ public class BattleUIScript : MonoBehaviour
         if (!fled)
         {
             //Gives EXP to player.
-            characterStatHandler.addEXP(expToGive);
         }
         //Reset Fled Flag
         fled = false;

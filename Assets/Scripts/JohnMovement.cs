@@ -173,6 +173,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     {
         battleEars.enabled = false;
         overworldEars.enabled = true;
+        pauseMenu.SetActive(false);
         soundManager.ChangeMusic(levelMusic);
     }
 

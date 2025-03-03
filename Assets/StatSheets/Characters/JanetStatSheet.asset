@@ -17,9 +17,9 @@ MonoBehaviour:
   attackSprite: {fileID: -9014898942371220051, guid: 7da844a9147fb1c4db029ea8f2c4227c, type: 3}
   downedSprite: {fileID: 8379082059386957824, guid: c54153b07970bf54ca51c9b5901164d5, type: 3}
   hurtSprite: {fileID: -9099321052138193462, guid: 4b07693a5788d8443b90b72106b2e24d, type: 3}
-  characterLevel: 1
-  characterHP: 35
-  currentHP: 35
-  bashMultiplier: 1
-  slashMultiplier: 0.9
-  pokeMultiplier: 1.1
+  characterLevel: 6
+  characterHP: 60
+  currentHP: 60
+  bashMultiplier: 1.5000001
+  slashMultiplier: 1.2500001
+  pokeMultiplier: 1.75
