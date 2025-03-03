@@ -12,15 +12,15 @@ public class GameData
     public Vector3 playerPosition;
     public SerializableDictionary<string, bool> staticsCleared;
     //Character Stats: John
-    public float jHP, jBash, jSlash, jPoke;
+    public float jHP, jCHP, jBash, jSlash, jPoke;
     //Character Stats: Bob
-    public float bHP, bBash, bSlash, bPoke;
+    public float bHP, bCHP, bBash, bSlash, bPoke;
     //Character Stats: Thozos
-    public float tHP, tBash, tSlash, tPoke;
+    public float tHP, tCHP, tBash, tSlash, tPoke;
     //Character Stats: Janet
-    public float nHP, nBash, nSlash, nPoke;
+    public float nHP, nCHP, nBash, nSlash, nPoke;
     //Character Stats: Stephven
-    public float sHP, sBash, sSlash, sPoke;
+    public float sHP, sCHP, sBash, sSlash, sPoke;
 
     public GameData()
     {
@@ -40,26 +40,31 @@ public class GameData
         staticsCleared = new SerializableDictionary<string, bool>();
         //Character Stats: John
         jHP = 30;
+        jCHP = 30;
         jBash = 1.0f;
         jSlash = 1.0f;
         jPoke = 1.0f;
         //Character Stats: Bob
         bHP = 40;
+        bCHP = 40;
         bBash = 1.1f;
         bSlash = 1.0f;
         bPoke = 0.9f;
         //Character Stats: Thozos
         tHP = 20;
+        tCHP = 20;
         tBash = 0.9f;
         tSlash = 0.9f;
         tPoke = 0.9f;
         //Character Stats: Janet
         nHP = 35;
+        nCHP = 35;
         nBash = 1.0f;
         nSlash = 0.9f;
         nPoke = 1.1f;
         //Character Stats: Stephven
         sHP = 25;
+        sCHP = 25;
         sBash = 0.9f;
         sSlash = 1.1f;
         sPoke = 1.0f;

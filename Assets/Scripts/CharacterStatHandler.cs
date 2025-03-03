@@ -25,30 +25,35 @@ public class CharacterStatHandler : MonoBehaviour, IDataPersistence
         //Set John's stats
         John.characterLevel = partyLevel;
         John.characterHP = data.jHP;
+        John.currentHP = data.jCHP;
         John.bashMultiplier = data.jBash;
         John.slashMultiplier = data.jSlash;
         John.pokeMultiplier = data.jPoke;
         //Set Bob's stats
         Bob.characterLevel = partyLevel;
         Bob.characterHP = data.bHP;
+        Bob.currentHP = data.bCHP;
         Bob.bashMultiplier = data.bBash;
         Bob.slashMultiplier = data.bSlash;
         Bob.pokeMultiplier = data.bPoke;
         //Set Thozos' stats
         Thozos.characterLevel = partyLevel;
         Thozos.characterHP = data.tHP;
+        Thozos.currentHP = data.tCHP;
         Thozos.bashMultiplier = data.tBash;
         Thozos.slashMultiplier = data.tSlash;
         Thozos.pokeMultiplier = data.tPoke;
         //Set Janet's stats
         Janet.characterLevel = partyLevel;
         Janet.characterHP = data.nHP;
+        Janet.currentHP = data.nCHP;
         Janet.bashMultiplier= data.nBash;
         Janet.slashMultiplier = data.nSlash;
         Janet.pokeMultiplier = data.nPoke;
         //Set Stephven's statts
         Stephven.characterLevel = partyLevel;
         Stephven.characterHP = data.sHP;
+        Stephven.currentHP = data.sCHP;
         Stephven.bashMultiplier = data.sBash;
         Stephven.slashMultiplier = data.sSlash;
         Stephven.pokeMultiplier = data.sPoke;
@@ -64,26 +69,31 @@ public class CharacterStatHandler : MonoBehaviour, IDataPersistence
         data.partyLevel = partyLevel;
         //Save John's stats
         data.jHP = John.characterHP;
+        data.jCHP = John.currentHP;
         data.jBash = John.bashMultiplier;
         data.jSlash = John.slashMultiplier;
         data.jPoke = John.pokeMultiplier;
         //Save Bob's stats
         data.bHP = Bob.characterHP;
+        data.bCHP = Bob.currentHP;
         data.bBash = Bob.bashMultiplier;
         data.bSlash = Bob.slashMultiplier;
         data.bPoke = Bob.pokeMultiplier;
         //Save Thozos' stats
         data.tHP = Thozos.characterHP;
+        data.tCHP = Thozos.currentHP;
         data.tBash = Thozos.bashMultiplier;
         data.tSlash = Thozos.slashMultiplier;
         data.tPoke = Thozos.pokeMultiplier;
         //Save Janet's stats
         data.nHP = Janet.characterHP;
+        data.nCHP = Janet.currentHP;
         data.nBash = Janet.bashMultiplier;
         data.nSlash = Janet.slashMultiplier;
         data.nPoke = Janet.pokeMultiplier;
         //Save Stephven's statts
         data.sHP = Stephven.characterHP;
+        data.sCHP = Stephven.currentHP;
         data.sBash = Stephven.bashMultiplier;
         data.sSlash = Stephven.slashMultiplier;
         data.sPoke = Stephven.pokeMultiplier;
@@ -207,30 +217,35 @@ public class CharacterStatHandler : MonoBehaviour, IDataPersistence
         //Set John's stats
         John.characterLevel = 1;
         John.characterHP = 30;
+        John.currentHP = 30;
         John.bashMultiplier = 1.0f;
         John.slashMultiplier = 1.0f;
         John.pokeMultiplier = 1.0f;
         //Set Bob's stats
         Bob.characterLevel = 1;
         Bob.characterHP = 40;
+        Bob.currentHP = 40;
         Bob.bashMultiplier = 1.1f;
         Bob.slashMultiplier = 1.0f;
         Bob.pokeMultiplier = 0.9f;
         //Set Thozos' stats
         Thozos.characterLevel = 1;
         Thozos.characterHP = 20;
+        Thozos.currentHP = 20;
         Thozos.bashMultiplier = 0.9f;
         Thozos.slashMultiplier = 0.9f;
         Thozos.pokeMultiplier = 0.9f;
         //Set Janet's stats
         Janet.characterLevel = 1;
         Janet.characterHP = 35;
+        Janet.currentHP = 35;
         Janet.bashMultiplier = 1.0f;
         Janet.slashMultiplier = 0.9f;
         Janet.pokeMultiplier = 1.1f;
         //Set Stephven's statts
         Stephven.characterLevel = 1;
         Stephven.characterHP = 25;
+        Stephven.currentHP = 25;
         Stephven.bashMultiplier = 0.9f;
         Stephven.slashMultiplier = 1.1f;
         Stephven.pokeMultiplier = 1.0f;

@@ -120,6 +120,7 @@ public class BattleUIScript : MonoBehaviour
     public List<Sprite> forestSpritePool = new List<Sprite>();
     public List<EnemyStatSheet> enemyPool = new List<EnemyStatSheet>();
 
+    //Battle Log
     private List<string> battleLog = new List<string> {"", "", "", "", "", "", "", "", "", "", "", ""};
     private string battleLogEntry = string.Empty;
     public TextMeshProUGUI battleLogLine1;
@@ -130,6 +131,7 @@ public class BattleUIScript : MonoBehaviour
         bigLogLine7, bigLogLine8, bigLogLine9, bigLogLine10, bigLogLine11, bigLogLine12;
     public GameObject battleLogObj;
 
+    //Post-Battle Report
     private List<EnemyStatSheet> enemies = new List<EnemyStatSheet>();
     public TextMeshProUGUI line1Name, line1EXP;
     public TextMeshProUGUI line2Name, line2EXP;
@@ -140,6 +142,15 @@ public class BattleUIScript : MonoBehaviour
     public Image expBarInner;
     public GameObject postReportObj;
     private bool postReportOpen;
+
+    //Level Up
+    public GameObject LUJohn, LUBob, LUThozos, LUJanet, LUStevphen, LevelUpButton, XButton, EXPArea, LUArea;
+    public TextMeshProUGUI LUJohnHP, LUJohnBash, LUJohnSlash, LUJohnPoke;
+    public TextMeshProUGUI LUBobHP, LUBobBash, LUBobSlash, LUBobPoke;
+    public TextMeshProUGUI LUThozosHP, LUThozosBash, LUThozosSlash, LUThozosPoke;
+    public TextMeshProUGUI LUJanetHP, LUJanetBash, LUJanetSlash, LUJanetPoke;
+    public TextMeshProUGUI LUStevphenHP, LUStevphenBash, LUStevphenSlash, LUStevphenPoke;
+    public TextMeshProUGUI LevelReached, LUExpToNext;
 
     public GameObject overworldMenu;
 
@@ -224,6 +235,11 @@ public class BattleUIScript : MonoBehaviour
         bigReport.SetActive(false);
         postReportOpen = false;
         postReportObj.SetActive(false);
+        LUBob.gameObject.SetActive(false);
+        LUThozos.gameObject.SetActive(false);
+        LUJanet.gameObject.SetActive(false);
+        LUStevphen.gameObject.SetActive(false);
+        LevelUpButton.gameObject.SetActive(false);
 
         battleLogLine1.text = "";
         battleLogLine2.text = "";
@@ -1516,27 +1532,30 @@ public class BattleUIScript : MonoBehaviour
 
     private void postBattleReport()
     {
+        EXPArea.SetActive(true);
+        LUArea.SetActive(false);
+        XButton.SetActive(false);
         int currentLevel = characterStatHandler.partyLevel;
         postReportObj.SetActive(true);
         if (enemies[0] != null || enemies.Count > 0)
         {
             line1Name.text = enemies[0].enemyName;
-            line1EXP.text = enemies[0].baseExpValue.ToString();
+            line1EXP.text = (enemies[0].baseExpValue.ToString() + " EXP");
         }
         if (enemies[1] != null || enemies.Count > 1)
         {
             line2Name.text = enemies[1].enemyName;
-            line2EXP.text = enemies[1].baseExpValue.ToString();
+            line2EXP.text = (enemies[1].baseExpValue.ToString() + " EXP");
         }
         if (enemies[2] != null || enemies.Count > 2)
         {
             line3Name.text = enemies[2].enemyName;
-            line3EXP.text = enemies[2].baseExpValue.ToString();
+            line3EXP.text = (enemies[2].baseExpValue.ToString() + " EXP");
         }
         if (enemies[3] != null || enemies.Count > 3)
         {
             line4Name.text = enemies[3].enemyName;
-            line4EXP.text = enemies[3].baseExpValue.ToString();
+            line4EXP.text = (enemies[3].baseExpValue.ToString() + " EXP");
         }
         line5Total.text = (expToGive.ToString());
         currentLVL.text = characterStatHandler.partyLevel.ToString();
@@ -1548,18 +1567,82 @@ public class BattleUIScript : MonoBehaviour
             {
                 expToNextTXT.text = ((characterStatHandler.expToNext - characterStatHandler.partyEXP).ToString() + " TO NEXT LEVEL!");
                 expBarInner.fillAmount = characterStatHandler.partyEXP / characterStatHandler.expToNext;
+                XButton.SetActive(true);
             }
             else
             {
                 expToNextTXT.text = ("LEVEL " + characterStatHandler.partyLevel.ToString() + " REACHED!");
                 expBarInner.fillAmount = 1;
-                //level up screen
+                LevelUpButton.gameObject.SetActive(true);
             }
         }
         else
         {
             nextLVL.text = "Max Level";
         }
+    }
+
+    public void postReportLevelUp()
+    {
+        EXPArea.SetActive(false);
+        LUArea.SetActive(true);
+
+        LevelReached.text = ("LEVEL " + characterStatHandler.partyLevel.ToString());
+
+        //Show John's Stats
+        LUJohnHP.text = ("HP: " + (john.characterHP).ToString() + " (+5)");
+        LUJohnBash.text = ("BASH: " + ((int)(john.bashMultiplier * 100)).ToString() + "% (+10%)");
+        LUJohnSlash.text = ("SLASH: " + ((int)(john.slashMultiplier * 100)).ToString() + "% (+10%)");
+        LUJohnPoke.text = ("POKE: " + ((int)(john.pokeMultiplier * 100)).ToString() + "% (+10%)");
+        if (johnMovement.bobActive)
+        {
+            //Set Bob's area to active and show stats
+            LUBob.SetActive(true);
+            LUBobHP.text = ("HP: " + (bob.characterHP).ToString() + " (+5)");
+            LUBobBash.text = ("BASH: " + ((int)(bob.bashMultiplier * 100)).ToString() + "% (+13%)");
+            LUBobSlash.text = ("SLASH: " + ((int)(bob.slashMultiplier * 100)).ToString() + "% (+10%)");
+            LUBobPoke.text = ("POKE: " + ((int)(bob.pokeMultiplier * 100)).ToString() + "% (+7%)");
+        }
+        if (johnMovement.thozosActive)
+        {
+            //Set Thozos's area to active and show stats
+            LUThozos.SetActive(true);
+            LUThozosHP.text = ("HP: " + (thozos.characterHP).ToString() + " (+5)");
+            LUThozosBash.text = ("BASH: " + ((int)(thozos.bashMultiplier * 100)).ToString() + "% (+7%)");
+            LUThozosSlash.text = ("SLASH: " + ((int)(thozos.slashMultiplier * 100)).ToString() + "% (+7%)");
+            LUThozosPoke.text = ("POKE: " + ((int)(thozos.pokeMultiplier * 100)).ToString() + "% (+7%)");
+        }
+        if (johnMovement.janetActive)
+        {
+            //Set Janet's area to active and show stats
+            LUJanet.SetActive(true);
+            LUJanetHP.text = ("HP: " + (janet.characterHP).ToString() + " (+5)");
+            LUJanetBash.text = ("BASH: " + ((int)(janet.bashMultiplier * 100)).ToString() + "% (+10%)");
+            LUJanetSlash.text = ("SLASH: " + ((int)(janet.slashMultiplier * 100)).ToString() + "% (+7%)");
+            LUJanetPoke.text = ("POKE: " + ((int)(janet.pokeMultiplier * 100)).ToString() + "% (+13%)");
+        }
+        if (johnMovement.stephvenActive)
+        {
+            //Set Stevphen's area to active and show stats
+            LUStevphen.SetActive(true);
+            LUStevphenHP.text = ("HP: " + (stephven.characterHP).ToString() + " (+5)");
+            LUStevphenBash.text = ("BASH: " + ((int)(stephven.bashMultiplier * 100)).ToString() + "% (+7%)");
+            LUStevphenSlash.text = ("SLASH: " + ((int)(stephven.slashMultiplier * 100)).ToString() + "% (+13%)");
+            LUStevphenPoke.text = ("POKE: " + ((int)(stephven.pokeMultiplier * 100)).ToString() + "% (+10%)");
+        }
+
+        //Check whether the player is at the max level or not
+        if (characterStatHandler.partyLevel == characterStatHandler.levelMax)
+        {
+            //If so, display MAX LEVEL for exp to next level
+            LUExpToNext.text = ("MAX LEVEL");
+        }
+        else
+        {
+            //Otherwise, display the amount of EXP needed to reach the next level
+            LUExpToNext.text = (characterStatHandler.expToNext.ToString());
+        }
+        XButton.SetActive(true);
     }
 
     public void postReportClose()
