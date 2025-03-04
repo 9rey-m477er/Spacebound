@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using System;
 using Random = UnityEngine.Random;
 using System.Runtime.CompilerServices;
+using UnityEngine.SceneManagement;
 
 public class BattleUIScript : MonoBehaviour
 {
@@ -159,6 +160,7 @@ public class BattleUIScript : MonoBehaviour
 
     public bool fled = false;
     public int expToGive;
+    public bool char1Dead, char2Dead, char3Dead, char4Dead;
 
     public TextMeshProUGUI turnName;
     void OnEnable()
@@ -1972,10 +1974,11 @@ public class BattleUIScript : MonoBehaviour
         rt.sizeDelta = new Vector2(p1.sprite.bounds.size.x * 16f, p1.sprite.bounds.size.y * 16f);
 
         string name1 = p1.sprite.name;
-        if (currentPlayer.health <= 0)
+        if (currentPlayer.health <= 0 && !char1Dead)
         {
+            char1Dead = true;
             p1.sprite = Resources.Load<Sprite>("Dead " + name1);
-            updateBattleLog($"{p1.name} is unconscious!");
+            updateBattleLog($"{currentPlayer.name} is unconscious!");
         }
         else
         {
@@ -1992,10 +1995,11 @@ public class BattleUIScript : MonoBehaviour
             RectTransform rt2 = player2.GetComponent<RectTransform>();
             rt2.sizeDelta = new Vector2(p2.sprite.bounds.size.x * 16f, p2.sprite.bounds.size.y * 16f);
             string name2 = p2.sprite.name;
-            if (currentPlayer.health <= 0)
+            if (currentPlayer.health <= 0 && !char2Dead)
             {
+                char2Dead = true;
                 p2.sprite = Resources.Load<Sprite>("Dead " + name2);
-                updateBattleLog($"{p2.name} is unconscious!");
+                updateBattleLog($"{currentPlayer.name} is unconscious!");
             }
             else
             {
@@ -2013,10 +2017,11 @@ public class BattleUIScript : MonoBehaviour
             RectTransform rt3 = player3.GetComponent<RectTransform>();
             rt3.sizeDelta = new Vector2(p3.sprite.bounds.size.x * 1f, p3.sprite.bounds.size.y * 1f);
             string name = p3.sprite.name;
-            if (currentPlayer.health <= 0)
+            if (currentPlayer.health <= 0 && !char3Dead)
             {
+                char3Dead = true;
                 p3.sprite = Resources.Load<Sprite>("Dead " + name);
-                updateBattleLog($"{p3.name} is unconscious!");
+                updateBattleLog($"{currentPlayer.name} is unconscious!");
             }
             else
             {
@@ -2034,10 +2039,11 @@ public class BattleUIScript : MonoBehaviour
             RectTransform rt4 = player4.GetComponent<RectTransform>();
             rt4.sizeDelta = new Vector2(p4.sprite.bounds.size.x * 16f, p4.sprite.bounds.size.y * 16f);
             string name = p4.sprite.name;
-            if (currentPlayer.health <= 0)
+            if (currentPlayer.health <= 0 && char4Dead)
             {
+                char4Dead = true;
                 p4.sprite = Resources.Load<Sprite>("Dead " + name);
-                updateBattleLog($"{p4.name} is unconscious!");
+                updateBattleLog($"{currentPlayer.name} is unconscious!");
             }
             else
             {
@@ -2065,6 +2071,7 @@ public class BattleUIScript : MonoBehaviour
             //StartCoroutine(Fade(0));
             isBattleOver = true;
             exitBattle();
+            SceneManager.LoadScene("game");
             dataPersistenceManager.LoadGame();
             Debug.Log("all players dead");
         }
