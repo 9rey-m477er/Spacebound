@@ -5,6 +5,7 @@ using UnityEngine;
 public class EncounterSaver : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private string id;
+    public List<GameObject> removeObjects = new List<GameObject>();
 
     [ContextMenu("Generate GUID for encounter ID")]
     private void generateGUID()
@@ -21,6 +22,13 @@ public class EncounterSaver : MonoBehaviour, IDataPersistence
     {
         cleared = true;
         encounter.SetActive(false);
+        if (removeObjects.Count > 0 )
+        {
+            foreach (GameObject go in removeObjects)
+            {
+                go.SetActive(false);
+            }
+        }    
     }
 
     public void resetEncounter()
@@ -34,6 +42,13 @@ public class EncounterSaver : MonoBehaviour, IDataPersistence
         if (cleared)
         {
             encounter.SetActive(false);
+            if (removeObjects.Count > 0)
+            {
+                foreach (GameObject go in removeObjects)
+                {
+                    go.SetActive(false);
+                }
+            }
         }
     }
 
