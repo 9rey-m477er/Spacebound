@@ -141,7 +141,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 overworldEars.enabled = false;
                 inBattle = true;
                 bossSystem.SetActive(true);
-                bossScript.StartScriptedBattle(specEncounter);
+                bossScript.StartScriptedBattle(specEncounter, null);
                 UpdateStepSpawn();
             }
         }

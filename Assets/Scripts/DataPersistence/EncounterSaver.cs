@@ -15,6 +15,18 @@ public class EncounterSaver : MonoBehaviour, IDataPersistence
     [SerializeField] private GameObject encounter;
 
     public bool cleared = false;
+    public bool started = false;
+
+    public void clearEncounter()
+    {
+        cleared = true;
+        encounter.SetActive(false);
+    }
+
+    public void resetEncounter()
+    {
+        started = false;
+    }
 
     public void LoadData(GameData data)
     {

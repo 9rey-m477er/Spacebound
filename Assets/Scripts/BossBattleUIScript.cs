@@ -138,6 +138,8 @@ public class BossBattleUIScript : MonoBehaviour
     public TextMeshProUGUI chooseDefendText;
     public bool isSelectingAlly;
 
+    public EncounterSaver encounterSaver;
+
 
     public int selection;
 
@@ -743,11 +745,12 @@ public class BossBattleUIScript : MonoBehaviour
             reportArrow.gameObject.SetActive(true);
         }
     }
-    public void StartScriptedBattle(BossStatSheet enemy)
+    public void StartScriptedBattle(BossStatSheet enemy, EncounterSaver es)
     {
         soundManager.BattleTransition(enemy.encounterIntro, enemy.encounterMusic) ;
         SetEnemyStats(enemy);
         johnMovement.inBattle = true;
+        encounterSaver = es;
     }
 
 
@@ -2032,6 +2035,7 @@ public class BossBattleUIScript : MonoBehaviour
             //StartCoroutine(Fade(1));
             //StartCoroutine(Fade(0));
             isBattleOver = true;
+            encounterSaver.resetEncounter();
             exitBattle();
             dataPersistenceManager.LoadGame();
             Debug.Log("all players dead");
@@ -2040,6 +2044,10 @@ public class BossBattleUIScript : MonoBehaviour
 
         if (e1.health <= 0)
         {
+            if (encounterSaver != null)
+            {
+                encounterSaver.clearEncounter();
+            }
             isBattleOver = true;
         }
     }

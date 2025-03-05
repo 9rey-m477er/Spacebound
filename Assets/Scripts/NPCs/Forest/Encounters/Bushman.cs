@@ -17,7 +17,7 @@ public class Bushman : NPC, ITalkable, IBattleable
     public override void Interact()
     {
         Talk(dialogueText);
-        if (!battleStarted && dialogueController.paragraphs.Count == 0)
+        if (!encounterSaver.started && dialogueController.paragraphs.Count == 0)
         {
             dialogueController.EndConversation();
             Battle(enemy);
@@ -31,10 +31,8 @@ public class Bushman : NPC, ITalkable, IBattleable
 
     public void Battle(BossStatSheet enemy)
     {
-        battleStarted = true;
+        encounterSaver.started = true;
         bossSystem.SetActive(true);
-        bossScript.StartScriptedBattle(enemy);
-        encounterSaver.cleared = true;
-        this.gameObject.SetActive(false);
+        bossScript.StartScriptedBattle(enemy, encounterSaver);
     }
 }
