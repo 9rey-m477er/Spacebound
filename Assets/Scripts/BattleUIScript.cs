@@ -9,6 +9,7 @@ using System;
 using Random = UnityEngine.Random;
 using System.Runtime.CompilerServices;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class BattleUIScript : MonoBehaviour
 {
@@ -163,6 +164,26 @@ public class BattleUIScript : MonoBehaviour
     public bool char1Dead, char2Dead, char3Dead, char4Dead;
 
     public TextMeshProUGUI turnName;
+
+    public float p1BaseEvade;
+    public float p2BaseEvade;
+    public float p3BaseEvade;
+    public float p4BaseEvade;
+
+    public float p1BaseDefense;
+    public float p2BaseDefense;
+    public float p3BaseDefense;
+    public float p4BaseDefense;
+
+    
+    public int defender;
+    public int beingDefended;
+    public TextMeshProUGUI chooseDefendText;
+    public bool isSelectingAlly;
+
+
+    public int selection;
+
     void OnEnable()
     {
         resetMenu();
@@ -261,6 +282,8 @@ public class BattleUIScript : MonoBehaviour
         bigLogLine12.text = "";
         //battleLogObj.SetActive(true);
 
+        chooseDefendText.gameObject.SetActive(false);
+
         //Randomly Assign Enemies
         enemyPool = johnMovement.encounterPool;
         enemies.Clear();
@@ -272,6 +295,7 @@ public class BattleUIScript : MonoBehaviour
         updateEnemyHealth();
         playerTeamSpawn();
         isBattleOver = false;
+        isSelectingAlly = false;
     }
 
     public void playerTeamSpawn()
@@ -280,6 +304,11 @@ public class BattleUIScript : MonoBehaviour
         BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+
+        p1BaseEvade = p1.evasiveness;
+        p2BaseEvade = p2.evasiveness;
+        p3BaseEvade = p3.evasiveness;
+        p4BaseEvade = p4.evasiveness;
 
         p1.health = john.currentHP;
         p1.startingHealth = john.characterHP;
@@ -438,6 +467,12 @@ public class BattleUIScript : MonoBehaviour
             {
                 StartCoroutine(HandleEnemySelection());
             }
+
+            else if (isSelectingAlly)
+            {
+                StartCoroutine(ChoosingAlly());
+            }
+
             else if (isinMenu && isSelectingEnemy == false && menuBlocking.gameObject.active == false)
             {
                 menuArrowNav();
@@ -706,6 +741,24 @@ public class BattleUIScript : MonoBehaviour
                 attackSlot3();
                 StartCoroutine(postSelectionWaitCoroutine(0.2f));
             }
+            //
+            if (defArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            {
+                dodge();
+                StartCoroutine(postSelectionWaitCoroutine(0.2f));
+            }
+            
+            if (defArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            {
+                defend();
+                StartCoroutine(postSelectionWaitCoroutine(0.2f));
+            }
+            if (defArrow3.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            {
+                protect();
+                StartCoroutine(postSelectionWaitCoroutine(0.2f));
+            }
+            //
             if (invArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
             {
                 invSlot1();
@@ -716,6 +769,7 @@ public class BattleUIScript : MonoBehaviour
                 invSlot2();
                 Debug.Log("islot2");
             }
+            //
             if (runArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
             {
                 fleeButtonClick();
@@ -932,43 +986,6 @@ public class BattleUIScript : MonoBehaviour
         updateTurns();
         UpdatePartyArrow();
     }
-    /*
-    public void enemyAttack()
-    {
-        BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
-        BattleEnemyScript e2 = enemy2.GetComponent<BattleEnemyScript>();
-        BattleEnemyScript e3 = enemy3.GetComponent<BattleEnemyScript>();
-        BattleEnemyScript e4 = enemy4.GetComponent<BattleEnemyScript>();
-
-        int attackPower = 10;
-        List<BattlePlayerScript> validTargets = new List<BattlePlayerScript>();
-
-        // Add valid targets (players with health > 0)
-        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
-        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
-        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
-        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
-
-        if (p1.health > 0) validTargets.Add(p1);
-        if (p2.health > 0) validTargets.Add(p2);
-        if (p3.health > 0) validTargets.Add(p3);
-        if (p4.health > 0) validTargets.Add(p4);
-
-        // If no valid targets exist, exit the attack method
-        if (validTargets.Count == 0) return;
-
-        // Randomly select a target
-        BattlePlayerScript target = validTargets[Random.Range(0, validTargets.Count)];
-
-        // Apply damage to the target
-        target.health -= attackPower;
-        Debug.Log($"Enemy attacked {target.name} for {attackPower} damage.");
-
-        // Update player health UI
-        updatePlayerHealth();
-        checkForEndOfBattle();
-    }
-    */
 
     private IEnumerator EnemyAttackSequence()
     {
@@ -983,6 +1000,7 @@ public class BattleUIScript : MonoBehaviour
         BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+
 
         // List of all players
         List<BattlePlayerScript> players = new List<BattlePlayerScript>
@@ -1063,7 +1081,7 @@ public class BattleUIScript : MonoBehaviour
 
                 // Play attack sound and deal damage using the enemy's attackStrength
                 yield return new WaitForSeconds(0.75f);
-                target.health -= enemyScript.attackStrength;
+                target.health -= enemyScript.attackStrength * ((100 - target.defMultiplier)/100);
 
                 //Write the Attack to the Battle Log
                 Debug.Log($"{target.characterName} was attacked by {enemyScript.enemyName}! ({enemyScript.attackStrength} HP)");
@@ -1117,11 +1135,105 @@ public class BattleUIScript : MonoBehaviour
                         if (target.health > 0)
                         {
                             float targetDodge = 0;
+                            BattlePlayerScript originalTarget = target;
+
+                            // Handle Defenders
+
+                            if (target == players[0] && defender != 0 && beingDefended == 1)
+                            {
+                                if (defender == 2 && p2.health > 0)
+                                {
+                                    target = players[1];
+                                }
+                                else if (defender == 3 && p3.health > 0)
+                                {
+                                    target = players[2];
+                                }
+                                else if (defender == 4 && p4.health > 0)
+                                {
+                                    target = players[3];
+                                }
+                                Debug.Log($"New Target = {target.characterName}");
+                            }
+                            //////////
+                            if (target == players[1] && defender != 0 && beingDefended == 2)
+                            {
+                                if (defender == 1 && p1.health > 0)
+                                {
+                                    target = players[0];
+                                }
+                                else if (defender == 3 && p3.health > 0)
+                                {
+                                    target = players[2];
+                                }
+                                else if (defender == 4 && p4.health > 0)
+                                {
+                                    target = players[3];
+                                }
+                                Debug.Log($"New Target = {target.characterName}");
+                            }
+                            /////////
+                            if (target == players[2] && defender != 0 && beingDefended == 3)
+                            {
+                                if (defender == 2 && p2.health > 0)
+                                {
+                                    target = players[1];
+                                }
+                                else if (defender == 1 && p1.health > 0)
+                                {
+                                    target = players[0];
+                                }
+                                else if (defender == 4 && p4.health > 0)
+                                {
+                                    target = players[3];
+                                }
+                                Debug.Log($"New Target = {target.characterName}");
+                            }
+                            ////////
+                            if (target == players[3] && defender != 0 && beingDefended == 4)
+                            {
+                                if (defender == 2 && p2.health > 0)
+                                {
+                                    target = players[1];
+                                }
+                                else if (defender == 3 && p3.health > 0)
+                                {
+                                    target = players[2];
+                                }
+                                else if (defender == 1 && p1.health > 0)
+                                {
+                                    target = players[0];
+                                }
+                                Debug.Log($"New Target = {target.characterName}");
+                            }
+                            // target now equals player taking damage
                             // Show the reticle for the selected target and play damage sound
                             if (target == players[0])
                             {
                                 targetDodge = p1.evasiveness;
-                                party1Reticle.SetActive(true);
+                                if(defender != 0)
+                                {
+                                    if(originalTarget == players[0])
+                                    {
+                                        partyReticle(1);
+                                    }
+                                    else if(originalTarget == players[1])
+                                    {
+                                        partyReticle(2);
+                                    }
+                                    else if (originalTarget == players[2])
+                                    {
+                                        partyReticle(3);
+                                    }
+                                    else if (originalTarget == players[3])
+                                    {
+                                        partyReticle(4);
+                                    }
+                                }
+                                else
+                                {
+                                    party1Reticle.SetActive(true);
+                                }
                                 Image playerImage = player1.GetComponent<Image>();
                                 soundManager.PlaySoundClip(6);
                                 playerImage.sprite = p1.hurtSprite;
@@ -1131,7 +1243,29 @@ public class BattleUIScript : MonoBehaviour
                             else if (target == players[1])
                             {
                                 targetDodge = p2.evasiveness;
-                                party2Reticle.SetActive(true);
+                                if (defender != 0)
+                                {
+                                    if (originalTarget == players[0])
+                                    {
+                                        partyReticle(1);
+                                    }
+                                    else if (originalTarget == players[1])
+                                    {
+                                        partyReticle(2);
+                                    }
+                                    else if (originalTarget == players[2])
+                                    {
+                                        partyReticle(3);
+                                    }
+                                    else if (originalTarget == players[3])
+                                    {
+                                        partyReticle(4);
+                                    }
+                                }
+                                else
+                                {
+                                    party2Reticle.SetActive(true);
+                                }
                                 Image playerImage = player2.GetComponent<Image>();
                                 soundManager.PlaySoundClip(6);
                                 playerImage.sprite = p2.hurtSprite;
@@ -1142,7 +1276,29 @@ public class BattleUIScript : MonoBehaviour
                             else if (target == players[2])
                             {
                                 targetDodge = p3.evasiveness;
-                                party3Reticle.SetActive(true);
+                                if (defender != 0)
+                                {
+                                    if (originalTarget == players[0])
+                                    {
+                                        partyReticle(1);
+                                    }
+                                    else if (originalTarget == players[1])
+                                    {
+                                        partyReticle(2);
+                                    }
+                                    else if (originalTarget == players[2])
+                                    {
+                                        partyReticle(3);
+                                    }
+                                    else if (originalTarget == players[3])
+                                    {
+                                        partyReticle(4);
+                                    }
+                                }
+                                else
+                                {
+                                    party3Reticle.SetActive(true);
+                                }
                                 Image playerImage = player3.GetComponent<Image>();
                                 soundManager.PlaySoundClip(6);
                                 playerImage.sprite = p3.hurtSprite;
@@ -1152,7 +1308,29 @@ public class BattleUIScript : MonoBehaviour
                             else if (target == players[3])
                             {
                                 targetDodge = p4.evasiveness;
-                                party4Reticle.SetActive(true);
+                                if (defender != 0)
+                                {
+                                    if (originalTarget == players[0])
+                                    {
+                                        partyReticle(1);
+                                    }
+                                    else if (originalTarget == players[1])
+                                    {
+                                        partyReticle(2);
+                                    }
+                                    else if (originalTarget == players[2])
+                                    {
+                                        partyReticle(3);
+                                    }
+                                    else if (originalTarget == players[3])
+                                    {
+                                        partyReticle(4);
+                                    }
+                                }
+                                else
+                                {
+                                    party4Reticle.SetActive(true);
+                                }
                                 Image playerImage = player4.GetComponent<Image>();
                                 soundManager.PlaySoundClip(6);
                                 playerImage.sprite = p4.hurtSprite;
@@ -1163,15 +1341,16 @@ public class BattleUIScript : MonoBehaviour
                             yield return new WaitForSeconds(0.75f);
 
                             // Deal damage using the enemy's attackStrength and the attack's attackStrength
-                            int accuracyCheck = Random.Range(0, 100);
-                            if(enemyScript.accuracy - targetDodge < accuracyCheck) //miss
+                            int accuracyCheck = Random.Range(0, 100);                            
+                            
+                            if (enemyScript.accuracy - targetDodge < accuracyCheck) //miss
                             {
                                 Debug.Log($"{target.characterName} dodged the {enemyScript.enemyName + "'s attack"}! (0 HP)");
                                 battleLogEntry = $"{target.characterName} dodged the {enemyScript.enemyName + "'s attack"}! (0 HP)";
                             }
                             else
                             {
-                                target.health -= enemyScript.attackStrength + chosenAttack.attackStrength;
+                                target.health -= (enemyScript.attackStrength + chosenAttack.attackStrength) * ((100 - target.defMultiplier) / 100);
                                 //Write the Attack to the Battle Log
                                 Debug.Log($"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} HP)");
                                 battleLogEntry = $"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} HP)";
@@ -1215,8 +1394,43 @@ public class BattleUIScript : MonoBehaviour
         turnCounterIndex++;
         menuBlocking.gameObject.SetActive(false);
         isinMenu = true;
+
+        // Reset Defenses
+        p1.evasiveness = p1BaseEvade;
+        p2.evasiveness = p2BaseEvade;
+        p3.evasiveness = p3BaseEvade;
+        p4.evasiveness = p4BaseEvade;
+        //
+        p1.defMultiplier = p1BaseDefense;
+        p2.defMultiplier = p2BaseDefense;
+        p3.defMultiplier = p3BaseDefense;
+        p4.defMultiplier = p4BaseDefense;
+
+        defender = 0;
+        beingDefended = 0;
+
         resetMenu();
         UpdatePartyArrow();
+    }
+
+    public void partyReticle(int target)
+    {
+        if(target == 1)
+        {
+            party1Reticle.SetActive(true);
+        }
+        else if(target == 2)
+        {
+            party2Reticle.SetActive(true);
+        }
+        else if (target == 3)
+        {
+            party3Reticle.SetActive(true);
+        }
+        else if (target == 4)
+        {
+            party4Reticle.SetActive(true);
+        }
     }
 
     private void updateBattleLog(string logUpdate)
@@ -1370,6 +1584,204 @@ public class BattleUIScript : MonoBehaviour
             currentEnemy = 4;
         }
         UpdateEnemyArrows();
+    }
+
+    public void dodge()
+    {
+        menuArrowTemp = currentMenuArrow;
+        resetMenu();
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+
+        if (playerTurn == 1)
+        {
+            p1.evasiveness += 45;
+        }
+        else if (playerTurn == 2)
+        {
+            p2.evasiveness += 45;
+        }
+        else if (playerTurn == 3)
+        {
+            p3.evasiveness += 45;
+        }
+        else if (playerTurn == 4)
+        {
+            p4.evasiveness += 45;
+        }
+        incrementTurn();
+    }
+    
+    public void defend()
+    {
+        menuArrowTemp = currentMenuArrow;
+        resetMenu();
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+
+        if (playerTurn == 1)
+        {
+            defender = 1;
+            p1.defMultiplier += 20;
+        }
+        else if (playerTurn == 2)
+        {
+            defender = 2;
+            p2.defMultiplier += 20;
+        }
+        else if (playerTurn == 3)
+        {
+            defender = 3;
+            p3.defMultiplier += 20;
+        }
+        else if (playerTurn == 4)
+        {
+            defender = 4;
+            p4.defMultiplier += 20;
+        }
+
+        chooseDefendText.gameObject.SetActive(true);
+        selection = defender;
+        isSelectingAlly = true;
+    }
+    
+    public IEnumerator ChoosingAlly()
+    {
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>(); ////   3   1
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>(); ////   4   2
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        {
+            soundManager.PlaySoundClip(3);
+            if (selection == 3 && p4.health > 0) selection = 4;
+            else if (selection == 3 && p4.health <= 0) selection = 2;
+            else if (selection == 1 && p2.health > 0) selection = 2;
+            else if (selection == 1 && p2.health <= 0) selection = 4;
+            selectingAllyArrows(selection);
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        {
+            soundManager.PlaySoundClip(3);
+            if (selection == 4 && p3.health > 0) selection = 3;
+            else if (selection == 4 && p3.health <= 0) selection = 1;
+            else if (selection == 2 && p1.health > 0) selection = 1;
+            else if (selection == 2 && p1.health <= 0) selection = 3;
+            selectingAllyArrows(selection);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+        {
+            soundManager.PlaySoundClip(3);
+            if (selection == 1 && p3.health > 0) selection = 3;
+            else if (selection == 1 && p3.health <= 0) selection = 4;
+            else if (selection == 2 && p4.health > 0) selection = 4;
+            else if (selection == 2 && p4.health <= 0) selection = 3;
+            selectingAllyArrows(selection);
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        {
+            soundManager.PlaySoundClip(3);
+            if (selection == 3 && p1.health > 0) selection = 1;
+            else if (selection == 3 && p1.health <= 0) selection = 2;
+            else if (selection == 4 && p2.health > 0) selection = 2;
+            else if (selection == 4 && p2.health <= 0) selection = 1;
+            selectingAllyArrows(selection);
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
+        {
+            beingDefended = selection;
+            chooseDefendText.gameObject.SetActive(false);
+            party1Arrow.gameObject.SetActive(false);
+            party2Arrow.gameObject.SetActive(false);
+            party3Arrow.gameObject.SetActive(false);
+            party4Arrow.gameObject.SetActive(false);
+
+            yield return new WaitForSeconds(.5f);////////////////////////////// ANIMATION IS ALLOWED TO SIMMER HERE
+            isSelectingAlly = false;
+            updatePlayerHealth(); //player sprites get reset back to base form here
+            resetMenu();
+            incrementTurn();
+            //checkForEndOfBattle();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
+        {
+            menuArrowTemp = currentMenuArrow;
+            Debug.Log("back out");
+            party1Arrow.gameObject.SetActive(false);
+            party2Arrow.gameObject.SetActive(false);
+            party3Arrow.gameObject.SetActive(false);
+            party4Arrow.gameObject.SetActive(false);
+            resetMenu();
+            isSelectingAlly = false;
+            chooseDefendText.gameObject.SetActive(false);
+            UpdatePartyArrow();
+        }
+    }
+    
+    public void selectingAllyArrows(int selection)
+    {
+        if(selection == 1)
+        {
+            party1Arrow.SetActive(true);
+            party2Arrow.SetActive(false);
+            party3Arrow.SetActive(false);
+            party4Arrow.SetActive(false);
+        }
+        else if (selection == 2)
+        {
+            party1Arrow.SetActive(false);
+            party2Arrow.SetActive(true);
+            party3Arrow.SetActive(false);
+            party4Arrow.SetActive(false);
+        }
+        else if (selection == 3)
+        {
+            party1Arrow.SetActive(false);
+            party2Arrow.SetActive(false);
+            party3Arrow.SetActive(true);
+            party4Arrow.SetActive(false);
+        }
+        else if (selection == 4)
+        {
+            party1Arrow.SetActive(false);
+            party2Arrow.SetActive(false);
+            party3Arrow.SetActive(false);
+            party4Arrow.SetActive(true);
+        }
+    }
+    
+    
+    public void protect()
+    {
+        menuArrowTemp = currentMenuArrow;
+        resetMenu();
+        BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p3 = player3.GetComponent<BattlePlayerScript>();
+        BattlePlayerScript p4 = player4.GetComponent<BattlePlayerScript>();
+        if (playerTurn == 1)
+        {
+            p1.defMultiplier += 50;
+        }
+        else if (playerTurn == 2)
+        {
+            p2.defMultiplier += 50;
+        }
+        else if (playerTurn == 3)
+        {
+            p3.defMultiplier += 50;
+        }
+        else if (playerTurn == 4)
+        {
+            p4.defMultiplier += 50;
+        }
+        incrementTurn();
     }
 
     public void invSlot1()

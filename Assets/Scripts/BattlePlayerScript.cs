@@ -9,7 +9,7 @@ public class BattlePlayerScript : MonoBehaviour
     public float slashMultiplier = 0;
     public float bashMultiplier = 0;
     public float pokeMultiplier = 0;
-    public float defMultiplier = 1.0f;
+    public float defMultiplier = 0f;
     public float accuracy = 95f;
     public float evasiveness = 5f;
     public Sprite characterSprite = null;
