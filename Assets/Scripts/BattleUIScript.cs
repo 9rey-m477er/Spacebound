@@ -963,10 +963,12 @@ public class BattleUIScript : MonoBehaviour
             StartCoroutine(EnemyAttackSequence()); // TURN THIS OFF TO DISABLE ENEMY ATTACKS
             if(p1.health > 0)
             {
+                Debug.Log("starting on player 1");
                 playerTurn = 1;
             }
             else if (p2.health > 0)
             {
+                Debug.Log("starting on player 2");
                 playerTurn = 2;
             }
             else if (p3.health > 0)
@@ -1408,6 +1410,25 @@ public class BattleUIScript : MonoBehaviour
 
         defender = 0;
         beingDefended = 0;
+
+        if (p1.health > 0)
+        {
+            Debug.Log("meowing on player 1");
+            playerTurn = 1;
+        }
+        else if (p2.health > 0)
+        {
+            Debug.Log("meowing on player 2");
+            playerTurn = 2;
+        }
+        else if (p3.health > 0)
+        {
+            playerTurn = 3;
+        }
+        else if (p4.health > 0)
+        {
+            playerTurn = 4;
+        }
 
         resetMenu();
         UpdatePartyArrow();
@@ -2451,7 +2472,7 @@ public class BattleUIScript : MonoBehaviour
             RectTransform rt4 = player4.GetComponent<RectTransform>();
             rt4.sizeDelta = new Vector2(p4.sprite.bounds.size.x * 16f, p4.sprite.bounds.size.y * 16f);
             string name = p4.sprite.name;
-            if (currentPlayer.health <= 0 && char4Dead)
+            if (currentPlayer.health <= 0 && !char4Dead)
             {
                 char4Dead = true;
                 p4.sprite = Resources.Load<Sprite>("Dead " + name);
