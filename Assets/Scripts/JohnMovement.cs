@@ -49,8 +49,8 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public List<EnemyStatSheet> gCavePool = new List<EnemyStatSheet>();
 
     public Color shipBG, shipTxt, forestBG, forestTxt, fcaveBG, fcaveTxt, fgconnBG, fgconnTxt, glacierBG, glacierTxt, gCaveBG, gCaveTxt;
-    public Image battleBacakground;
-    public TextMeshProUGUI battleHintText;
+    public Image battleBackground, bossBackground;
+    public TextMeshProUGUI battleHintText, bossHintText;
 
     public bool bobActive, stephvenActive, janetActive, thozosActive;
 
@@ -198,6 +198,10 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 specEncounter = forestSE;
                 encounterPool = new List<EnemyStatSheet>();
                 encounterPool = forestPool;
+                battleBackground.color = forestBG;
+                bossBackground.color = forestBG;
+                battleHintText.color = forestTxt;
+                bossHintText.color = forestTxt;
                 break;
             case 2: //Forest Cave
                 battleMusic = forestBM;
@@ -207,6 +211,10 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 specEncounter = caveSE;
                 encounterPool = new List<EnemyStatSheet>();
                 encounterPool = fCavePool;
+                battleBackground.color = fcaveBG;
+                bossBackground.color = fcaveBG;
+                battleHintText.color = fcaveTxt;
+                bossHintText.color = fcaveTxt;
                 break;
             case 3: //Forest Connector Cave
                 battleMusic = forestBM;
@@ -216,6 +224,10 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 specEncounter = caveSE;
                 encounterPool = new List<EnemyStatSheet>();
                 encounterPool = fgConnPool;
+                battleBackground.color = fgconnBG;
+                bossBackground.color = fgconnBG;
+                battleHintText.color = fgconnTxt;
+                bossHintText.color = fgconnTxt;
                 break;
             case 4: //Glacier
                 battleMusic = glacierBM;
@@ -225,6 +237,10 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 specEncounter = caveSE;
                 encounterPool = new List<EnemyStatSheet>();
                 encounterPool = glacierPool;
+                battleBackground.color = glacierBG;
+                bossBackground.color = glacierBG;
+                battleHintText.color = glacierTxt;
+                bossHintText.color = glacierTxt;
                 break;
             case 5: //Glacier Cave
                 battleMusic = glacierBM;
@@ -234,6 +250,10 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 specEncounter = caveSE;
                 encounterPool = new List<EnemyStatSheet>();
                 encounterPool = gCavePool;
+                battleBackground.color = gCaveBG;
+                bossBackground.color = gCaveBG;
+                battleHintText.color = gCaveTxt;
+                bossHintText.color = gCaveTxt;
                 break;
         }
         if (levelMusic != prevMusic)
