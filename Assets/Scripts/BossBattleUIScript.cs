@@ -120,6 +120,7 @@ public class BossBattleUIScript : MonoBehaviour
 
     public bool fled = false;
     public int expToGive;
+    public bool char1Dead, char2Dead, char3Dead, char4Dead;
 
     public TextMeshProUGUI turnName;
 
@@ -225,6 +226,11 @@ public class BossBattleUIScript : MonoBehaviour
         bigLogLine10.text = "";
         bigLogLine11.text = "";
         bigLogLine12.text = "";
+
+        char1Dead = false;
+        char2Dead = false;
+        char3Dead = false;
+        char4Dead = false;
 
         updateEnemyHealth();
 
@@ -1997,12 +2003,17 @@ public class BossBattleUIScript : MonoBehaviour
         string name1 = p1.sprite.name;
         if (currentPlayer.health <= 0)
         {
-            p1.sprite = Resources.Load<Sprite>("Dead " + name1);
-            updateBattleLog($"{p1.name} is unconscious!");
+            p1.sprite = currentPlayer.downedSprite;
+            rt.sizeDelta = new Vector2(p1.sprite.bounds.size.x * 16f, p1.sprite.bounds.size.y * 16f);
+            if (char1Dead == false)
+            {
+                updateBattleLog($"{currentPlayer.characterName} is unconscious!");
+                char1Dead = true;
+            }
         }
         else
         {
-            p1.sprite = Resources.Load<Sprite>("John Spacebound");
+            p1.sprite = currentPlayer.characterSprite;
         }
         playerHP1.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP1.sizeDelta.y);
 
@@ -2017,12 +2028,17 @@ public class BossBattleUIScript : MonoBehaviour
             string name2 = p2.sprite.name;
             if (currentPlayer.health <= 0)
             {
-                p2.sprite = Resources.Load<Sprite>("Dead " + name2);
-                updateBattleLog($"{p2.name} is unconscious!");
+                p2.sprite = currentPlayer.downedSprite;
+                rt2.sizeDelta = new Vector2(p2.sprite.bounds.size.x * 16f, p2.sprite.bounds.size.y * 16f);
+                if (char2Dead == false)
+                {
+                    updateBattleLog($"{currentPlayer.characterName} is unconscious!");
+                    char2Dead = true;
+                }
             }
             else
             {
-                p2.sprite = Resources.Load<Sprite>("Bob");
+                p2.sprite = currentPlayer.characterSprite;
             }
             playerHP2.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP2.sizeDelta.y);
         }
@@ -2034,16 +2050,21 @@ public class BossBattleUIScript : MonoBehaviour
             Image p3 = player3.GetComponent<Image>();
             p3.sprite = player3sprite.characterSprite;
             RectTransform rt3 = player3.GetComponent<RectTransform>();
-            rt3.sizeDelta = new Vector2(p3.sprite.bounds.size.x * 1f, p3.sprite.bounds.size.y * 1f);
+            rt3.sizeDelta = new Vector2(48, 48); //(p3.sprite.bounds.size.x * 1f, p3.sprite.bounds.size.y * 1f);
             string name = p3.sprite.name;
             if (currentPlayer.health <= 0)
             {
-                p3.sprite = Resources.Load<Sprite>("Dead " + name);
-                updateBattleLog($"{p3.name} is unconscious!");
+                p3.sprite = currentPlayer.downedSprite;
+                rt3.sizeDelta = new Vector2(48, 48); //(p3.sprite.bounds.size.x * 1f, p3.sprite.bounds.size.y * 1f);
+                if (char3Dead == false)
+                {
+                    updateBattleLog($"{currentPlayer.characterName} is unconscious!");
+                    char3Dead = true;
+                }
             }
             else
             {
-                p3.sprite = Resources.Load<Sprite>("Thozos");
+                p3.sprite = currentPlayer.characterSprite;
             }
             playerHP3.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP3.sizeDelta.y);
         }
@@ -2059,12 +2080,17 @@ public class BossBattleUIScript : MonoBehaviour
             string name = p4.sprite.name;
             if (currentPlayer.health <= 0)
             {
-                p4.sprite = Resources.Load<Sprite>("Dead " + name);
-                updateBattleLog($"{p4.name} is unconscious!");
+                p4.sprite = currentPlayer.downedSprite;
+                rt4.sizeDelta = new Vector2(p4.sprite.bounds.size.x * 16f, p4.sprite.bounds.size.y * 16f);
+                if (char4Dead == false)
+                {
+                    updateBattleLog($"{currentPlayer.characterName} is unconscious!");
+                    char4Dead = true;
+                }
             }
             else
             {
-                p4.sprite = Resources.Load<Sprite>("Janet");
+                p4.sprite = currentPlayer.characterSprite;
             }
             playerHP4.sizeDelta = new Vector2((currentPlayer.health / currentPlayer.startingHealth) * 180, playerHP4.sizeDelta.y);
         }
