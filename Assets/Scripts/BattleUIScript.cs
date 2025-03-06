@@ -184,6 +184,9 @@ public class BattleUIScript : MonoBehaviour
 
     public int selection;
 
+    public int fleeChance = 100;
+    public TextMeshProUGUI fleeText;
+
     void OnEnable()
     {
         resetMenu();
@@ -296,6 +299,8 @@ public class BattleUIScript : MonoBehaviour
         playerTeamSpawn();
         isBattleOver = false;
         isSelectingAlly = false;
+
+        fleeText.text = fleeChance + "% Chance";
     }
 
     public void playerTeamSpawn()
@@ -2538,17 +2543,33 @@ public class BattleUIScript : MonoBehaviour
         }
 
 
-        if (e1.health <= 0 && e2.health <= 0 && e3.health <= 0 && e4.health <= 0)
+        if (e1.health <= 0 && e2.health <= 0 && e3.health <= 0 && e4.health <= 0) //battle won
         {
             isBattleOver = true;
+            fleeChance = 100;
         }
     }
 
     public void fleeButtonClick()
     {
-        resetMenu();
-        fled = true;
-        StartCoroutine(exitBattle());
+        if(Random.Range(0,100) > fleeChance)
+        {
+            resetMenu();
+            incrementTurn();
+            updateBattleLog("The party failed to escape!");
+            currentMenuArrow = 1;
+            updateMenuArrows();
+        }
+        else
+        {
+            fleeChance = fleeChance - 10;
+            if(fleeChance < 0)
+            {
+                fleeChance = 0;
+            }
+            fled = true;
+            StartCoroutine(exitBattle());
+        }
     }
 
     public IEnumerator exitBattle()
