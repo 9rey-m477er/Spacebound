@@ -1330,6 +1330,26 @@ public class BossBattleUIScript : MonoBehaviour
         defender = 0;
         beingDefended = 0;
 
+
+        if (p1.health > 0)
+        {
+            Debug.Log("meowing on player 1");
+            playerTurn = 1;
+        }
+        else if (p2.health > 0)
+        {
+            Debug.Log("meowing on player 2");
+            playerTurn = 2;
+        }
+        else if (p3.health > 0)
+        {
+            playerTurn = 3;
+        }
+        else if (p4.health > 0)
+        {
+            playerTurn = 4;
+        }
+
         resetMenu();
         UpdatePartyArrow();
     }
@@ -1509,22 +1529,18 @@ public class BossBattleUIScript : MonoBehaviour
         if (playerTurn == 1)
         {
             defender = 1;
-            p1.defMultiplier += 20;
         }
         else if (playerTurn == 2)
         {
             defender = 2;
-            p2.defMultiplier += 20;
         }
         else if (playerTurn == 3)
         {
             defender = 3;
-            p3.defMultiplier += 20;
         }
         else if (playerTurn == 4)
         {
             defender = 4;
-            p4.defMultiplier += 20;
         }
 
         chooseDefendText.gameObject.SetActive(true);
@@ -1584,6 +1600,39 @@ public class BossBattleUIScript : MonoBehaviour
             party2Arrow.gameObject.SetActive(false);
             party3Arrow.gameObject.SetActive(false);
             party4Arrow.gameObject.SetActive(false);
+
+            if (defender == 1)
+            {
+                p1.defMultiplier += 20;
+                if (p1.defMultiplier > 100)
+                {
+                    p1.defMultiplier = 100;
+                }
+            }
+            else if (defender == 2)
+            {
+                p2.defMultiplier += 20;
+                if (p2.defMultiplier > 100)
+                {
+                    p2.defMultiplier = 100;
+                }
+            }
+            else if (defender == 3)
+            {
+                p3.defMultiplier += 20;
+                if (p3.defMultiplier > 100)
+                {
+                    p3.defMultiplier = 100;
+                }
+            }
+            else if (defender == 4)
+            {
+                p4.defMultiplier += 20;
+                if (p4.defMultiplier > 100)
+                {
+                    p4.defMultiplier = 100;
+                }
+            }
 
             yield return new WaitForSeconds(.5f);////////////////////////////// ANIMATION IS ALLOWED TO SIMMER HERE
             isSelectingAlly = false;

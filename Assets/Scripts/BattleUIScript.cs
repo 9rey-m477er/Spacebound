@@ -1647,22 +1647,18 @@ public class BattleUIScript : MonoBehaviour
         if (playerTurn == 1)
         {
             defender = 1;
-            p1.defMultiplier += 20;
         }
         else if (playerTurn == 2)
         {
             defender = 2;
-            p2.defMultiplier += 20;
         }
         else if (playerTurn == 3)
         {
             defender = 3;
-            p3.defMultiplier += 20;
         }
         else if (playerTurn == 4)
         {
             defender = 4;
-            p4.defMultiplier += 20;
         }
 
         chooseDefendText.gameObject.SetActive(true);
@@ -1723,6 +1719,38 @@ public class BattleUIScript : MonoBehaviour
             party3Arrow.gameObject.SetActive(false);
             party4Arrow.gameObject.SetActive(false);
 
+            if(defender == 1)
+            {
+                p1.defMultiplier += 20;
+                if(p1.defMultiplier > 100)
+                {
+                    p1.defMultiplier = 100;
+                }
+            }
+            else if(defender == 2)
+            {
+                p2.defMultiplier += 20;
+                if (p2.defMultiplier > 100)
+                {
+                    p2.defMultiplier = 100;
+                }
+            }
+            else if (defender == 3)
+            {
+                p3.defMultiplier += 20;
+                if (p3.defMultiplier > 100)
+                {
+                    p3.defMultiplier = 100;
+                }
+            }
+            else if (defender == 4)
+            {
+                p4.defMultiplier += 20;
+                if (p4.defMultiplier > 100)
+                {
+                    p4.defMultiplier = 100;
+                }
+            }
             yield return new WaitForSeconds(.5f);////////////////////////////// ANIMATION IS ALLOWED TO SIMMER HERE
             isSelectingAlly = false;
             updatePlayerHealth(); //player sprites get reset back to base form here
