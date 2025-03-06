@@ -21,7 +21,7 @@ MonoBehaviour:
   pokeMultiplier: 1
   health: 275
   attackStrength: 7
-  baseExpValue: 0
+  baseExpValue: 50
   canFlee: 0
   enemyAttacks:
   - {fileID: 11400000, guid: ade3fe6fa7b6106479127f631ee9dcc6, type: 2}
