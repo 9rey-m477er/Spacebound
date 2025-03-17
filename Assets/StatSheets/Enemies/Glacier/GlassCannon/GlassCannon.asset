@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e03aba36b32024c9ddf13a8e14e08d, type: 3}
+  m_Name: GlassCannon
+  m_EditorClassIdentifier: 
+  enemyName: Glass Cannon
+  sprite: {fileID: -2591697541961547414, guid: 416fd32be9d9c9b43b1561192da2bc56, type: 3}
+  encounterIntro: {fileID: 8300000, guid: f3019d5c49ad3d645902e29ed70fad64, type: 3}
+  encounterMusic: {fileID: 8300000, guid: 1356138e00fa7fe4dab0a2df324a0fd5, type: 3}
+  bashMultiplier: 1
+  slashMultiplier: 0.5
+  pokeMultiplier: 0.5
+  health: 300
+  attackStrength: 50
+  baseExpValue: 600
+  canFlee: 0
+  enemyAttacks:
+  - {fileID: 11400000, guid: 8507af0965f4f51429145e717b019d3a, type: 2}
+  - {fileID: 11400000, guid: 9431af463f32bde49910cd752c5eec09, type: 2}

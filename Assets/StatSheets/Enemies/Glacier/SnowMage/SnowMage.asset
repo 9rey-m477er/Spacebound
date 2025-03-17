@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Snow Mage
   sprite: {fileID: 3299541802283406644, guid: ec91a04aaa6ceb0409c84a8adc12f2ee, type: 3}
-  encounterIntro: {fileID: 8300000, guid: 09b867ec2ecad144abb8c967963b0717, type: 3}
-  encounterMusic: {fileID: 8300000, guid: f28c6fca85aba714f8e6c02cbb6ac3a3, type: 3}
+  encounterIntro: {fileID: 8300000, guid: dca02357341a9924ba54c0f430aa7dd5, type: 3}
+  encounterMusic: {fileID: 8300000, guid: 231f5c581b47114479fff4b516742013, type: 3}
   bashMultiplier: 0.5
   slashMultiplier: 0.5
   pokeMultiplier: 1
