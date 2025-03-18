@@ -1349,19 +1349,48 @@ public class BattleUIScript : MonoBehaviour
                             yield return new WaitForSeconds(0.75f);
 
                             // Deal damage using the enemy's attackStrength and the attack's attackStrength
-                            int accuracyCheck = Random.Range(0, 100);                            
-                            
+                            int accuracyCheck = Random.Range(0, 100);
+                            //////
+                            int textTarget = 0;
+                            if (target == players[0])
+                            {
+                                textTarget = 1;
+                            }
+                            else if (target == players[1])
+                            {
+                                textTarget = 2;
+                            }
+                            else if (target == players[2])
+                            {
+                                textTarget = 3;
+                            }
+                            else if (target == players[3])
+                            {
+                                textTarget = 4;
+                            }
+                            /////
+
+                            Transform textHolder = null;
+
+                            if (textTarget == 1) textHolder = player1.transform.Find("textHolder(p1)");
+                            else if (textTarget == 2) textHolder = player2.transform.Find("textHolder(p2)");
+                            else if (textTarget == 3) textHolder = player3.transform.Find("textHolder(p3)");
+                            else if (textTarget == 4) textHolder = player4.transform.Find("textHolder(p4)");
+
                             if (enemyScript.accuracy - targetDodge < accuracyCheck) //miss
                             {
                                 Debug.Log($"{target.characterName} dodged the {enemyScript.enemyName + "'s attack"}! (0 HP)");
                                 battleLogEntry = $"{target.characterName} dodged the {enemyScript.enemyName + "'s attack"}! (0 HP)";
+                                ShowFloatingText("Miss!", textHolder.position, textHolder);
                             }
                             else
                             {
                                 target.health -= (enemyScript.attackStrength + chosenAttack.attackStrength) * ((100 - target.defMultiplier) / 100);
+                                float temp = (enemyScript.attackStrength + chosenAttack.attackStrength) * ((100 - target.defMultiplier) / 100);
                                 //Write the Attack to the Battle Log
                                 Debug.Log($"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} HP)");
                                 battleLogEntry = $"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} HP)";
+                                ShowFloatingText(enemyScript.attackStrength.ToString(), textHolder.position, textHolder);
                             }
 
                             updateBattleLog(battleLogEntry);
@@ -1419,12 +1448,12 @@ public class BattleUIScript : MonoBehaviour
 
         if (p1.health > 0)
         {
-            Debug.Log("meowing on player 1");
+            //Debug.Log("meowing on player 1");
             playerTurn = 1;
         }
         else if (p2.health > 0)
         {
-            Debug.Log("meowing on player 2");
+            //Debug.Log("meowing on player 2");
             playerTurn = 2;
         }
         else if (p3.health > 0)
@@ -2135,12 +2164,24 @@ public class BattleUIScript : MonoBehaviour
         BattleEnemyScript e3 = enemy3.GetComponent<BattleEnemyScript>();
         BattleEnemyScript e4 = enemy4.GetComponent<BattleEnemyScript>();
 
+
+
         int currentAttacker = playerTurn;
         int selectedEnemy = 0;
         string attackerName = string.Empty;
         string attackDesc = string.Empty;
         string enemyName = string.Empty;
         string readoutDamage = string.Empty;
+
+
+        Transform textHolder = null;
+        if (selectedEnemy == 1) textHolder = enemy1.transform.Find("textHolder(e1)");
+        else if (selectedEnemy == 2) textHolder = enemy2.transform.Find("textHolder(e2)");
+        else if (selectedEnemy == 3) textHolder = enemy3.transform.Find("textHolder(e3)");
+        else if (selectedEnemy == 4) textHolder = enemy4.transform.Find("textHolder(e4)");
+
+
+
         switch (currentEnemy)
         {
             case 1:
@@ -2208,6 +2249,13 @@ public class BattleUIScript : MonoBehaviour
                     selectedEnemyScript.health -= damage;
                     attackDesc = "missed";
                     enemyName = selectedEnemyScript.enemyName;
+
+                    if (selectedEnemy == 1) textHolder = enemy1.transform.Find("textHolder(e1)");
+                    else if (selectedEnemy == 2) textHolder = enemy2.transform.Find("textHolder(e2)");
+                    else if (selectedEnemy == 3) textHolder = enemy3.transform.Find("textHolder(e3)");
+                    else if (selectedEnemy == 4) textHolder = enemy4.transform.Find("textHolder(e4)");
+
+                    ShowFloatingText("Miss!", textHolder.position, textHolder);
                 }
                 else
                 {
@@ -2215,6 +2263,13 @@ public class BattleUIScript : MonoBehaviour
                     selectedEnemyScript.health -= damage;
                     attackDesc = "bashed";
                     enemyName = selectedEnemyScript.enemyName;
+
+                    if (selectedEnemy == 1) textHolder = enemy1.transform.Find("textHolder(e1)");
+                    else if (selectedEnemy == 2) textHolder = enemy2.transform.Find("textHolder(e2)");
+                    else if (selectedEnemy == 3) textHolder = enemy3.transform.Find("textHolder(e3)");
+                    else if (selectedEnemy == 4) textHolder = enemy4.transform.Find("textHolder(e4)");
+
+                    ShowFloatingText(damage.ToString(), textHolder.position, textHolder);
                 }
 
             }
@@ -2234,24 +2289,31 @@ public class BattleUIScript : MonoBehaviour
                     {
                         attack1damage = 0;
                         attackDesc = "missed";
+                        ShowFloatingText("Miss!", e1.transform.Find("textHolder(e1)").position, e1.transform.Find("textHolder(e1)"));
                     }
                     else //hit
                     {
                         e1.health -= attack1damage;
+                        ShowFloatingText(attack1damage.ToString(), e1.transform.Find("textHolder(e1)").position, e1.transform.Find("textHolder(e1)"));
                     }
 
                     if ((attacker.accuracy - e2.evasiveness) < accuracyCheck) //miss
                     {
                         attack2damage = 0;
                         attackDesc = "missed";
+                        ShowFloatingText("Miss!", e2.transform.Find("textHolder(e2)").position, e2.transform.Find("textHolder(e2)"));
+
                     }
                     else //hit
                     {
                         e2.health -= attack2damage;
+                        ShowFloatingText(attack2damage.ToString(), e2.transform.Find("textHolder(e2)").position, e2.transform.Find("textHolder(e2)"));
+
                     }
 
                     readoutDamage = attack1damage.ToString() + " / " + attack2damage.ToString();
                     enemyName = ($"{e1.enemyName} and {e2.enemyName}");
+
                 }
                 else if (selectedEnemy == 3 || selectedEnemy == 4)
                 {
@@ -2259,20 +2321,28 @@ public class BattleUIScript : MonoBehaviour
                     {
                         attack1damage = 0;
                         attackDesc = "missed";
+                        ShowFloatingText("Miss!", e3.transform.Find("textHolder(e3)").position, e3.transform.Find("textHolder(e3)"));
+
                     }
                     else //hit
                     {
                         e3.health -= attack1damage;
+                        ShowFloatingText(attack1damage.ToString(), e3.transform.Find("textHolder(e3)").position, e3.transform.Find("textHolder(e3)"));
+
                     }
 
                     if ((attacker.accuracy - e4.evasiveness) < accuracyCheck) //miss
                     {
                         attack2damage = 0;
                         attackDesc = "missed";
+                        ShowFloatingText("Miss!", e4.transform.Find("textHolder(e4)").position, e4.transform.Find("textHolder(e4)"));
+
                     }
                     else //hit
                     {
                         e4.health -= attack2damage;
+                        ShowFloatingText(attack2damage.ToString(), e4.transform.Find("textHolder(e4)").position, e4.transform.Find("textHolder(e4)"));
+
                     }
 
                     readoutDamage = attack1damage.ToString() + " / " + attack2damage.ToString();
@@ -2294,20 +2364,26 @@ public class BattleUIScript : MonoBehaviour
                     {
                         attack1damage = 0;
                         attackDesc = "missed";
+                        ShowFloatingText("Miss!", e1.transform.Find("textHolder(e1)").position, e1.transform.Find("textHolder(e1)"));
+
                     }
                     else //hit
                     {
                         e1.health -= attack1damage;
+                        ShowFloatingText(attack1damage.ToString(), e1.transform.Find("textHolder(e1)").position, e1.transform.Find("textHolder(e1)"));
+
                     }
 
                     if ((attacker.accuracy - e3.evasiveness) < accuracyCheck) //miss
                     {
                         attack2damage = 0;
                         attackDesc = "missed";
+                        ShowFloatingText("Miss!", e3.transform.Find("textHolder(e3)").position, e3.transform.Find("textHolder(e3)"));
                     }
                     else //hit
                     {
                         e3.health -= attack2damage;
+                        ShowFloatingText(attack2damage.ToString(), e3.transform.Find("textHolder(e3)").position, e3.transform.Find("textHolder(e3)"));
                     }
 
                     readoutDamage = attack1damage.ToString() + " / " + attack2damage.ToString();
@@ -2319,20 +2395,25 @@ public class BattleUIScript : MonoBehaviour
                     {
                         attack1damage = 0;
                         attackDesc = "missed";
+                        ShowFloatingText("Miss!", e2.transform.Find("textHolder(e2)").position, e2.transform.Find("textHolder(e2)"));
                     }
                     else //hit
                     {
                         e2.health -= attack1damage;
+                        ShowFloatingText(attack1damage.ToString(), e2.transform.Find("textHolder(e2)").position, e2.transform.Find("textHolder(e2)"));
+
                     }
 
                     if ((attacker.accuracy - e4.evasiveness) < accuracyCheck) //miss
                     {
                         attack2damage = 0;
                         attackDesc = "missed";
+                        ShowFloatingText("Miss!", e4.transform.Find("textHolder(e4)").position, e4.transform.Find("textHolder(e4)"));
                     }
                     else //hit
                     {
                         e4.health -= attack2damage;
+                        ShowFloatingText(attack2damage.ToString(), e4.transform.Find("textHolder(e4)").position, e4.transform.Find("textHolder(e4)"));
                     }
 
                     readoutDamage = attack1damage.ToString() + " / " + attack2damage.ToString();
@@ -2352,6 +2433,14 @@ public class BattleUIScript : MonoBehaviour
                     selectedEnemyScript.health -= attackPower;
                     attackDesc = "missed";
                     enemyName = selectedEnemyScript.enemyName;
+
+
+                    if (selectedEnemy == 1) textHolder = enemy1.transform.Find("textHolder(e1)");
+                    else if (selectedEnemy == 2) textHolder = enemy2.transform.Find("textHolder(e2)");
+                    else if (selectedEnemy == 3) textHolder = enemy3.transform.Find("textHolder(e3)");
+                    else if (selectedEnemy == 4) textHolder = enemy4.transform.Find("textHolder(e4)");
+
+                    ShowFloatingText("Miss!", textHolder.position, textHolder);
                 }
                 else
                 {
@@ -2359,14 +2448,50 @@ public class BattleUIScript : MonoBehaviour
                     selectedEnemyScript.health -= attackPower;
                     attackDesc = "threw a rock at";
                     enemyName = selectedEnemyScript.enemyName;
+
+
+                    if (selectedEnemy == 1) textHolder = enemy1.transform.Find("textHolder(e1)");
+                    else if (selectedEnemy == 2) textHolder = enemy2.transform.Find("textHolder(e2)");
+                    else if (selectedEnemy == 3) textHolder = enemy3.transform.Find("textHolder(e3)");
+                    else if (selectedEnemy == 4) textHolder = enemy4.transform.Find("textHolder(e4)");
+
+                    ShowFloatingText(attackPower.ToString(), textHolder.position, textHolder);
                 }
             }
             currentAttack = 'n';
             soundManager.PlaySoundClip(6);
+
+
+            /*if (attackPower > 0)
+            {
+                ShowFloatingText(attackPower.ToString(), textHolder.position, textHolder);
+            }*/
+
             updateBattleLog($"{attackerName} {attackDesc} {enemyName}! ({readoutDamage} HP)");
             //Debug.Log("Attacked enemy " + currentEnemy + ", remaining health: " + selectedEnemyScript.health); //BATTLE NARRATION
         }
     }
+    public void ShowFloatingText(string message, Vector3 position, Transform parent)
+    {
+        GameObject floatingTextPrefab = Resources.Load<GameObject>("damageTMP");
+        GameObject floatingText = Instantiate(floatingTextPrefab, position, Quaternion.identity, parent);
+
+        // Get all TMP components in children
+        TextMeshProUGUI[] textComponents = floatingText.GetComponentsInChildren<TextMeshProUGUI>();
+
+        if (textComponents.Length > 0)
+        {
+            foreach (var tmp in textComponents)
+            {
+                tmp.text = message; // Apply message to all TMP objects
+            }
+        }
+        else
+        {
+            Debug.LogError("No TextMeshProUGUI components found in the instantiated prefab!");
+        }
+    }
+
 
     public void updateEnemyHealth()
     {

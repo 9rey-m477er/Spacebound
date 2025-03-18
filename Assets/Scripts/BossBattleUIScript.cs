@@ -1309,17 +1309,48 @@ public class BossBattleUIScript : MonoBehaviour
                             yield return new WaitForSeconds(0.75f);
                             // Deal damage using the enemy's attackStrength and the attack's attackStrength
                             int accuracyCheck = Random.Range(0, 100);
+
+                            //////
+                            int textTarget = 0;
+                            if (target == players[0])
+                            {
+                                textTarget = 1;
+                            }
+                            else if (target == players[1])
+                            {
+                                textTarget = 2;
+                            }
+                            else if (target == players[2])
+                            {
+                                textTarget = 3;
+                            }
+                            else if (target == players[3])
+                            {
+                                textTarget = 4;
+                            }
+                            /////
+
+                            Transform textHolder = null;
+
+                            if (textTarget == 1) textHolder = player1.transform.Find("textHolder(p1)");
+                            else if (textTarget == 2) textHolder = player2.transform.Find("textHolder(p2)");
+                            else if (textTarget == 3) textHolder = player3.transform.Find("textHolder(p3)");
+                            else if (textTarget == 4) textHolder = player4.transform.Find("textHolder(p4)");
+
                             if (enemyScript.accuracy - targetDodge < accuracyCheck) //miss
                             {
-                                Debug.Log($"{target.characterName} dodged the {enemyScript.enemyName}'s attack! (0 HP)");
-                                battleLogEntry = $"{target.characterName} dodged the {enemyScript.enemyName}'s attack! (0 HP)";
+                                Debug.Log($"{target.characterName} dodged the {enemyScript.enemyName + "'s attack"}! (0 HP)");
+                                battleLogEntry = $"{target.characterName} dodged the {enemyScript.enemyName + "'s attack"}! (0 HP)";
+                                ShowFloatingText("Miss!", textHolder.position, textHolder);
                             }
                             else
                             {
-                                target.health -= (enemyScript.attackStrength + chosenAttack.attackStrength) * ((100 - target.defMultiplier) / 100);                               
+                                target.health -= (enemyScript.attackStrength + chosenAttack.attackStrength) * ((100 - target.defMultiplier) / 100);
+                                float temp = (enemyScript.attackStrength + chosenAttack.attackStrength) * ((100 - target.defMultiplier) / 100);
                                 //Write the Attack to the Battle Log
                                 Debug.Log($"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} HP)");
                                 battleLogEntry = $"{target.characterName} {attackReadout} {enemyScript.enemyName}! ({enemyScript.attackStrength} HP)";
+                                ShowFloatingText(enemyScript.attackStrength.ToString(), textHolder.position, textHolder);
                             }
 
                             updateBattleLog(battleLogEntry);
@@ -1378,12 +1409,12 @@ public class BossBattleUIScript : MonoBehaviour
 
         if (p1.health > 0)
         {
-            Debug.Log("meowing on player 1");
+            //Debug.Log("meowing on player 1");
             playerTurn = 1;
         }
         else if (p2.health > 0)
         {
-            Debug.Log("meowing on player 2");
+            //Debug.Log("meowing on player 2");
             playerTurn = 2;
         }
         else if (p3.health > 0)
@@ -1398,6 +1429,28 @@ public class BossBattleUIScript : MonoBehaviour
         resetMenu();
         UpdatePartyArrow();
     }
+
+    public void ShowFloatingText(string message, Vector3 position, Transform parent)
+    {
+        GameObject floatingTextPrefab = Resources.Load<GameObject>("damageTMP");
+        GameObject floatingText = Instantiate(floatingTextPrefab, position, Quaternion.identity, parent);
+
+        // Get all TMP components in children
+        TextMeshProUGUI[] textComponents = floatingText.GetComponentsInChildren<TextMeshProUGUI>();
+
+        if (textComponents.Length > 0)
+        {
+            foreach (var tmp in textComponents)
+            {
+                tmp.text = message; // Apply message to all TMP objects
+            }
+        }
+        else
+        {
+            Debug.LogError("No TextMeshProUGUI components found in the instantiated prefab!");
+        }
+    }
+
     public void partyReticle(int target)
     {
         if (target == 1)
@@ -1882,6 +1935,7 @@ public class BossBattleUIScript : MonoBehaviour
         string enemyName = string.Empty;
         string readoutDamage = string.Empty;
 
+        Transform textHolder = enemy1.transform.Find("textHolder(e1)");
         ////////////////////////////////// -- ATTACK ANIMATIONS THIS CHANGES CURRENT IMAGE TO THE IMAGE ATTACHED TO IMAGE COMPONENT OF FRONTLINE/BACKLINE GAMEOBJECT
         if (currentAttacker == 1)
         {
@@ -1930,6 +1984,8 @@ public class BossBattleUIScript : MonoBehaviour
                     selectedEnemyScript.health -= damage;
                     attackDesc = "missed";
                     enemyName = selectedEnemyScript.enemyName;
+                    ShowFloatingText("Miss!", textHolder.position, textHolder);
+
                 }
                 else
                 {
@@ -1937,6 +1993,8 @@ public class BossBattleUIScript : MonoBehaviour
                     selectedEnemyScript.health -= damage;
                     attackDesc = "bashed";
                     enemyName = selectedEnemyScript.enemyName;
+                    ShowFloatingText(damage.ToString(), textHolder.position, textHolder);
+
                 }
             }
             else if (currentAttack == 's') //slash
@@ -1950,6 +2008,8 @@ public class BossBattleUIScript : MonoBehaviour
                     selectedEnemyScript.health -= damage;
                     attackDesc = "missed";
                     enemyName = selectedEnemyScript.enemyName;
+                    ShowFloatingText("Miss!", textHolder.position, textHolder);
+
                 }
                 else
                 {
@@ -1957,6 +2017,8 @@ public class BossBattleUIScript : MonoBehaviour
                     selectedEnemyScript.health -= damage;
                     attackDesc = "slashed";
                     enemyName = selectedEnemyScript.enemyName;
+                    ShowFloatingText(damage.ToString(), textHolder.position, textHolder);
+
                 }
             }
             else if (currentAttack == 'p') //poke
@@ -1970,6 +2032,8 @@ public class BossBattleUIScript : MonoBehaviour
                     selectedEnemyScript.health -= damage;
                     attackDesc = "missed";
                     enemyName = selectedEnemyScript.enemyName;
+                    ShowFloatingText("Miss!", textHolder.position, textHolder);
+
                 }
                 else
                 {
@@ -1977,6 +2041,8 @@ public class BossBattleUIScript : MonoBehaviour
                     selectedEnemyScript.health -= damage;
                     attackDesc = "poked";
                     enemyName = selectedEnemyScript.enemyName;
+                    ShowFloatingText(damage.ToString(), textHolder.position, textHolder);
+
                 }
             }
             else if (currentAttack == 'r') //rock
@@ -1990,6 +2056,8 @@ public class BossBattleUIScript : MonoBehaviour
                     selectedEnemyScript.health -= damage;
                     attackDesc = "missed";
                     enemyName = selectedEnemyScript.enemyName;
+                    ShowFloatingText("Miss!", textHolder.position, textHolder);
+
                 }
                 else
                 {
@@ -1997,6 +2065,8 @@ public class BossBattleUIScript : MonoBehaviour
                     selectedEnemyScript.health -= damage;
                     attackDesc = "threw a rock at";
                     enemyName = selectedEnemyScript.enemyName;
+                    ShowFloatingText(damage.ToString(), textHolder.position, textHolder);
+
                 }
             }
             currentAttack = 'n';
