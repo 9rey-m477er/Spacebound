@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
+  m_Name: AfterT.H.EIntro
+  m_EditorClassIdentifier: 
+  speakerNames:
+  - Janet
+  - Bob
+  - Steven
+  - John
+  - Stevphen
+  - John
+  - John
+  paragraphs:
+  - What was that all about?
+  - Yeah. Mission? I signed up for a vacation.
+  - "Let\u2019s go along with it. I mean, the AI did mention an artifact."
+  - "Steven\u2019s right."
+  - "My name is spelled with a \"ph\", dammit. We\u2019ve been over this, John!"
+  - Sorry, Stevphen.
+  - "Anyway, we should head to the simulation room. T.H.E. would probably pester
+    us if we didn\u2019t."

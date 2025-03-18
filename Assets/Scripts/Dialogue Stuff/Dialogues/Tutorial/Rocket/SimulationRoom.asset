@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
+  m_Name: SimulationRoom
+  m_EditorClassIdentifier: 
+  speakerNames:
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - Bob
+  - John
+  - Bob
+  - Stevphen
+  - Janet
+  - John
+  paragraphs:
+  - Welcome to the Simulation Room.
+  - Here, you will engage in combat training. This will help you learn how to battle
+    any enemies that stand in your way.
+  - To begin, please use the monitor to select a weapon of your choice and put on
+    the VR goggles.
+  - "No weapon. I\u2019ll use my fists!"
+  - "You think that\u2019s wise?"
+  - Yes.
+  - "Dumbass. I\u2019m going for the sword."
+  - "I like that drill-looking spear. I\u2019m going for that."
+  - (Which weapon should I go for?)

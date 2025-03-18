@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
+  m_Name: BlastedOff
+  m_EditorClassIdentifier: 
+  speakerNames:
+  - Bob
+  - Steven
+  - Janet
+  - John
+  - Bob
+  - John
+  - Bob
+  - Janet
+  - John
+  - Steven
+  - Bob
+  - Steven
+  - Janet
+  - Janet
+  - John
+  - John
+  - Steven
+  - Steven
+  - Bob
+  - Steven
+  - Bob
+  paragraphs:
+  - Whoo! We did it!
+  - Do you have to be so loud?
+  - Let him have his moment.
+  - "Honestly, I never thought we\u2019d make it to space\u2014let alone get inside
+    the rocket."
+  - Good thing the workers finished in time.
+  - "Yeah, that would\u2019ve been a problem if they hadn\u2019t."
+  - Planet Sanctuary, here we come!
+  - Great idea suggesting this, John.
+  - Hey, we earned it.
+  - "I wonder what we\u2019re going to spend the money on?"
+  - How much do we have?
+  - "A million. We\u2019ll split it evenly when we land."
+  - "I\u2019m getting a makeover. I heard their salon is excellent."
+  - Might also pick up some jewelry.
+  - "I\u2019m working on my body. There\u2019s a contest at the beach, and I\u2019m
+    going to win it."
+  - "Might grab some special clothes for extra flair.\r"
+  - "You know me - I\u2019m hitting up the electronics convention. I heard about
+    a highly advanced computer.\r\n"
+  - "Might end up buying it.\r"
+  - Nerd!
+  - Well, Bob, what are you going to do?
+  - "I don\u2019t know. Maybe -"

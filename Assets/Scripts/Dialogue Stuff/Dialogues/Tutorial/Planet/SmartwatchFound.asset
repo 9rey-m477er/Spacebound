@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
+  m_Name: SmartwatchFound
+  m_EditorClassIdentifier: 
+  speakerNames:
+  - John
+  - T.H.E
+  - John
+  - T.H.E
+  - T.H.E
+  - John
+  - T.H.E
+  - John
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - John
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - John
+  - T.H.E
+  - John
+  paragraphs:
+  - Are you alright?
+  - "I\u2019m fine. Are the others with you?"
+  - "Haven\u2019t seen them."
+  - "Don\u2019t worry, I\u2019m able to ascertain their location. The escape pods
+    have trackers in them."
+  - Did you come from the escape pod by the rocket?
+  - I did.
+  - So, the remaining ones can be found in each biome.
+  - Biome?
+  - While searching, I also gathered intel about where we are.
+  - This planet has three biomes, and we crashed right near a convenience store.
+  - The others can be found in the Forest, Glacier, and Volcano biomes.
+  - "So, this is not the planet we\u2019re supposed to be on?"
+  - "No, this is a different planet. I don\u2019t have enough information, so you
+    may have to investigate."
+  - However, reuniting with the others solves one problem.
+  - When the rocket crashed, a few pieces flew off into each of the biomes.
+  - "Until we get those back, we won\u2019t be able to leave."
+  - "Don\u2019t worry, I\u2019ll get them back for you."
+  - Thank you. Before you go, take anything you need from the rocket and the smartwatch
+    so we can communicate.
+  - Will do.

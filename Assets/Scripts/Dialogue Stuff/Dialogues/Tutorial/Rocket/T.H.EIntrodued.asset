@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
+  m_Name: T.H.EIntrodued
+  m_EditorClassIdentifier: 
+  speakerNames:
+  - ???
+  - John
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  paragraphs:
+  - "Greetings, everyone! You must be the four embarking on today\u2019s mission."
+  - Um, who are you?
+  - "Oh, the workers didn\u2019t inform you? I am The Helpful Expeditionist, or T.H.E.
+    for short."
+  - "I\u2019m here to guide you on a mission to retrieve a golden artifact from Planet
+    SF-BW."
+  - This is a challenging mission, as the planet is home to some not-so-friendly
+    monsters.
+  - "Not to worry\u2014I have specialized training prepared for you all."
+  - Please proceed to the large room at the back of the ship for a battle simulation
+    training.
+  - I will meet you there shortly.
