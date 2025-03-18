@@ -2242,34 +2242,31 @@ public class BattleUIScript : MonoBehaviour
             {
                 int damage = (int)(attackPower * attacker.bashMultiplier * selectedEnemyScript.bashMultiplier);
                 int accuracyCheck = Random.Range(0, 100);
-                if((attacker.accuracy - selectedEnemyScript.evasiveness) < accuracyCheck) //if miss
+
+
+                if ((attacker.accuracy - selectedEnemyScript.evasiveness) < accuracyCheck) //if miss
                 {
                     damage = 0;
                     readoutDamage = damage.ToString();
-                    selectedEnemyScript.health -= damage;
                     attackDesc = "missed";
                     enemyName = selectedEnemyScript.enemyName;
 
-                    if (selectedEnemy == 1) textHolder = enemy1.transform.Find("textHolder(e1)");
-                    else if (selectedEnemy == 2) textHolder = enemy2.transform.Find("textHolder(e2)");
-                    else if (selectedEnemy == 3) textHolder = enemy3.transform.Find("textHolder(e3)");
-                    else if (selectedEnemy == 4) textHolder = enemy4.transform.Find("textHolder(e4)");
 
+                    textHolder = GameObject.Find("textHolder(e" + selectedEnemy + ")")?.transform;
                     ShowFloatingText("Miss!", textHolder.position, textHolder);
+                    selectedEnemyScript.health -= damage;
+
                 }
                 else
                 {
                     readoutDamage = damage.ToString();
-                    selectedEnemyScript.health -= damage;
+                    
                     attackDesc = "bashed";
                     enemyName = selectedEnemyScript.enemyName;
 
-                    if (selectedEnemy == 1) textHolder = enemy1.transform.Find("textHolder(e1)");
-                    else if (selectedEnemy == 2) textHolder = enemy2.transform.Find("textHolder(e2)");
-                    else if (selectedEnemy == 3) textHolder = enemy3.transform.Find("textHolder(e3)");
-                    else if (selectedEnemy == 4) textHolder = enemy4.transform.Find("textHolder(e4)");
-
+                    textHolder = GameObject.Find("textHolder(e" + selectedEnemy + ")")?.transform;
                     ShowFloatingText(damage.ToString(), textHolder.position, textHolder);
+                    selectedEnemyScript.health -= damage;
                 }
 
             }
@@ -2283,6 +2280,20 @@ public class BattleUIScript : MonoBehaviour
                 int attack1damage = damage;
                 int attack2damage = damage;
 
+                BattleEnemyScript enemy1Script = null;
+                BattleEnemyScript enemy2Script = null;
+
+                if (selectedEnemy == 1 || selectedEnemy == 2)
+                {
+                    enemy1Script = e1;
+                    enemy2Script = e2;
+                }
+                else if (selectedEnemy == 3 || selectedEnemy == 4)
+                {
+                    enemy1Script = e3;
+                    enemy2Script = e4;
+                }
+
                 if (selectedEnemy == 1 || selectedEnemy == 2)
                 {
                     if ((attacker.accuracy - e1.evasiveness) < accuracyCheck) //miss
@@ -2294,7 +2305,8 @@ public class BattleUIScript : MonoBehaviour
                     else //hit
                     {
                         e1.health -= attack1damage;
-                        ShowFloatingText(attack1damage.ToString(), e1.transform.Find("textHolder(e1)").position, e1.transform.Find("textHolder(e1)"));
+                        textHolder = GameObject.Find("textHolder(e" + 1 + ")")?.transform;
+                        ShowFloatingText(damage.ToString(), textHolder.position, textHolder);
                     }
 
                     if ((attacker.accuracy - e2.evasiveness) < accuracyCheck) //miss
@@ -2307,7 +2319,8 @@ public class BattleUIScript : MonoBehaviour
                     else //hit
                     {
                         e2.health -= attack2damage;
-                        ShowFloatingText(attack2damage.ToString(), e2.transform.Find("textHolder(e2)").position, e2.transform.Find("textHolder(e2)"));
+                        textHolder = GameObject.Find("textHolder(e" + 2 + ")")?.transform;
+                        ShowFloatingText(damage.ToString(), textHolder.position, textHolder);
 
                     }
 
@@ -2327,7 +2340,8 @@ public class BattleUIScript : MonoBehaviour
                     else //hit
                     {
                         e3.health -= attack1damage;
-                        ShowFloatingText(attack1damage.ToString(), e3.transform.Find("textHolder(e3)").position, e3.transform.Find("textHolder(e3)"));
+                        textHolder = GameObject.Find("textHolder(e" + 3 + ")")?.transform;
+                        ShowFloatingText(damage.ToString(), textHolder.position, textHolder);
 
                     }
 
@@ -2341,8 +2355,8 @@ public class BattleUIScript : MonoBehaviour
                     else //hit
                     {
                         e4.health -= attack2damage;
-                        ShowFloatingText(attack2damage.ToString(), e4.transform.Find("textHolder(e4)").position, e4.transform.Find("textHolder(e4)"));
-
+                        textHolder = GameObject.Find("textHolder(e" + 4 + ")")?.transform;
+                        ShowFloatingText(damage.ToString(), textHolder.position, textHolder);
                     }
 
                     readoutDamage = attack1damage.ToString() + " / " + attack2damage.ToString();
@@ -2370,8 +2384,8 @@ public class BattleUIScript : MonoBehaviour
                     else //hit
                     {
                         e1.health -= attack1damage;
-                        ShowFloatingText(attack1damage.ToString(), e1.transform.Find("textHolder(e1)").position, e1.transform.Find("textHolder(e1)"));
-
+                        textHolder = GameObject.Find("textHolder(e" + 1 + ")")?.transform;
+                        ShowFloatingText(damage.ToString(), textHolder.position, textHolder);
                     }
 
                     if ((attacker.accuracy - e3.evasiveness) < accuracyCheck) //miss
@@ -2383,7 +2397,8 @@ public class BattleUIScript : MonoBehaviour
                     else //hit
                     {
                         e3.health -= attack2damage;
-                        ShowFloatingText(attack2damage.ToString(), e3.transform.Find("textHolder(e3)").position, e3.transform.Find("textHolder(e3)"));
+                        textHolder = GameObject.Find("textHolder(e" + 3 + ")")?.transform;
+                        ShowFloatingText(damage.ToString(), textHolder.position, textHolder);
                     }
 
                     readoutDamage = attack1damage.ToString() + " / " + attack2damage.ToString();
@@ -2400,7 +2415,8 @@ public class BattleUIScript : MonoBehaviour
                     else //hit
                     {
                         e2.health -= attack1damage;
-                        ShowFloatingText(attack1damage.ToString(), e2.transform.Find("textHolder(e2)").position, e2.transform.Find("textHolder(e2)"));
+                        textHolder = GameObject.Find("textHolder(e" + 2 + ")")?.transform;
+                        ShowFloatingText(damage.ToString(), textHolder.position, textHolder);
 
                     }
 
@@ -2413,7 +2429,8 @@ public class BattleUIScript : MonoBehaviour
                     else //hit
                     {
                         e4.health -= attack2damage;
-                        ShowFloatingText(attack2damage.ToString(), e4.transform.Find("textHolder(e4)").position, e4.transform.Find("textHolder(e4)"));
+                        textHolder = GameObject.Find("textHolder(e" + 4 + ")")?.transform;
+                        ShowFloatingText(damage.ToString(), textHolder.position, textHolder);
                     }
 
                     readoutDamage = attack1damage.ToString() + " / " + attack2damage.ToString();
@@ -2455,6 +2472,7 @@ public class BattleUIScript : MonoBehaviour
                     else if (selectedEnemy == 3) textHolder = enemy3.transform.Find("textHolder(e3)");
                     else if (selectedEnemy == 4) textHolder = enemy4.transform.Find("textHolder(e4)");
 
+                    textHolder = GameObject.Find("textHolder(e" + 1 + ")")?.transform;
                     ShowFloatingText(attackPower.ToString(), textHolder.position, textHolder);
                 }
             }

@@ -1971,6 +1971,7 @@ public class BossBattleUIScript : MonoBehaviour
         }
         attackerName = attacker.characterName;
         ///////////////////////////////////
+        ///
         if (selectedEnemyScript != null)
         {
             if (currentAttack == 'b') //bash
