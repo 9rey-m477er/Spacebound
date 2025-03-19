@@ -18,6 +18,8 @@ public class DialogueController : MonoBehaviour
     //private bool isTyping;
     private string n;
     private string p;
+    private bool isInCutscene = false;
+    private DialogueText currentCutscene;
 
     //private Coroutine typeDialogueCoroutine;
 
@@ -27,6 +29,17 @@ public class DialogueController : MonoBehaviour
     public void Awake()
     {
 
+    }
+
+    public void Update()
+    {
+        if (isInCutscene)
+        {
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                displayNextParagraph(currentCutscene);
+            }
+        }
     }
 
     public void displayNextParagraph(DialogueText dialogueText)
@@ -103,8 +116,18 @@ public class DialogueController : MonoBehaviour
             soundManager.PlaySoundClip(4);
             gameObject.SetActive(false);
         }
+        if (isInCutscene)
+        {
+            isInCutscene = false;
+        }
     }
 
+    public void startCutscene(DialogueText text)
+    {
+        currentCutscene = text;
+        displayNextParagraph(currentCutscene);
+        isInCutscene = true;
+    }
     //private IEnumerator TypeDialogueText(string p)
     //{
     //    isTyping = true;

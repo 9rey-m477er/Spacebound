@@ -36,6 +36,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public GameObject fadetoBlackImage;
     public GameObject battleSystem, bossSystem, pauseMenu;
     public GameObject dialogueSystem;
+    private DialogueController dialogueController;
     public BossStatSheet forestSE, caveSE;
     public BossBattleUIScript bossScript;
     public BossStatSheet specEncounter;
@@ -58,11 +59,16 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
 
     private DataPersistenceManager dpm;
 
+    public DialogueText startingCutscene;
+    private string id = "00000000-0000-0000-0000-000000000000";
+    private bool startSceneWatched = false;
+
     public Animator anim;
     public bool inBattle;
     private bool moving;
     void Start()
     {
+        dialogueController = dialogueSystem.GetComponent<DialogueController>();
         dpm = GameObject.Find("DataPersistenceManager").GetComponent<DataPersistenceManager>();
         rb = GetComponent<Rigidbody2D>();
         lastPosition = rb.position;
@@ -70,6 +76,11 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         battleSystem.gameObject.gameObject.SetActive(false);
         anim = GetComponent<Animator>();
         BiomeChange(level);
+        if (!startSceneWatched)
+        {
+            dialogueController.startCutscene(startingCutscene);
+            startSceneWatched = true;
+        }
     }
 
     void Update()
@@ -297,6 +308,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         this.stephvenActive = data.stephvenFlag;
         this.janetActive = data.janetFlag;
         this.level = data.area;
+        data.cutscenesWatched.TryGetValue(id, out startSceneWatched);
         BiomeChange(level);
     }
 
@@ -310,5 +322,10 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         data.stephvenFlag = this.stephvenActive;
         data.janetFlag = this.janetActive;
         data.area = this.level;
+        if (data.cutscenesWatched.ContainsKey(id))
+        {
+            data.cutscenesWatched.Remove(id);
+        }
+        data.cutscenesWatched.Add(id, startSceneWatched);
     }
 }
