@@ -15,6 +15,7 @@ public class sceneLoader : MonoBehaviour
     }
     public void MainMenu()
     {
+        Debug.Log("Loading Main Menu");
         SceneManager.LoadScene("Main Menu");
     }
 }
