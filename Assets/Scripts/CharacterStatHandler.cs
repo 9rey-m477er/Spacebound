@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class CharacterStatHandler : MonoBehaviour, IDataPersistence
 {
-    [SerializeField] private CharacterStatSheet John;
-    [SerializeField] private CharacterStatSheet Bob;
-    [SerializeField] private CharacterStatSheet Thozos;
-    [SerializeField] private CharacterStatSheet Janet;
-    [SerializeField] private CharacterStatSheet Stephven;
+    public CharacterStatSheet John;
+    public CharacterStatSheet Bob;
+    public CharacterStatSheet Thozos;
+    public CharacterStatSheet Janet;
+    public CharacterStatSheet Stephven;
     public int partyEXP;
     public int expToNext;
     public int partyLevel;

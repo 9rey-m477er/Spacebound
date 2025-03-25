@@ -7,10 +7,11 @@ public class GameData
 {
     //General Information: Simple
     public int steps, membersMissing, partyLevel, partyExp, expToNext, area;
-    public bool bobFlag, thozosFlag, janetFlag, stephvenFlag;
+    public bool bobFlag, thozosFlag, janetFlag, stephvenFlag, openingScenePlayed;
     //General Information: Complex
     public Vector3 playerPosition;
     public SerializableDictionary<string, bool> staticsCleared;
+    public SerializableDictionary<string, bool> cutscenesWatched;
     //Character Stats: John
     public float jHP, jCHP, jBash, jSlash, jPoke;
     //Character Stats: Bob

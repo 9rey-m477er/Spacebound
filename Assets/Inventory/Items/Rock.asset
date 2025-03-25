@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Rock
   amount: 0
-  description: Rock
-  buyPrice: 0
-  sellPrice: 0
+  description: Just a rock. Can't think of any other use outside of throwing
+  buyPrice: 10
+  sellPrice: 5
   useableInWorld: 0
-  typeIndex: 0
-  specIndex: 1
+  typeIndex: 1
+  specIndex: 0
