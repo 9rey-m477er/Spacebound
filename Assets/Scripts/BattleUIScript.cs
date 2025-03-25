@@ -118,6 +118,8 @@ public class BattleUIScript : MonoBehaviour
 
     public bool canSelect = false;
     public bool canSelect2 = false;
+    public bool waiting = false;
+    public bool isAttacking = false;
 
     public List<Sprite> forestSpritePool = new List<Sprite>();
     public List<EnemyStatSheet> enemyPool = new List<EnemyStatSheet>();
@@ -474,6 +476,14 @@ public class BattleUIScript : MonoBehaviour
                 StartCoroutine(HandleEnemySelection());
             }
 
+            else if (isAttacking)
+            {
+                atkMenu.SetActive(false);
+                defMenu.SetActive(false);
+                invMenu.SetActive(false);
+                runMenu.SetActive(false);
+            }
+
             else if (isSelectingAlly)
             {
                 StartCoroutine(ChoosingAlly());
@@ -616,8 +626,9 @@ public class BattleUIScript : MonoBehaviour
                 }
                 menuArrowTemp = currentMenuArrow;
             }
-            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return) && canSelect2 == false && isSelectingEnemy == false)
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return) && canSelect2 == false && isSelectingEnemy == false && waiting == false && isAttacking == false)
             {
+                Debug.Log("top");
                 canSelect2 = true;
                 if (currentMenuArrow == 1)
                 {
@@ -732,55 +743,55 @@ public class BattleUIScript : MonoBehaviour
 
             ////////////
             ///
-            if(atkArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            if (atkArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
             {
                 attackSlot1();
                 StartCoroutine(postSelectionWaitCoroutine(0.2f));
             }
-            if (atkArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            if (atkArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
             {
                 attackSlot2();
                 StartCoroutine(postSelectionWaitCoroutine(0.2f));
             }
-            if (atkArrow3.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            if (atkArrow3.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
             {
                 attackSlot3();
                 StartCoroutine(postSelectionWaitCoroutine(0.2f));
             }
             //
-            if (defArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            if (defArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
             {
                 dodge();
                 StartCoroutine(postSelectionWaitCoroutine(0.2f));
             }
             
-            if (defArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            if (defArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
             {
                 defend();
                 StartCoroutine(postSelectionWaitCoroutine(0.2f));
             }
-            if (defArrow3.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            if (defArrow3.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
             {
                 protect();
                 StartCoroutine(postSelectionWaitCoroutine(0.2f));
             }
             //
-            if (invArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            if (invArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
             {
                 invSlot1();
                 Debug.Log("islot1");
             }
-            if (invArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            if (invArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
             {
                 invSlot2();
                 Debug.Log("islot2");
             }
             //
-            if (runArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            if (runArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
             {
                 fleeButtonClick();
             }
-            if (runArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true)
+            if (runArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
             {
                 resetMenu();
             }
@@ -805,7 +816,6 @@ public class BattleUIScript : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         Debug.Log("waiting");
-        //canSelect2 = false;
         currentMenuArrow = 1;
         menuArrowTemp = currentMenuArrow;
         resetMenu();
@@ -1999,20 +2009,23 @@ public class BattleUIScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))//confirm
         {
-            isSelectingEnemy = false; 
+            isAttacking = true;
             ExecuteAttack();
-
+            resetMenu();
+            isSelectingEnemy = false;
             updateEnemyHealth();
             enemy1Arrow.gameObject.SetActive(false);
             enemy2Arrow.gameObject.SetActive(false);
             enemy3Arrow.gameObject.SetActive(false);
             enemy4Arrow.gameObject.SetActive(false);
 
-            yield return new WaitForSeconds(.5f);////////////////////////////// ANIMATION IS ALLOWED TO SIMMER HERE
-
+            waiting = true;
+            yield return new WaitForSeconds(0.5f);////////////////////////////// ANIMATION IS ALLOWED TO SIMMER HERE
             updatePlayerHealth(); //player sprites get reset back to base form here
             incrementTurn();
             resetMenu();
+            waiting = false;
+            isAttacking = false;
             //checkForEndOfBattle();
         }
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
