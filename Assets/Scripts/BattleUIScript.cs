@@ -2313,7 +2313,8 @@ public class BattleUIScript : MonoBehaviour
                     {
                         attack1damage = 0;
                         attackDesc = "missed";
-                        ShowFloatingText("Miss!", e1.transform.Find("textHolder(e1)").position, e1.transform.Find("textHolder(e1)"));
+                        textHolder = GameObject.Find("textHolder(e" + 1 + ")")?.transform;
+                        ShowFloatingText("Miss!", textHolder.position, textHolder);
                     }
                     else //hit
                     {
@@ -2326,7 +2327,8 @@ public class BattleUIScript : MonoBehaviour
                     {
                         attack2damage = 0;
                         attackDesc = "missed";
-                        ShowFloatingText("Miss!", e2.transform.Find("textHolder(e2)").position, e2.transform.Find("textHolder(e2)"));
+                        textHolder = GameObject.Find("textHolder(e" + 2 + ")")?.transform;
+                        ShowFloatingText("Miss!", textHolder.position, textHolder);
 
                     }
                     else //hit
@@ -2347,7 +2349,8 @@ public class BattleUIScript : MonoBehaviour
                     {
                         attack1damage = 0;
                         attackDesc = "missed";
-                        ShowFloatingText("Miss!", e3.transform.Find("textHolder(e3)").position, e3.transform.Find("textHolder(e3)"));
+                        textHolder = GameObject.Find("textHolder(e" + 3 + ")")?.transform;
+                        ShowFloatingText("Miss!", textHolder.position, textHolder);
 
                     }
                     else //hit
@@ -2362,7 +2365,8 @@ public class BattleUIScript : MonoBehaviour
                     {
                         attack2damage = 0;
                         attackDesc = "missed";
-                        ShowFloatingText("Miss!", e4.transform.Find("textHolder(e4)").position, e4.transform.Find("textHolder(e4)"));
+                        textHolder = GameObject.Find("textHolder(e" + 4 + ")")?.transform;
+                        ShowFloatingText("Miss!", textHolder.position, textHolder);
 
                     }
                     else //hit
@@ -2391,7 +2395,8 @@ public class BattleUIScript : MonoBehaviour
                     {
                         attack1damage = 0;
                         attackDesc = "missed";
-                        ShowFloatingText("Miss!", e1.transform.Find("textHolder(e1)").position, e1.transform.Find("textHolder(e1)"));
+                        textHolder = GameObject.Find("textHolder(e" + 1 + ")")?.transform;
+                        ShowFloatingText("Miss!", textHolder.position, textHolder);
 
                     }
                     else //hit
@@ -2405,7 +2410,8 @@ public class BattleUIScript : MonoBehaviour
                     {
                         attack2damage = 0;
                         attackDesc = "missed";
-                        ShowFloatingText("Miss!", e3.transform.Find("textHolder(e3)").position, e3.transform.Find("textHolder(e3)"));
+                        textHolder = GameObject.Find("textHolder(e" + 3 + ")")?.transform;
+                        ShowFloatingText("Miss!", textHolder.position, textHolder);
                     }
                     else //hit
                     {
@@ -2423,7 +2429,8 @@ public class BattleUIScript : MonoBehaviour
                     {
                         attack1damage = 0;
                         attackDesc = "missed";
-                        ShowFloatingText("Miss!", e2.transform.Find("textHolder(e2)").position, e2.transform.Find("textHolder(e2)"));
+                        textHolder = GameObject.Find("textHolder(e" + 2 + ")")?.transform;
+                        ShowFloatingText("Miss!", textHolder.position, textHolder);
                     }
                     else //hit
                     {
@@ -2437,7 +2444,8 @@ public class BattleUIScript : MonoBehaviour
                     {
                         attack2damage = 0;
                         attackDesc = "missed";
-                        ShowFloatingText("Miss!", e4.transform.Find("textHolder(e4)").position, e4.transform.Find("textHolder(e4)"));
+                        textHolder = GameObject.Find("textHolder(e" + 4 + ")")?.transform;
+                        ShowFloatingText("Miss!", textHolder.position, textHolder);
                     }
                     else //hit
                     {
