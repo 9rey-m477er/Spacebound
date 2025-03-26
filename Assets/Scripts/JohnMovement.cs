@@ -9,6 +9,7 @@ using TMPro;
 
 public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
 {
+    public bool tutorialBattle = false;
     public float moveSpeed = 4f;
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -43,6 +44,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
 
     public List<EnemyStatSheet> encounterPool = new List<EnemyStatSheet>();
 
+    public List<EnemyStatSheet> tutorialPool = new List<EnemyStatSheet>();
     public List<EnemyStatSheet> forestPool = new List<EnemyStatSheet>();
     public List<EnemyStatSheet> fCavePool = new List<EnemyStatSheet>();
     public List<EnemyStatSheet> fgConnPool = new List<EnemyStatSheet>();

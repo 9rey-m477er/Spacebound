@@ -13,6 +13,7 @@ using UnityEditor;
 
 public class BattleUIScript : MonoBehaviour
 {
+    public int tutorialStage = 0;
     public GameObject battleSystem;
     public GameObject atkMenu;
     public GameObject defMenu;
@@ -290,20 +291,90 @@ public class BattleUIScript : MonoBehaviour
 
         chooseDefendText.gameObject.SetActive(false);
 
-        //Randomly Assign Enemies
-        enemyPool = johnMovement.encounterPool;
-        enemies.Clear();
-        rollEnemy(enemy1, enemyPool);
-        rollEnemy(enemy2, enemyPool);
-        rollEnemy(enemy3, enemyPool);
-        rollEnemy(enemy4, enemyPool);
-        updateEnemyNames();
-        updateEnemyHealth();
-        playerTeamSpawn();
+
+
+        if(johnMovement.tutorialBattle == false)
+        {
+            //Randomly Assign Enemies
+            enemyPool = johnMovement.encounterPool;
+            enemies.Clear();
+            rollEnemy(enemy1, enemyPool);
+            rollEnemy(enemy2, enemyPool);
+            rollEnemy(enemy3, enemyPool);
+            rollEnemy(enemy4, enemyPool);
+            updateEnemyNames();
+            updateEnemyHealth();
+            playerTeamSpawn();
+        }
+        else
+        {
+            turnName.text = "Party Turn!";
+            turnName.color = Color.cyan;
+            enemyPool = johnMovement.tutorialPool; //what should atk strength be - based on party size
+
+            enemies.Clear();
+            rollEnemy(enemy1, enemyPool);
+            rollEnemy(enemy2, enemyPool);
+            rollEnemy(enemy3, enemyPool);
+            rollEnemy(enemy4, enemyPool);
+            updateEnemyNames();
+            updateEnemyHealth();
+            playerTeamSpawn();
+            atkArrow1.gameObject.SetActive(true);
+            menuBlocking.gameObject.SetActive(true);
+            tutorialStage = 1;
+            
+        }
+
         isBattleOver = false;
         isSelectingAlly = false;
 
         fleeText.text = fleeChance + "% Chance";
+    }
+
+    public IEnumerator tutorial1() //select attack
+    {
+        // dialogue can only be one line for now
+        // have THE say to pick an attack
+        menuBlocking.gameObject.SetActive(false);
+        atkArrow1.gameObject.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
+        {
+            atkMenu.SetActive(true);
+            tutorialStage = 2;
+            innerMenuArrow = 1;
+            updateInnerArrow();
+        }
+
+        yield return new WaitUntil(() => tutorialStage == 2);
+    }
+
+    public IEnumerator tutorial2() //select bash
+    {
+        yield return new WaitForSeconds(0.2f);
+        if (atkArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)))
+        {
+            attackSlot1();
+            tutorialStage = 3;
+        }
+        yield return new WaitUntil(() => tutorialStage == 3);
+    }
+
+    public IEnumerator tutorial3() //select enemy
+    {
+        yield return new WaitForSeconds(0.2f);
+        enemy1Arrow.gameObject.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
+        {
+            BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
+            atkMenu.SetActive(false);
+            e1.health = e1.health - 25;
+            Transform textHolder = GameObject.Find("textHolder(e" + 1 + ")")?.transform;
+            ShowFloatingText("25", textHolder.position, textHolder);
+            updateEnemyHealth();
+            tutorialStage = 4;
+        }
+        yield return new WaitUntil(() => tutorialStage == 4);
     }
 
     public void playerTeamSpawn()
@@ -489,7 +560,7 @@ public class BattleUIScript : MonoBehaviour
                 StartCoroutine(ChoosingAlly());
             }
 
-            else if (isinMenu && isSelectingEnemy == false && menuBlocking.gameObject.active == false)
+            else if (isinMenu && isSelectingEnemy == false && menuBlocking.gameObject.active == false && johnMovement.tutorialBattle == false)
             {
                 menuArrowNav();
             }
@@ -499,8 +570,26 @@ public class BattleUIScript : MonoBehaviour
             postReportOpen = true;
             postBattleReport();
         }
-        checkForEndOfBattle();
-        updateTurnText();
+        if (johnMovement.tutorialBattle == false)
+        {
+            checkForEndOfBattle();
+            updateTurnText();
+        }
+        else if(johnMovement.tutorialBattle == true)
+        {
+            if(tutorialStage == 1)
+            {
+                StartCoroutine(tutorial1());
+            }
+            else if(tutorialStage == 2)
+            {
+                StartCoroutine(tutorial2());
+            }
+            else if (tutorialStage == 3)
+            {
+                StartCoroutine(tutorial3());
+            }
+        }
     }
 
     void updateTurnText()
@@ -1569,10 +1658,13 @@ public class BattleUIScript : MonoBehaviour
     {                         //        OO
         currentMenuArrow = 1;
         menuArrowTemp = currentMenuArrow;
-        resetMenu();
+        if(johnMovement.tutorialBattle == false)
+        {
+            resetMenu();
+            isSelectingEnemy = true;
+        }
         currentAttack = 'b';
         soundManager.PlaySoundClip(5);
-        isSelectingEnemy = true;
         attackPower = 25;
         
         if(enemy1.active == true)
