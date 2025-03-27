@@ -23,11 +23,9 @@ MonoBehaviour:
   - Janet
   - John
   paragraphs:
-  - Welcome to the Simulation Room.
-  - Here, you will engage in combat training. This will help you learn how to battle
-    any enemies that stand in your way.
-  - To begin, please use the monitor to select a weapon of your choice and put on
-    the VR goggles.
+  - Welcome to the Simulation Room, where you will engage in comba training.
+  - This will help you learn how to battle any enemies that stand in your way.
+  - To begin, please use the monitor to select a weapon and put on the VR goggles.
   - "No weapon. I\u2019ll use my fists!"
   - "You think that\u2019s wise?"
   - Yes.

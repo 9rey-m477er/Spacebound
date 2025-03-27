@@ -14,6 +14,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerNames:
   - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
   paragraphs:
-  - "Now, let\u2019s try out the attacks. I\u2019m not going to have the enemies
-    attack just yet."
+  - "Next, you have three options for defend: Dodge, Block, and Protect.\r"
+  - Dodge gives you a greater chance of avoiding an attack until your next turn.
+  - Block allows you to take less damage if you are hit until your next turn.
+  - Protect allows you to bodyguard another party member until your next turn.
+  - The person who is bodyguarding will suffer great damage, so keep that in mind.
+  - Next is the Inventory.
+  - Any items you collect, you can use them in battle.
+  - 'There are different kinds of items: healing, attacking, and defending. '
+  - Of course, items are a limited resource so make sure you use them wisely!
+  - The final option before I let you back into combat is Flee.
+  - You can run away when you think a battle is too tough.
+  - However, this may fail. If it does, you leave yourselves vulnerable to attacks.
+  - For this fight, you will not be able to flee.
+  - Sorry, there are two more things.
+  - There is a battle log that will display what is going on throughout the fight.
+  - It only displays the four most recent entries. But if you select the battle log
+    --
+  - You will be able to see up to twelve entries at a time.
+  - Finally, if your HP is low, I will heal you.
+  - Now, let the training combat begin!

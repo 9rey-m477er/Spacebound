@@ -31,6 +31,7 @@ MonoBehaviour:
   - T.H.E
   - John
   - T.H.E
+  - T.H.E
   - John
   paragraphs:
   - Are you alright?
@@ -52,6 +53,6 @@ MonoBehaviour:
   - When the rocket crashed, a few pieces flew off into each of the biomes.
   - "Until we get those back, we won\u2019t be able to leave."
   - "Don\u2019t worry, I\u2019ll get them back for you."
-  - Thank you. Before you go, take anything you need from the rocket and the smartwatch
-    so we can communicate.
+  - Thank you. Before you go, take anything you need from the rocket.
+  - Take the smartwatch so we can communicate
   - Will do.
