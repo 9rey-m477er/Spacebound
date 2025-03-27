@@ -15,16 +15,12 @@ public class DialogueController : MonoBehaviour
     private Queue<string> names = new Queue<string>();
 
     public bool conversationEnded;
-    //private bool isTyping;
+    public bool isTyping;
     private string n;
     private string p;
     private bool isInCutscene = false;
     private DialogueText currentCutscene;
 
-    //private Coroutine typeDialogueCoroutine;
-
-    //private const string htmlAlpha = "<color=#00000000>";
-    //private const float maxTypeTime = 0.1f;
 
     public void Awake()
     {
@@ -33,9 +29,15 @@ public class DialogueController : MonoBehaviour
 
     public void Update()
     {
-        if (isInCutscene)
+        if ((isInCutscene) && Input.GetKeyDown(KeyCode.E))
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if (isTyping)
+            {
+                // Instantly complete the text
+                isTyping = false;
+                npcDialogueText.text = p; // Display full text immediately
+            }
+            else
             {
                 displayNextParagraph(currentCutscene);
             }
@@ -58,13 +60,6 @@ public class DialogueController : MonoBehaviour
             }
         }
 
-        //if (!isTyping)
-        //{
-        //    p = paragraphs.Dequeue();
-        //    typeDialogueCoroutine = StartCoroutine(TypeDialogueText(p));
-        //}
-
-
         n = names.Dequeue();
         p = paragraphs.Dequeue();
         soundManager.PlaySoundClip(3);
@@ -80,14 +75,23 @@ public class DialogueController : MonoBehaviour
         }
     }
 
-    private IEnumerator TypeText(string fullText)
+    public IEnumerator TypeText(string fullText)
     {
+        isTyping = true;
+
         npcDialogueText.text = ""; // Clear the current text
         foreach (char letter in fullText.ToCharArray())
         {
+            if (!isTyping)
+            {
+                npcDialogueText.text = fullText; // If interrupted, display full text
+                break;
+            }
+
             npcDialogueText.text += letter; // Add one letter at a time
             yield return new WaitForSeconds(0.035f); // Wait between letters (adjust for speed)
         }
+        isTyping = false;
     }
 
     private void StartConversation(DialogueText dialogueText)
@@ -128,27 +132,4 @@ public class DialogueController : MonoBehaviour
         displayNextParagraph(currentCutscene);
         isInCutscene = true;
     }
-    //private IEnumerator TypeDialogueText(string p)
-    //{
-    //    isTyping = true;
-
-    //    npcDialogueText.text = "";
-
-    //    string originalText = p;
-    //    string displayedText = "";
-
-    //    int alphaIndex = 0;
-
-    //    foreach (char c in p.ToCharArray())
-    //    {
-    //        alphaIndex++;
-    //        npcDialogueText.text = originalText;
-
-    //        displayedText = npcDialogueText.text.Insert(alphaIndex, htmlAlpha);
-    //        npcDialogueText.text = displayedText;
-    //        yield return new WaitForSeconds(maxTypeTime / typeSpeed);
-    //    }
-
-    //    isTyping = false;
-    //}
 }
