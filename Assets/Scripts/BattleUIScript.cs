@@ -314,10 +314,10 @@ public class BattleUIScript : MonoBehaviour
         }
         else
         {
+            tutorialStage = 1;
             turnName.text = "Party Turn!";
             turnName.color = Color.cyan;
             enemyPool = johnMovement.tutorialPool; //what should atk strength be - based on party size
-
             enemies.Clear();
             rollEnemy(enemy1, enemyPool);
             rollEnemy(enemy2, enemyPool);
@@ -327,9 +327,7 @@ public class BattleUIScript : MonoBehaviour
             updateEnemyHealth();
             playerTeamSpawn();
             atkArrow1.gameObject.SetActive(true);
-            menuBlocking.gameObject.SetActive(true);
-            tutorialStage = 1;
-            
+            menuBlocking.gameObject.SetActive(true);           
         }
 
         isBattleOver = false;
@@ -352,7 +350,7 @@ public class BattleUIScript : MonoBehaviour
         diaText.text = "Welcome to battle! Press E to open the attack menu!";
         menuBlocking.gameObject.SetActive(false);
         atkArrow1.gameObject.SetActive(true);
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
+        if (fadeImage.gameObject.active == false && Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
         {
             atkMenu.SetActive(true);
             tutorialStage = 2;
