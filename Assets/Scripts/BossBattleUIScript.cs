@@ -2286,9 +2286,10 @@ public class BossBattleUIScript : MonoBehaviour
                 LevelUpButton.gameObject.SetActive(true);
             }
         }
-        else
+        else if (characterStatHandler.partyLevel >= characterStatHandler.levelMax)
         {
-            nextLVL.text = "Max Level";
+            expToNextTXT.text = "Max Level";
+            XButton.SetActive(true);
         }
     }
 

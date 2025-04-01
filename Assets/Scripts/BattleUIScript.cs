@@ -2429,12 +2429,12 @@ public class BattleUIScript : MonoBehaviour
                 LevelUpButton.gameObject.SetActive(true);
             }
         }
-        else
+        else if (characterStatHandler.partyLevel >= characterStatHandler.levelMax)
         {
-            nextLVL.text = "Max Level";
+            expToNextTXT.text = "Max Level";
+            XButton.SetActive(true);
         }
     }
-
     public void postReportLevelUp()
     {
         EXPArea.SetActive(false);
