@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc9567689f673314299186c92df3243c, type: 3}
   m_Name: holoFake
   m_EditorClassIdentifier: 
-  attackName: Holographic Smack
+  attackName: Nothing
   attackStrength: 1
   targets: 00000000
   attackReadout:
-  - was hit by
-  - was softly grazed by
+  - was not hit by
+  - was mentally smacked by

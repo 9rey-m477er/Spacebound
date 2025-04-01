@@ -14,6 +14,11 @@ using UnityEditor;
 public class BattleUIScript : MonoBehaviour
 {
     public int tutorialStage = 0;
+    public TextMeshProUGUI diaText;
+    public TextMeshProUGUI diaName;
+    public GameObject textbox;
+    public TextMeshProUGUI tutAdvancetxt;
+
     public GameObject battleSystem;
     public GameObject atkMenu;
     public GameObject defMenu;
@@ -193,6 +198,7 @@ public class BattleUIScript : MonoBehaviour
 
     void OnEnable()
     {
+        tutAdvancetxt.gameObject.SetActive(false);
         resetMenu();
         currentMenuArrow = 1;
         expToGive = 0;
@@ -331,11 +337,19 @@ public class BattleUIScript : MonoBehaviour
 
         fleeText.text = fleeChance + "% Chance";
     }
-
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     public IEnumerator tutorial1() //select attack
-    {
-        // dialogue can only be one line for now
-        // have THE say to pick an attack
+    { 
+        if(fadeImage.gameObject.active == false)
+        {
+            textbox.gameObject.SetActive(true);
+        }
+        textbox.GetComponent<RectTransform>().anchoredPosition = new Vector2(-187f, 130f);
+        diaName.text = "T.H.E";
+        diaText.text = "Welcome to battle! Press E to open the attack menu!";
         menuBlocking.gameObject.SetActive(false);
         atkArrow1.gameObject.SetActive(true);
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
@@ -351,6 +365,7 @@ public class BattleUIScript : MonoBehaviour
 
     public IEnumerator tutorial2() //select bash
     {
+        diaText.text = "Bash is a single target attack that does considerable damage! Press E to try it out!";
         yield return new WaitForSeconds(0.2f);
         if (atkArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)))
         {
@@ -362,21 +377,204 @@ public class BattleUIScript : MonoBehaviour
 
     public IEnumerator tutorial3() //select enemy
     {
+        diaText.text = "This is how you will select enemies, for now we will attack this one. Press E to use your bash attack!";
         yield return new WaitForSeconds(0.2f);
         enemy1Arrow.gameObject.SetActive(true);
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
         {
             BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
             atkMenu.SetActive(false);
-            e1.health = e1.health - 25;
+            e1.health = 25;
             Transform textHolder = GameObject.Find("textHolder(e" + 1 + ")")?.transform;
             ShowFloatingText("25", textHolder.position, textHolder);
             updateEnemyHealth();
+            enemy1Arrow.gameObject.SetActive(false);
+            innerMenuArrow = 2;
             tutorialStage = 4;
         }
         yield return new WaitUntil(() => tutorialStage == 4);
     }
+    ////////
+    public IEnumerator tutorial4() //select menu
+    {
+        diaText.text = "Great Job! Now let's try another attack, press E again to open the menu.";
+        yield return new WaitForSeconds(0.2f);
+        enemy1Arrow.gameObject.SetActive(false);
+        atkArrow2.gameObject.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
+        {
+            atkMenu.SetActive(true);
+            tutorialStage = 5;
+            innerMenuArrow = 2;
+            updateInnerArrow();
+        }
+        yield return new WaitUntil(() => tutorialStage == 5);
+    }
+    public IEnumerator tutorial5() //select slash
+    {
+        diaText.text = "Slash is a vertical based attack that does less damage but affects two enemies at once!";
+        yield return new WaitForSeconds(0.2f);
+        if (atkArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)))
+        {
+            attackSlot2();
+            tutorialStage = 6;
+        }
+        yield return new WaitUntil(() => tutorialStage == 6);
+    }
+    public IEnumerator tutorial6() //select enemy
+    {
+        diaText.text = "Show those dummies what your cool new attack does!";
+        yield return new WaitForSeconds(0.2f);
+        enemy1Arrow.gameObject.SetActive(true);
+        enemy2Arrow.gameObject.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
+        {
+            BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
+            BattleEnemyScript e2 = enemy2.GetComponent<BattleEnemyScript>();
 
+            atkMenu.SetActive(false);
+            e1.health = 0;
+            e2.health = 25;
+            Transform textHolder = GameObject.Find("textHolder(e" + 1 + ")")?.transform;
+            Transform textHolder2 = GameObject.Find("textHolder(e" + 2 + ")")?.transform;
+
+            ShowFloatingText("25", textHolder.position, textHolder);
+            ShowFloatingText("25", textHolder2.position, textHolder2);
+
+            updateEnemyHealth();
+            enemy1Arrow.gameObject.SetActive(false);
+            enemy2Arrow.gameObject.SetActive(false);
+            tutorialStage = 7;
+        }
+        yield return new WaitUntil(() => tutorialStage == 7);
+    }
+    ////////////
+    public IEnumerator tutorial7() //select menu
+    {
+        enemy1Arrow.gameObject.SetActive(false);
+        enemy2Arrow.gameObject.SetActive(false);
+        diaText.text = "Awesome! Open up your menu again and I'll teach you about your last attack!";
+        yield return new WaitForSeconds(0.2f);
+        atkArrow3.gameObject.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
+        {
+            atkMenu.SetActive(true);
+            tutorialStage = 8;
+            innerMenuArrow = 3;
+            updateInnerArrow();
+        }
+        yield return new WaitUntil(() => tutorialStage == 8);
+    }
+    public IEnumerator tutorial8() //select poke
+    {
+        diaText.text = "Poke is similar to slash in that it attacks two enemies, but this allows you to attack in a horizontal manner!";
+        yield return new WaitForSeconds(0.2f);
+        if (atkArrow3.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)))
+        {
+            attackSlot3();
+            tutorialStage = 9;
+        }
+        yield return new WaitUntil(() => tutorialStage == 9);
+    }
+    public IEnumerator tutorial9() //select enemy
+    {
+        diaText.text = "Take them out!";
+        yield return new WaitForSeconds(0.2f);
+        enemy2Arrow.gameObject.SetActive(true);
+        enemy4Arrow.gameObject.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
+        {
+            BattleEnemyScript e1 = enemy2.GetComponent<BattleEnemyScript>();
+            BattleEnemyScript e2 = enemy4.GetComponent<BattleEnemyScript>();
+
+            atkMenu.SetActive(false);
+            e1.health = 0;
+            e2.health = 25;
+            Transform textHolder = GameObject.Find("textHolder(e" + 2 + ")")?.transform;
+            Transform textHolder2 = GameObject.Find("textHolder(e" + 4 + ")")?.transform;
+
+            ShowFloatingText("25", textHolder.position, textHolder);
+            ShowFloatingText("25", textHolder2.position, textHolder2);
+
+            updateEnemyHealth();
+            enemy2Arrow.gameObject.SetActive(false);
+            enemy4Arrow.gameObject.SetActive(false);
+            tutorialStage = 10;
+        }
+        yield return new WaitUntil(() => tutorialStage == 10);
+    }
+    public IEnumerator tutorial10()
+    {
+        enemy2Arrow.gameObject.SetActive(false);
+        enemy4Arrow.gameObject.SetActive(false);
+        diaText.text = "Great job attacking! Defending is also important in battle, we will learn about that next.";
+        tutAdvancetxt.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
+        {
+            tutorialStage = 11;
+        }
+        yield return new WaitUntil(() => tutorialStage == 11);
+    }
+    public IEnumerator tutorial11()
+    {
+        diaText.text = "Dodge increases your ability to avoid attacks for the rest of that turn. Super helpful if you are low on health!";
+        yield return new WaitForSeconds(0.2f);
+
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
+        {
+            tutorialStage = 12;
+        }
+        yield return new WaitUntil(() => tutorialStage == 12);
+    }
+    public IEnumerator tutorial12()
+    {
+        diaText.text = "Defend Ally allows you to take hits for whomever you choose, while Brace reduces the amount of damage you take for a turn.";
+        yield return new WaitForSeconds(0.2f);
+
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
+        {
+            tutorialStage = 13;
+        }
+        yield return new WaitUntil(() => tutorialStage == 13);
+    }
+    public IEnumerator tutorial13()
+    {
+        diaText.text = "Fleeing is usually always an option, when selected you can also see your chance to escape!";
+        yield return new WaitForSeconds(0.2f);
+
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
+        {
+            tutorialStage = 14;
+        }
+        yield return new WaitUntil(() => tutorialStage == 14);
+    }
+    public IEnumerator tutorial14()
+    {
+        diaText.text = "Thats all for now, good luck adventurer!";
+        yield return new WaitForSeconds(0.2f);
+
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
+        {
+            tutorialStage = 15;
+        }
+        yield return new WaitUntil(() => tutorialStage == 15);
+    }
+    public void tutorial15()
+    {
+        tutAdvancetxt.gameObject.SetActive(false);
+        textbox.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, -10f);
+        textbox.gameObject.SetActive(false);
+        johnMovement.tutorialBattle = false;
+        menuBlocking.gameObject.SetActive(false);
+        tutorialStage = 0;
+        StartCoroutine(exitBattle());
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     public void playerTeamSpawn()
     {
         BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
@@ -588,6 +786,54 @@ public class BattleUIScript : MonoBehaviour
             else if (tutorialStage == 3)
             {
                 StartCoroutine(tutorial3());
+            }
+            else if (tutorialStage == 4)
+            {
+                StartCoroutine(tutorial4());
+            }
+            else if (tutorialStage == 5)
+            {
+                StartCoroutine(tutorial5());
+            }
+            else if (tutorialStage == 6)
+            {
+                StartCoroutine(tutorial6());
+            }
+            else if (tutorialStage == 7)
+            {
+                StartCoroutine(tutorial7());
+            }
+            else if (tutorialStage == 8)
+            {
+                StartCoroutine(tutorial8());
+            }
+            else if (tutorialStage == 9)
+            {
+                StartCoroutine(tutorial9());
+            }
+            else if (tutorialStage == 10)
+            {
+                StartCoroutine(tutorial10());
+            }
+            else if (tutorialStage == 11)
+            {
+                StartCoroutine(tutorial11());
+            }
+            else if (tutorialStage == 12)
+            {
+                StartCoroutine(tutorial12());
+            }
+            else if (tutorialStage == 13)
+            {
+                StartCoroutine(tutorial13());
+            }
+            else if (tutorialStage == 14)
+            {
+                StartCoroutine(tutorial14());
+            }
+            else if (tutorialStage == 15)
+            {
+                tutorial15();
             }
         }
     }
@@ -1690,10 +1936,13 @@ public class BattleUIScript : MonoBehaviour
     {                                   //   XO
         currentMenuArrow = 1;
         menuArrowTemp = currentMenuArrow;
-        resetMenu();
+        if (johnMovement.tutorialBattle == false)
+        {
+            resetMenu();
+            isSelectingEnemy = true;
+        }
         currentAttack = 's';
         soundManager.PlaySoundClip(5);
-        isSelectingEnemy = true;
         attackPower = 15;
 
         if (enemy1.active == true)
@@ -1719,10 +1968,13 @@ public class BattleUIScript : MonoBehaviour
     {                                   // OO
         currentMenuArrow = 1;
         menuArrowTemp = currentMenuArrow;
-        resetMenu();
+        if (johnMovement.tutorialBattle == false)
+        {
+            resetMenu();
+            isSelectingEnemy = true;
+        }
         currentAttack = 'p';
         soundManager.PlaySoundClip(5);
-        isSelectingEnemy = true;
         attackPower = 15;
 
         if (enemy1.active == true)
