@@ -14,7 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerNames:
   - System
-  - Metsys
+  - System
+  - System
+  - System
+  - System
+  - System
+  - System
   paragraphs:
-  - Beep boop boop beep.
-  - .peeb poob poob peeB
+  - 'Hello! Welcome to Spacebound: Zero-G!
+
+    (Press E to advance dialogue.)'
+  - This is the April 1st Demo Version for Playtest Session 02.
+  - Here is a brief introduction to our controls.
+  - You can open and close the main menu by pressing the Escape Key. To switch between
+    submenus, press the Tab Key
+  - The controls for overworld movement are displayed in the first submenu.
+  - The controls for combat are displayed at the bottom of the battle screen.
+  - Don't forget to fill out the survey after you've played. Thanks!
