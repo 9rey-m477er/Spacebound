@@ -14,6 +14,7 @@ using UnityEditor;
 public class BattleUIScript : MonoBehaviour
 {
     public int tutorialStage = 0;
+    public GameObject tutorialDoor;
     public TextMeshProUGUI diaText;
     public TextMeshProUGUI diaName;
     public GameObject textbox;
@@ -567,6 +568,7 @@ public class BattleUIScript : MonoBehaviour
         johnMovement.tutorialBattle = false;
         menuBlocking.gameObject.SetActive(false);
         tutorialStage = 0;
+        tutorialDoor.gameObject.SetActive(false);
         StartCoroutine(exitBattle());
     }
     ///////////////////////////////////////////////////////////////////////
