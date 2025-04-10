@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
+  m_Name: Movement
+  m_EditorClassIdentifier: 
+  speakerNames:
+  - T.H.E
+  - John
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - T.H.E
+  - John
+  paragraphs:
+  - Just one more thing, Captain.
+  - Yes?
+  - Allow me to explain how to navigate throughout your adventure.
+  - You already know that using the arrow keys is how you move.
+  - To sprint, all you need to do is hold down the Shift key while moving.
+  - Next, I will explain how to interact with anything or anyone on your adventure.
+  - "An object is interactable whenever you are near it and see an \u201C!\u201D
+    icon."
+  - "Once you see the icon, press \u201CE\u201D to interact."
+  - Be cautious of who or what you interact with.
+  - You may find yourself in a predicament if you are not careful.
+  - Finally, to open up the menu, press Escape.
+  - From there, you can access your inventory and stats by pressing Tab to navigate
+    to the requisite menus.
+  - That covers everything you need to know about navigation and accessing the menu.
+  - Thanks, T.H.E!
