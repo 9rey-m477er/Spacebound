@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec4c13967b8b9047b5111fbac75d138, type: 3}
+  m_Name: TestShop
+  m_EditorClassIdentifier: 
+  shopName: Test Shop
+  shopInventory:
+  - {fileID: 11400000, guid: f393d0c25a2f09b49b4cfff109dced9d, type: 2}
+  - {fileID: 11400000, guid: ada3ed541e214044b995a769d96f8819, type: 2}
+  - {fileID: 11400000, guid: 33a697cc8d7871b49a6bf7d0c013ac46, type: 2}
+  shopMusic: {fileID: 8300000, guid: 30434caeeb559f14389cb9eae761d05a, type: 3}
+  shopPortrait: {fileID: 397022807397769715, guid: 94a5cd42de7623046839a165f6ecd92f, type: 3}
+  shopOpenText: {fileID: 0}
+  shopBuyText: {fileID: 0}
+  shopSellText: {fileID: 0}
+  shopCloseText: {fileID: 0}
