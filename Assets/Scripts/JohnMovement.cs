@@ -33,6 +33,10 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public AudioListener battleEars;
     public AudioListener overworldEars;
 
+
+    public Image fadeImage;
+    public float fadeDuration = 0.3f;
+
     public LayerMask unwalkableLayer;
     public GameObject fadetoBlackImage;
     public GameObject battleSystem, bossSystem, pauseMenu;
@@ -70,6 +74,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     private bool moving;
     void Start()
     {
+        StartCoroutine(fadeIn());
         dialogueController = dialogueSystem.GetComponent<DialogueController>();
         dpm = GameObject.Find("DataPersistenceManager").GetComponent<DataPersistenceManager>();
         rb = GetComponent<Rigidbody2D>();
@@ -83,6 +88,18 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
             dialogueController.startCutscene(startingCutscene);
             startSceneWatched = true;
         }
+    }
+
+    public void OnAwake()
+    {
+    }
+
+    public IEnumerator fadeIn()
+    {
+        Debug.Log("fade in");
+        fadeImage.gameObject.SetActive(true);
+        yield return StartCoroutine(Fade(0));
+        fadeImage.gameObject.SetActive(false);
     }
 
     void Update()
@@ -329,5 +346,22 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
             data.cutscenesWatched.Remove(id);
         }
         data.cutscenesWatched.Add(id, startSceneWatched);
+    }
+
+    private IEnumerator Fade(float targetAlpha)
+    {
+        float startAlpha = fadeImage.color.a;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / fadeDuration);
+            fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, newAlpha);
+            yield return null;
+        }
+
+        // Ensure the final alpha value is set
+        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, targetAlpha);
     }
 }

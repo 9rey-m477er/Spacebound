@@ -21,11 +21,13 @@ public class MainMenuButtons : MonoBehaviour
     public void NewGame()
     {
         dm.NewGame();
-        sl.LoadGame();
+        StartCoroutine(sl.LoadGame());
     }
+
     public void LoadGame()
     {
         dm.LoadGame();
-        sl.LoadGame();
+        StartCoroutine(sl.LoadGame());
     }
+
 }
