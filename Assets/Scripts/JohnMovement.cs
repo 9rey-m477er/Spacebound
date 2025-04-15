@@ -96,7 +96,6 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
 
     public IEnumerator fadeIn()
     {
-        Debug.Log("fade in");
         fadeImage.gameObject.SetActive(true);
         yield return StartCoroutine(Fade(0));
         fadeImage.gameObject.SetActive(false);

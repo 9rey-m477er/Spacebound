@@ -22,12 +22,18 @@ public class sceneLoader : MonoBehaviour
     {
         Application.Quit();
     }
-    public IEnumerator MainMenu()
+
+    public IEnumerator goToMain()
     {
+        fadeImage.gameObject.SetActive(true);
         yield return StartCoroutine(Fade(1));
         Debug.Log("Loading Main Menu");
         SceneManager.LoadScene("Main Menu");
         yield return StartCoroutine(Fade(0));
+    }
+    public void MainMenu()
+    {
+        StartCoroutine(goToMain());
     }
 
     private IEnumerator Fade(float targetAlpha)
