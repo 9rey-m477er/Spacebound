@@ -31,7 +31,6 @@ public class sceneLoader : MonoBehaviour
         yield return StartCoroutine(Fade2(1));
         Debug.Log("Loading Main Menu");
         SceneManager.LoadScene("Main Menu");
-        yield return StartCoroutine(Fade2(0));
     }
     public void MainMenu()
     {
