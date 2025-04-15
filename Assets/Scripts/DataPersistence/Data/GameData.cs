@@ -37,7 +37,7 @@ public class GameData
         janetFlag = false;
         stephvenFlag = false;
         //General Information: Complex
-        playerPosition = new Vector3(329.01f, -25.24f, 0f); //change to start position for full game (Starts in 1st forest room right now)
+        playerPosition = new Vector3(344f, 80f, 0f); //change to start position for full game (Starts in 1st forest room right now)
         staticsCleared = new SerializableDictionary<string, bool>();
         //Character Stats: John
         jHP = 30;
