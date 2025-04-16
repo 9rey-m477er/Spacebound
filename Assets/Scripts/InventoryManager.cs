@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -10,11 +12,19 @@ public class InventoryManager : MonoBehaviour
     public Item phillycake;
     public Item rock;
     public Item paddle;
+    
+    public Button phillyView;
+    public Button phillyUse;
+    public Button rockView;
+    public Button paddleView;
 
-    public void Start()
-    {
-        
-    }
+    public TextMeshProUGUI itemName;
+    public TextMeshProUGUI itemDescription;
+    
+    public TextMeshProUGUI phillyAmount;
+    public TextMeshProUGUI rockAmount;
+    public TextMeshProUGUI paddleAmount;
+
     public void Update()
     {
         if (Input.GetKey(KeyCode.Keypad0))
@@ -57,6 +67,7 @@ public class InventoryManager : MonoBehaviour
             i.amount += quantity;
             money -= cost;
         }
+        updateAmounts();
     }
     public void sell(int quantity, Item i)
     {
@@ -66,5 +77,30 @@ public class InventoryManager : MonoBehaviour
             i.amount -= quantity;
             money += profit;
         }
+        updateAmounts();
+    }
+
+    public void addItem(Item i)
+    {
+        i.amount++;
+        updateAmounts();
+    }
+    public void consume(Item i)
+    {
+        i.amount--;
+        updateAmounts();
+    }
+
+    public void updateAmounts()
+    {
+        rockAmount.text = rock.amount.ToString();
+        phillyAmount.text = phillycake.amount.ToString();
+        paddleAmount.text = paddle.amount.ToString();
+    }
+
+    public void viewDescription(Item i)
+    {
+        itemName.text = i.name;
+        itemDescription.text = i.description;
     }
 }
