@@ -48,6 +48,7 @@ public class OverworldMenu : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
             {
                 handleMenu();
+                johnMovement.menuOpen = false;
             }
             if (Input.GetKeyDown(KeyCode.Tab))
             {
@@ -67,7 +68,11 @@ public class OverworldMenu : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                handleMenu();
+                if (!johnMovement.menuOpen)
+                {
+                    handleMenu();
+                    johnMovement.menuOpen = true;
+                }
             }
         }
     }

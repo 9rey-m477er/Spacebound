@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
@@ -11,21 +12,45 @@ public class ShopManager : MonoBehaviour
     public GameObject MenuObject, ShopMenu, MainMenu, StatMenu; //, InvMenu;
     public OmniDirectionalMovement John;
     private Shop currentShop;
+    private bool isShopOpen;
 
-    public Sprite shopImage;
+    public Image shopImage;
     public TextMeshProUGUI shopNameText;
     public TextMeshProUGUI shopItem1Name, shopItem1Price, shopItem1Amount;
     public TextMeshProUGUI shopItem2Name, shopItem2Price, shopItem2Amount;
     public TextMeshProUGUI shopItem3Name, shopItem3Price, shopItem3Amount;
     public TextMeshProUGUI moneyHeld;
 
+    public bool devTools;
+    public Shop demoShop;
+
+    void Update()
+    {
+        if (devTools)
+        {
+            if (Input.GetKeyDown(KeyCode.V))
+            {
+                OpenShop(demoShop);
+            }
+        }
+        if (isShopOpen)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                CloseShop();
+            }
+        }
+    }
+
     public void OpenShop(Shop shop)
     {
+        John.menuOpen = true;
         //Save shop as currentShop
         currentShop = shop;
         //Load Basic Shop Info
-        shopImage = shop.shopPortrait;
+        shopImage.sprite = shop.shopPortrait;
         shopNameText.text = shop.shopName;
+        moneyHeld.text = "Credits Held: " + inventoryManager.money.ToString();
 
         //Load Item 1
         shopItem1Name.text = shop.shopInventory[0].itemName;
@@ -53,19 +78,13 @@ public class ShopManager : MonoBehaviour
         MainMenu.SetActive(false);
         StatMenu.SetActive(false);
         //InvMenu.SetActive(false);
-
-        dialogueController.startCutscene(shop.shopOpenText);
+        isShopOpen = true;
     }
 
     public void CloseShop()
     {
         ShopMenu.SetActive(false);
         MenuObject.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        John.menuOpen = false;
     }
 }

@@ -72,6 +72,8 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public Animator anim;
     public bool inBattle;
     private bool moving;
+
+    public bool menuOpen;
     void Start()
     {
         StartCoroutine(fadeIn());
