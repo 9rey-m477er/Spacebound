@@ -10,6 +10,8 @@ public class OverworldMenu : MonoBehaviour
     public GameObject StatsMenu;
     //public GameObject InvMenu;
     public int menuOpen;
+    public bool owMenuOpen;
+    public SoundManager soundManager;
 
     //Stat Menu Variables
     public CharacterStatHandler charStats;
@@ -30,7 +32,7 @@ public class OverworldMenu : MonoBehaviour
 
     public void handleMenu()
     {
-        if (menuObject.activeSelf)
+        if (owMenuOpen)
         {
             menuObject.SetActive(false);
             menuOpen = 0;
@@ -43,7 +45,7 @@ public class OverworldMenu : MonoBehaviour
     }
     void Update()
     {
-        if (menuObject.activeSelf)
+        if (owMenuOpen)
         {
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
             {
