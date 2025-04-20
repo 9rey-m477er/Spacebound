@@ -56,12 +56,12 @@ public class ShopManager : MonoBehaviour
             }
             if (!isBuySell)
             {
-                if (Input.GetKeyDown(KeyCode.W))
+                if (Input.GetKeyDown(KeyCode.S))
                 {
                     AdvanceArrow(true);
                     soundManager.PlaySoundClip(3);
                 }
-                if (Input.GetKeyDown(KeyCode.S))
+                if (Input.GetKeyDown(KeyCode.W))
                 {
                     AdvanceArrow(false);
                     soundManager.PlaySoundClip(3);
@@ -177,21 +177,25 @@ public class ShopManager : MonoBehaviour
         {
             if (itemArrow < 2)
             {
+                Debug.Log("Increment arrow up");
                 itemArrow++;
             }
             else
             {
+                Debug.Log("Max reached. Looping");
                 itemArrow = 0;
             }
         }
-        if (!isUp)
+        else
         {
             if (itemArrow > 0)
             {
+                Debug.Log("Increment arrow down");
                 itemArrow--;
             }
             else
             {
+                Debug.Log("Min reached. Looping");
                 itemArrow = 2;
             }
         }
@@ -203,7 +207,7 @@ public class ShopManager : MonoBehaviour
                 Item3Arrow.SetActive(false);
                 break;
             case 1:
-                if (currentShop.shopInventory.Count < 1)
+                if (currentShop.shopInventory.Count > 1)
                 {
                     Item1Arrow.SetActive(false);
                     Item2Arrow.SetActive(true);
@@ -218,7 +222,7 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case 2:
-                if (currentShop.shopInventory.Count < 2)
+                if (currentShop.shopInventory.Count > 2)
                 {
                     Item1Arrow.SetActive(false);
                     Item2Arrow.SetActive(false);
@@ -298,7 +302,6 @@ public class ShopManager : MonoBehaviour
         shopItem1Name.text = item1.itemName;
         shopItem1Price.text = item1.buyPrice.ToString();
         shopItem1Amount.text = item1.amount.ToString();
-        Item1Arrow.SetActive(true);
 
         if (currentShop.shopInventory.Count > 0)
         {
