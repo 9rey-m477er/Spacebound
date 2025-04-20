@@ -25,40 +25,69 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
     public TextMeshProUGUI rockAmount;
     public TextMeshProUGUI paddleAmount;
 
+    public Image[] UIarrows = new Image[4];
+    int pointer = 0;
     public void Update()
     {
-        if (Input.GetKey(KeyCode.Keypad0))
+        if (Input.GetKeyUp(KeyCode.Keypad0))
         {
             buy(1, phillycake);
             Debug.Log("Bought a Philly Cake, remaining money = " + money);
         }
-        if (Input.GetKey(KeyCode.Keypad1))
+        if (Input.GetKeyUp(KeyCode.Keypad1))
         {
             buy(1, rock);
             Debug.Log("Bought a rock, remaining money = " + money);
         }
-        if (Input.GetKey(KeyCode.Keypad2))
+        if (Input.GetKeyUp(KeyCode.Keypad2))
         {
             buy(1, paddle);
             Debug.Log("Bought a Paddle.png, remaining money = " + money);
         }
-        if (Input.GetKey(KeyCode.Keypad3))
+        if (Input.GetKeyUp(KeyCode.Keypad3))
         {
             sell(1, phillycake);
             Debug.Log("Sold a Philly Cake, current money = " + money);
         }
-        if (Input.GetKey(KeyCode.Keypad4))
+        if (Input.GetKeyUp(KeyCode.Keypad4))
         {
             sell(1, rock);
             Debug.Log("Sold a rock, current money = " + money);
         }
-        if (Input.GetKey(KeyCode.Keypad5))
+        if (Input.GetKeyUp(KeyCode.Keypad5))
         {
             sell(1, paddle);
             Debug.Log("Sold a Paddle.png, current money = " + money);
         }
+        NavigateInventory();
     }
-
+    public void NavigateInventory()
+    {
+        Image currentArrow = UIarrows[pointer];
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            if(pointer < 0)
+            {
+                pointer = UIarrows.Length-1;
+            }
+            pointer--;
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            pointer++;
+            
+            if(pointer >= UIarrows.Length)
+            {
+                pointer = 0;
+            }
+        }
+        for(int i = 0; i < UIarrows.Length; i++)
+        {
+            UIarrows[i].gameObject.SetActive(false);
+        }
+        UIarrows[pointer].gameObject.SetActive(true);
+        Debug.Log("Pointer = " + pointer);
+    }
     public void buy(int quantity, Item i)
     {
         int cost = i.buyPrice * quantity;
