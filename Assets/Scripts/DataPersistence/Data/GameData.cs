@@ -22,6 +22,8 @@ public class GameData
     public float nHP, nCHP, nBash, nSlash, nPoke;
     //Character Stats: Stephven
     public float sHP, sCHP, sBash, sSlash, sPoke;
+    //Inventory Counts (Add to as necessary)
+    public int credits, rockAmt, philAmt, paddAmt;
 
     public GameData()
     {
@@ -37,7 +39,7 @@ public class GameData
         janetFlag = false;
         stephvenFlag = false;
         //General Information: Complex
-        playerPosition = new Vector3(344f, 80f, 0f); //change to start position for full game (Starts in 1st forest room right now)
+        playerPosition = new Vector3(344f, 80f, 0f); //change to start position for full game (Starts in small ruined ship room right now)
         staticsCleared = new SerializableDictionary<string, bool>();
         //Character Stats: John
         jHP = 30;
@@ -69,5 +71,10 @@ public class GameData
         sBash = 0.9f;
         sSlash = 1.1f;
         sPoke = 1.0f;
+        //Inventory Counts
+        rockAmt = 0;
+        philAmt = 0;
+        paddAmt = 0;
+        credits = 100;
     }
 }

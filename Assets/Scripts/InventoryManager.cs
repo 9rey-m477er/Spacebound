@@ -109,6 +109,11 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
         updateAmounts();
     }
 
+    public void addCredits(int amount)
+    {
+        money += amount;
+    }
+
     public void addItem(Item i)
     {
         i.amount++;
@@ -135,11 +140,17 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        throw new System.NotImplementedException();
+        money = data.credits;
+        rock.amount = data.rockAmt;
+        phillycake.amount = data.philAmt;
+        paddle.amount = data.paddAmt;
     }
 
     public void SaveData(ref GameData data)
     {
-        throw new System.NotImplementedException();
+        data.credits = money;
+        data.rockAmt = rock.amount;
+        data.philAmt = phillycake.amount;
+        data.paddAmt = paddle.amount;
     }
 }

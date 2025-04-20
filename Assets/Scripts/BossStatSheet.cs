@@ -16,6 +16,7 @@ public class BossStatSheet : ScriptableObject
     public float health = 0;
     public float attackStrength = 0;
     public float baseExpValue = 0;
+    public int creditValue = 0;
     public bool canFlee = false;
     //public List<int> hpPhases = new List<int>();
     public List<EnemyAttack> enemyAttacks = new List<EnemyAttack>();

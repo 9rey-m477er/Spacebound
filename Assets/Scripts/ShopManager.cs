@@ -322,6 +322,8 @@ public class ShopManager : MonoBehaviour
 
     public void CloseShop()
     {
+        isShopOpen = false;
+        isBuySell = false;
         ShopMenu.SetActive(false);
         MenuObject.SetActive(false);
         soundManager.PlaySoundClip(2);

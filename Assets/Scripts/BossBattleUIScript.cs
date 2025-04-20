@@ -81,6 +81,7 @@ public class BossBattleUIScript : MonoBehaviour
 
     private OmniDirectionalMovement johnMovement;
     private SoundManager soundManager;
+    public InventoryManager inventoryManager;
     public bool isinMenu = false;
     public Button menuBlocking;
     public int currentMenuArrow = 1;
@@ -122,11 +123,11 @@ public class BossBattleUIScript : MonoBehaviour
 
     //Post-Battle Report
     private List<BossStatSheet> enemies = new List<BossStatSheet>();
-    public TextMeshProUGUI line1Name, line1EXP;
-    public TextMeshProUGUI line2Name, line2EXP;
-    public TextMeshProUGUI line3Name, line3EXP;
-    public TextMeshProUGUI line4Name, line4EXP;
-    public TextMeshProUGUI line5Total, expToNextTXT;
+    public TextMeshProUGUI line1Name, line1EXP, line1Credits;
+    public TextMeshProUGUI line2Name, line2EXP, line2Credits;
+    public TextMeshProUGUI line3Name, line3EXP, line3Credits;
+    public TextMeshProUGUI line4Name, line4EXP, line4Credits;
+    public TextMeshProUGUI line5Total, line5Credits, expToNextTXT;
     public TextMeshProUGUI currentLVL, nextLVL;
     public Image expBarInner;
     public GameObject postReportObj;

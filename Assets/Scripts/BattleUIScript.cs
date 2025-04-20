@@ -102,6 +102,7 @@ public class BattleUIScript : MonoBehaviour
 
     private OmniDirectionalMovement johnMovement;
     private SoundManager soundManager;
+    public InventoryManager inventoryManager;
     public bool isinMenu = false;
     public Button menuBlocking;
     public int currentMenuArrow = 1;
@@ -145,11 +146,11 @@ public class BattleUIScript : MonoBehaviour
 
     //Post-Battle Report
     private List<EnemyStatSheet> enemies = new List<EnemyStatSheet>();
-    public TextMeshProUGUI line1Name, line1EXP;
-    public TextMeshProUGUI line2Name, line2EXP;
-    public TextMeshProUGUI line3Name, line3EXP;
-    public TextMeshProUGUI line4Name, line4EXP;
-    public TextMeshProUGUI line5Total, expToNextTXT;
+    public TextMeshProUGUI line1Name, line1EXP, line1Credits;
+    public TextMeshProUGUI line2Name, line2EXP, line2Credits;
+    public TextMeshProUGUI line3Name, line3EXP, line3Credits;
+    public TextMeshProUGUI line4Name, line4EXP, line4Credits;
+    public TextMeshProUGUI line5Total, line5Credits, expToNextTXT;
     public TextMeshProUGUI currentLVL, nextLVL;
     public Image expBarInner;
     public GameObject postReportObj;
@@ -170,7 +171,7 @@ public class BattleUIScript : MonoBehaviour
     public CharacterStatHandler characterStatHandler;
 
     public bool fled = false;
-    public int expToGive;
+    public int expToGive, creditsToGive;
     public bool char1Dead, char2Dead, char3Dead, char4Dead;
 
     public TextMeshProUGUI turnName;
@@ -203,6 +204,7 @@ public class BattleUIScript : MonoBehaviour
         resetMenu();
         currentMenuArrow = 1;
         expToGive = 0;
+        creditsToGive = 0;
         updateMenuArrows();
         innerMenuArrow = 1;
         updateInnerArrow();
@@ -724,7 +726,9 @@ public class BattleUIScript : MonoBehaviour
         targetScript.pokeMultiplier = sheet.pokeMultiplier;
         targetScript.baseExpValue = sheet.baseExpValue;
         expToGive += sheet.baseExpValue;
+        creditsToGive += sheet.creditValue;
         Debug.Log("EXP To Give: " + expToGive);
+        Debug.Log("Credits To Give: " + creditsToGive);
         enemies.Add(sheet);
 
         //If the player is in the forest level and have reached level 10 or higher
@@ -732,6 +736,7 @@ public class BattleUIScript : MonoBehaviour
         {
             //Exp gain is set to 1.
             expToGive = 1;
+            creditsToGive = 1;
         }
     }
 
@@ -2395,24 +2400,29 @@ public class BattleUIScript : MonoBehaviour
         if (enemies[0] != null || enemies.Count > 0)
         {
             line1Name.text = enemies[0].enemyName;
+            line1Credits.text = (enemies[0].creditValue.ToString() + "C");
             line1EXP.text = (enemies[0].baseExpValue.ToString() + " EXP");
         }
         if (enemies[1] != null || enemies.Count > 1)
         {
             line2Name.text = enemies[1].enemyName;
+            line2Credits.text = (enemies[1].creditValue.ToString() + "C");
             line2EXP.text = (enemies[1].baseExpValue.ToString() + " EXP");
         }
         if (enemies[2] != null || enemies.Count > 2)
         {
             line3Name.text = enemies[2].enemyName;
+            line3Credits.text = (enemies[2].creditValue.ToString() + "C");
             line3EXP.text = (enemies[2].baseExpValue.ToString() + " EXP");
         }
         if (enemies[3] != null || enemies.Count > 3)
         {
             line4Name.text = enemies[3].enemyName;
+            line4Credits.text = (enemies[3].creditValue.ToString() + "C");
             line4EXP.text = (enemies[3].baseExpValue.ToString() + " EXP");
         }
-        line5Total.text = (expToGive.ToString());
+        line5Total.text = (expToGive.ToString() + " EXP");
+        line5Credits.text = (creditsToGive.ToString() + " C");
         currentLVL.text = characterStatHandler.partyLevel.ToString();
         if (characterStatHandler.partyLevel < characterStatHandler.levelMax)
         {
@@ -2436,6 +2446,7 @@ public class BattleUIScript : MonoBehaviour
             expToNextTXT.text = "Max Level";
             XButton.SetActive(true);
         }
+        inventoryManager.addCredits(creditsToGive);
     }
     public void postReportLevelUp()
     {

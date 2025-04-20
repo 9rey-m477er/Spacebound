@@ -22,6 +22,7 @@ MonoBehaviour:
   health: 300
   attackStrength: 50
   baseExpValue: 600
+  creditValue: 50
   canFlee: 0
   enemyAttacks:
   - {fileID: 11400000, guid: 8507af0965f4f51429145e717b019d3a, type: 2}
