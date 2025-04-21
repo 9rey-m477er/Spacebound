@@ -300,6 +300,14 @@ public class BossBattleUIScript : MonoBehaviour
         }
         checkForEndOfBattle();
         updateTurnText();
+
+        if (postReportObj.gameObject.active == true)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
+            {
+                postReportClose();
+            }
+        }
     }
 
     void updateTurnText()

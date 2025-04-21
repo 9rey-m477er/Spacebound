@@ -10,6 +10,8 @@ using Random = UnityEngine.Random;
 using System.Runtime.CompilerServices;
 using UnityEngine.SceneManagement;
 using UnityEditor;
+using UnityEngine.Windows;
+using Input = UnityEngine.Input;
 
 public class BattleUIScript : MonoBehaviour
 {
@@ -839,6 +841,14 @@ public class BattleUIScript : MonoBehaviour
             else if (tutorialStage == 15)
             {
                 tutorial15();
+            }
+        }
+
+        if(postReportObj.gameObject.active == true)
+        {
+            if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
+            {
+                postReportClose();
             }
         }
     }
