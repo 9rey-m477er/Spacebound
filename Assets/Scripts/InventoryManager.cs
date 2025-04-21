@@ -26,6 +26,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
     public TextMeshProUGUI paddleAmount;
 
     public Image[] UIarrows = new Image[4];
+    public Button[] InvButtons = new Button[4];
     int pointer = 0;
     public void Update()
     {
@@ -87,6 +88,10 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
         }
         UIarrows[pointer].gameObject.SetActive(true);
         Debug.Log("Pointer = " + pointer);
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            InvButtons[pointer].GetComponent<ItemViewButtons>().describe();
+        }
     }
     public void buy(int quantity, Item i)
     {
