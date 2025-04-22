@@ -42,7 +42,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
     public GameObject battleSystem, bossSystem, pauseMenu;
     public GameObject dialogueSystem;
     private DialogueController dialogueController;
-    public BossStatSheet forestSE, caveSE;
+    public BossStatSheet forestSE, caveSE, glacierSE, gCaveSE;
     public BossBattleUIScript bossScript;
     public BossStatSheet specEncounter;
 
@@ -265,7 +265,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 battleMusicIntro = glacierBMIntro;
                 levelMusic = glacierLM;
                 walkSound = glacierWalk;
-                specEncounter = caveSE;
+                specEncounter = glacierSE;
                 encounterPool = new List<EnemyStatSheet>();
                 encounterPool = glacierPool;
                 battleBackground.color = glacierBG;
@@ -278,7 +278,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 battleMusicIntro = glacierBMIntro;
                 levelMusic = glacierLM;
                 walkSound = glacierWalk;
-                specEncounter = caveSE;
+                specEncounter = gCaveSE;
                 encounterPool = new List<EnemyStatSheet>();
                 encounterPool = gCavePool;
                 battleBackground.color = gCaveBG;

@@ -29,38 +29,42 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
     public Image[] UIarrows = new Image[4];
     public Button[] InvButtons = new Button[4];
     int pointer = 0;
+    public void Start()
+    {
+        updateAmounts();
+    }
     public void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Keypad0))
-        {
-            buy(1, phillycake);
-            Debug.Log("Bought a Philly Cake, remaining money = " + money);
-        }
-        if (Input.GetKeyUp(KeyCode.Keypad1))
-        {
-            buy(1, rock);
-            Debug.Log("Bought a rock, remaining money = " + money);
-        }
-        if (Input.GetKeyUp(KeyCode.Keypad2))
-        {
-            buy(1, paddle);
-            Debug.Log("Bought a Paddle.png, remaining money = " + money);
-        }
-        if (Input.GetKeyUp(KeyCode.Keypad3))
-        {
-            sell(1, phillycake);
-            Debug.Log("Sold a Philly Cake, current money = " + money);
-        }
-        if (Input.GetKeyUp(KeyCode.Keypad4))
-        {
-            sell(1, rock);
-            Debug.Log("Sold a rock, current money = " + money);
-        }
-        if (Input.GetKeyUp(KeyCode.Keypad5))
-        {
-            sell(1, paddle);
-            Debug.Log("Sold a Paddle.png, current money = " + money);
-        }
+        //if (Input.GetKeyUp(KeyCode.Keypad0))
+        //{
+        //    buy(1, phillycake);
+        //    Debug.Log("Bought a Philly Cake, remaining money = " + money);
+        //}
+        //if (Input.GetKeyUp(KeyCode.Keypad1))
+        //{
+        //    buy(1, rock);
+        //    Debug.Log("Bought a rock, remaining money = " + money);
+        //}
+        //if (Input.GetKeyUp(KeyCode.Keypad2))
+        //{
+        //    buy(1, paddle);
+        //    Debug.Log("Bought a Paddle.png, remaining money = " + money);
+        //}
+        //if (Input.GetKeyUp(KeyCode.Keypad3))
+        //{
+        //    sell(1, phillycake);
+        //    Debug.Log("Sold a Philly Cake, current money = " + money);
+        //}
+        //if (Input.GetKeyUp(KeyCode.Keypad4))
+        //{
+        //    sell(1, rock);
+        //    Debug.Log("Sold a rock, current money = " + money);
+        //}
+        //if (Input.GetKeyUp(KeyCode.Keypad5))
+        //{
+        //    sell(1, paddle);
+        //    Debug.Log("Sold a Paddle.png, current money = " + money);
+        //}
         if (overworldMenu.owMenuOpen && overworldMenu.menuOpen == 2)
         {
             NavigateInventory();
@@ -72,9 +76,9 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
         Image currentArrow = UIarrows[pointer];
         if (Input.GetKeyUp(KeyCode.W))
         {
-            if(pointer < 0)
+            if (pointer <= 0)
             {
-                pointer = UIarrows.Length-1;
+                pointer = UIarrows.Length;
             }
             pointer--;
         }
@@ -124,9 +128,9 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
         money += amount;
     }
 
-    public void addItem(Item i)
+    public void addItem(Item i, int amount)
     {
-        i.amount++;
+        i.amount += amount;
         updateAmounts();
     }
     public void consume(Item i)
@@ -140,6 +144,12 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
         rockAmount.text = rock.amount.ToString();
         phillyAmount.text = phillycake.amount.ToString();
         paddleAmount.text = paddle.amount.ToString();
+    }
+
+    public void resetText()
+    {
+        itemName.text = "";
+        itemDescription.text = "Press view on an item to see its description. Navigate with W and S";
     }
 
     public void viewDescription(Item i)

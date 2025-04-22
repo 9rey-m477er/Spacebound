@@ -12,6 +12,7 @@ public class OverworldMenu : MonoBehaviour
     public int menuOpen;
     public bool owMenuOpen;
     public SoundManager soundManager;
+    public InventoryManager inventoryManager;
 
     //Stat Menu Variables
     public CharacterStatHandler charStats;
@@ -100,6 +101,8 @@ public class OverworldMenu : MonoBehaviour
             case 2: //Inventory
                 MainMenu.SetActive(false);
                 StatsMenu.SetActive(false);
+                inventoryManager.updateAmounts();
+                inventoryManager.resetText();
                 InvMenu.SetActive(true);
                 break;
         }

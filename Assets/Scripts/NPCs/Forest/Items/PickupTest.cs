@@ -6,17 +6,25 @@ public class PickupTest : NPC, ITalkable, ICollectable
 {
     [SerializeField] private DialogueText dialogueText;
     [SerializeField] private DialogueController dialogueController;
+    [SerializeField] private InventoryManager inventoryManager;
     private OmniDirectionalMovement john;
+    public Item item;
+    private bool collected;
 
     public override void Interact()
     {
         Talk(dialogueText);
-        Collect("rock", 1);
+        if (dialogueController.paragraphs.Count == 0)
+        {
+            dialogueController.EndConversation();
+            Collect(item, 1);
+        }
     }
 
-    public void Collect(string item, int amount)
+    public void Collect(Item item, int amount)
     {
-        throw new System.NotImplementedException();
+        inventoryManager.addItem(item, amount);
+        this.gameObject.SetActive(false);
     }
 
     public void Talk(DialogueText dialogueText)

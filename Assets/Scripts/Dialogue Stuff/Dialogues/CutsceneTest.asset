@@ -13,21 +13,22 @@ MonoBehaviour:
   m_Name: CutsceneTest
   m_EditorClassIdentifier: 
   speakerNames:
-  - System
-  - System
-  - System
-  - System
-  - System
-  - System
-  - System
+  - T.H.E.
+  - John
+  - T.H.E.
+  - John
+  - T.H.E.
+  - T.H.E.
+  - 
   paragraphs:
-  - 'Hello! Welcome to Spacebound: Zero-G!
+  - 'Wake up, John!
 
-    (Press E to advance dialogue.)'
-  - This is the April 1st Demo Version for Playtest Session 02.
-  - Here is a brief introduction to our controls.
-  - You can open and close the main menu by pressing the Escape Key. To switch between
-    submenus, press the Tab Key
-  - The controls for overworld movement are displayed in the first submenu.
-  - The controls for combat are displayed at the bottom of the battle screen.
-  - Don't forget to fill out the survey after you've played. Thanks!
+    (Press E to advance dialogue)'
+  - Wh- huh!? T.H.E.? What happened?
+  - The ship crashed. We're stranded on an unknown planet.
+  - Where's everyone else?
+  - Their escape pods scattered across the planet. I think one of them is in the
+    forest outside, but I can't detect the others.
+  - You should probably leave the ship. It's missing a few parts, and it's unsafe
+    to remain inside.
+  - (Move with WASD. Press ESCAPE to open the menu)
