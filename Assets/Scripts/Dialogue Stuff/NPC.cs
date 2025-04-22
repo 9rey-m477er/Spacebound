@@ -19,7 +19,7 @@ public abstract class NPC : MonoBehaviour, IInteractible
 
     void Update()
     {
-        if (!johnMovement.menuOpen || !johnMovement.inBattle)
+        if (!johnMovement.menuOpen && !johnMovement.inBattle)
         {
             if (Input.GetKeyDown(KeyCode.E) && IsWithinInteractDistance())
             {
