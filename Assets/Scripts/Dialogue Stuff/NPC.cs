@@ -19,19 +19,20 @@ public abstract class NPC : MonoBehaviour, IInteractible
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.E) && IsWithinInteractDistance() && !johnMovement.inBattle)
+        if (!johnMovement.menuOpen || !johnMovement.inBattle)
         {
-            Interact();
-        }
-
-        if (interactSprite.gameObject.activeSelf && !IsWithinInteractDistance())
-        {
-            interactSprite.gameObject.SetActive(false);
-        }
-        else if (!interactSprite.gameObject.activeSelf && IsWithinInteractDistance())
-        {
-            interactSprite.gameObject.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.E) && IsWithinInteractDistance())
+            {
+                Interact();
+            }
+            if (interactSprite.gameObject.activeSelf && !IsWithinInteractDistance())
+            {
+                interactSprite.gameObject.SetActive(false);
+            }
+            else if (!interactSprite.gameObject.activeSelf && IsWithinInteractDistance())
+            {
+                interactSprite.gameObject.SetActive(true);
+            }
         }
     }
 

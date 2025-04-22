@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7902b4f215e59954b972508c6a35a433, type: 3}
   m_Name: TestShopOpen
   m_EditorClassIdentifier: 
-  speakerNames: []
-  paragraphs: []
+  speakerNames:
+  - Shopkeeper
+  - Shopkeeper
+  paragraphs:
+  - Hello! Here to buy or sell something?
+  - Hello! Here to buy or sell something?
