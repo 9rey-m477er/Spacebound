@@ -8,6 +8,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
 {
     public Item[,] inventory = new Item[3,1]; //[type index, spec index] - healing items = [0][] - attack items [1][] - defense items [2][0] 
     public int money = 999; //999 for the sake of testing things, will change later
+    public OverworldMenu overworldMenu;
     
     public Item phillycake;
     public Item rock;
@@ -60,7 +61,11 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
             sell(1, paddle);
             Debug.Log("Sold a Paddle.png, current money = " + money);
         }
-        NavigateInventory();
+        if (overworldMenu.owMenuOpen && overworldMenu.menuOpen == 2)
+        {
+            NavigateInventory();
+        }
+
     }
     public void NavigateInventory()
     {

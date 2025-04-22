@@ -8,7 +8,7 @@ public class OverworldMenu : MonoBehaviour
     public GameObject menuObject;
     public GameObject MainMenu;
     public GameObject StatsMenu;
-    //public GameObject InvMenu;
+    public GameObject InvMenu;
     public int menuOpen;
     public bool owMenuOpen;
     public SoundManager soundManager;
@@ -35,11 +35,13 @@ public class OverworldMenu : MonoBehaviour
         if (owMenuOpen)
         {
             menuObject.SetActive(false);
+            owMenuOpen = false;
             menuOpen = 0;
         }
         else
         {
             menuObject.SetActive(true);
+            owMenuOpen = true;
             switchMenu(menuOpen);
         }
     }
@@ -54,7 +56,7 @@ public class OverworldMenu : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                if (menuOpen == 1)
+                if (menuOpen == 2)
                 {
                     switchMenu(0);
                     menuOpen = 0;
@@ -87,15 +89,19 @@ public class OverworldMenu : MonoBehaviour
             case 0: //Main
                 MainMenu.SetActive(true);
                 StatsMenu.SetActive(false);
-                //InvMenu.SetActive(false);
+                InvMenu.SetActive(false);
                 break;
             case 1: //Stats
                 MainMenu.SetActive(false);
                 StatsMenu.SetActive(true);
                 assignStats();
-                //InvMenu.SetActive(false);
+                InvMenu.SetActive(false);
                 break;
-            //case 2: //Inventory
+            case 2: //Inventory
+                MainMenu.SetActive(false);
+                StatsMenu.SetActive(false);
+                InvMenu.SetActive(true);
+                break;
         }
     }
 
