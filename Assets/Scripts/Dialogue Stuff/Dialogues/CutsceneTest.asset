@@ -31,4 +31,4 @@ MonoBehaviour:
     forest outside, but I can't detect the others.
   - You should probably leave the ship. It's missing a few parts, and it's unsafe
     to remain inside.
-  - (Move with WASD. Press ESCAPE to open the menu)
+  - (Move with WASD & run with LShift. Press ESCAPE to open the menu)

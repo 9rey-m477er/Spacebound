@@ -11,7 +11,7 @@ public class ShopManager : MonoBehaviour
     public InventoryManager inventoryManager;
     public DialogueController dialogueController;
     public SoundManager soundManager;
-    public GameObject MenuObject, ShopMenu, MainMenu, StatMenu; //, InvMenu;
+    public GameObject MenuObject, ShopMenu, MainMenu, StatMenu, InvMenu;
     public OmniDirectionalMovement John;
     private Shop currentShop;
     private bool isShopOpen;
@@ -167,8 +167,8 @@ public class ShopManager : MonoBehaviour
         ShopMenu.SetActive(true);
         MainMenu.SetActive(false);
         StatMenu.SetActive(false);
-        //InvMenu.SetActive(false);
-        isShopOpen = true;
+        InvMenu.SetActive(false);
+        StartCoroutine(waiter(0.2f));
     }
 
     public void AdvanceArrow(bool isUp)
@@ -318,6 +318,12 @@ public class ShopManager : MonoBehaviour
             shopItem3Price.text = item3.buyPrice.ToString();
             shopItem3Amount.text = item3.amount.ToString();
         }
+    }
+
+    IEnumerator waiter(float time)
+    {
+        yield return new WaitForSeconds(time);
+        isShopOpen = true;
     }
 
     public void CloseShop()
