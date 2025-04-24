@@ -132,6 +132,7 @@ public class BossBattleUIScript : MonoBehaviour
     public Image expBarInner;
     public GameObject postReportObj;
     private bool postReportOpen;
+    private bool lostBattle;
 
     //Level Up
     public GameObject LUJohn, LUBob, LUThozos, LUJanet, LUStevphen, LevelUpButton, XButton, EXPArea, LUArea;
@@ -267,6 +268,7 @@ public class BossBattleUIScript : MonoBehaviour
         char3Dead = false;
         char4Dead = false;
         isBattleOver = false;
+        lostBattle = false;
 
         updateEnemyHealth();
 
@@ -293,14 +295,25 @@ public class BossBattleUIScript : MonoBehaviour
         }
         if (isBattleOver)
         {
-            if (postReportOpen == false)
+            if (!lostBattle)
             {
-                postReportOpen = true;
-                postBattleReport();
+                if (postReportOpen == false && !lostBattle)
+                {
+                    postReportOpen = true;
+                    postBattleReport();
+                }
+            }
+            else
+            {
+                Debug.Log("Battle Lost!");
+                StartCoroutine(exitBattle());
             }
         }
-        checkForEndOfBattle();
-        updateTurnText();
+        else
+        {
+            checkForEndOfBattle();
+            updateTurnText();
+        }
 
         if (postReportObj.gameObject.active == true)
         {
@@ -2394,12 +2407,15 @@ public class BossBattleUIScript : MonoBehaviour
 
         if (p1.health <= 0 && p2.health <= 0 && p3.health <= 0 && p4.health <= 0)
         {
-            //StartCoroutine(Fade(1));
+            StartCoroutine(Fade(1));
             //StartCoroutine(Fade(0));
-            isBattleOver = true;
-            encounterSaver.resetEncounter();
-            exitBattle();
+            if (encounterSaver != null)
+            {
+                encounterSaver.resetEncounter();
+            }
             dataPersistenceManager.LoadGame();
+            lostBattle = true;
+            isBattleOver = true;
             Debug.Log("all players dead");
         }
 
@@ -2447,7 +2463,7 @@ public class BossBattleUIScript : MonoBehaviour
         p4.health = p4.startingHealth;
 
         //Checks to make sure the player didn't flee the fight
-        if (!fled)
+        if (!fled && !lostBattle)
         {
             //Gives EXP to player.
             characterStatHandler.addEXP(expToGive);
