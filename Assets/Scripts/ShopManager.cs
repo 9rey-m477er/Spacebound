@@ -51,6 +51,7 @@ public class ShopManager : MonoBehaviour
                 }
                 else
                 {
+                    isShopOpen = false;
                     CloseShop();
                 }
             }
