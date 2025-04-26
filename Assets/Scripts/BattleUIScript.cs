@@ -199,9 +199,12 @@ public class BattleUIScript : MonoBehaviour
 
     public int fleeChance = 100;
     public TextMeshProUGUI fleeText;
-
+    public TextMeshProUGUI cake;
+    public TextMeshProUGUI rock;
+    public TextMeshProUGUI paddle;
     void OnEnable()
     {
+        
         tutAdvancetxt.gameObject.SetActive(false);
         resetMenu();
         currentMenuArrow = 1;
@@ -1128,6 +1131,7 @@ public class BattleUIScript : MonoBehaviour
             //
             if (invArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
             {
+                
                 invSlot1();
                 Debug.Log("islot1");
             }
@@ -1217,6 +1221,7 @@ public class BattleUIScript : MonoBehaviour
         }
         else if (invMenu.active == true)
         {
+            
             if (innerMenuArrow == 1)
             {
                 invArrow1.gameObject.SetActive(true);
@@ -1775,6 +1780,7 @@ public class BattleUIScript : MonoBehaviour
             // Update turn and UI
             updateTurns();
             updatePlayerHealth();
+            
 
             // Hide the reticles and arrow after the attack
             party1Reticle.SetActive(false);
@@ -3342,5 +3348,11 @@ public class BattleUIScript : MonoBehaviour
     public void updateTurns()
     {
         turnCounter.text = "Turn " + turnCounterIndex;
+    }
+    public void InventoryButtonAmounts()
+    {
+        cake.text = inventoryManager.inventory[0,0].itemName + " "+ inventoryManager.inventory[0, 0].amount;
+        rock.text = inventoryManager.inventory[1, 0].itemName + " " + inventoryManager.inventory[1, 0].amount;
+        paddle.text = inventoryManager.inventory[2,0].itemName + " " + inventoryManager.inventory[2, 0].amount;
     }
 }

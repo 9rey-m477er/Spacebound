@@ -84,12 +84,24 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
         }
         if (Input.GetKeyUp(KeyCode.S))
         {
-            pointer++;
+            if(pointer == 1)
+            {
+                pointer = 3;
+            }
+            else
+            {
+                pointer++;
+            }
+            
             
             if(pointer >= UIarrows.Length)
             {
                 pointer = 0;
             }
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            pointer = 2;
         }
         for(int i = 0; i < UIarrows.Length; i++)
         {
