@@ -31,7 +31,9 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
     int pointer = 0;
     public void Start()
     {
+        InitializeInventory();
         updateAmounts();
+        
     }
     public void Update()
     {
@@ -184,5 +186,11 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
         data.rockAmt = rock.amount;
         data.philAmt = phillycake.amount;
         data.paddAmt = paddle.amount;
+    }
+    public void InitializeInventory()
+    {
+        inventory[0, 0] = phillycake;
+        inventory[1, 0] = rock;
+        inventory[2, 0] = paddle;
     }
 }

@@ -893,6 +893,7 @@ public class BattleUIScript : MonoBehaviour
             attackArrow.gameObject.SetActive(false);
             defendArrow.gameObject.SetActive(false);
             invenArrow.gameObject.SetActive(true);
+            InventoryButtonAmounts();
             runArrow.gameObject.SetActive(false);
             reportArrow.gameObject.SetActive(false);
         }
@@ -1131,7 +1132,6 @@ public class BattleUIScript : MonoBehaviour
             //
             if (invArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
             {
-                
                 invSlot1();
                 Debug.Log("islot1");
             }
@@ -3352,7 +3352,9 @@ public class BattleUIScript : MonoBehaviour
     public void InventoryButtonAmounts()
     {
         cake.text = inventoryManager.inventory[0,0].itemName + " "+ inventoryManager.inventory[0, 0].amount;
+
         rock.text = inventoryManager.inventory[1, 0].itemName + " " + inventoryManager.inventory[1, 0].amount;
+
         paddle.text = inventoryManager.inventory[2,0].itemName + " " + inventoryManager.inventory[2, 0].amount;
     }
 }
