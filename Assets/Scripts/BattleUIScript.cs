@@ -1130,15 +1130,17 @@ public class BattleUIScript : MonoBehaviour
                 StartCoroutine(postSelectionWaitCoroutine(0.2f));
             }
             //
-            if (invArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
+            if (invArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false && inventoryManager.inventory[0, 0].amount > 0)
             {
                 invSlot1();
-                Debug.Log("islot1");
             }
-            if (invArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
+            if (invArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false && inventoryManager.inventory[1, 0].amount > 0)
             {
                 invSlot2();
-                Debug.Log("islot2");
+            }
+            if (invArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false && inventoryManager.inventory[2, 0].amount > 0)
+            {
+                //invSlot3();
             }
             //
             if (runArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
@@ -2298,6 +2300,8 @@ public class BattleUIScript : MonoBehaviour
         }
         incrementTurn();
         updatePlayerHealth();
+        inventoryManager.inventory[0, 0].amount -= 1;
+        InventoryButtonAmounts();
     }
 
     public void invSlot2()
@@ -2327,6 +2331,8 @@ public class BattleUIScript : MonoBehaviour
             currentEnemy = 4;
         }
         UpdateEnemyArrows();
+        inventoryManager.inventory[1, 0].amount -= 1;
+        InventoryButtonAmounts();
     }
     private IEnumerator HandleEnemySelection()
     {
