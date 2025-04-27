@@ -82,6 +82,15 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
             {
                 pointer = UIarrows.Length;
             }
+            else if(pointer == 3)
+            {
+                pointer = 1;
+            }
+            else if(pointer == 2)
+            {
+                pointer = 0;
+            }
+            else
             pointer--;
         }
         if (Input.GetKeyUp(KeyCode.S))
@@ -105,7 +114,11 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
         {
             pointer = 2;
         }
-        for(int i = 0; i < UIarrows.Length; i++)
+        if (Input.GetKeyUp(KeyCode.A) && pointer == 2)
+        {
+            pointer = 1;
+        }
+        for (int i = 0; i < UIarrows.Length; i++)
         {
             UIarrows[i].gameObject.SetActive(false);
         }
@@ -119,7 +132,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
     public void buy(int quantity, Item i)
     {
         int cost = i.buyPrice * quantity;
-        if(money > cost)
+        if(money >= cost)
         {
             i.amount += quantity;
             money -= cost;
@@ -129,7 +142,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
     public void sell(int quantity, Item i)
     {
         int profit = i.sellPrice * quantity;
-        if (i.amount > quantity)
+        if (i.amount >= quantity)
         {
             i.amount -= quantity;
             money += profit;
