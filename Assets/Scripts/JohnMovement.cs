@@ -155,7 +155,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
                 sfx.PlayOneShot(walkSound);
             }
             lastPosition = currentPosition;
-            randomNum = randomNum - 3;
+            randomNum = randomNum - 2;
             if(randomNum <= 0 && specRoll != 69)
             {
                 battleEars.enabled = true;

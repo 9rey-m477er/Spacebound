@@ -126,10 +126,10 @@ public class BattleUIScript : MonoBehaviour
     public GameObject runArrow1;
     public GameObject runArrow2;
 
-    public bool canSelect = false;
-    public bool canSelect2 = false;
-    public bool waiting = false;
-    public bool isAttacking = false;
+    private bool canSelect = false;
+    private bool canSelect2 = false;
+    private bool waiting = false;
+    private bool isAttacking = false;
 
     public List<Sprite> forestSpritePool = new List<Sprite>();
     public List<EnemyStatSheet> enemyPool = new List<EnemyStatSheet>();
@@ -202,6 +202,12 @@ public class BattleUIScript : MonoBehaviour
     public TextMeshProUGUI cake;
     public TextMeshProUGUI rock;
     public TextMeshProUGUI paddle;
+
+    private bool p1hasPaddle;
+    private bool p2hasPaddle;
+    private bool p3hasPaddle;
+    private bool p4hasPaddle;
+
     void OnEnable()
     {
         
@@ -1138,9 +1144,9 @@ public class BattleUIScript : MonoBehaviour
             {
                 invSlot2();
             }
-            if (invArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false && inventoryManager.inventory[2, 0].amount > 0)
+            if (invArrow3.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false && inventoryManager.inventory[2, 0].amount > 0)
             {
-                //invSlot3();
+                invSlot3();
             }
             //
             if (runArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
@@ -1364,6 +1370,11 @@ public class BattleUIScript : MonoBehaviour
 
     private IEnumerator EnemyAttackSequence()
     {
+        bool p1attacked = false;
+        bool p2attacked = false;
+        bool p3attacked = false;
+        bool p4attacked = false;
+
         yield return new WaitForSeconds(0.5f);
 
         BattleEnemyScript e1 = enemy1.GetComponent<BattleEnemyScript>();
@@ -1609,6 +1620,12 @@ public class BattleUIScript : MonoBehaviour
                                 {
                                     party1Reticle.SetActive(true);
                                 }
+                                if(p1hasPaddle == true)
+                                {
+                                    p1attacked = true;
+                                    p1.defMultiplier = p1.defMultiplier + 50;
+                                    enemyScript.health = enemyScript.health - Mathf.CeilToInt((enemyScript.attackStrength + chosenAttack.attackStrength) * ((100 - target.defMultiplier) / 100f) / 4f);
+                                }
                                 Image playerImage = player1.GetComponent<Image>();
                                 soundManager.PlaySoundClip(6);
                                 playerImage.sprite = p1.hurtSprite;
@@ -1640,6 +1657,12 @@ public class BattleUIScript : MonoBehaviour
                                 else
                                 {
                                     party2Reticle.SetActive(true);
+                                }
+                                if (p2hasPaddle == true)
+                                {
+                                    p2attacked = true;
+                                    p2.defMultiplier = p2.defMultiplier + 50;
+                                    enemyScript.health = enemyScript.health - Mathf.CeilToInt((enemyScript.attackStrength + chosenAttack.attackStrength) * ((100 - target.defMultiplier) / 100f) / 4f);
                                 }
                                 Image playerImage = player2.GetComponent<Image>();
                                 soundManager.PlaySoundClip(6);
@@ -1674,6 +1697,12 @@ public class BattleUIScript : MonoBehaviour
                                 {
                                     party3Reticle.SetActive(true);
                                 }
+                                if (p3hasPaddle == true)
+                                {
+                                    p3attacked = true;
+                                    p3.defMultiplier = p3.defMultiplier + 50;
+                                    enemyScript.health = enemyScript.health - Mathf.CeilToInt((enemyScript.attackStrength + chosenAttack.attackStrength) * ((100 - target.defMultiplier) / 100f) / 4f);
+                                }
                                 Image playerImage = player3.GetComponent<Image>();
                                 soundManager.PlaySoundClip(6);
                                 playerImage.sprite = p3.hurtSprite;
@@ -1705,6 +1734,12 @@ public class BattleUIScript : MonoBehaviour
                                 else
                                 {
                                     party4Reticle.SetActive(true);
+                                }
+                                if (p4hasPaddle == true)
+                                {
+                                    p4attacked = true;
+                                    p4.defMultiplier = p4.defMultiplier + 50;
+                                    enemyScript.health = enemyScript.health - Mathf.CeilToInt((enemyScript.attackStrength + chosenAttack.attackStrength) * ((100 - target.defMultiplier) / 100f) / 4f);
                                 }
                                 Image playerImage = player4.GetComponent<Image>();
                                 soundManager.PlaySoundClip(6);
@@ -1738,6 +1773,29 @@ public class BattleUIScript : MonoBehaviour
                             /////
 
                             Transform textHolder = null;
+                            Transform enemyTextHolder = enemyScript.transform;
+
+                            if (p1hasPaddle && p1attacked == true || p2hasPaddle && p2attacked == true || p3hasPaddle && p3attacked == true || p4hasPaddle && p4attacked == true)
+                            {
+                                ShowFloatingText(Mathf.CeilToInt((enemyScript.attackStrength + chosenAttack.attackStrength) * ((100 - target.defMultiplier) / 100) / 4).ToString(), enemyTextHolder.position, enemyTextHolder);
+                                updateEnemyHealth();
+                                if(p1attacked == true)
+                                {
+                                    p1hasPaddle = false;
+                                }
+                                else if (p2attacked == true)
+                                {
+                                    p2hasPaddle = false;
+                                }
+                                else if (p3attacked == true)
+                                {
+                                    p3hasPaddle = false;
+                                }
+                                else if (p4attacked == true)
+                                {
+                                    p4hasPaddle = false;
+                                }
+                            }
 
                             if (textTarget == 1) textHolder = player1.transform.Find("textHolder(p1)");
                             else if (textTarget == 2) textHolder = player2.transform.Find("textHolder(p2)");
@@ -1770,10 +1828,16 @@ public class BattleUIScript : MonoBehaviour
                     }
 
                     updatePlayerHealth();
+                    updateEnemyHealth();
                     party1Reticle.SetActive(false);
                     party2Reticle.SetActive(false);
                     party3Reticle.SetActive(false);
                     party4Reticle.SetActive(false);
+
+                    p1attacked = false;
+                    p2attacked = false;
+                    p3attacked = false;
+                    p4attacked = false;
 
                     yield return new WaitForSeconds(0.25f);
                 }
@@ -1816,12 +1880,10 @@ public class BattleUIScript : MonoBehaviour
 
         if (p1.health > 0)
         {
-            //Debug.Log("meowing on player 1");
             playerTurn = 1;
         }
         else if (p2.health > 0)
         {
-            //Debug.Log("meowing on player 2");
             playerTurn = 2;
         }
         else if (p3.health > 0)
@@ -2245,7 +2307,7 @@ public class BattleUIScript : MonoBehaviour
         incrementTurn();
     }
 
-    public void invSlot1()
+    public void invSlot1() //heal
     {
         //currentMenuArrow = 1;
         menuArrowTemp = currentMenuArrow;
@@ -2304,7 +2366,7 @@ public class BattleUIScript : MonoBehaviour
         InventoryButtonAmounts();
     }
 
-    public void invSlot2()
+    public void invSlot2() //rock
     {
         //currentMenuArrow = 1;
         menuArrowTemp = currentMenuArrow;
@@ -2334,6 +2396,35 @@ public class BattleUIScript : MonoBehaviour
         inventoryManager.inventory[1, 0].amount -= 1;
         InventoryButtonAmounts();
     }
+
+    public void invSlot3() //paddle
+    {
+        menuArrowTemp = currentMenuArrow;
+        resetMenu();
+        soundManager.PlaySoundClip(5);
+        
+        if(playerTurn == 1)
+        {
+            p1hasPaddle = true;
+        }
+        else if(playerTurn == 2)
+        {
+            p2hasPaddle = true;
+        }
+        else if(playerTurn == 3)
+        {
+            p3hasPaddle = true;
+        }
+        else if (playerTurn == 4)
+        {
+            p4hasPaddle = true;
+        }
+        incrementTurn();
+        UpdateEnemyArrows();
+        inventoryManager.inventory[2, 0].amount -= 1;
+        InventoryButtonAmounts();
+    }
+
     private IEnumerator HandleEnemySelection()
     {
         BattleEnemyScript enemy1HealthCheck = enemy1.GetComponent<BattleEnemyScript>();
