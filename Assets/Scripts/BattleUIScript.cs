@@ -1934,7 +1934,7 @@ public class BattleUIScript : MonoBehaviour
         }
         currentAttack = 'b';
         soundManager.PlaySoundClip(5);
-        attackPower = 25;
+        attackPower = Random.Range(17, 21);
         
         if(enemy1.active == true)
         {
@@ -1966,7 +1966,7 @@ public class BattleUIScript : MonoBehaviour
         }
         currentAttack = 's';
         soundManager.PlaySoundClip(5);
-        attackPower = 15;
+        attackPower = Random.Range(12, 16);
 
         if (enemy1.active == true)
         {
@@ -1998,7 +1998,7 @@ public class BattleUIScript : MonoBehaviour
         }
         currentAttack = 'p';
         soundManager.PlaySoundClip(5);
-        attackPower = 15;
+        attackPower = Random.Range(12, 16);
 
         if (enemy1.active == true)
         {
@@ -2312,7 +2312,7 @@ public class BattleUIScript : MonoBehaviour
         currentAttack = 'r';
         soundManager.PlaySoundClip(5);
         isSelectingEnemy = true;
-        attackPower = 10;
+        attackPower = Random.Range(7, 11);
 
         if (enemy1.active == true)
         {

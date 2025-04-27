@@ -16,6 +16,7 @@ public class TutorialBattleTrigger : MonoBehaviour
         {
             johnMovement.tutorialBattle = true;
             johnMovement.randomNum = 0;
+            johnMovement.specRoll = 10;
         }
     }
 }

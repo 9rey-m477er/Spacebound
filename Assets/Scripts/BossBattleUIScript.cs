@@ -6,6 +6,7 @@ using TMPro;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using Random = UnityEngine.Random;
+using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
 
 public class BossBattleUIScript : MonoBehaviour
@@ -166,6 +167,10 @@ public class BossBattleUIScript : MonoBehaviour
     public TextMeshProUGUI chooseDefendText;
     public bool isSelectingAlly;
 
+    public TextMeshProUGUI cake;
+    public TextMeshProUGUI rock;
+    public TextMeshProUGUI paddle;
+
     public EncounterSaver encounterSaver;
 
 
@@ -271,8 +276,9 @@ public class BossBattleUIScript : MonoBehaviour
         lostBattle = false;
 
         updateEnemyHealth();
-
+        
         playerTeamSpawn();
+        InventoryButtonAmounts();
     }
 
     void Update()
@@ -474,6 +480,7 @@ public class BossBattleUIScript : MonoBehaviour
                 else if (currentMenuArrow == 4)
                 {
                     currentMenuArrow = 3;
+                    InventoryButtonAmounts();
                     updateMenuArrows();
                 }
                 menuArrowTemp = currentMenuArrow;
@@ -601,6 +608,7 @@ public class BossBattleUIScript : MonoBehaviour
             }
             else if (innerMenuArrow == 3)
             {
+                InventoryButtonAmounts();
                 if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
                 {
                     //Debug.Log("3 > 1");
@@ -651,15 +659,19 @@ public class BossBattleUIScript : MonoBehaviour
                 StartCoroutine(postSelectionWaitCoroutine(0.2f));
             }
             //
-            if (invArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
+            if (invArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false && inventoryManager.inventory[0, 0].amount > 0)
             {
                 invSlot1();
                 Debug.Log("islot1");
             }
-            if (invArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
+            if (invArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false && inventoryManager.inventory[1, 0].amount > 0)
             {
                 invSlot2();
                 Debug.Log("islot2");
+            }
+            if (invArrow2.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false && inventoryManager.inventory[2, 0].amount > 0)
+            {
+                //invSlot3();
             }
             if (runArrow1.activeInHierarchy == true && (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Return)) && canSelect == true && waiting == false)
             {
@@ -1902,6 +1914,7 @@ public class BossBattleUIScript : MonoBehaviour
         }
         incrementTurn();
         updatePlayerHealth();
+        InventoryButtonAmounts();
     }
 
     public void invSlot2()
@@ -1919,6 +1932,7 @@ public class BossBattleUIScript : MonoBehaviour
             currentEnemy = 1;
         }
         UpdateEnemyArrows();
+        InventoryButtonAmounts();
     }
 
     private IEnumerator HandleEnemySelection()
@@ -2610,5 +2624,14 @@ public class BossBattleUIScript : MonoBehaviour
     public void updateTurns()
     {
         turnCounter.text = "Turn " + turnCounterIndex;
+    }
+
+    public void InventoryButtonAmounts()
+    {
+        cake.text = inventoryManager.inventory[0, 0].itemName + " " + inventoryManager.inventory[0, 0].amount;
+
+        rock.text = inventoryManager.inventory[1, 0].itemName + " " + inventoryManager.inventory[1, 0].amount;
+
+        paddle.text = inventoryManager.inventory[2, 0].itemName + " " + inventoryManager.inventory[2, 0].amount;
     }
 }
