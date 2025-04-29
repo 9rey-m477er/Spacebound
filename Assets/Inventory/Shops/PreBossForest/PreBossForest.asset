@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec4c13967b8b9047b5111fbac75d138, type: 3}
+  m_Name: PreBossForest
+  m_EditorClassIdentifier: 
+  shopName: Gift Shop
+  shopInventory:
+  - {fileID: 11400000, guid: 33a697cc8d7871b49a6bf7d0c013ac46, type: 2}
+  - {fileID: 11400000, guid: f393d0c25a2f09b49b4cfff109dced9d, type: 2}
+  - {fileID: 11400000, guid: ada3ed541e214044b995a769d96f8819, type: 2}
+  shopMusic: {fileID: 8300000, guid: 5e61ca24cffef724ba9ce69761f99287, type: 3}
+  shopPortrait: {fileID: -5668126979296280083, guid: 559bdb7a680ea744bafc158fa3fd73cb, type: 3}
+  shopOpenText: {fileID: 11400000, guid: 62b4d312264997e4183bd50d0c0c96e5, type: 2}
+  shopBuyText: {fileID: 11400000, guid: 9702f2708ea0fa44080c2dea38130907, type: 2}
+  shopSellText: {fileID: 11400000, guid: 7570ff96e1686af4ba3f5346db3398ac, type: 2}
+  shopCloseText: {fileID: 11400000, guid: 09134519b019c8e4185d26efffed35fb, type: 2}
