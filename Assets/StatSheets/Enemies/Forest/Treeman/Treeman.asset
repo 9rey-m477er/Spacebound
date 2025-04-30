@@ -17,10 +17,10 @@ MonoBehaviour:
   encounterIntro: {fileID: 8300000, guid: a8a989fe01d8bbe47bcc81bbaee24f84, type: 3}
   encounterMusic: {fileID: 8300000, guid: e2267472c51f2ae45b78e9a26c5439ca, type: 3}
   bashMultiplier: 1
-  slashMultiplier: 1
+  slashMultiplier: 1.2
   pokeMultiplier: 1
   health: 600
-  attackStrength: 10
+  attackStrength: 8
   baseExpValue: 150
   creditValue: 50
   canFlee: 0
