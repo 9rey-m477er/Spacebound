@@ -7,7 +7,7 @@ public class ItemViewButtons : MonoBehaviour
     public Item viewItem;
     public InventoryManager im;
 
-    public void describe()
+    public void describe() //mapped script to buttons so they run when E is pressed
     {
         im.viewDescription(viewItem);
     }
