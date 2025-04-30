@@ -25,7 +25,7 @@ public class GameData
     //Inventory Counts (Add to as necessary)
     public int credits, rockAmt, philAmt, paddAmt;
 
-    public GameData()
+    public GameData() //data for New Game
     {
         //General Information: Simple
         steps = 0;

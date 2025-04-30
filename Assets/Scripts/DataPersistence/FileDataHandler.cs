@@ -8,14 +8,14 @@ public class FileDataHandler
 {
     private string dataDirPath = "", dataFileName = "";
 
-
+    //gets the file's datapath
     public FileDataHandler(string dataDirPath, string dataFileName)
     {
         this.dataDirPath = dataDirPath;
         this.dataFileName = dataFileName;
     }
 
-    public GameData Load()
+    public GameData Load() //loads the game
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
         GameData loadedData = null;
@@ -41,7 +41,7 @@ public class FileDataHandler
         return loadedData;
     }
 
-    public void Save(GameData data)
+    public void Save(GameData data) //saves the game
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
         try
