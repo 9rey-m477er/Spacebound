@@ -19,7 +19,7 @@ MonoBehaviour:
   slashMultiplier: 0.7
   pokeMultiplier: 0.9
   health: 90
-  attackStrength: 7
+  attackStrength: 12
   baseExpValue: 50
   creditValue: 25
   enemyAttacks:

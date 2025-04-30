@@ -19,7 +19,7 @@ MonoBehaviour:
   bashMultiplier: 0.5
   slashMultiplier: 1
   pokeMultiplier: 0.5
-  health: 375
+  health: 400
   attackStrength: 7
   baseExpValue: 600
   creditValue: 50

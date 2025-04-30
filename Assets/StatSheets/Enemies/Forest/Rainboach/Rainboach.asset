@@ -19,9 +19,9 @@ MonoBehaviour:
   bashMultiplier: 1
   slashMultiplier: 1
   pokeMultiplier: 1
-  health: 225
+  health: 275
   attackStrength: 7
-  baseExpValue: 50
+  baseExpValue: 60
   creditValue: 20
   canFlee: 1
   enemyAttacks:

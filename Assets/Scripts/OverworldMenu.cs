@@ -130,27 +130,27 @@ public class OverworldMenu : MonoBehaviour
         }
         //Set John's Stats
         johnHP.text = ("HP: " + charStats.John.currentHP.ToString() + "/" + charStats.John.characterHP.ToString());
-        johnBash.text = ("Bash: " + ((int)(charStats.John.bashMultiplier * 100)).ToString() + "% (" + ((int)(25 * charStats.John.bashMultiplier)).ToString() + ")");
+        johnBash.text = ("Bash: " + ((int)(charStats.John.bashMultiplier * 100)).ToString() + "% (" + ((int)(20 * charStats.John.bashMultiplier)).ToString() + ")");
         johnSlash.text = ("Slash: " + ((int)(charStats.John.slashMultiplier * 100)).ToString() + "% (" + ((int)(15 * charStats.John.slashMultiplier)).ToString() + ")");
         johnPoke.text = ("Poke: " + ((int)(charStats.John.pokeMultiplier * 100)).ToString() + "% (" + ((int)(15 * charStats.John.pokeMultiplier)).ToString() + ")");
         //Set Bob's Stats
         bobHP.text = ("HP: " + charStats.Bob.currentHP.ToString() + "/" + charStats.Bob.characterHP.ToString());
-        bobBash.text = ("Bash: " + ((int)(charStats.Bob.bashMultiplier * 100)).ToString() + "% (" + ((int)(25 * charStats.Bob.bashMultiplier)).ToString() + ")");
+        bobBash.text = ("Bash: " + ((int)(charStats.Bob.bashMultiplier * 100)).ToString() + "% (" + ((int)(20 * charStats.Bob.bashMultiplier)).ToString() + ")");
         bobSlash.text = ("Slash: " + ((int)(charStats.Bob.slashMultiplier * 100)).ToString() + "% (" + ((int)(15 * charStats.Bob.slashMultiplier)).ToString() + ")");
         bobPoke.text = ("Poke: " + ((int)(charStats.Bob.pokeMultiplier * 100)).ToString() + "% (" + ((int)(15 * charStats.Bob.pokeMultiplier)).ToString() + ")");
         //Set Thozos's Stats
         thozosHP.text = ("HP: " + charStats.Thozos.currentHP.ToString() + "/" + charStats.Thozos.characterHP.ToString());
-        thozosBash.text = ("Bash: " + ((int)(charStats.Thozos.bashMultiplier * 100)).ToString() + "% (" + ((int)(25 * charStats.Thozos.bashMultiplier)).ToString() + ")");
+        thozosBash.text = ("Bash: " + ((int)(charStats.Thozos.bashMultiplier * 100)).ToString() + "% (" + ((int)(20 * charStats.Thozos.bashMultiplier)).ToString() + ")");
         thozosSlash.text = ("Slash: " + ((int)(charStats.Thozos.slashMultiplier * 100)).ToString() + "% (" + ((int)(15 * charStats.Thozos.slashMultiplier)).ToString() + ")");
         thozosPoke.text = ("Poke: " + ((int)(charStats.Thozos.pokeMultiplier * 100)).ToString() + "% (" + ((int)(15 * charStats.Thozos.pokeMultiplier)).ToString() + ")");
         //Set Janet's Stats
         janetHP.text = ("HP: " + charStats.Janet.currentHP.ToString() + "/" + charStats.Janet.characterHP.ToString());
-        janetBash.text = ("Bash: " + ((int)(charStats.Janet.bashMultiplier * 100)).ToString() + "% (" + ((int)(25 * charStats.Janet.bashMultiplier)).ToString() + ")");
+        janetBash.text = ("Bash: " + ((int)(charStats.Janet.bashMultiplier * 100)).ToString() + "% (" + ((int)(20 * charStats.Janet.bashMultiplier)).ToString() + ")");
         janetSlash.text = ("Slash: " + ((int)(charStats.Janet.slashMultiplier * 100)).ToString() + "% (" + ((int)(15 * charStats.Janet.slashMultiplier)).ToString() + ")");
         janetPoke.text = ("Poke: " + ((int)(charStats.Janet.pokeMultiplier * 100)).ToString() + "% (" + ((int)(15 * charStats.Janet.pokeMultiplier)).ToString() + ")");
         //Set Stevphen's Stats
         stevphenHP.text = ("HP: " + charStats.Stephven.currentHP.ToString() + "/" + charStats.Stephven.characterHP.ToString());
-        stevphenBash.text = ("Bash: " + ((int)(charStats.Stephven.bashMultiplier * 100)).ToString() + "% (" + ((int)(25 * charStats.Stephven.bashMultiplier)).ToString() + ")");
+        stevphenBash.text = ("Bash: " + ((int)(charStats.Stephven.bashMultiplier * 100)).ToString() + "% (" + ((int)(20 * charStats.Stephven.bashMultiplier)).ToString() + ")");
         stevphenSlash.text = ("Slash: " + ((int)(charStats.Stephven.slashMultiplier * 100)).ToString() + "% (" + ((int)(15 * charStats.Stephven.slashMultiplier)).ToString() + ")");
         stevphenPoke.text = ("Poke: " + ((int)(charStats.Stephven.pokeMultiplier * 100)).ToString() + "% (" + ((int)(15 * charStats.Stephven.pokeMultiplier)).ToString() + ")");
         //Set Level Text
