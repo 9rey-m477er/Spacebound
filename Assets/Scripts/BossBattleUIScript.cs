@@ -1651,7 +1651,7 @@ public class BossBattleUIScript : MonoBehaviour
         currentAttack = 'b';
         soundManager.PlaySoundClip(5);
         isSelectingEnemy = true;
-        attackPower = 25;
+        attackPower = Random.Range(17, 21);
 
         if (enemy1.active == true)
         {
@@ -1668,7 +1668,7 @@ public class BossBattleUIScript : MonoBehaviour
         currentAttack = 's';
         soundManager.PlaySoundClip(5);
         isSelectingEnemy = true;
-        attackPower = 15;
+        attackPower = Random.Range(12, 16);
 
         if (enemy1.active == true)
         {
@@ -1685,7 +1685,7 @@ public class BossBattleUIScript : MonoBehaviour
         currentAttack = 'p';
         soundManager.PlaySoundClip(5);
         isSelectingEnemy = true;
-        attackPower = 15;
+        attackPower = Random.Range(12, 16);
 
         if (enemy1.active == true)
         {
@@ -2004,6 +2004,9 @@ public class BossBattleUIScript : MonoBehaviour
         menuArrowTemp = currentMenuArrow;
         resetMenu();
         soundManager.PlaySoundClip(5);
+        isSelectingEnemy = false;
+        currentEnemy = 0;
+
 
         if (playerTurn == 1)
         {
@@ -2022,7 +2025,7 @@ public class BossBattleUIScript : MonoBehaviour
             p4hasPaddle = true;
         }
         incrementTurn();
-        UpdateEnemyArrows();
+        //UpdateEnemyArrows();
         inventoryManager.inventory[2, 0].amount -= 1;
         InventoryButtonAmounts();
     }
