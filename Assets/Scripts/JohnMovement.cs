@@ -105,14 +105,13 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
 
     void Update()
     {
-
         //wasd input
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
         movement = movement.normalized;
         Animate();
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift)) //sprint
         {
             moveSpeed = 6f;
         }
@@ -139,7 +138,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         }
     }
 
-    bool IsTileUnwalkable(Vector2 targetPosition)
+    bool IsTileUnwalkable(Vector2 targetPosition) //you cant walk here
     {
         return Physics2D.OverlapCircle(targetPosition, 0.1f, unwalkableLayer) != null;
     }
@@ -177,7 +176,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
             }
         }
     }
-    void UpdateStepSpawn()
+    void UpdateStepSpawn() //battle spawning
     {
         randomNum = UnityEngine.Random.Range(64, 256);
         specRoll = UnityEngine.Random.Range(0, 100);
@@ -210,7 +209,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         soundManager.ChangeMusic(levelMusic);
     }
 
-    public void BiomeChange(int lvl)
+    public void BiomeChange(int lvl) //change between differen levels
     {
         AudioClip prevMusic = levelMusic;
         level = lvl;
@@ -295,7 +294,7 @@ public class OmniDirectionalMovement : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void setTeammateActive(int flag)
+    public void setTeammateActive(int flag) //you got a friend on your team
     {
         switch(flag)
         {
