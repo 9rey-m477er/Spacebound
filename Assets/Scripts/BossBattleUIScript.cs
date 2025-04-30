@@ -327,11 +327,18 @@ public class BossBattleUIScript : MonoBehaviour
             updateTurnText();
         }
 
-        if (postReportObj.gameObject.active == true)
+        if (postReportObj.gameObject.active == true) //fix this
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Escape))
             {
-                postReportClose();
+                if (LevelUpButton.activeSelf == true)
+                {
+                    postReportLevelUp();
+                }
+                else
+                {
+                    postReportClose();
+                }
             }
         }
     }

@@ -854,9 +854,17 @@ public class BattleUIScript : MonoBehaviour
 
         if(postReportObj.gameObject.active == true) //fix this
         {
-            if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
+            if(Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Escape))
             {
-                postReportClose();
+                if (LevelUpButton.activeSelf == true)
+                {
+                    postReportLevelUp();
+                    LevelUpButton.SetActive(false);
+                }
+                else
+                {
+                    postReportClose();
+                }
             }
         }
     }
