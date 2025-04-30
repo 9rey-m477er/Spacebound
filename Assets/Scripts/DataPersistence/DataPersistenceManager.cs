@@ -16,37 +16,42 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Awake()
     {
+        //checks for duplicate DPMs
         if (instance != null)
         {
             Debug.LogError("Found more than one DataPersistenceManager in the scene!");
         }
+        //sets the used DPM to this one
         instance = this;
     }
 
     private void Start()
     {
+        //creates a new data handler and collects all of the Data Persistence objects
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         //Debug.LogError(Application.persistentDataPath + " / " + fileName);
         LoadGame();
     }
 
-    public void NewGame()
+    public void NewGame() //starts a new game
     {
         this.gameData = new GameData();
         dataHandler.Save(this.gameData);
     }
 
-    public void LoadGame()
+    public void LoadGame() //loads a saved game
     {
         this.gameData = dataHandler.Load();
 
-        if (this.gameData == null)
+        if (this.gameData == null) //starts a new game if there isn't a saved game
         {
             Debug.Log("No Save Data Found. Initializing From Default Values.");
             NewGame();
         }
 
+
+        //runs the load function in all saveable/loadable objects
         foreach (IDataPersistence dpo in dataPersistenceObjects)
         {
             dpo.LoadData(gameData);
@@ -54,10 +59,14 @@ public class DataPersistenceManager : MonoBehaviour
 
     }
 
-    public void SaveGame()
+    public void SaveGame() //saves the game
     {
         Debug.Log("DPM Recieved Save Call");
+
+        //heals the player characters
         characterStatHandler.healCharacters();
+
+        //runs the save function in all saveable/loadable objects
         foreach (IDataPersistence dpo in dataPersistenceObjects)
         {
             Debug.Log("Saving object: " + dpo);
@@ -72,7 +81,7 @@ public class DataPersistenceManager : MonoBehaviour
     //    SaveGame();
     //}
 
-    private List<IDataPersistence> FindAllDataPersistenceObjects()
+    private List<IDataPersistence> FindAllDataPersistenceObjects() //finds every object that inherits from IDataPersistence
     {
         IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>()
             .OfType<IDataPersistence>();
