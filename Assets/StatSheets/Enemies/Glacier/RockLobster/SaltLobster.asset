@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SaltLobster
   m_EditorClassIdentifier: 
   enemyName: Salt Lobster
-  sprite: {fileID: -893567347768359609, guid: 36f2842ae01cbdf43961c7393ce95990, type: 3}
-  attackSprite: {fileID: -893567347768359609, guid: 36f2842ae01cbdf43961c7393ce95990, type: 3}
+  sprite: {fileID: 7702687637039836178, guid: e9bf1a06881c1cc4cadcd2308dd6f2af, type: 3}
+  attackSprite: {fileID: 7702687637039836178, guid: e9bf1a06881c1cc4cadcd2308dd6f2af, type: 3}
   bashMultiplier: 0.5
   slashMultiplier: 0.7
   pokeMultiplier: 0.9
