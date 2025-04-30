@@ -208,9 +208,8 @@ public class BattleUIScript : MonoBehaviour
     private bool p3hasPaddle;
     private bool p4hasPaddle;
 
-    void OnEnable()
-    {
-        
+    void OnEnable() //start of battle
+    {      
         tutAdvancetxt.gameObject.SetActive(false);
         resetMenu();
         currentMenuArrow = 1;
@@ -313,7 +312,7 @@ public class BattleUIScript : MonoBehaviour
 
 
 
-        if(johnMovement.tutorialBattle == false)
+        if(johnMovement.tutorialBattle == false) //regular battle
         {
             //Randomly Assign Enemies
             enemyPool = johnMovement.encounterPool;
@@ -326,7 +325,7 @@ public class BattleUIScript : MonoBehaviour
             updateEnemyHealth();
             playerTeamSpawn();
         }
-        else
+        else //start tutorial
         {
             tutorialStage = 1;
             turnName.text = "Party Turn!";
@@ -588,7 +587,7 @@ public class BattleUIScript : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    public void playerTeamSpawn()
+    public void playerTeamSpawn() //spawn player team
     {
         BattlePlayerScript p1 = player1.GetComponent<BattlePlayerScript>();
         BattlePlayerScript p2 = player2.GetComponent<BattlePlayerScript>();
@@ -704,7 +703,7 @@ public class BattleUIScript : MonoBehaviour
         enemyName4.text = e4.enemyName;
     }
 
-    void rollEnemy(GameObject enemy, List<EnemyStatSheet> sheetPool)
+    void rollEnemy(GameObject enemy, List<EnemyStatSheet> sheetPool) //pull enemy from enemy pool
     {
         // Get a random sprite from the pool
         EnemyStatSheet sheet = sheetPool[Random.Range(0, sheetPool.Count)];
@@ -789,7 +788,7 @@ public class BattleUIScript : MonoBehaviour
             checkForEndOfBattle();
             updateTurnText();
         }
-        else if(johnMovement.tutorialBattle == true)
+        else if(johnMovement.tutorialBattle == true) //tutorial
         {
             if(tutorialStage == 1)
             {
@@ -853,7 +852,7 @@ public class BattleUIScript : MonoBehaviour
             }
         }
 
-        if(postReportObj.gameObject.active == true)
+        if(postReportObj.gameObject.active == true) //fix this
         {
             if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
             {
@@ -1168,22 +1167,20 @@ public class BattleUIScript : MonoBehaviour
         }
     }
 
-    public IEnumerator SelectionWaitCoroutine(float duration)
+    public IEnumerator SelectionWaitCoroutine(float duration) //wait function
     {
         yield return new WaitForSeconds(duration);
-        //Debug.Log("waiting");
         canSelect = true;
     }
-    public IEnumerator postSelectionWaitCoroutine(float duration) //broken idk
+    public IEnumerator postSelectionWaitCoroutine(float duration) //wait function
     {
         yield return new WaitForSeconds(duration);
-        Debug.Log("waiting");
         currentMenuArrow = 1;
         menuArrowTemp = currentMenuArrow;
         resetMenu();
     }
 
-    public void updateInnerArrow()
+    public void updateInnerArrow() //expanded menu nav
     {
         if(atkMenu.active == true)
         {
@@ -1266,13 +1263,11 @@ public class BattleUIScript : MonoBehaviour
 
     public IEnumerator fadeIntoBattle()
     {
-        //Debug.Log("fade in");
         fadeImage.gameObject.SetActive(true);
         yield return StartCoroutine(Fade(1));
         yield return StartCoroutine(Fade(0));
         fadeImage.gameObject.SetActive(false);
         turnCounterIndex = 1;
-        //Debug.Log("fade out");
     }
 
     public void incrementTurn()
@@ -1899,7 +1894,7 @@ public class BattleUIScript : MonoBehaviour
         UpdatePartyArrow();
     }
 
-    public void partyReticle(int target)
+    public void partyReticle(int target) //who is getting attacked
     {
         if(target == 1)
         {
@@ -1935,27 +1930,6 @@ public class BattleUIScript : MonoBehaviour
         Debug.Log(battleLog.ToString());
 
         //Write as many lines as needed based on the length of the battle log (1-4, bottom-top)
-        //switch (battleLog.Count)
-        //{
-        //    case 1:
-        //        battleLogLine1.text = battleLog[0];
-        //        break;
-        //    case 2:
-        //        battleLogLine1.text = battleLog[0];
-        //        battleLogLine2.text = battleLog[1];
-        //        break;
-        //    case 3:
-        //        battleLogLine1.text = battleLog[0];
-        //        battleLogLine2.text = battleLog[1];
-        //        battleLogLine3.text = battleLog[2];
-        //        break;
-        //    case 4:
-        //        battleLogLine1.text = battleLog[0];
-        //        battleLogLine2.text = battleLog[1];
-        //        battleLogLine3.text = battleLog[2];
-        //        battleLogLine4.text = battleLog[3];
-        //        break;
-        //}
         battleLogLine1.text = battleLog[0];
         battleLogLine2.text = battleLog[1];
         battleLogLine3.text = battleLog[2];
@@ -2081,7 +2055,7 @@ public class BattleUIScript : MonoBehaviour
         UpdateEnemyArrows();
     }
 
-    public void dodge()
+    public void dodge() //increase evasiveness
     {
         menuArrowTemp = currentMenuArrow;
         resetMenu();
@@ -2109,7 +2083,7 @@ public class BattleUIScript : MonoBehaviour
         incrementTurn();
     }
     
-    public void defend()
+    public void defend() //protect an ally
     {
         menuArrowTemp = currentMenuArrow;
         resetMenu();
@@ -2978,7 +2952,7 @@ public class BattleUIScript : MonoBehaviour
             //Debug.Log("Attacked enemy " + currentEnemy + ", remaining health: " + selectedEnemyScript.health); //BATTLE NARRATION
         }
     }
-    public void ShowFloatingText(string message, Vector3 position, Transform parent)
+    public void ShowFloatingText(string message, Vector3 position, Transform parent) //damage numbers
     {
         GameObject floatingTextPrefab = Resources.Load<GameObject>("damageTMP");
         GameObject floatingText = Instantiate(floatingTextPrefab, position, Quaternion.identity, parent);
@@ -3188,7 +3162,6 @@ public class BattleUIScript : MonoBehaviour
             exitBattle();
             SceneManager.LoadScene("game");
             dataPersistenceManager.LoadGame();
-            Debug.Log("all players dead");
         }
 
 
@@ -3320,7 +3293,7 @@ public class BattleUIScript : MonoBehaviour
             }
         }
     }
-    public void resetMenu()
+    public void resetMenu() //resets atk def inv flee menus
     {
         atkMenu.SetActive(false);
         defMenu.SetActive(false);

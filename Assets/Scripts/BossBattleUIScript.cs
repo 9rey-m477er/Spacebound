@@ -181,7 +181,7 @@ public class BossBattleUIScript : MonoBehaviour
 
     public int selection;
 
-    void OnEnable()
+    void OnEnable() //start of battle
     {
         resetMenu();
         currentMenuArrow = 1;
@@ -318,7 +318,6 @@ public class BossBattleUIScript : MonoBehaviour
             }
             else
             {
-                Debug.Log("Battle Lost!");
                 StartCoroutine(exitBattle());
             }
         }
@@ -697,13 +696,13 @@ public class BossBattleUIScript : MonoBehaviour
         }
     }
 
-    public IEnumerator SelectionWaitCoroutine(float duration)
+    public IEnumerator SelectionWaitCoroutine(float duration) //wait function
     {
         yield return new WaitForSeconds(duration);
         //Debug.Log("waiting");
         canSelect = true;
     }
-    public IEnumerator postSelectionWaitCoroutine(float duration) //broken idk
+    public IEnumerator postSelectionWaitCoroutine(float duration) //wait function
     {
         yield return new WaitForSeconds(duration);
         Debug.Log("waiting");
@@ -712,7 +711,7 @@ public class BossBattleUIScript : MonoBehaviour
         menuArrowTemp = currentMenuArrow;
         resetMenu();
     }
-    public void updateInnerArrow()
+    public void updateInnerArrow() //expanded menu arrow nav
     {
         if (atkMenu.active == true)
         {
@@ -1537,7 +1536,7 @@ public class BossBattleUIScript : MonoBehaviour
         UpdatePartyArrow();
     }
 
-    public void ShowFloatingText(string message, Vector3 position, Transform parent)
+    public void ShowFloatingText(string message, Vector3 position, Transform parent) //damage nums
     {
         GameObject floatingTextPrefab = Resources.Load<GameObject>("damageTMP");
         GameObject floatingText = Instantiate(floatingTextPrefab, position, Quaternion.identity, parent);
@@ -1558,7 +1557,7 @@ public class BossBattleUIScript : MonoBehaviour
         }
     }
 
-    public void partyReticle(int target)
+    public void partyReticle(int target) //who got attacked
     {
         if (target == 1)
         {
@@ -1593,27 +1592,6 @@ public class BossBattleUIScript : MonoBehaviour
         Debug.Log(battleLog.ToString());
 
         //Write as many lines as needed based on the length of the battle log (1-4, bottom-top)
-        //switch (battleLog.Count)
-        //{
-        //    case 1:
-        //        battleLogLine1.text = battleLog[0];
-        //        break;
-        //    case 2:
-        //        battleLogLine1.text = battleLog[0];
-        //        battleLogLine2.text = battleLog[1];
-        //        break;
-        //    case 3:
-        //        battleLogLine1.text = battleLog[0];
-        //        battleLogLine2.text = battleLog[1];
-        //        battleLogLine3.text = battleLog[2];
-        //        break;
-        //    case 4:
-        //        battleLogLine1.text = battleLog[0];
-        //        battleLogLine2.text = battleLog[1];
-        //        battleLogLine3.text = battleLog[2];
-        //        battleLogLine4.text = battleLog[3];
-        //        break;
-        //}
         battleLogLine1.text = battleLog[0];
         battleLogLine2.text = battleLog[1];
         battleLogLine3.text = battleLog[2];
@@ -1636,7 +1614,7 @@ public class BossBattleUIScript : MonoBehaviour
         bigLogLine12.text = battleLog[11];
     }
 
-    private void UpdatePartyArrow()
+    private void UpdatePartyArrow() //current player turn
     {
         party1Arrow.gameObject.SetActive(playerTurn == 1 && menuBlocking.isActiveAndEnabled == false);
         party2Arrow.gameObject.SetActive(playerTurn == 2);
@@ -1921,7 +1899,7 @@ public class BossBattleUIScript : MonoBehaviour
         incrementTurn();
     }
 
-    public void invSlot1()
+    public void invSlot1() //heal
     {
         //currentMenuArrow = 1;
         menuArrowTemp = currentMenuArrow;
@@ -1980,7 +1958,7 @@ public class BossBattleUIScript : MonoBehaviour
         InventoryButtonAmounts();
     }
 
-    public void invSlot2()
+    public void invSlot2() //rock
     {
         //currentMenuArrow = 1;
         menuArrowTemp = currentMenuArrow;
