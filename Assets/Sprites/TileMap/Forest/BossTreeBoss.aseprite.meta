@@ -8,6 +8,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -77,6 +78,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -89,6 +91,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -282,70 +285,83 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1926063050
+    uuid:
+      value0: 103334030
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 103334030
     name: BossTreeBoss
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: BossTreeBoss_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 2
         width: 40
         height: 45
       spriteId: abfe33072edf01842961cc81d7cc657b
-    - name: BossTreeBoss_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 2
         width: 40
         height: 45
       spriteId: 5dba3e0f94236ca4ca1693ef36f37dac
-    - name: BossTreeBoss_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 2
         width: 40
         height: 45
       spriteId: 165afb98850210f479c8f17fc3bf7de9
-    - name: BossTreeBoss_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 2
         width: 40
         height: 45
       spriteId: 80f7cb7c23bd3e44583a5a37dfcad25b
-    - name: BossTreeBoss_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 2
         width: 40
         height: 45
       spriteId: f5865aa17d4e4d74fbd01a6332b1c79e
-    - name: BossTreeBoss_Frame_5
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 2
         width: 40
         height: 45
       spriteId: 20c7abf17ae8ef741bac38a4d61ea8b5
-    - name: BossTreeBoss_Frame_6
+    - name: Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 2
         width: 40
         height: 45
       spriteId: 9cbc2595fcc441e4da5a4f640674fdf9
-    - name: BossTreeBoss_Frame_7
+    - name: Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 4
         y: 2
@@ -355,6 +371,8 @@ ScriptedImporter:
     linkedCells: []
     parentIndex: -1
   platformSettings: []
+  generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 48, y: 48}
+  previousTextureSize: {x: 128, y: 256}

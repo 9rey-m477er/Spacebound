@@ -8,6 +8,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -77,6 +78,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -89,6 +91,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -242,54 +245,65 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1911490448
+    uuid:
+      value0: 2309167568
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: -1985799728
     name: bug
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: bug_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 10
         y: 6
         width: 25
         height: 36
       spriteId: 033e17654f3090c419f8be86f0404966
-    - name: bug_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 10
         y: 6
         width: 25
         height: 35
       spriteId: 2e55d3ae243cda247b20c27877cab1f0
-    - name: bug_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 10
         y: 6
         width: 25
         height: 34
       spriteId: b2036907bbf2ccf4d90a238058af43e8
-    - name: bug_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 10
         y: 6
         width: 25
         height: 33
       spriteId: 77b10aa6853535943ba4bca1ee6ac29c
-    - name: bug_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 10
         y: 6
         width: 25
         height: 34
       spriteId: 559e16c7e409eb240a32210e8dcaa3d2
-    - name: bug_Frame_5
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 10
         y: 6
@@ -335,6 +349,8 @@ ScriptedImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     androidETC2FallbackOverride: 0
+  generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 48, y: 48}
+  previousTextureSize: {x: 128, y: 128}
